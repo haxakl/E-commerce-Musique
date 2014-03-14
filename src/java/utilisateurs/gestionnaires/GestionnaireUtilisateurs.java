@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package utilisateurs.gestionnaires;
 
 import java.util.Collection;
@@ -12,14 +7,9 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import utilisateurs.modeles.Utilisateur;
 
-/**
- *
- * @author Guillaume
- */
 @Stateless
 public class GestionnaireUtilisateurs {
-
-    @PersistenceContext(unitName = "WebApplication1PU")
+    @PersistenceContext(unitName = "TP_2_GitPU")
     private EntityManager em;
 
     public void persist(Object object) {
@@ -43,6 +33,14 @@ public class GestionnaireUtilisateurs {
         // Exécution d'une requête équivalente à un select *  
         Query q = em.createQuery("select u from Utilisateur u");
         return q.getResultList();
+    }
+
+    public void persist1(Object object) {
+        em.persist(object);
+    }
+
+    public void persist2(Object object) {
+        em.persist(object);
     }
 
 }
