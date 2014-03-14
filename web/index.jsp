@@ -34,8 +34,8 @@
     <section>
         <div class="signinpanel">
             <div class="row">
-                <div class="col-md-3"></div>
-                <div class="col-md-6">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
                     <form method="post">
                         <h4 class="nomargin">Connexion</h4><br/>
                         <p class="mt5 mb20">Connexion pour accéder à l'interface administrateur.</p>

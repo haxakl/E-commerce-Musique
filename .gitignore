@@ -1,0 +1,6 @@
+build/
+nbproject/
+src/conf/
+build.xml
+dist/WebApplication1.war
+setup/glassfish-resources.xml
