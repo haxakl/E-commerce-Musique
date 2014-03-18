@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package servlets;
 
 import java.io.IOException;
@@ -6,7 +11,6 @@ import java.util.Collection;
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,8 +21,8 @@ import utilisateurs.modeles.Utilisateur;
  *
  * @author Guillaume
  */
-@WebServlet(name = "ServletUsers", urlPatterns = {"/ServletUsers"})
-public class ServletUsers extends HttpServlet {
+public class ListerUtilisateurs extends HttpServlet {
+
     @EJB
     private GestionnaireUtilisateurs gestionnaireUtilisateurs;
 
@@ -33,32 +37,10 @@ public class ServletUsers extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Pratique pour décider de l'action à faire  
-        String action = request.getParameter("action");
-        String forwardTo = "";
-        String message = "";
+        Collection<Utilisateur> liste = gestionnaireUtilisateurs.getAllUsers();
+        request.setAttribute("listeDesUsers", liste);
 
-        if (action != null) {
-            if (action.equals("listerLesUtilisateurs")) {
-                Collection<Utilisateur> liste = gestionnaireUtilisateurs.getAllUsers();
-                request.setAttribute("listeDesUsers", liste);
-                forwardTo = "index.jsp?action=listerLesUtilisateurs";
-                message = "Liste des utilisateurs";
-            } else if (action.equals("creerUtilisateursDeTest")) {
-                gestionnaireUtilisateurs.creerUtilisateursDeTest();
-                Collection<Utilisateur> liste = gestionnaireUtilisateurs.getAllUsers();
-                request.setAttribute("listeDesUsers", liste);
-                forwardTo = "index.jsp?action=listerLesUtilisateurs";
-                message = "Liste des utilisateurs";
-            } else {
-                forwardTo = "index.jsp?action=todo";
-                message = "La fonctionnalité pour le paramètre " + action + " est à implémenter !";
-            }
-        }
-
-        RequestDispatcher dp = request.getRequestDispatcher(forwardTo + "&message=" + message);
-        dp.forward(request, response);
-        // Après un forward, plus rien ne peut être exécuté après !  
+        this.getServletContext().getRequestDispatcher("/utilisateurs.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

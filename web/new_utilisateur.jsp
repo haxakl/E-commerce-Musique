@@ -15,7 +15,7 @@
 
         <title>Bracket Responsive Bootstrap3 Admin</title>
 
-        <link href="css/style.default.css" rel="stylesheet">
+        <link href="../css/style.default.css" rel="stylesheet">
 
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
@@ -120,16 +120,16 @@
 
     </section>
 
-    <script src="js/jquery-1.10.2.min.js"></script>
-    <script src="js/jquery-migrate-1.2.1.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/modernizr.min.js"></script>
-    <script src="js/jquery.sparkline.min.js"></script>
-    <script src="js/toggles.min.js"></script>
-    <script src="js/retina.min.js"></script>
-    <script src="js/jquery.cookies.js"></script>
+    <script src="../js/jquery-1.10.2.min.js"></script>
+    <script src="../js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/modernizr.min.js"></script>
+    <script src="../js/jquery.sparkline.min.js"></script>
+    <script src="../js/toggles.min.js"></script>
+    <script src="../js/retina.min.js"></script>
+    <script src="../js/jquery.cookies.js"></script>
 
-    <script src="js/custom.js"></script>
+    <script src="../js/custom.js"></script>
 
 </body>
 </html>

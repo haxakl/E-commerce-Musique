@@ -3859,3 +3859,7 @@ div.error label.error:before {
     }
 
 }
+
+.contentpanel a {
+    margin-bottom: 20px;
+}
