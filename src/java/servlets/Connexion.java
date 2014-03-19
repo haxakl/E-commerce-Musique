@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.util.Collection;
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,6 +20,7 @@ import utilisateurs.modeles.Utilisateur;
  */
 @WebServlet(name = "Connexion", urlPatterns = {"/index.jsp"})
 public class Connexion extends HttpServlet {
+
     @EJB
     private GestionnaireUtilisateurs gestionnaireUtilisateurs;
 
@@ -34,16 +36,15 @@ public class Connexion extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setAttribute("nombre_utilisateur", gestionnaireUtilisateurs.getAllUsers().size());
-        
+
         // Il n'y a pas d'utilisateurs
-        if(gestionnaireUtilisateurs.getAllUsers().isEmpty()) {
+        if (gestionnaireUtilisateurs.getAllUsers().isEmpty()) {
             gestionnaireUtilisateurs.creeUtilisateur("Administrateur", "", "admin", "admin");
         }
-        
+
         this.getServletContext().getRequestDispatcher("/connexion.jsp").forward(request, response);
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -69,17 +70,14 @@ public class Connexion extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
-    }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
+        if (gestionnaireUtilisateurs.connexion(request.getParameter("login"), request.getParameter("password"))) {
+            ServletContext context = getServletContext();
+            RequestDispatcher dispatcher = context.getRequestDispatcher("/connecte.jsp");
+            response.sendRedirect("/connecte.jsp");
+        } else {
+            processRequest(request, response);
+        }
+    }
 
 }

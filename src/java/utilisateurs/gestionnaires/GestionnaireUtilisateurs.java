@@ -23,6 +23,14 @@ public class GestionnaireUtilisateurs {
         creeUtilisateur("Georges", "Harisson", "georgesH", "test");
     }
 
+    public boolean connexion(String login, String password) {
+        Query q = em.createQuery("select u from Utilisateur u where u.login = :clogin and u.password = :cpassword").setParameter("clogin", login).setParameter("cpassword", password);
+        
+        Collection<Utilisateur> users = q.getResultList();
+        
+        return users.isEmpty();
+    }
+    
     public Utilisateur creeUtilisateur(String nom, String prenom, String login, String password) {
         Utilisateur u = new Utilisateur(nom, prenom, login, password);
         em.persist(u);
