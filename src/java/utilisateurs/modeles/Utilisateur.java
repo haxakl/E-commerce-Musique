@@ -13,17 +13,20 @@ public class Utilisateur implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+    
     private String firstname;
     private String lastname;
     private String login;
+    private String password;
 
     public Utilisateur() {
     }
 
-    public Utilisateur(final String login, final String lastname, final String firstname) {
+    public Utilisateur(final String firstname, final String lastname, final String login, final String password) {
         this.login = login;
         this.lastname = lastname;
         this.firstname = firstname;
+        this.password = password;
     }
 
     public String getFirstname() {
@@ -56,6 +59,14 @@ public class Utilisateur implements Serializable {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override

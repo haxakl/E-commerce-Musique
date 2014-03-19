@@ -17,14 +17,14 @@ public class GestionnaireUtilisateurs {
     }
 
     public void creerUtilisateursDeTest() {
-        creeUtilisateur("John", "Lennon", "jlennon");
-        creeUtilisateur("Paul", "Mac Cartney", "pmc");
-        creeUtilisateur("Ringo", "Starr", "rstarr");
-        creeUtilisateur("Georges", "Harisson", "georgesH");
+        creeUtilisateur("John", "Lennon", "jlennon", "test");
+        creeUtilisateur("Paul", "Mac Cartney", "pmc", "test");
+        creeUtilisateur("Ringo", "Starr", "rstarr", "test");
+        creeUtilisateur("Georges", "Harisson", "georgesH", "test");
     }
 
-    public Utilisateur creeUtilisateur(String nom, String prenom, String login) {
-        Utilisateur u = new Utilisateur(nom, prenom, login);
+    public Utilisateur creeUtilisateur(String nom, String prenom, String login, String password) {
+        Utilisateur u = new Utilisateur(nom, prenom, login, password);
         em.persist(u);
         return u;
     }

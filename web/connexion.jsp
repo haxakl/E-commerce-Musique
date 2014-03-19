@@ -10,18 +10,11 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
-        <meta name="author" content="">
-        <link rel="shortcut icon" href="images/favicon.png" type="image/png">
+        <meta name="author" content="Golfieri Guillaume Blacas Julien">
 
-        <title>Bracket Responsive Bootstrap3 Admin</title>
+        <title>Connexion à l'interface administrateur</title>
 
-        <link href="css/style.default.css" rel="stylesheet">
-
-        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!--[if lt IE 9]>
-        <script src="js/html5shiv.js"></script>
-        <script src="js/respond.min.js"></script>
-        <![endif]-->
+        <link href="${requestScope['root']}css/style.default.css" rel="stylesheet">
     </head>
 
     <body class="signin">
@@ -38,19 +31,22 @@
                 <div class="col-md-8">
                     <form method="post">
                         <h4 class="nomargin">Connexion</h4><br/>
+                        <c:set var="nbUsers" scope="session" value="${requestScope['nombre_utilisateur']}"/>
+                        <c:if test="${nbUsers == 0}">
+                        <div class="alert alert-warning">
+                            Aucun utilisateur trouvé dans la base. Un nouvel utilisateur admin/admin a été crée. Veuillez le modifier le plus rapidement possible.
+                        </div>
+                        </c:if>
                         <p class="mt5 mb20">Connexion pour accéder à l'interface administrateur.</p>
-                        <p><a href="connecte.jsp">Court-circuité vers l'interface admin</a></p>
 
-                        <input type="text" class="form-control uname" placeholder="Username" />
-                        <input type="password" class="form-control pword" placeholder="Password" /><br/>
+                        <input type="text" name="login" class="form-control uname" placeholder="Login" />
+                        <input type="password" name="password" class="form-control pword" placeholder="Password" /><br/>
                         <button class="btn btn-success btn-block">Accéder</button>
-
                     </form>
                 </div>
             </div>
         </div>
     </section>
-
 
     <script src="js/jquery-1.10.2.min.js"></script>
     <script src="js/jquery-migrate-1.2.1.min.js"></script>

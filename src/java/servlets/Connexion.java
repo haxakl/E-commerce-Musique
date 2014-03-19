@@ -17,8 +17,8 @@ import utilisateurs.modeles.Utilisateur;
  *
  * @author Guillaume
  */
-@WebServlet(name = "ServletUsers", urlPatterns = {"/ServletUsers"})
-public class ServletUsers extends HttpServlet {
+@WebServlet(name = "Connexion", urlPatterns = {"/index.jsp"})
+public class Connexion extends HttpServlet {
     @EJB
     private GestionnaireUtilisateurs gestionnaireUtilisateurs;
 
@@ -33,32 +33,14 @@ public class ServletUsers extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Pratique pour décider de l'action à faire  
-        String action = request.getParameter("action");
-        String forwardTo = "";
-        String message = "";
-
-        if (action != null) {
-            if (action.equals("listerLesUtilisateurs")) {
-                Collection<Utilisateur> liste = gestionnaireUtilisateurs.getAllUsers();
-                request.setAttribute("listeDesUsers", liste);
-                forwardTo = "index.jsp?action=listerLesUtilisateurs";
-                message = "Liste des utilisateurs";
-            } else if (action.equals("creerUtilisateursDeTest")) {
-                gestionnaireUtilisateurs.creerUtilisateursDeTest();
-                Collection<Utilisateur> liste = gestionnaireUtilisateurs.getAllUsers();
-                request.setAttribute("listeDesUsers", liste);
-                forwardTo = "index.jsp?action=listerLesUtilisateurs";
-                message = "Liste des utilisateurs";
-            } else {
-                forwardTo = "index.jsp?action=todo";
-                message = "La fonctionnalité pour le paramètre " + action + " est à implémenter !";
-            }
+        request.setAttribute("nombre_utilisateur", gestionnaireUtilisateurs.getAllUsers().size());
+        
+        // Il n'y a pas d'utilisateurs
+        if(gestionnaireUtilisateurs.getAllUsers().isEmpty()) {
+            gestionnaireUtilisateurs.creeUtilisateur("Administrateur", "", "admin", "admin");
         }
-
-        RequestDispatcher dp = request.getRequestDispatcher(forwardTo + "&message=" + message);
-        dp.forward(request, response);
-        // Après un forward, plus rien ne peut être exécuté après !  
+        
+        this.getServletContext().getRequestDispatcher("/connexion.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

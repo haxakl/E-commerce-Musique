@@ -32,6 +32,8 @@ public class AjouterUtilisateur extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setAttribute("root", "/TP2Web/");
+        
         this.getServletContext().getRequestDispatcher("/new_utilisateur.jsp").forward(request, response);
     }
 
