@@ -56,6 +56,7 @@ public class Connexion extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setAttribute("message", "");
         processRequest(request, response);
     }
 
@@ -73,9 +74,9 @@ public class Connexion extends HttpServlet {
 
         if (gestionnaireUtilisateurs.connexion(request.getParameter("login"), request.getParameter("password"))) {
             ServletContext context = getServletContext();
-            RequestDispatcher dispatcher = context.getRequestDispatcher("/connecte.jsp");
-            response.sendRedirect("/connecte.jsp");
+            response.sendRedirect("/TP2Web/connecte.jsp");
         } else {
+            request.setAttribute("message", "invalide");
             processRequest(request, response);
         }
     }

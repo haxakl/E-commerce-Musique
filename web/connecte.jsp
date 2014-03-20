@@ -43,16 +43,14 @@
 
                 <h5 class="sidebartitle">Navigation</h5>
                 <ul class="nav nav-pills nav-stacked nav-bracket">
-                    <li><a href="utilisateurs.jsp"><i class="fa fa-user"></i> <span>Utilisateurs</span></a></li>
+                    <li><a href="utilisateurs"><i class="fa fa-user"></i> <span>Utilisateurs</span></a></li>
                 </ul>
 
             </div><!-- leftpanelinner -->
         </div><!-- leftpanel -->
 
         <div class="mainpanel">
-
             <div class="headerbar">
-
                 <a class="menutoggle"><i class="fa fa-bars"></i></a>
 
                 <div class="header-right">

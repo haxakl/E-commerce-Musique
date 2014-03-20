@@ -28,7 +28,7 @@ public class GestionnaireUtilisateurs {
         
         Collection<Utilisateur> users = q.getResultList();
         
-        return users.isEmpty();
+        return !users.isEmpty();
     }
     
     public Utilisateur creeUtilisateur(String nom, String prenom, String login, String password) {

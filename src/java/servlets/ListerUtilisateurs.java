@@ -11,6 +11,7 @@ import java.util.Collection;
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,6 +22,7 @@ import utilisateurs.modeles.Utilisateur;
  *
  * @author Guillaume
  */
+@WebServlet(name = "ListerUtilisateurs", urlPatterns = {"/utilisateurs"})
 public class ListerUtilisateurs extends HttpServlet {
 
     @EJB
@@ -39,7 +41,6 @@ public class ListerUtilisateurs extends HttpServlet {
             throws ServletException, IOException {
         Collection<Utilisateur> liste = gestionnaireUtilisateurs.getAllUsers();
         request.setAttribute("listeDesUsers", liste);
-
         this.getServletContext().getRequestDispatcher("/utilisateurs.jsp").forward(request, response);
     }
 

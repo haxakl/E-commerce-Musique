@@ -65,7 +65,7 @@
                                 </button>
                                 <ul class="dropdown-menu dropdown-menu-usermenu pull-right">
                                     <li><a href="compte"><i class="glyphicon glyphicon-cog"></i> Compte</a></li>
-                                    <li><a href=""><i class="glyphicon glyphicon-log-out"></i> Déconnexion</a></li>
+                                    <li><a href="index.jsp"><i class="glyphicon glyphicon-log-out"></i> Déconnexion</a></li>
                                 </ul>
                             </div>
                         </li>

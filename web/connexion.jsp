@@ -14,7 +14,7 @@
 
         <title>Connexion à l'interface administrateur</title>
 
-        <link href="${requestScope['root']}css/style.default.css" rel="stylesheet">
+        <link href="css/style.default.css" rel="stylesheet">
     </head>
 
     <body class="signin">
@@ -35,6 +35,12 @@
                         <c:if test="${nbUsers == 0}">
                         <div class="alert alert-warning">
                             Aucun utilisateur trouvé dans la base. Un nouvel utilisateur admin/admin a été crée. Veuillez le modifier le plus rapidement possible.
+                        </div>
+                        </c:if>
+                        <c:set var="message" scope="session" value="${requestScope['message']}"/>
+                        <c:if test="${message != ''}">
+                        <div class="alert alert-danger">
+                            Mauvais login/mot de passe
                         </div>
                         </c:if>
                         <p class="mt5 mb20">Connexion pour accéder à l'interface administrateur.</p>
