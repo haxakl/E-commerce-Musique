@@ -14,35 +14,35 @@ public class Utilisateur implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     
-    private String firstname;
-    private String lastname;
+    private String prenom;
+    private String nom;
     private String login;
     private String password;
 
     public Utilisateur() {
     }
 
-    public Utilisateur(final String firstname, final String lastname, final String login, final String password) {
+    public Utilisateur(final String prenom, final String nom, final String login, final String password) {
         this.login = login;
-        this.lastname = lastname;
-        this.firstname = firstname;
+        this.prenom = prenom;
+        this.nom = nom;
         this.password = password;
     }
 
-    public String getFirstname() {
-        return firstname;
+    public String getPrenom() {
+        return prenom;
     }
 
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
     }
 
-    public String getLastname() {
-        return lastname;
+    public String getNom() {
+        return nom;
     }
 
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
+    public void setNom(String nom) {
+        this.nom = nom;
     }
 
     public String getLogin() {

@@ -1,6 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-    "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 
 <!-- Ne pas oublier cette ligne sinon tous les tags de la JSTL seront ignorés ! -->
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -31,16 +30,15 @@
                 <div class="col-md-8">
                     <form method="post">
                         <h4 class="nomargin">Connexion</h4><br/>
-                        <c:set var="nbUsers" scope="session" value="${requestScope['nombre_utilisateur']}"/>
-                        <c:if test="${nbUsers == 0}">
-                        <div class="alert alert-warning">
-                            Aucun utilisateur trouvé dans la base. Un nouvel utilisateur admin/admin a été crée. Veuillez le modifier le plus rapidement possible.
-                        </div>
-                        </c:if>
                         <c:set var="message" scope="session" value="${requestScope['message']}"/>
-                        <c:if test="${message != ''}">
+                        <c:if test="${message.equals('invalide')}">
                         <div class="alert alert-danger">
                             Mauvais login/mot de passe
+                        </div>
+                        </c:if>
+                        <c:if test="${message.equals('deconnexion')}">
+                        <div class="alert alert-success">
+                            Vous vous êtes bien deconnecté.
                         </div>
                         </c:if>
                         <p class="mt5 mb20">Connexion pour accéder à l'interface administrateur.</p>

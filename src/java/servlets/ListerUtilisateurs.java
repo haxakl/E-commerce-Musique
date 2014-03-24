@@ -39,7 +39,24 @@ public class ListerUtilisateurs extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Collection<Utilisateur> liste = gestionnaireUtilisateurs.getAllUsers();
+        
+        // Page affichée
+        int numPage = 1;
+        if(request.getAttribute("page") != null) {
+            numPage = Integer.parseInt(request.getParameter("page"));
+        }
+        
+        // Nombre affichée par page
+        int nbAffiche = 30;
+        if(request.getAttribute("nbAffiche") != null) {
+            nbAffiche = Integer.parseInt(request.getParameter("nbAffiche"));
+        }
+        
+        Collection<Utilisateur> liste = gestionnaireUtilisateurs.getUsers(numPage, nbAffiche);
+        
+        request.setAttribute("nbPages", Math.ceil(liste.size()/nbAffiche));
+        request.setAttribute("page", numPage);
+        
         request.setAttribute("listeDesUsers", liste);
         this.getServletContext().getRequestDispatcher("/utilisateurs.jsp").forward(request, response);
     }

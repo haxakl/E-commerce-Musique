@@ -22,8 +22,8 @@ import utilisateurs.modeles.Utilisateur;
  *
  * @author Guillaume
  */
-@WebServlet(name = "AjouterUtilisateur", urlPatterns = {"/utilisateurs/new"})
-public class AjouterUtilisateur extends HttpServlet {
+@WebServlet(name = "ModifierUtilisateur", urlPatterns = {"/utilisateurs/modify/*"})
+public class ModifierUtilisateur extends HttpServlet {
     @EJB
     private GestionnaireUtilisateurs gestionnaireUtilisateurs;
 
@@ -38,10 +38,11 @@ public class AjouterUtilisateur extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        this.getServletContext().getRequestDispatcher("/new_utilisateur.jsp").forward(request, response);
+        Utilisateur user = gestionnaireUtilisateurs.getUser(Integer.parseInt(request.getPathInfo().replaceAll("/", "")));
+        request.setAttribute("modif_user", user);
+        this.getServletContext().getRequestDispatcher("/modifier_utilisateur.jsp").forward(request, response);
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -68,11 +69,11 @@ public class AjouterUtilisateur extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        this.getServletContext().log(request.getParameter("nom"));
-        this.getServletContext().log(request.getParameter("prenom"));
+        this.getServletContext().log("Modification de l'utilisateur");
 
-        // Récupération de l'utilisateur
-        Utilisateur user = gestionnaireUtilisateurs.creeUtilisateur(
+        // Modification de l'utilisateur
+        gestionnaireUtilisateurs.modifierUtilisateur(
+                Integer.parseInt(request.getPathInfo().replaceAll("/", "")),
                 request.getParameter("nom"),
                 request.getParameter("prenom"),
                 request.getParameter("login"),
@@ -90,6 +91,6 @@ public class AjouterUtilisateur extends HttpServlet {
     @Override
     public String getServletInfo() {
         return "Short description";
-    }// </editor-fold>
+    }
 
 }

@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import utilisateurs.gestionnaires.GestionnaireUtilisateurs;
 import utilisateurs.modeles.Utilisateur;
 
@@ -20,7 +21,6 @@ import utilisateurs.modeles.Utilisateur;
  */
 @WebServlet(name = "Connexion", urlPatterns = {"/index.jsp"})
 public class Connexion extends HttpServlet {
-
     @EJB
     private GestionnaireUtilisateurs gestionnaireUtilisateurs;
 
@@ -35,8 +35,16 @@ public class Connexion extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setAttribute("nombre_utilisateur", gestionnaireUtilisateurs.getAllUsers().size());
-
+        
+        // L'utilisateur est connecté
+        if((Utilisateur) request.getSession().getAttribute("user") != null) {
+            
+            // Récupération de l'utilisateur
+            Utilisateur user = (Utilisateur) request.getSession().getAttribute("user");
+            
+            this.getServletContext().getRequestDispatcher("/connecte.jsp").forward(request, response);
+        }
+        
         // Il n'y a pas d'utilisateurs
         if (gestionnaireUtilisateurs.getAllUsers().isEmpty()) {
             gestionnaireUtilisateurs.creeUtilisateur("Administrateur", "", "admin", "admin");
@@ -73,11 +81,21 @@ public class Connexion extends HttpServlet {
             throws ServletException, IOException {
 
         if (gestionnaireUtilisateurs.connexion(request.getParameter("login"), request.getParameter("password"))) {
+            
+            // Récupération de l'utilisateur
+            Utilisateur user = gestionnaireUtilisateurs.getUser(request.getParameter("login"));
+            
+            // Stocker les informations de l'utilisateur
+            HttpSession session = request.getSession();
+            session.setAttribute("user", user);
+            
+            // Redirection
             ServletContext context = getServletContext();
-            response.sendRedirect("/TP2Web/connecte.jsp");
+            response.sendRedirect("/TP2Web/");
+            
         } else {
             request.setAttribute("message", "invalide");
-            processRequest(request, response);
+            this.getServletContext().getRequestDispatcher("/connexion.jsp").forward(request, response);
         }
     }
 

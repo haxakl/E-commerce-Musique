@@ -3,29 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package servlets;
+package services;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.ejb.EJB;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import utilisateurs.gestionnaires.GestionnaireUtilisateurs;
-import utilisateurs.modeles.Utilisateur;
 
 /**
  *
  * @author Guillaume
  */
-@WebServlet(name = "AjouterUtilisateur", urlPatterns = {"/utilisateurs/new"})
-public class AjouterUtilisateur extends HttpServlet {
-    @EJB
-    private GestionnaireUtilisateurs gestionnaireUtilisateurs;
+@WebServlet(name = "Deconnexion", urlPatterns = {"/logout"})
+public class Deconnexion extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,7 +32,15 @@ public class AjouterUtilisateur extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        this.getServletContext().getRequestDispatcher("/new_utilisateur.jsp").forward(request, response);
+
+        // Récupération de la déconnexion
+        request.getSession().invalidate();
+        request.setAttribute("message", "deconnexion");
+
+        // Redirection
+        ServletContext context = getServletContext();
+        response.sendRedirect("/TP2Web/");
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -67,19 +69,7 @@ public class AjouterUtilisateur extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        this.getServletContext().log(request.getParameter("nom"));
-        this.getServletContext().log(request.getParameter("prenom"));
-
-        // Récupération de l'utilisateur
-        Utilisateur user = gestionnaireUtilisateurs.creeUtilisateur(
-                request.getParameter("nom"),
-                request.getParameter("prenom"),
-                request.getParameter("login"),
-                request.getParameter("password"));
-
-        // Redirection
-        response.sendRedirect("/TP2Web/utilisateurs");
+        processRequest(request, response);
     }
 
     /**
