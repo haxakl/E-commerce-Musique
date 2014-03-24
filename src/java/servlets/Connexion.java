@@ -91,7 +91,7 @@ public class Connexion extends HttpServlet {
             
             // Redirection
             ServletContext context = getServletContext();
-            response.sendRedirect("/TP2Web/");
+            response.sendRedirect("/tp2webmiage/");
             
         } else {
             request.setAttribute("message", "invalide");

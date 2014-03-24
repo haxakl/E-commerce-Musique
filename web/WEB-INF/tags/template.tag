@@ -12,8 +12,8 @@
 
         <title>Administration</title>
 
-        <link href="/TP2Web/css/style.default.css" rel="stylesheet">
-        <link href="/TP2Web/css/style.css" rel="stylesheet">
+        <link href="/tp2webmiage/css/style.default.css" rel="stylesheet">
+        <link href="/tp2webmiage/css/style.css" rel="stylesheet">
     </head>
     <body>
 
@@ -32,7 +32,7 @@
 
                 <h5 class="sidebartitle">Navigation</h5>
                 <ul class="nav nav-pills nav-stacked nav-bracket">
-                    <li><a href="/TP2Web/utilisateurs"><i class="fa fa-user"></i> <span>Utilisateurs</span></a></li>
+                    <li><a href="/tp2webmiage/utilisateurs"><i class="fa fa-user"></i> <span>Utilisateurs</span></a></li>
                 </ul>
 
             </div><!-- leftpanelinner -->
@@ -51,7 +51,7 @@
                                     <span class="caret"></span>
                                 </button>
                                 <ul class="dropdown-menu dropdown-menu-usermenu pull-right">
-                                    <li><a href="/TP2Web/logout"><i class="glyphicon glyphicon-log-out"></i> Déconnexion</a></li>
+                                    <li><a href="/tp2webmiage/logout"><i class="glyphicon glyphicon-log-out"></i> Déconnexion</a></li>
                                 </ul>
                             </div>
                         </li>
@@ -70,14 +70,14 @@
 
         </div><!-- Main Panel -->
 
-        <script src="/TP2Web/js/jquery-1.10.2.min.js"></script>
-        <script src="/TP2Web/js/jquery-migrate-1.2.1.min.js"></script>
-        <script src="/TP2Web/js/bootstrap.min.js"></script>
-        <script src="/TP2Web/js/modernizr.min.js"></script>
-        <script src="/TP2Web/js/jquery.sparkline.min.js"></script>
-        <script src="/TP2Web/js/toggles.min.js"></script>
-        <script src="/TP2Web/js/retina.min.js"></script>
-        <script src="/TP2Web/js/jquery.cookies.js"></script>
-        <script src="/TP2Web/js/custom.js"></script>
+        <script src="/tp2webmiage/js/jquery-1.10.2.min.js"></script>
+        <script src="/tp2webmiage/js/jquery-migrate-1.2.1.min.js"></script>
+        <script src="/tp2webmiage/js/bootstrap.min.js"></script>
+        <script src="/tp2webmiage/js/modernizr.min.js"></script>
+        <script src="/tp2webmiage/js/jquery.sparkline.min.js"></script>
+        <script src="/tp2webmiage/js/toggles.min.js"></script>
+        <script src="/tp2webmiage/js/retina.min.js"></script>
+        <script src="/tp2webmiage/js/jquery.cookies.js"></script>
+        <script src="/tp2webmiage/js/custom.js"></script>
     </body>
 </html>

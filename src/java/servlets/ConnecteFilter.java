@@ -61,7 +61,7 @@ public class ConnecteFilter implements Filter {
 
         if (session == null || session.getAttribute("user") == null) {
             this.filterConfig.getServletContext().log("Unauthorized access request");
-            res.sendRedirect("/TP2Web/index.jsp");
+            res.sendRedirect("/tp2webmiage/index.jsp");
         } else {
             this.filterConfig.getServletContext().log("Authorized access request");
             chain.doFilter(request, response);

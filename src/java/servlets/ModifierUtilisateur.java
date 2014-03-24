@@ -80,7 +80,7 @@ public class ModifierUtilisateur extends HttpServlet {
                 request.getParameter("password"));
 
         // Redirection
-        response.sendRedirect("/TP2Web/utilisateurs");
+        response.sendRedirect("/tp2webmiage/utilisateurs");
     }
 
     /**

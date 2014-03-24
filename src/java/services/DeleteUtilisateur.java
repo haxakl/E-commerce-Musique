@@ -37,7 +37,7 @@ public class DeleteUtilisateur extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         gestionnaireUtilisateurs.deleteUtilisateur(Integer.parseInt(request.getPathInfo().replaceAll("/", "")));
-        response.sendRedirect("/TP2Web/utilisateurs");
+        response.sendRedirect("/tp2webmiage/utilisateurs");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

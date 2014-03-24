@@ -82,7 +82,7 @@ public class GestionnaireUtilisateurs {
     // Retourne les utilisateurs avec un index et un offset
     public Collection<Utilisateur> getUsers(int index, int offset) {
         // Exécution d'une requête équivalente à un select *  
-        Query q = em.createQuery("select u from Utilisateur u limit :cindex, :coffset").setParameter("cindex", index).setParameter("coffset", offset);
+        Query q = em.createQuery("select u from Utilisateur u").setMaxResults(offset).setFirstResult(index);
         return q.getResultList();
     }
     

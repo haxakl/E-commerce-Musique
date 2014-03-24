@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Collection;
 import javax.ejb.EJB;
+import javax.management.StringValueExp;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -42,21 +43,36 @@ public class ListerUtilisateurs extends HttpServlet {
         
         // Page affichée
         int numPage = 1;
-        if(request.getAttribute("page") != null) {
+        if(request.getParameter("page") != null) {
             numPage = Integer.parseInt(request.getParameter("page"));
         }
         
         // Nombre affichée par page
-        int nbAffiche = 30;
-        if(request.getAttribute("nbAffiche") != null) {
+        int nbAffiche=0;
+        if(request.getParameter("nbAffiche") != null) {
             nbAffiche = Integer.parseInt(request.getParameter("nbAffiche"));
+            System.out.println("nbAffiche : " + nbAffiche);
         }
+        else{
+            nbAffiche = 30;
+        }
+        System.out.println("Numpage: "+ numPage);
+        System.out.println("Requete utilisateurs de : " + (numPage-1)*nbAffiche + "à : " + nbAffiche*numPage);
+        Collection<Utilisateur> liste = gestionnaireUtilisateurs.getUsers((numPage-1)*nbAffiche, nbAffiche);
+        // Recupère tous les utilisateurs
+        Collection<Utilisateur> listeAllUsers = gestionnaireUtilisateurs.getAllUsers();
+        double totalUser = listeAllUsers.size();
         
-        Collection<Utilisateur> liste = gestionnaireUtilisateurs.getUsers(numPage, nbAffiche);
+        System.out.println("Nombre d'utilisateurs total :" + listeAllUsers.size() + "Nombre d'utilisateur par page : " + liste.size());
         
-        request.setAttribute("nbPages", Math.ceil(liste.size()/nbAffiche));
+        if(totalUser == 0){
+            request.setAttribute("nbPages", Math.ceil(liste.size()/nbAffiche));
+        }
+        else{
+            request.setAttribute("nbPages", (int) Math.ceil(totalUser/nbAffiche));    
+        }
         request.setAttribute("page", numPage);
-        
+        request.setAttribute("nbAffiche", nbAffiche);
         request.setAttribute("listeDesUsers", liste);
         this.getServletContext().getRequestDispatcher("/utilisateurs.jsp").forward(request, response);
     }

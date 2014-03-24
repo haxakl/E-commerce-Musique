@@ -16,35 +16,69 @@
     <jsp:body>
 
         <p>
-            <a href="/TP2Web/utilisateurs/new" class="btn btn-primary btn-sm">Ajouter un utilisateur</a>
-            <a href="/TP2Web/utilisateurs/masse/50" class="btn btn-primary btn-sm">Créer utilisateurs de tests</a>
+            <a href="/tp2webmiage/utilisateurs/new" class="btn btn-primary btn-sm">Ajouter un utilisateur</a>
+            <a href="/tp2webmiage/utilisateurs/masse/50" class="btn btn-primary btn-sm">Créer utilisateurs de tests</a>
         </p>
 
         <div class="row">
-            <div class="col-lg-4">
+            <div class="col-lg-6">
                 <ul class="pagination">
-                    <li><a href="">&laquo;</a></li>
-                        <c:forEach var="entry" begin="1" end="${nbPages}">
-                        <li
-                        <c:if test="${page.equals(entry)}">
-                         class="active"
-                        </c:if>
-                        ><a href="?page=${entry}">${entry}</a></li>
-                        </c:forEach>
-                    <li><a href="">&raquo;</a></li>
+                   <!-- Définition du nombre d'élément par page -->
+                   <c:choose>
+                       <c:when test="${nbAffiche != 30}">
+                         <c:set var="nbElement" value="${param.nbAffiche}">          
+                       </c:set>
+                       </c:when>
+                       <c:otherwise>
+                         <c:set var="nbElement" value="30">          
+                         </c:set>
+                       </c:otherwise>       
+                   </c:choose>
+                    
+                   <!-- Bouton "précédent" -->
+                   <c:choose>
+                        <c:when test="${page == '1'}">
+                            <li><a href="?page=${page}&nbAffiche=${nbElement}">&laquo;</a></li>
+                        </c:when>
+                        <c:otherwise>
+                            <li><a href="?page=${page - 1}&nbAffiche=${nbElement}">&laquo;</a></li>
+                        </c:otherwise>
+                   </c:choose>
+                   <!-- fin bouton "précedent" --> 
+                   
+                    <c:forEach var="entry" begin="1" end="${nbPages}">
+                    <li
+                    <c:if test="${page.equals(entry)}">
+                     class="active"
+                    </c:if>
+                     ><a href="?page=${entry}&nbAffiche=${nbElement}">${entry}</a></li>
+                    </c:forEach>
+                      
+                    <!-- Bouton suivant -->
+                    <c:choose>
+                        <c:when test="${page.equals(nbPages)}">
+                            <li><a href="?page=${page}&nbAffiche=${nbElement}">&raquo;</a></li>
+                        </c:when>
+                        <c:otherwise>
+                            <li><a href="?page=${page + 1}&nbAffiche=${nbElement}">&raquo;</a></li>
+                        </c:otherwise>
+                    </c:choose>
+                    <!-- Fin bouton suivant --> 
                 </ul>
             </div>
-            <div class="col-lg-6"></div>
+            <div class="col-lg-4"></div>
             <div class="col-lg-2">
-                <select class="form-control">
-                    <option value="10">10</option>
-                    <option value="20">20</option>
-                    <option value="30">30</option>
-                    <option value="50">50</option>
-                    <option value="100">100</option>
-                    <option value="-1">Tous</option>
-                </select><br/>
-                <a class="btn btn-info">Filtrer</a>
+               <form name="submitForm" method="POST" action="/tp2webmiage/utilisateurs">
+                    <select name="nbAffiche" class="form-control">
+                        <option value="10">10</option>
+                        <option value="20">20</option>
+                        <option value="30">30</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                        <option value="-1">Tous</option>
+                    </select><br/>
+                    <input type="submit" class="btn btn-info" onclick="this.form.submit()"></a>
+                </form>
             </div>
         </div>
 
@@ -65,11 +99,11 @@
 
             <c:forEach var="u" items="${requestScope['listeDesUsers']}">
                 <tr>
-                    <td><a href="/TP2Web/utilisateurs/modify/${u.id}" class="btn btn-primary btn-sm"><i class="fa fa-cog"></i> Modifier</a></td>
+                    <td><a href="/tp2webmiage/utilisateurs/modify/${u.id}" class="btn btn-primary btn-sm"><i class="fa fa-cog"></i> Modifier</a></td>
                     <td>${u.login}</td>
                     <td>${u.nom}</td>
                     <td>${u.prenom}</td>
-                    <td><a href="/TP2Web/utilisateurs/delete/${u.id}" class="btn btn-danger btn-sm"><i class="fa fa-times"></i> Supprimer</a></td>
+                    <td><a href="/tp2webmiage/utilisateurs/delete/${u.id}" class="btn btn-danger btn-sm"><i class="fa fa-times"></i> Supprimer</a></td>
                     <!-- On compte le nombre de users -->  
                     <c:set var="total" value="${total+1}"/>
                 </tr>

@@ -39,7 +39,7 @@ public class Deconnexion extends HttpServlet {
 
         // Redirection
         ServletContext context = getServletContext();
-        response.sendRedirect("/TP2Web/");
+        response.sendRedirect("/tp2webmiage/");
 
     }
 
