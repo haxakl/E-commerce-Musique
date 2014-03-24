@@ -5,3 +5,4 @@ build.xml
 dist/WebApplication1.war
 setup/glassfish-resources.xml
 web/WEB-INF/glassfish-web.xml
+dist/TP_2_Git.war
