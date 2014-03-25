@@ -70,11 +70,21 @@
             <div class="col-lg-2">
                <form name="submitForm" method="POST" action="/tp2webmiage/utilisateurs">
                     <select name="nbAffiche" class="form-control">
-                        <option value="10">10</option>
-                        <option value="20">20</option>
-                        <option value="30">30</option>
-                        <option value="50">50</option>
-                        <option value="100">100</option>
+                        <option value="10"
+                                <c:if test="${nbAffiche == 10}">selected</c:if>        
+                        >10</option>
+                        <option value="20"
+                                <c:if test="${nbAffiche == 20}">selected</c:if>  
+                        >20</option>
+                        <option value="30"
+                                <c:if test="${nbAffiche == 30}">selected</c:if>  
+                        >30</option>
+                        <option value="50"
+                                <c:if test="${nbAffiche == 50}">selected</c:if> 
+                        >50</option>
+                        <option value="100"
+                                <c:if test="${nbAffiche == 100}">selected</c:if> 
+                        >100</option>
                         <option value="-1">Tous</option>
                     </select><br/>
                     <input type="submit" class="btn btn-info" onclick="this.form.submit()"></a>
