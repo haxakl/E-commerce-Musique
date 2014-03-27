@@ -5,28 +5,28 @@
  */
 package servlets;
 
-import adresse.modeles.Adresse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Collection;
 import javax.ejb.EJB;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import utilisateurs.gestionnaires.GestionnaireUtilisateurs;
 import utilisateurs.modeles.Utilisateur;
 
 /**
  *
- * @author Guillaume
+ * @author julien
  */
-@WebServlet(name = "AjouterUtilisateur", urlPatterns = {"/utilisateurs/new"})
-public class AjouterUtilisateur extends HttpServlet {
+@WebServlet(name = "ListerAvecAdresse", urlPatterns = {"/adresses/*"})
+public class ListerAvecAdresse extends HttpServlet {
     @EJB
     private GestionnaireUtilisateurs gestionnaireUtilisateurs;
+    
+    private String forwardTo;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,8 +39,18 @@ public class AjouterUtilisateur extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        this.getServletContext().getRequestDispatcher("/new_utilisateur.jsp").forward(request, response);
+
+        // on récupère le paramètre idVille  
+        int idVille = Integer.parseInt(request.getPathInfo().replaceAll("/", ""));
+
+        // On récupère la liste des utilisateurs pour la ville  
+        Collection<Utilisateur> liste = gestionnaireUtilisateurs.getUsersParVille(idVille);
+
+        // et on passe le résultat à la JSP pour affichage...  
+        request.setAttribute("listeDesUsers", liste);
+        this.getServletContext().getRequestDispatcher("/adresses.jsp").forward(request, response);
     }
+
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -68,20 +78,7 @@ public class AjouterUtilisateur extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        this.getServletContext().log(request.getParameter("nom"));
-        this.getServletContext().log(request.getParameter("prenom"));
-
-        // Récupération de l'utilisateur
-        Utilisateur user = gestionnaireUtilisateurs.creeUtilisateur(
-                request.getParameter("nom"),
-                request.getParameter("prenom"),
-                request.getParameter("login"),
-                request.getParameter("password"),
-               new Adresse(request.getParameter("adresse"), request.getParameter("codePostal")));
-
-        // Redirection
-        response.sendRedirect("/tp2webmiage/utilisateurs");
+        processRequest(request, response);
     }
 
     /**
