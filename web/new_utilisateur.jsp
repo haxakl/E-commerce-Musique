@@ -16,32 +16,56 @@
     <jsp:body>
         <form method="post" class="form-horizontal" role="form">
             <div class="form-group">
-                <label for="prenom" class="col-sm-2 control-label">Prénom</label>
+                <label for="prenom" class="col-sm-2 control-label">
+                    Prénom 
+                </label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control" name="prenom" id="prenom" placeholder="Prénom">
                 </div>
             </div>
             <div class="form-group">
-                <label for="nom" class="col-sm-2 control-label">Nom</label>
+                <label for="nom" class="col-sm-2 control-label">
+                    Nom
+                </label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control" name="nom" id="nom" placeholder="Nom">
                 </div>
             </div>
             <div class="form-group">
-                <label for="login" class="col-sm-2 control-label">Login</label>
+                <label for="login" class="col-sm-2 control-label">
+                    <label class="label label-danger">Obligatoire</label> Login
+                </label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" name="login" id="login" placeholder="Prénom">
+                    <input type="text" class="form-control" name="login" id="login" placeholder="Login" required>
                 </div>
             </div>
             <div class="form-group">
-                <label for="password" class="col-sm-2 control-label">Password</label>
+                <label for="password" class="col-sm-2 control-label">
+                    <label class="label label-danger">Obligatoire</label> Password
+                </label>
                 <div class="col-sm-10">
-                    <input type="password" class="form-control" name="password" id="password" placeholder="Password">
+                    <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
                 </div>
             </div>
-            
-            <button class="btn btn-success btn-block pull-right">Enregistrer l'utilisateur</button>
+            <div class="row">
+                <div class="col-lg-9"></div>
+                <div class="col-lg-3">
+                    <button class="btn btn-success btn-block pull-right">Enregistrer l'utilisateur</button>
+                </div>
+            </div>
         </form><br/>
+
+        <script>
+            // Basic Form
+            jQuery("#basicForm").validate({
+                highlight: function(element) {
+                    jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+                },
+                success: function(element) {
+                    jQuery(element).closest('.form-group').removeClass('has-error');
+                }
+            });
+        </script>
 
     </jsp:body>
 </t:template>

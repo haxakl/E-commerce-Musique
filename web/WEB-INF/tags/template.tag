@@ -14,6 +14,8 @@
 
         <link href="/tp2webmiage/css/style.default.css" rel="stylesheet">
         <link href="/tp2webmiage/css/style.css" rel="stylesheet">
+        
+        <script src="/tp2webmiage/js/jquery-1.10.2.min.js"></script>
     </head>
     <body>
 
@@ -69,8 +71,7 @@
             </div>
 
         </div><!-- Main Panel -->
-
-        <script src="/tp2webmiage/js/jquery-1.10.2.min.js"></script>
+        
         <script src="/tp2webmiage/js/jquery-migrate-1.2.1.min.js"></script>
         <script src="/tp2webmiage/js/bootstrap.min.js"></script>
         <script src="/tp2webmiage/js/modernizr.min.js"></script>

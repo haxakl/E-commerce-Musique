@@ -43,14 +43,15 @@ public class Connexion extends HttpServlet {
             Utilisateur user = (Utilisateur) request.getSession().getAttribute("user");
             
             this.getServletContext().getRequestDispatcher("/connecte.jsp").forward(request, response);
-        }
-        
-        // Il n'y a pas d'utilisateurs
-        if (gestionnaireUtilisateurs.getAllUsers().isEmpty()) {
-            gestionnaireUtilisateurs.creeUtilisateur("Administrateur", "", "admin", "admin");
-        }
+        } else {
 
-        this.getServletContext().getRequestDispatcher("/connexion.jsp").forward(request, response);
+            // Il n'y a pas d'utilisateurs
+            if (gestionnaireUtilisateurs.getAllUsers().isEmpty()) {
+                gestionnaireUtilisateurs.creeUtilisateur("Administrateur", "", "admin", "admin");
+            }
+
+            this.getServletContext().getRequestDispatcher("/connexion.jsp").forward(request, response);
+        }
     }
 
     /**

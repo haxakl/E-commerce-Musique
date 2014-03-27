@@ -6,6 +6,6 @@
         <h1>Welcome</h1>
     </jsp:attribute>
     <jsp:body>
-        <p>Hi I'm the heart of the message</p>
+        <p></p>
     </jsp:body>
 </t:template>
