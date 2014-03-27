@@ -1,5 +1,6 @@
 package utilisateurs.gestionnaires;
 
+import adresse.modeles.Adresse;
 import java.util.Collection;
 import java.util.Iterator;
 import javax.ejb.Stateless;
@@ -20,36 +21,45 @@ public class GestionnaireUtilisateurs {
 
     // Créer une masse d'utilisateur
     public void creerUtilisateursDeTest() {
-        creeUtilisateur("John", "Lennon", "jlennon", "test");
-        creeUtilisateur("Paul", "Mac Cartney", "pmc", "test");
-        creeUtilisateur("Ringo", "Starr", "rstarr", "test");
-        creeUtilisateur("Georges", "Harisson", "georgesH", "test");
-        creeUtilisateur("Georges", "Harisson", "georgesH", "test");
-        creeUtilisateur("Georges", "Harisson", "georgesH", "test");
-        creeUtilisateur("Georges", "Harisson", "georgesH", "test");
-        creeUtilisateur("Georges", "Harisson", "georgesH", "test");
-        creeUtilisateur("Georges", "Harisson", "georgesH", "test");
-        creeUtilisateur("Georges", "Harisson", "georgesH", "test");
-        creeUtilisateur("Georges", "Harisson", "georgesH", "test");
-        creeUtilisateur("Georges", "Harisson", "georgesH", "test");
-        creeUtilisateur("Georges", "Harisson", "georgesH", "test");
-        creeUtilisateur("Georges", "Harisson", "georgesH", "test");
-        creeUtilisateur("Georges", "Harisson", "georgesH", "test");
-        creeUtilisateur("Georges", "Harisson", "georgesH", "test");
-        creeUtilisateur("Georges", "Harisson", "georgesH", "test");
-        creeUtilisateur("Georges", "Harisson", "georgesH", "test");
-        creeUtilisateur("Georges", "Harisson", "georgesH", "test");
-        creeUtilisateur("Georges", "Harisson", "georgesH", "test");
-        creeUtilisateur("Georges", "Harisson", "georgesH", "test");
-        creeUtilisateur("Georges", "Harisson", "georgesH", "test");
-        creeUtilisateur("Georges", "Harisson", "georgesH", "test");
-        creeUtilisateur("Georges", "Harisson", "georgesH", "test");
-        creeUtilisateur("Georges", "Harisson", "georgesH", "test");
-        creeUtilisateur("Georges", "Harisson", "georgesH", "test");
-        creeUtilisateur("Georges", "Harisson", "georgesH", "test");
-        creeUtilisateur("Georges", "Harisson", "georgesH", "test");
-        creeUtilisateur("Georges", "Harisson", "georgesH", "test");
-        creeUtilisateur("Georges", "Harisson", "georgesH", "test");
+        
+        // On cree des adresses et on les insère dans la base  
+        Adresse biot = new Adresse("Biot", "06410");  
+        em.persist(biot);  
+        Adresse valbonne = new Adresse("Valbonne", "06560");  
+        em.persist(valbonne);  
+        Adresse nice = new Adresse("Nice", "06000");  
+        em.persist(nice);
+        
+        creeUtilisateur("John", "Lennon", "jlennon", "test", nice);
+        creeUtilisateur("Paul", "Mac Cartney", "pmc", "test", valbonne);
+        creeUtilisateur("Ringo", "Starr", "rstarr", "test", nice);
+        creeUtilisateur("Georges", "Harisson", "georgesH", "test", biot);
+        creeUtilisateur("Georges", "Harisson", "georgesH", "test", biot);
+        creeUtilisateur("Georges", "Harisson", "georgesH", "test", biot);
+        creeUtilisateur("Georges", "Harisson", "georgesH", "test", biot);
+        creeUtilisateur("Georges", "Harisson", "georgesH", "test", biot);
+        creeUtilisateur("Georges", "Harisson", "georgesH", "test",biot);
+        creeUtilisateur("Georges", "Harisson", "georgesH", "test", biot);
+        creeUtilisateur("Georges", "Harisson", "georgesH", "test", biot);
+        creeUtilisateur("Georges", "Harisson", "georgesH", "test", biot);
+        creeUtilisateur("Georges", "Harisson", "georgesH", "test", biot);
+        creeUtilisateur("Georges", "Harisson", "georgesH", "test", biot);
+        creeUtilisateur("Georges", "Harisson", "georgesH", "test", biot);
+        creeUtilisateur("Georges", "Harisson", "georgesH", "test", biot);
+        creeUtilisateur("Georges", "Harisson", "georgesH", "test", biot);
+        creeUtilisateur("Georges", "Harisson", "georgesH", "test", biot);
+        creeUtilisateur("Georges", "Harisson", "georgesH", "test", biot);
+        creeUtilisateur("Georges", "Harisson", "georgesH", "test", biot);
+        creeUtilisateur("Georges", "Harisson", "georgesH", "test", biot);
+        creeUtilisateur("Georges", "Harisson", "georgesH", "test", biot);
+        creeUtilisateur("Georges", "Harisson", "georgesH", "test", biot);
+        creeUtilisateur("Georges", "Harisson", "georgesH", "test",biot);
+        creeUtilisateur("Georges", "Harisson", "georgesH", "test",biot);
+        creeUtilisateur("Georges", "Harisson", "georgesH", "test",biot);
+        creeUtilisateur("Georges", "Harisson", "georgesH", "test",biot);
+        creeUtilisateur("Georges", "Harisson", "georgesH", "test",biot);
+        creeUtilisateur("Georges", "Harisson", "georgesH", "test",biot);
+        creeUtilisateur("Georges", "Harisson", "georgesH", "test",biot);
     }
 
     // Test si l'utilisateur existe et si le mot de passe correspond
@@ -62,8 +72,19 @@ public class GestionnaireUtilisateurs {
     }
     
     // Créer un utilisateur
-    public Utilisateur creeUtilisateur(String nom, String prenom, String login, String password) {
+    public Utilisateur creeUtilisateur(String nom, String prenom, String login, String password, Adresse a) {
+        
         Utilisateur u = new Utilisateur(prenom, nom, login, password);
+        // On met à jour la relation, elle est déjà en base  
+        u.setAdresse(a);
+        
+        // a est déjà en base et connectée, donc la ligne suivante modifie les   
+        // données pour relier l'adresse à l'utilisateur 
+        a.addUtilisateur(u);
+        
+        // On persiste l'utilisateur, la relation est déjà en base, cela va donc  
+        // ajouter une ligne dans la table des utilisateur avec une clé étrangère  
+        // correspondant à l'adresse  
         em.persist(u);
         return u;
     }
@@ -108,6 +129,13 @@ public class GestionnaireUtilisateurs {
         
         return (Utilisateur) iterator.next();
     }
+    
+    public Collection<Utilisateur> getUsersParVille(int idVille) {  
+        Adresse a = em.find(Adresse.class, idVille);  
+  
+        // a est connecté, le get va déclencher un select  
+        return a.getUtilisateurs();  
+    } 
 
     // Retourne l'utilisateur demandé grâce à son id
     public Utilisateur getUser(int id) {

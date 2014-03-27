@@ -1,5 +1,6 @@
 package servlets;
 
+import adresse.modeles.Adresse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Collection;
@@ -43,15 +44,15 @@ public class Connexion extends HttpServlet {
             Utilisateur user = (Utilisateur) request.getSession().getAttribute("user");
             
             this.getServletContext().getRequestDispatcher("/connecte.jsp").forward(request, response);
-        } else {
-
-            // Il n'y a pas d'utilisateurs
-            if (gestionnaireUtilisateurs.getAllUsers().isEmpty()) {
-                gestionnaireUtilisateurs.creeUtilisateur("Administrateur", "", "admin", "admin");
-            }
-
-            this.getServletContext().getRequestDispatcher("/connexion.jsp").forward(request, response);
         }
+        
+        // Il n'y a pas d'utilisateurs
+        if (gestionnaireUtilisateurs.getAllUsers().isEmpty()) {
+            Adresse nice = new Adresse("NICE", "06480");
+            gestionnaireUtilisateurs.creeUtilisateur("Administrateur", "", "admin", "admin", nice);
+        }
+
+        this.getServletContext().getRequestDispatcher("/connexion.jsp").forward(request, response);
     }
 
     /**

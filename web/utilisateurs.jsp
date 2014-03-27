@@ -93,13 +93,15 @@
             </div>
 
             <!-- Zone qui affiche les utilisateurs si le paramètre action vaut listerComptes -->  
-            <table class="table table-striped">  
+            <table class="table">  
                 <!-- La ligne de titre du tableau des comptes -->  
                 <tr>  
                     <td><b>Modifier</b></td>
                     <td><b>Login</b></td>
                     <td><b>Nom</b></td>
                     <td><b>Prénom</b></td>
+                    <td><b>Ville</b></td>  
+                    <td><b>Code postal</b></td> 
                     <td><b>Supprimer</b></td>
                 </tr>  
 
@@ -113,7 +115,13 @@
                     <td>${u.login}</td>
                     <td>${u.nom}</td>
                     <td>${u.prenom}</td>
-                    <td><a href="/tp2webmiage/utilisateurs/delete/${u.id}" class="supprimer btn btn-danger btn-sm"><i class="fa fa-times"></i> Supprimer</a></td>
+                    <td>
+                        <a href="adresses/${u.adresse.id}">
+                            ${u.adresse.ville}
+                        </a>
+                    </td>  
+                    <td>${u.adresse.codePostal}</td> 
+                    <td><a href="/tp2webmiage/utilisateurs/delete/${u.id}" class="btn btn-danger btn-sm"><i class="fa fa-times"></i> Supprimer</a></td>
                     <!-- On compte le nombre de users -->  
                     <c:set var="total" value="${total+1}"/>
                 </tr>
@@ -122,44 +130,6 @@
             <!-- Affichage du solde total dans la dernière ligne du tableau -->  
             <tr><td><b>TOTAL</b></td><td></td><td></td><td><b>${total}</b></td><td></td></tr>
         </table>
-
-        <div class="modal fade bs-example-modal-panel in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
-            <div class="modal-dialog">
-                <div class="modal-content"><div class="panel panel-dark panel-alt">
-                        <div class="panel-heading">
-                            <div class="panel-btns">
-                                <a class="panel-close" data-dismiss="modal" aria-hidden="true">×</a>
-                            </div><!-- panel-btns -->
-                            <h3 class="panel-title">Etes-vous sur de vouloir supprimer cet utilisateur ?</h3>
-                        </div>
-                        <div class="panel-body">
-                            La suppression d'un utilisateur est permanent. Il ne sera pas possible de le récupérer.
-                        </div>
-                        <div class="panel-footer">
-                            <a class="non btn btn-default pull-right">Non</a>
-                            <a class="oui btn btn-success pull-right" style="margin-right: 20px;">Oui</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <script>
-
-            // Prevent suppression
-            jQuery(".supprimer").click(function(event) {
-                event.preventDefault();
-                jQuery(".bs-example-modal-panel").modal("show");
-                var lien = $(this).attr("href");
-                jQuery(".bs-example-modal-panel .non").click(function() {
-                    $(this).closest(".bs-example-modal-panel").modal("hide");
-                });
-                jQuery(".bs-example-modal-panel .oui").click(function() {
-                    location = lien;
-                });
-            });
-
-        </script>
 
     </jsp:body>
 </t:template>
