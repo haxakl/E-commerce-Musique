@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import telephone.modeles.Telephone;
 import utilisateurs.gestionnaires.GestionnaireUtilisateurs;
 import utilisateurs.modeles.Utilisateur;
 
@@ -49,7 +50,8 @@ public class Connexion extends HttpServlet {
         // Il n'y a pas d'utilisateurs
         if (gestionnaireUtilisateurs.getAllUsers().isEmpty()) {
             Adresse nice = new Adresse("NICE", "06480");
-            gestionnaireUtilisateurs.creeUtilisateur("Administrateur", "", "admin", "admin", nice);
+            Telephone tel = new Telephone("22");
+            gestionnaireUtilisateurs.creeUtilisateur("Administrateur", "", "admin", "admin", nice, tel);
         }
 
         this.getServletContext().getRequestDispatcher("/connexion.jsp").forward(request, response);

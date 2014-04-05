@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import telephone.modeles.Telephone;
 import utilisateurs.gestionnaires.GestionnaireUtilisateurs;
 import utilisateurs.modeles.Utilisateur;
 
@@ -78,7 +79,7 @@ public class AjouterUtilisateur extends HttpServlet {
                 request.getParameter("prenom"),
                 request.getParameter("login"),
                 request.getParameter("password"),
-               new Adresse(request.getParameter("adresse"), request.getParameter("codePostal")));
+               new Adresse(request.getParameter("adresse"), request.getParameter("codePostal")), new Telephone("0600112233"));
 
         // Redirection
         response.sendRedirect("/tp2webmiage/utilisateurs");

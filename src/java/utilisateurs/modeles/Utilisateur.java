@@ -9,20 +9,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import telephone.modeles.Telephone;
 
 @Entity
 public class Utilisateur implements Serializable {
     
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private Adresse adresse;  
-
-    public Adresse getAdresse() {
-        return adresse;
-    }
-
-    public void setAdresse(Adresse adresse) {
-        this.adresse = adresse;
-    }
+    @OneToOne(cascade = CascadeType.PERSIST)
+    private Telephone telephone;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -36,7 +31,7 @@ public class Utilisateur implements Serializable {
     public Utilisateur() {
     }
 
-    public Utilisateur(final String prenom, final String nom, final String login, final String password) {
+    public Utilisateur(final String prenom, final String nom, final String login, final String password){
         this.login = login;
         this.prenom = prenom;
         this.nom = nom;
@@ -82,6 +77,22 @@ public class Utilisateur implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+    
+    public Telephone getTelephone() {
+        return telephone;
+    }
+
+    public void setTelephone(Telephone telephone) {
+        this.telephone = telephone;
+    }
+    
+    public Adresse getAdresse() {
+        return adresse;
+    }
+
+    public void setAdresse(Adresse adresse) {
+        this.adresse = adresse;
     }
 
     @Override

@@ -4,7 +4,7 @@
 
 <t:template>
     <jsp:attribute name="breadcrumb">
-        <h2><i class="fa fa-home"></i> Utilisateurs <span>Lister les utilisateurs</span></h2>
+        <h2><i class="fa fa-user"></i> Utilisateurs <span>Lister les utilisateurs</span></h2>
         <div class="breadcrumb-wrapper">
             <span class="label">Vous êtes ici</span>
             <ol class="breadcrumb">
@@ -101,7 +101,8 @@
                     <td><b>Nom</b></td>
                     <td><b>Prénom</b></td>
                     <td><b>Ville</b></td>  
-                    <td><b>Code postal</b></td> 
+                    <td><b>Code postal</b></td>
+                    <td><b>Téléphone</b></td>
                     <td><b>Supprimer</b></td>
                 </tr>  
 
@@ -121,6 +122,7 @@
                         </a>
                     </td>  
                     <td>${u.adresse.codePostal}</td> 
+                    <td>${u.telephone.tel}</td>
                     <td><a href="/tp2webmiage/utilisateurs/delete/${u.id}" class="supprimer btn btn-danger btn-sm"><i class="fa fa-times"></i> Supprimer</a></td>
                     <!-- On compte le nombre de users -->  
                     <c:set var="total" value="${total+1}"/>

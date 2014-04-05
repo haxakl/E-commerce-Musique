@@ -59,6 +59,7 @@ public class ListerUtilisateurs extends HttpServlet {
         System.out.println("Numpage: "+ numPage);
         System.out.println("Requete utilisateurs de : " + (numPage-1)*nbAffiche + "à : " + nbAffiche*numPage);
         Collection<Utilisateur> liste = gestionnaireUtilisateurs.getUsers((numPage-1)*nbAffiche, nbAffiche);
+        System.out.println(liste);
         // Recupère tous les utilisateurs
         Collection<Utilisateur> listeAllUsers = gestionnaireUtilisateurs.getAllUsers();
         double totalUser = listeAllUsers.size();
