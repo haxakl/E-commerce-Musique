@@ -7,6 +7,10 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import musique.modeles.Artiste;
+import musique.modeles.Genre;
+import musique.modeles.Musique;
+import telephone.modeles.Telephone;
 import utilisateurs.modeles.Utilisateur;
 
 @Stateless
@@ -29,38 +33,46 @@ public class GestionnaireUtilisateurs {
         em.persist(valbonne);  
         Adresse nice = new Adresse("Nice", "06000");  
         em.persist(nice);
+       
+        Telephone untel = new Telephone("0634220204");
+        em.persist(untel);
         
-        creeUtilisateur("John", "Lennon", "jlennon", "test", nice);
-        creeUtilisateur("Paul", "Mac Cartney", "pmc", "test", valbonne);
-        creeUtilisateur("Ringo", "Starr", "rstarr", "test", nice);
-        creeUtilisateur("Georges", "Harisson", "georgesH", "test", biot);
-        creeUtilisateur("Georges", "Harisson", "georgesH", "test", biot);
-        creeUtilisateur("Georges", "Harisson", "georgesH", "test", biot);
-        creeUtilisateur("Georges", "Harisson", "georgesH", "test", biot);
-        creeUtilisateur("Georges", "Harisson", "georgesH", "test", biot);
-        creeUtilisateur("Georges", "Harisson", "georgesH", "test",biot);
-        creeUtilisateur("Georges", "Harisson", "georgesH", "test", biot);
-        creeUtilisateur("Georges", "Harisson", "georgesH", "test", biot);
-        creeUtilisateur("Georges", "Harisson", "georgesH", "test", biot);
-        creeUtilisateur("Georges", "Harisson", "georgesH", "test", biot);
-        creeUtilisateur("Georges", "Harisson", "georgesH", "test", biot);
-        creeUtilisateur("Georges", "Harisson", "georgesH", "test", biot);
-        creeUtilisateur("Georges", "Harisson", "georgesH", "test", biot);
-        creeUtilisateur("Georges", "Harisson", "georgesH", "test", biot);
-        creeUtilisateur("Georges", "Harisson", "georgesH", "test", biot);
-        creeUtilisateur("Georges", "Harisson", "georgesH", "test", biot);
-        creeUtilisateur("Georges", "Harisson", "georgesH", "test", biot);
-        creeUtilisateur("Georges", "Harisson", "georgesH", "test", biot);
-        creeUtilisateur("Georges", "Harisson", "georgesH", "test", biot);
-        creeUtilisateur("Georges", "Harisson", "georgesH", "test", biot);
-        creeUtilisateur("Georges", "Harisson", "georgesH", "test",biot);
-        creeUtilisateur("Georges", "Harisson", "georgesH", "test",biot);
-        creeUtilisateur("Georges", "Harisson", "georgesH", "test",biot);
-        creeUtilisateur("Georges", "Harisson", "georgesH", "test",biot);
-        creeUtilisateur("Georges", "Harisson", "georgesH", "test",biot);
-        creeUtilisateur("Georges", "Harisson", "georgesH", "test",biot);
-        creeUtilisateur("Georges", "Harisson", "georgesH", "test",biot);
+        Telephone untel2 = new Telephone("0618967542");
+        em.persist(untel);
+        
+        creeUtilisateur("John", "Lennon", "jlennon", "test", nice, untel);
+        creeUtilisateur("Paul", "Mac Cartney", "pmc", "test", valbonne, untel);
+        creeUtilisateur("Ringo", "Starr", "rstarr", "test", nice, untel);
+        creeUtilisateur("Georges", "Harisson", "georgesH", "test", biot, untel2);
+        creeUtilisateur("Georges", "Harisson", "georgesH", "test", biot, untel2);
+        creeUtilisateur("Georges", "Harisson", "georgesH", "test", biot, untel2);
+        creeUtilisateur("Georges", "Harisson", "georgesH", "test", biot, untel2);
+        creeUtilisateur("Georges", "Harisson", "georgesH", "test", biot, untel2);
+        creeUtilisateur("Georges", "Harisson", "georgesH", "test",biot, untel2);
+        creeUtilisateur("Georges", "Harisson", "georgesH", "test", biot, untel2);
+        creeUtilisateur("Georges", "Harisson", "georgesH", "test", biot, untel2);
+        creeUtilisateur("Georges", "Harisson", "georgesH", "test", biot, untel2);
+        creeUtilisateur("Georges", "Harisson", "georgesH", "test", biot, untel2);
+        creeUtilisateur("Georges", "Harisson", "georgesH", "test", biot, untel2);
+        creeUtilisateur("Georges", "Harisson", "georgesH", "test", biot, untel2);
+        creeUtilisateur("Georges", "Harisson", "georgesH", "test", biot, untel2);
+        creeUtilisateur("Georges", "Harisson", "georgesH", "test", biot, untel2);
+        creeUtilisateur("Georges", "Harisson", "georgesH", "test", biot, untel2);
+        creeUtilisateur("Georges", "Harisson", "georgesH", "test", biot, untel2);
+        creeUtilisateur("Georges", "Harisson", "georgesH", "test", biot, untel2);
+        creeUtilisateur("Georges", "Harisson", "georgesH", "test", biot, untel2);
+        creeUtilisateur("Georges", "Harisson", "georgesH", "test", biot, untel2);
+        creeUtilisateur("Georges", "Harisson", "georgesH", "test", biot, untel2);
+        creeUtilisateur("Georges", "Harisson", "georgesH", "test",biot, untel2);
+        creeUtilisateur("Georges", "Harisson", "georgesH", "test",biot, untel2);
+        creeUtilisateur("Georges", "Harisson", "georgesH", "test",biot, untel2);
+        creeUtilisateur("Georges", "Harisson", "georgesH", "test",biot, untel2);
+        creeUtilisateur("Georges", "Harisson", "georgesH", "test",biot, untel2);
+        creeUtilisateur("Georges", "Harisson", "georgesH", "test",biot, untel2);
+        creeUtilisateur("Georges", "Harisson", "georgesH", "test",biot, untel2);
     }
+    
+    
 
     // Test si l'utilisateur existe et si le mot de passe correspond
     public boolean connexion(String login, String password) {
@@ -72,21 +84,70 @@ public class GestionnaireUtilisateurs {
     }
     
     // Créer un utilisateur
-    public Utilisateur creeUtilisateur(String nom, String prenom, String login, String password, Adresse a) {
+    public Utilisateur creeUtilisateur(String nom, String prenom, String login, String password, Adresse a, Telephone tel) {
         
         Utilisateur u = new Utilisateur(prenom, nom, login, password);
         // On met à jour la relation, elle est déjà en base  
         u.setAdresse(a);
+        u.setTelephone(tel);
         
         // a est déjà en base et connectée, donc la ligne suivante modifie les   
         // données pour relier l'adresse à l'utilisateur 
         a.addUtilisateur(u);
+        
+        tel.setUtilisateur(u);
         
         // On persiste l'utilisateur, la relation est déjà en base, cela va donc  
         // ajouter une ligne dans la table des utilisateur avec une clé étrangère  
         // correspondant à l'adresse  
         em.persist(u);
         return u;
+    }
+    public void creerMusiquesDeTest(){
+        
+        Artiste acdc = new Artiste("AC-DC", "Groupe de rock connu", "/photos/acdc");
+        Artiste afi = new Artiste("AFI", "AFI", "/photos/afi");
+        Artiste aero = new Artiste("Aerosmith", "Aerosmith", "/photos/aerosmith");
+        Artiste alicecopper = new Artiste("Alice Copper", "Alice Copper", "/photos/alicecopper");
+        
+        em.persist(acdc);
+        em.persist(afi);
+        em.persist(aero);
+        em.persist(alicecopper);
+        
+        Genre rock = new Genre("rock");
+        em.persist(rock);
+        
+        creerMusiques(acdc, "Highway To hell (live)", 2, 2000, null, rock);
+        creerMusiques(acdc, "Shoot To Thrills", 2, 2000, null, rock);
+        creerMusiques(acdc, "Back In Black (live)", 2, 2000, null, rock);
+        creerMusiques(acdc, "Hell's Bells (live)", 2, 2000, null, rock);
+        creerMusiques(acdc, "You Shook Me All Night Long (live)", 2, 2000, null, rock);
+        creerMusiques(afi, "Miss Murder", 2, 2000, null, rock);
+        creerMusiques(aero, "Back in the Saddle", 2, 2000, null, rock);
+        creerMusiques(aero, "Same Old Song and Dance", 2, 2000, null, rock);
+        creerMusiques(aero, "Walk This Way (3 tracks)", 2, 2000, null, rock);
+        creerMusiques(alicecopper, "Billions Dollars Babies (3 tracks)", 2, 2000, null, rock);
+        creerMusiques(alicecopper, "I'm Eighteen", 2, 2000, null, rock);
+        creerMusiques(alicecopper, "School's Out", 2, 2000, null, rock);
+    }
+    
+    // Créer un utilisateur
+    public Musique creerMusiques(Artiste artiste, String titre, int nbpiste, int annee,
+            String url, Genre genre) {
+        
+        Musique m = new Musique(titre, nbpiste, annee, url);
+        m.setArtiste(artiste);
+        m.setGenre(genre);
+        
+        // a est déjà en base et connectée, donc la ligne suivante modifie les   
+        // données pour relier l'adresse à l'utilisateur 
+        
+        // On persiste l'utilisateur, la relation est déjà en base, cela va donc  
+        // ajouter une ligne dans la table des utilisateur avec une clé étrangère  
+        // correspondant à l'adresse  
+        em.persist(m);
+        return m;
     }
     
     // Modifier un utilisateur
@@ -99,7 +160,19 @@ public class GestionnaireUtilisateurs {
         em.persist(u);
         return u;
     }
-
+    public Collection<Musique> getAllMusiques(){
+        // Exécution d'une requête équivalente à un select *  
+        Query q = em.createQuery("select m from Musique m");
+        return q.getResultList();
+    }
+    
+    public Collection<Musique> getMusiqueByGenre(int idgenre){
+         // Exécution d'une requête équivalente à un select *  
+        Query q = em.createQuery("select m from Musique m where m.genre.id = :cidgenre").setParameter("cidgenre", idgenre);
+        return q.getResultList();
+    }
+            
+            
     // Retourne les utilisateurs avec un index et un offset
     public Collection<Utilisateur> getUsers(int index, int offset) {
         // Exécution d'une requête équivalente à un select *  

@@ -35,6 +35,7 @@
                 <h5 class="sidebartitle">Navigation</h5>
                 <ul class="nav nav-pills nav-stacked nav-bracket">
                     <li><a href="/tp2webmiage/utilisateurs"><i class="fa fa-user"></i> <span>Utilisateurs</span></a></li>
+                    <li><a href="/tp2webmiage/musiques"><i class="fa fa-music"></i> <span>Musiques</span></a></li>
                 </ul>
 
             </div><!-- leftpanelinner -->

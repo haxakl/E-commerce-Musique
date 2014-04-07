@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import telephone.modeles.Telephone;
 import utilisateurs.gestionnaires.GestionnaireUtilisateurs;
 import utilisateurs.modeles.Utilisateur;
 
@@ -25,6 +26,7 @@ import utilisateurs.modeles.Utilisateur;
  */
 @WebServlet(name = "AjouterUtilisateur", urlPatterns = {"/utilisateurs/new"})
 public class AjouterUtilisateur extends HttpServlet {
+
     @EJB
     private GestionnaireUtilisateurs gestionnaireUtilisateurs;
 
@@ -40,7 +42,7 @@ public class AjouterUtilisateur extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setAttribute("listeVilles", gestionnaireUtilisateurs.getVilles());
-        
+
         this.getServletContext().getRequestDispatcher("/new_utilisateur.jsp").forward(request, response);
     }
 
@@ -79,7 +81,7 @@ public class AjouterUtilisateur extends HttpServlet {
                 request.getParameter("prenom"),
                 request.getParameter("login"),
                 request.getParameter("password"),
-               new Adresse(request.getParameter("ville"), request.getParameter("cp")));
+                new Adresse(request.getParameter("ville"), request.getParameter("cp")), new Telephone("0600112233"));
 
         // Redirection
         response.sendRedirect("/tp2webmiage/utilisateurs");

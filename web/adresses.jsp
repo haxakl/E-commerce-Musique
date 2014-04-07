@@ -52,7 +52,7 @@
             </c:forEach>
 
             <!-- Affichage du solde total dans la dernière ligne du tableau -->  
-            <tr><td><b>TOTAL</b></td><td></td><td></td><td><b>${total}</b></td><td></td></tr>
+            <tr><td><b>TOTAL</b></td><td></td><td></td><td></td><td></td><td><b>${total}</b></td><td></td></tr>
         </table>
     </jsp:body>
 </t:template>

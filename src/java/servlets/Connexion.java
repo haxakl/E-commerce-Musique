@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import telephone.modeles.Telephone;
 import utilisateurs.gestionnaires.GestionnaireUtilisateurs;
 import utilisateurs.modeles.Utilisateur;
 
@@ -22,6 +23,7 @@ import utilisateurs.modeles.Utilisateur;
  */
 @WebServlet(name = "Connexion", urlPatterns = {"/index.jsp"})
 public class Connexion extends HttpServlet {
+
     @EJB
     private GestionnaireUtilisateurs gestionnaireUtilisateurs;
 
@@ -36,20 +38,21 @@ public class Connexion extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         // L'utilisateur est connecté
-        if((Utilisateur) request.getSession().getAttribute("user") != null) {
-            
+        if ((Utilisateur) request.getSession().getAttribute("user") != null) {
+
             // Récupération de l'utilisateur
             Utilisateur user = (Utilisateur) request.getSession().getAttribute("user");
-            
+
             this.getServletContext().getRequestDispatcher("/connecte.jsp").forward(request, response);
         }
-        
+
         // Il n'y a pas d'utilisateurs
         if (gestionnaireUtilisateurs.getAllUsers().isEmpty()) {
-            Adresse nice = new Adresse("Nice", "06480");
-            gestionnaireUtilisateurs.creeUtilisateur("Administrateur", "", "admin", "admin", nice);
+            Adresse nice = new Adresse("NICE", "06480");
+            Telephone tel = new Telephone("22");
+            gestionnaireUtilisateurs.creeUtilisateur("Administrateur", "", "admin", "admin", nice, tel);
         }
 
         this.getServletContext().getRequestDispatcher("/connexion.jsp").forward(request, response);
@@ -83,18 +86,18 @@ public class Connexion extends HttpServlet {
             throws ServletException, IOException {
 
         if (gestionnaireUtilisateurs.connexion(request.getParameter("login"), request.getParameter("password"))) {
-            
+
             // Récupération de l'utilisateur
             Utilisateur user = gestionnaireUtilisateurs.getUser(request.getParameter("login"));
-            
+
             // Stocker les informations de l'utilisateur
             HttpSession session = request.getSession();
             session.setAttribute("user", user);
-            
+
             // Redirection
             ServletContext context = getServletContext();
             response.sendRedirect("/tp2webmiage/");
-            
+
         } else {
             request.setAttribute("message", "invalide");
             this.getServletContext().getRequestDispatcher("/connexion.jsp").forward(request, response);
