@@ -130,6 +130,12 @@ public class GestionnaireUtilisateurs {
         return (Utilisateur) iterator.next();
     }
     
+    public Collection<Adresse> getVilles() {  
+        Query q = em.createQuery("select a from Adresse a");
+        
+        return  q.getResultList(); 
+    } 
+    
     public Collection<Utilisateur> getUsersParVille(int idVille) {  
         Adresse a = em.find(Adresse.class, idVille);  
   

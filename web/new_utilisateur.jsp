@@ -15,9 +15,10 @@
     </jsp:attribute>
     <jsp:body>
         <form method="post" class="form-horizontal" role="form">
+            <h3>Informations</h3>
             <div class="form-group">
                 <label for="prenom" class="col-sm-2 control-label">
-                    Prénom 
+                    Prénom
                 </label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control" name="prenom" id="prenom" placeholder="Prénom">
@@ -47,6 +48,38 @@
                     <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
                 </div>
             </div>
+            <hr>
+            <h3>Adresse</h3>
+            <div class="form-group">
+                <label for="login" class="col-sm-2 control-label">
+                    Ville existante
+                </label>
+                <div class="col-sm-10">
+                    <select class="form-control chosen-select" name="ville_existante" data-placeholder="Choisissez une ville existante">
+                        <option value=""></option>
+                        <c:forEach var="a" items="${requestScope['listeVilles']}">
+                            <option value="${a.ville}">${a.ville}</option>
+                        </c:forEach>
+                    </select>
+                </div>
+            </div>
+            <h6>ou</h6>
+            <div class="form-group">
+                <label for="login" class="col-sm-2 control-label">
+                    Code Postal
+                </label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="cp" id="cp" placeholder="Code Postal">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="ville" class="col-sm-2 control-label">
+                    Ville
+                </label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="ville" id="ville" placeholder="Ville">
+                </div>
+            </div>
             <div class="row">
                 <div class="col-lg-9"></div>
                 <div class="col-lg-3">
@@ -57,13 +90,17 @@
 
         <script>
             // Basic Form
-            jQuery("#basicForm").validate({
-                highlight: function(element) {
-                    jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
-                },
-                success: function(element) {
-                    jQuery(element).closest('.form-group').removeClass('has-error');
-                }
+            jQuery(document).ready(function() {
+                jQuery(".chosen-select").chosen({'width': '100%', 'white-space': 'nowrap'});
+
+                jQuery("#basicForm").validate({
+                    highlight: function(element) {
+                        jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+                    },
+                    success: function(element) {
+                        jQuery(element).closest('.form-group').removeClass('has-error');
+                    }
+                });
             });
         </script>
 

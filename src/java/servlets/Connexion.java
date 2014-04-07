@@ -48,7 +48,7 @@ public class Connexion extends HttpServlet {
         
         // Il n'y a pas d'utilisateurs
         if (gestionnaireUtilisateurs.getAllUsers().isEmpty()) {
-            Adresse nice = new Adresse("NICE", "06480");
+            Adresse nice = new Adresse("Nice", "06480");
             gestionnaireUtilisateurs.creeUtilisateur("Administrateur", "", "admin", "admin", nice);
         }
 

@@ -39,10 +39,11 @@ public class AjouterUtilisateur extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setAttribute("listeVilles", gestionnaireUtilisateurs.getVilles());
+        
         this.getServletContext().getRequestDispatcher("/new_utilisateur.jsp").forward(request, response);
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -73,12 +74,12 @@ public class AjouterUtilisateur extends HttpServlet {
         this.getServletContext().log(request.getParameter("prenom"));
 
         // Récupération de l'utilisateur
-        Utilisateur user = gestionnaireUtilisateurs.creeUtilisateur(
+        gestionnaireUtilisateurs.creeUtilisateur(
                 request.getParameter("nom"),
                 request.getParameter("prenom"),
                 request.getParameter("login"),
                 request.getParameter("password"),
-               new Adresse(request.getParameter("adresse"), request.getParameter("codePostal")));
+               new Adresse(request.getParameter("ville"), request.getParameter("cp")));
 
         // Redirection
         response.sendRedirect("/tp2webmiage/utilisateurs");
@@ -92,6 +93,6 @@ public class AjouterUtilisateur extends HttpServlet {
     @Override
     public String getServletInfo() {
         return "Short description";
-    }// </editor-fold>
+    }
 
 }

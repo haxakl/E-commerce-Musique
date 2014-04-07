@@ -80,5 +80,6 @@
         <script src="/tp2webmiage/js/retina.min.js"></script>
         <script src="/tp2webmiage/js/jquery.cookies.js"></script>
         <script src="/tp2webmiage/js/custom.js"></script>
+        <script src="/tp2webmiage/js/chosen.jquery.min.js"></script>
     </body>
 </html>
