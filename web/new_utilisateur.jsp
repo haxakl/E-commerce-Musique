@@ -14,7 +14,8 @@
         </div>
     </jsp:attribute>
     <jsp:body>
-        <form method="post" class="form-horizontal" role="form">
+        <a class="btn btn-success" id="autofill"> Remplissage auto</a>
+        <form id="basicForm" method="post" class="form-horizontal" role="form">
             <h3>Informations</h3>
             <div class="form-group">
                 <label for="prenom" class="col-sm-2 control-label">
@@ -46,6 +47,14 @@
                 </label>
                 <div class="col-sm-10">
                     <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="phone" class="col-sm-2 control-label">
+                    <label class="label label-danger">Obligatoire</label> Tél
+                </label>
+                <div class="col-sm-10">
+                <input type="text" placeholder="Phone" id="phone" class="form-control" required>
                 </div>
             </div>
             <hr>
@@ -87,20 +96,31 @@
                 </div>
             </div>
         </form><br/>
-
         <script>
             // Basic Form
             jQuery(document).ready(function() {
-                jQuery(".chosen-select").chosen({'width': '100%', 'white-space': 'nowrap'});
-
+                  // Basic Form
                 jQuery("#basicForm").validate({
-                    highlight: function(element) {
-                        jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
-                    },
-                    success: function(element) {
-                        jQuery(element).closest('.form-group').removeClass('has-error');
-                    }
+                  highlight: function(element) {
+                    jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+                  },
+                  success: function(element) {
+                    jQuery(element).closest('.form-group').removeClass('has-error');
+                  }
                 });
+                $("#autofill").click(function(){
+                    $("#nom").val("Dupond");
+                    $("#prenom").val("jean");
+                    $("#login").val("jean0789");
+                    $("#password").val("jean");
+                    $("#phone").val("06.32.12.09.08");
+                    $("#cp").val("06560");
+                    $("#ville").val("Valbonne");
+                 });  
+                jQuery(".chosen-select").chosen({'width': '100%', 'white-space': 'nowrap'});
+                // Error Message In One Container
+                                 // Input Masks
+                jQuery("#phone").mask("99.99.99.99.99");
             });
         </script>
 

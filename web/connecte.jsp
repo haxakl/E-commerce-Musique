@@ -3,7 +3,7 @@
 
 <t:template>
     <jsp:attribute name="breadcrumb">
-        <h1>Welcome</h1>
+        <h1>Bienvenue</h1>
     </jsp:attribute>
     <jsp:body>
         <p></p>

@@ -20,22 +20,22 @@
         </div>
     </jsp:attribute>
     <jsp:body>
-      <!-- Zone qui affiche les utilisateurs si le paramètre action vaut listerComptes -->  
-            <table class="table">  
-                <!-- La ligne de titre du tableau des comptes -->  
-                <tr>  
-                    <td><b>Artiste</b></td>
-                    <td><b>Titre</b></td>
-                    <td><b>Nb Pistes</b></td>
-                    <td><b>Annee</b></td>
-                    <td><b>Genre</b></td>
-                    <td><b>URL</b></td>
-                    <td><b>Acheter</b></td>
+        <!-- Zone qui affiche les utilisateurs si le paramètre action vaut listerComptes -->  
+        <table class="table">  
+            <!-- La ligne de titre du tableau des comptes -->  
+            <tr>  
+                <td><b>Artiste</b></td>
+                <td><b>Titre</b></td>
+                <td><b>Nb Pistes</b></td>
+                <td><b>Annee</b></td>
+                <td><b>Genre</b></td>
+                <td><b>URL</b></td>
+                <td><b>Acheter</b></td>
 
-                </tr>  
+            </tr>  
 
-                <!-- Ici on affiche les lignes, une par utilisateur -->  
-                <!-- cette variable montre comment on peut utiliser JSTL et EL pour calculer -->  
+            <!-- Ici on affiche les lignes, une par utilisateur -->  
+            <!-- cette variable montre comment on peut utiliser JSTL et EL pour calculer -->  
             <c:set var="total" value="0"/>  
 
             <c:forEach var="m" items="${requestScope['listeDesMusiques']}">
@@ -46,9 +46,41 @@
                     <td>${m.annee}</td>
                     <td><a href="musiques?genre=${m.genre.id}">${m.genre.nom}</a></td>
                     <td>${m.url}</td> 
-                    <td><a class="btn btn-primary"><span class="glyphicon glyphicon-shopping-cart"></span></a></td>
+                    <td><button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+                            <span class="glyphicon glyphicon-shopping-cart"></span></button></td>
                 </tr>
             </c:forEach>
-        </table>  
+        </table>
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title" id="myModalLabel">Achat d'un titre</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
+                            <input type='hidden' value="5" name="amount" />
+                            <input name="currency_code" type="hidden" value="EUR" />
+                            <input name="return" type="hidden" value="http://localhost:8080/tp2webmiage/musiques" />
+                            <input name="cancel_return" type="hidden" value="http://localhost:8080/tp2webmiage/musiques" />
+                            <input name="notify_url" type="hidden" value="http://votredomaine/validationPaiement.php" />
+                            <input name="cmd" type="hidden" value="_xclick" />
+                            <input name="business" type="hidden" value="julienblacas@gmail.com" />
+                            <input name="item_name" type="hidden" value="Une musique" />
+                            <input name="no_note" type="hidden" value="1" />
+                            <input name="lc" type="hidden" value="FR" />
+                            <input name="bn" type="hidden" value="PP-BuyNowBF" />
+                            <input name="custom" type="hidden" value="ID_ACHETEUR" />
+                            <input alt="Effectuez vos paiements via PayPal : une solution rapide, gratuite et sécurisée" name="submit" src="https://www.paypal.com/fr_FR/FR/i/btn/btn_buynow_LG.gif" type="image" /><img src="https://www.paypal.com/fr_FR/i/scr/pixel.gif" border="0" alt="" width="1" height="1" />
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Payer avec paypal</button>
+                    </div>
+                </div><!-- modal-content -->
+            </div><!-- modal-dialog -->
+        </div>
     </jsp:body>
 </t:template>

@@ -81,7 +81,7 @@ public class AjouterUtilisateur extends HttpServlet {
                 request.getParameter("prenom"),
                 request.getParameter("login"),
                 request.getParameter("password"),
-                new Adresse(request.getParameter("ville"), request.getParameter("cp")), new Telephone("0600112233"));
+                new Adresse(request.getParameter("ville"), request.getParameter("cp")), new Telephone(request.getParameter("phone")));
 
         // Redirection
         response.sendRedirect("/tp2webmiage/utilisateurs");
