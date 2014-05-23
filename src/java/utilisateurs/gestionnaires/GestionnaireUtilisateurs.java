@@ -118,18 +118,6 @@ public class GestionnaireUtilisateurs {
         Genre rock = new Genre("rock");
         em.persist(rock);
         
-        creerMusiques(acdc, "Highway To hell (live)", 2, 2000, null, rock);
-        creerMusiques(acdc, "Shoot To Thrills", 2, 2000, null, rock);
-        creerMusiques(acdc, "Back In Black (live)", 2, 2000, null, rock);
-        creerMusiques(acdc, "Hell's Bells (live)", 2, 2000, null, rock);
-        creerMusiques(acdc, "You Shook Me All Night Long (live)", 2, 2000, null, rock);
-        creerMusiques(afi, "Miss Murder", 2, 2000, null, rock);
-        creerMusiques(aero, "Back in the Saddle", 2, 2000, null, rock);
-        creerMusiques(aero, "Same Old Song and Dance", 2, 2000, null, rock);
-        creerMusiques(aero, "Walk This Way (3 tracks)", 2, 2000, null, rock);
-        creerMusiques(alicecopper, "Billions Dollars Babies (3 tracks)", 2, 2000, null, rock);
-        creerMusiques(alicecopper, "I'm Eighteen", 2, 2000, null, rock);
-        creerMusiques(alicecopper, "School's Out", 2, 2000, null, rock);
     }
     
     // Créer un utilisateur

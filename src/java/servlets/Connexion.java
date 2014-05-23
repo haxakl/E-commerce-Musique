@@ -21,7 +21,7 @@ import utilisateurs.modeles.Utilisateur;
  *
  * @author Guillaume
  */
-@WebServlet(name = "Connexion", urlPatterns = {"/index.jsp"})
+@WebServlet(name = "Connexion", urlPatterns = {"/connexion"})
 public class Connexion extends HttpServlet {
 
     @EJB
@@ -45,7 +45,7 @@ public class Connexion extends HttpServlet {
             // Récupération de l'utilisateur
             Utilisateur user = (Utilisateur) request.getSession().getAttribute("user");
 
-            this.getServletContext().getRequestDispatcher("/connecte.jsp").forward(request, response);
+            this.getServletContext().getRequestDispatcher("/view/backoffice/connecte.jsp").forward(request, response);
         }
 
         // Il n'y a pas d'utilisateurs
@@ -55,7 +55,7 @@ public class Connexion extends HttpServlet {
             gestionnaireUtilisateurs.creeUtilisateur("Administrateur", "", "admin", "admin", nice, tel);
         }
 
-        this.getServletContext().getRequestDispatcher("/connexion.jsp").forward(request, response);
+        this.getServletContext().getRequestDispatcher("/view/frontoffice/connexion.jsp").forward(request, response);
     }
 
     /**
