@@ -10,6 +10,7 @@ import javax.persistence.Query;
 import musique.modeles.Artiste;
 import musique.modeles.Genre;
 import musique.modeles.Musique;
+import musique.modeles.Piste;
 import telephone.modeles.Telephone;
 import utilisateurs.modeles.Utilisateur;
 
@@ -102,29 +103,26 @@ public class GestionnaireUtilisateurs {
         return u;
     }
 
-    public void creerMusiquesDeTest() {
-
-        Artiste acdc = new Artiste("AC-DC", "Groupe de rock connu", "/photos/acdc");
-        Artiste afi = new Artiste("AFI", "AFI", "/photos/afi");
-        Artiste aero = new Artiste("Aerosmith", "Aerosmith", "/photos/aerosmith");
-        Artiste alicecopper = new Artiste("Alice Copper", "Alice Copper", "/photos/alicecopper");
-
-        em.persist(acdc);
-        em.persist(afi);
-        em.persist(aero);
-        em.persist(alicecopper);
-
-        Genre rock = new Genre("rock");
-        em.persist(rock);
-
-    }
-
     // Créer un utilisateur
     public Musique creerMusique(Artiste artiste, String titre, int nbpiste, int annee, String url, Genre genre) {
 
         Musique m = new Musique(titre, nbpiste, annee, url);
         m.setArtiste(artiste);
         m.setGenre(genre);
+
+        // a est déjà en base et connectée, donc la ligne suivante modifie les   
+        // données pour relier l'adresse à l'utilisateur 
+        // On persiste l'utilisateur, la relation est déjà en base, cela va donc  
+        // ajouter une ligne dans la table des utilisateur avec une clé étrangère  
+        // correspondant à l'adresse  
+        em.persist(m);
+        return m;
+    }
+
+    // Créer un utilisateur
+    public Piste creerPiste(Musique musique, String nom) {
+
+        Piste m = new Piste(musique, nom);
 
         // a est déjà en base et connectée, donc la ligne suivante modifie les   
         // données pour relier l'adresse à l'utilisateur 

@@ -34,8 +34,6 @@ public class Musiques extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
                 // Il n'y a pas d'utilisateurs
-        if(gestionnaireUtilisateurs.getAllMusiques().isEmpty())
-            gestionnaireUtilisateurs.creerMusiquesDeTest();
         
          Collection<Musique> liste;
         if(request.getParameter("genre") != null) {
