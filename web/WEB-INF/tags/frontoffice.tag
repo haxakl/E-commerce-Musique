@@ -1,5 +1,6 @@
 <%@tag pageEncoding="UTF-8" %>
 <%@attribute name="breadcrumb" fragment="true" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 
 <!DOCTYPE html>
 <!-- Ne pas oublier cette ligne sinon tous les tags de la JSTL seront ignorés ! -->
@@ -12,30 +13,44 @@
 
         <title>MultiTracksSongs</title>
 
-        <link href="css/style.default.css" rel="stylesheet">
+        <link href="/tp2webmiage/ressources/library/fontawesome/font-awesome.css" rel="stylesheet">
+        <link href="/tp2webmiage/ressources/library/bootstrap/bootstrap.css" rel="stylesheet">
+
+        <link href="/tp2webmiage/ressources/library/musiccomposer/systeme.css" rel="stylesheet">
+
     </head>
 
-    <body class="signin">
-        <div class="panel panel-default">
-
-            <div class="panel panel-primary">
-                <div class="panel-heading">Links</div>
-                <div class="panel-body">
-                    <a class="btn btn-sm btn-primary"><i class="fa fa-euro"></i> Pricing</a>
-                    <a class="btn btn-sm btn-primary"><i class="fa fa-music"></i> Music list</a>
-                    <a class="btn btn-sm btn-success"><i class="fa fa-shopping-cart"></i> Cart</a>
-                    <a href="/tp2webmiage/connexion" class="btn btn-sm btn-primary pull-right"><i class="fa fa-user"></i> Login</a>
-                </div>
+    <body class="container">
+        <div id="header">
+            <c:if test="${user != null}" >
+            <div class="membre_connecte">
+                <a class="pull-right" href="/tp2webmiage/logout"><i class="fa fa-sign-out"></i> Déconnexoin</a>
+                <a class="pull-right" href="/tp2webmiage/membre" style="margin-right: 20px;">
+                    <i class="fa fa-user"></i> ${user.getPrenom()} ${user.getNom()}
+                </a>
             </div>
-            <div class="contentpanel">
-                <jsp:doBody/>
-            </div>
+            </c:if>
+            
+            <c:if test="${user == null}" >
+            <a class="pull-right" href="/tp2webmiage/connexion"><i class="fa fa-sign-in"></i> Connexion</a>
+            <a class="pull-right" href="/tp2webmiage/inscription" style="margin-right: 20px;"><i class="fa fa-user"></i> Inscription</a>
+            </c:if>
         </div>
 
-        <script src="js/jquery-1.10.2.min.js"></script>
-        <script src="js/jquery-migrate-1.2.1.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-        <script src="js/modernizr.min.js"></script>
-        <script src="js/retina.min.js"></script>
+        <div id="menu">
+            <ul id="nav">
+                <li><a href="/tp2webmiage/">Accueil</a></li>
+                <li><a href="/tp2webmiage/musiques">Musiques</a></li>
+                <li><a href="/tp2webmiage/abonnement">Abonnement</a></li>
+                <li class="pull-right"><a href="/tp2webmiage/panier"><i class="fa fa-shopping-cart"></i> Panier</a></li>
+            </ul>
+        </div>
+
+        <div class="contentpanel">
+            <jsp:doBody/>
+        </div>
+
+        <script src="/tp2webmiage/ressources/library/jquery/jquery.js"></script>
+        <script src="/tp2webmiage/ressources/library/bootstrap/bootstrap.js"></script>
     </body>
 </html>

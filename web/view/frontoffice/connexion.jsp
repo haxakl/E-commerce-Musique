@@ -26,7 +26,10 @@
 
                             <input type="text" name="login" class="form-control uname" placeholder="Login" />
                             <input type="password" name="password" class="form-control pword" placeholder="Password" /><br/>
-                            <button class="btn btn-success btn-block">Accéder</button>
+                            
+                            Vous n'avez de compte ? <a href="/tp2webmiage/inscription">Créer un compte</a>
+                            
+                            <button class="btn btn-success btn-block">Connexion</button>
                         </form>
                     </div>
                 </div>
