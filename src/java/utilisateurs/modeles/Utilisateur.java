@@ -27,15 +27,22 @@ public class Utilisateur implements Serializable {
     private String nom;
     private String login;
     private String password;
+    private int groupe;
 
     public Utilisateur() {
+        
     }
 
     public Utilisateur(final String prenom, final String nom, final String login, final String password){
+        this(prenom, nom, login, password, 0);
+    }
+    
+    public Utilisateur(final String prenom, final String nom, final String login, final String password, int groupe){
         this.login = login;
         this.prenom = prenom;
         this.nom = nom;
         this.password = password;
+        this.groupe = groupe;
     }
 
 
@@ -93,6 +100,22 @@ public class Utilisateur implements Serializable {
 
     public void setAdresse(Adresse adresse) {
         this.adresse = adresse;
+    }
+
+    public int getGroupe() {
+        return groupe;
+    }
+
+    public void setGroupe(int groupe) {
+        this.groupe = groupe;
+    }
+    
+    public boolean isAdmin() {
+        if(this.groupe == 1) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override

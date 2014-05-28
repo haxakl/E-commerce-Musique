@@ -14,10 +14,10 @@
         <title>MultiTracksSongs</title>
 
         <link href="/tp2webmiage/ressources/library/musiccomposer/theme.css" rel="stylesheet">
+        <link href="/tp2webmiage/ressources/library/musiccomposer/systeme.css" rel="stylesheet">
         <link href="/tp2webmiage/ressources/library/fontello/fontello.css" rel="stylesheet">
         <link href="/tp2webmiage/ressources/library/fontawesome/font-awesome.css" rel="stylesheet">
         <link href="/tp2webmiage/ressources/library/bootstrap/bootstrap.min.css" rel="stylesheet">
-
     </head>
 
     <body>
@@ -38,8 +38,7 @@
         </div>
 
         <aside id="logo-bar">
-            <div id="logo"><a href="./index.html"><img src="/tp2webmiage/ressources/logo.png" alt="LOGO"></a></div>
-            <div id="ajax-load"></div>
+            <div id="logo"><a href="/tp2webmiage/"><img src="/tp2webmiage/ressources/logo.png" alt="LOGO"></a></div>
         </aside>
         <section id="page-global">
 
@@ -49,20 +48,20 @@
                 <nav id="primary-nav">
                     <ul class="clearfix">
                         <li>
-                            <a href="./artists.html">
+                            <a href="/tp2webmiage/artistes">
                                 <i class="icon-tag-1"></i>
                                 <p>Mon profil</p>
                             </a>
                         </li>
                         <li>
-                            <a href="./albums.html">
+                            <a href="/tp2webmiage/musiques">
                                 <i class="icon-music-1"></i>
                                 <p>Musiques</p>
                             </a>
                             <ul>
-                                <li><a href="./album-single.html">Toutes</a></li>
-                                <li><a href="#">Par genre</a></li>
-                                <li><a href="#">Par artiste</a></li>
+                                <li><a href="/tp2webmiage/musiques">Toutes</a></li>
+                                <li><a href="/tp2webmiage/musiques?order=genre">Par genre</a></li>
+                                <li><a href="/tp2webmiage/musiques?order=artiste">Par artiste</a></li>
                             </ul>
                         </li>
                         <li>
@@ -138,63 +137,19 @@
                                 </a></li><li><a href="./gallery.html" class="child">&nbsp;- Newest</a></li><li><a href="./gallery.html" class="child">&nbsp;- Popular</a></li><li><a href="#">
                                     <i class="icon-plus-squared"></i>
                                     <p>Pages</p>
-                                </a></li><li><a href="./fullwidth.html" class="child">&nbsp;- Fullwidth</a></li><li><a href="./404.html" class="child">&nbsp;- 404 Error</a></li><li><a href="./contact.html">
+                                </a></li><li><a href="./fullwidth.html" class="child">&nbsp;- Fullwidth</a></li><li><a href="./404.html" class="child">&nbsp;- 404 Error</a></li>
+                            <li>
+                                <a href="./contact.html">
                                     <i class="icon-email"></i>
                                     <p>Contact</p>
-                                </a></li></ul>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
                 </ul>
 
                 <div id="logo"><a href="./index.html"><img src="./assets/img/placeholder/logo.png" alt="LOGO"></a></div></header>
-            <!-- ## NAV HEADER END ## -->
-
-            <!-- ## MUSIC ## -->
-            <div id="music">
-                <div id="jquery_jplayer_1" class="jp-jplayer" style="width: 0px; height: 0px;"><img id="jp_poster_0" style="width: 0px; height: 0px; display: none;"><audio id="jp_audio_0" preload="metadata" src="http://3.s3.envato.com/files/5513511/preview.mp3"></audio></div>
-                <div id="jp_interface_1">
-                    <a href="#" class="jp-play" style="display: inline;"><i class="icon-play"></i> Play</a>
-                    <a href="#" class="jp-pause" style="display: none;"><i class="icon-pause"></i> Pause</a>
-                    <a href="#" class="music-title">- Bang Bang by David Guetta</a>
-                </div>
-            </div>	
-            <!-- ## MUSIC END ## -->
-
-
-            <!--
-                         FEATURE BAR ## 
-                        <section id="featuredBar">
-                            <div class="container">
-                                <ul class="clearfix">	
-                                    <li>
-                                        <a href="#">
-                                            <i class="icon-music-1"></i><p><span>Latest Album : </span>Wake me up by Avicii</p>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="icon-calendar-2"></i><p><span>Upcoming Event : </span>Sunburn Arena 8, Mumbai</p>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="icon-book-open"></i><p><span>Latest News : </span>Lorem ipsum dolor sit amet</p>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </section>-->
-            <!-- FEATURE BAR END ## -->	
-
         </section>
-        <ul id="supersized" class="quality" style="visibility: visible;"><li class="slide-0 prevslide" style="visibility: visible; opacity: 1;"><a target="_blank"><img src="http://themeforest.quadcodes.com/site/musicvent/assets/img/placeholder/full-bg-2.jpg" style="width: 1366px; left: 0px; top: -123.5px; height: 846.92px;"></a></li><li class="slide-1 activeslide" style="visibility: visible; opacity: 1;"><a target="_blank"><img src="http://themeforest.quadcodes.com/site/musicvent/assets/img/placeholder/full-bg-4.jpg" style="width: 1366px; height: 860.58px; left: 0px; top: -130.5px;"></a></li></ul>
-        <!--        <div id="menu">
-                    <ul id="nav">
-                        <li><a href="/tp2webmiage/">Accueil</a></li>
-                        <li><a href="/tp2webmiage/musiques">Musiques</a></li>
-                        <li><a href="/tp2webmiage/abonnement">Abonnement</a></li>
-                        <li class="pull-right"><a href="/tp2webmiage/panier"><i class="fa fa-shopping-cart"></i> Panier</a></li>
-                    </ul>
-                </div>-->
 
         <div class="contentpanel">
             <jsp:doBody/>
