@@ -53,7 +53,7 @@ public class ListerMusiques extends HttpServlet {
             liste =  gestionnaireUtilisateurs.getAllMusiques();
         }
         request.setAttribute("listeDesMusiques", liste);
-        this.getServletContext().getRequestDispatcher("/musiques.jsp").forward(request, response);
+        this.getServletContext().getRequestDispatcher("/view/backoffice/musiques.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

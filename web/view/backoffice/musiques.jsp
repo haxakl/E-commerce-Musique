@@ -8,7 +8,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 
-<t:template>
+<t:frontoffice>
     <jsp:attribute name="breadcrumb">
         <h2><i class="fa fa-music"></i> Musiques <span>Lister les musiques</span></h2>
         <div class="breadcrumb-wrapper">
@@ -82,4 +82,4 @@
             </div><!-- modal-dialog -->
         </div>
     </jsp:body>
-</t:template>
+</t:frontoffice>

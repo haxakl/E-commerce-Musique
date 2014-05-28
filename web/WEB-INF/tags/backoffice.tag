@@ -12,10 +12,9 @@
 
         <title>Administration</title>
 
-        <link href="/tp2webmiage/css/style.default.css" rel="stylesheet">
-        <link href="/tp2webmiage/css/style.css" rel="stylesheet">
+        <link href="/tp2webmiage/ressources/library/musiccomposer/style.default.css" rel="stylesheet">
         
-        <script src="/tp2webmiage/js/jquery-1.10.2.min.js"></script>
+        <script src="/tp2webmiage/ressources/library/jquery/jquery-1.10.2.min.js"></script>
     </head>
     <body>
 
@@ -72,17 +71,17 @@
             </div>
 
         </div><!-- Main Panel -->
-        <script src="/tp2webmiage/js/jquery-1.10.2.min.js"></script>
-        <script src="/tp2webmiage/js/jquery-migrate-1.2.1.min.js"></script>
-        <script src="/tp2webmiage/js/jquery.validate.min.js"></script>
-        <script src="/tp2webmiage/js/bootstrap.min.js"></script>
-        <script src="/tp2webmiage/js/modernizr.min.js"></script>
-        <script src="/tp2webmiage/js/jquery.sparkline.min.js"></script>
-        <script src="/tp2webmiage/js/toggles.min.js"></script>
-        <script src="/tp2webmiage/js/retina.min.js"></script>
-        <script src="/tp2webmiage/js/jquery.cookies.js"></script>
-        <script src="/tp2webmiage/js/custom.js"></script>
-        <script src="/tp2webmiage/js/jquery.maskedinput.min.js"></script>
-        <script src="/tp2webmiage/js/chosen.jquery.min.js"></script>
+        <script src="/tp2webmiage/ressources/library/jquery/jquery-1.10.2.min.js"></script>
+        <script src="/tp2webmiage/ressources/library/jquery/jquery-migrate-1.2.1.min.js"></script>
+        <script src="/tp2webmiage/ressources/library/jquery/jquery.validate.min.js"></script>
+        <script src="/tp2webmiage/ressources/library/jquery/bootstrap.min.js"></script>
+        <script src="/tp2webmiage/ressources/library/jquery/modernizr.min.js"></script>
+        <script src="/tp2webmiage/ressources/library/jquery/jquery.sparkline.min.js"></script>
+        <script src="/tp2webmiage/ressources/library/jquery/toggles.min.js"></script>
+        <script src="/tp2webmiage/ressources/library/jquery/retina.min.js"></script>
+        <script src="/tp2webmiage/ressources/library/jquery/jquery.cookies.js"></script>
+        <script src="/tp2webmiage/ressources/library/jquery/custom.js"></script>
+        <script src="/tp2webmiage/ressources/library/jquery/jquery.maskedinput.min.js"></script>
+        <script src="/tp2webmiage/ressources/library/jquery/chosen.jquery.min.js"></script>
     </body>
 </html>
