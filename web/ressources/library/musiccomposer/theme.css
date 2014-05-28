@@ -196,7 +196,7 @@ p#slidecite     			{    margin-top: 25px;
 /* === 3.1 PRIMARY NAV === */
 #primary-nav li                         { 	float: left;}
 #primary-nav li a                       {    display: block;
-                                             /* width: 90px; */
+                                             width: 200px;
                                              height: 100px;
                                              color: #eee;
                                              padding: 5px 20px;    text-align: center;

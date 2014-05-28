@@ -75,33 +75,6 @@
                                 <li><a href="#">Popular</a></li>
                             </ul>					
                         </li>
-                        <li>
-                            <a href="./blog.html">
-                                <i class="icon-book-open"></i>
-                                <p>Blog</p>
-                            </a>
-                            <ul>
-                                <li><a href="./blog-single.html">Blog Single</a></li>
-                                <li><a href="#">Newest</a></li>
-                                <li><a href="#">Popular</a></li>
-                            </ul>					
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="icon-plus-squared"></i>
-                                <p>Pages</p>
-                            </a>
-                            <ul>
-                                <li><a href="./fullwidth.html">Fullwidth</a></li>
-                                <li><a href="./404.html">404 Error</a></li>
-                            </ul>					
-                        </li>				
-                        <li>
-                            <a href="./contact.html">
-                                <i class="icon-email"></i>
-                                <p>Contact</p>
-                            </a>
-                        </li>
                         <li style="right: 0px; position: absolute;">
                             <a href="./contact.html">
                                 <i class="icon-cart"></i>
