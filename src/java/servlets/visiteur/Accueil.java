@@ -55,12 +55,14 @@ public class Accueil extends HttpServlet {
             gestionnaireUtilisateurs.persist(rock);
             for (int i = 0; i < array.size(); i++) {
                 JSONObject objet = (JSONObject) array.get(i);
-                gestionnaireUtilisateurs.creerMusique(acdc, (String) objet.get("nom"), 0, 2000, "", rock);
                 JSONArray compositions = (JSONArray) objet.get("composition");
                 
-                //TODO Boucle sur les compositions
+                Musique musique = gestionnaireUtilisateurs.creerMusique(acdc, (String) objet.get("nom"), compositions.size(), 2000, "", rock);
+
+                // Boucle sur les compositions
                 for(int j = 0; j < compositions.size(); j++) {
                     // Faire les pistes
+                    gestionnaireUtilisateurs.creerPiste(musique, (String) compositions.get(j));
                 }
                 
             }
