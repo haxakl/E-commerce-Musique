@@ -4,36 +4,47 @@
 
 <t:frontoffice>
     <jsp:body>
-        <section>
-            <div class="signinpanel">
-                <div class="row">
-                    <div class="col-md-2"></div>
-                    <div class="col-md-8">
-                        <form method="post">
-                            <h4 class="nomargin">Connexion</h4><br/>
-                            <c:set var="message" scope="session" value="${requestScope['message']}"/>
-                            <c:if test="${message.equals('invalide')}">
-                                <div class="alert alert-danger">
-                                    Mauvais login/mot de passe
-                                </div>
-                            </c:if>
-                            <c:if test="${message.equals('deconnexion')}">
-                                <div class="alert alert-success">
-                                    Vous vous êtes bien deconnecté.
-                                </div>
-                            </c:if>
-                            <p class="mt5 mb20">Connexion pour accéder à l'interface administrateur.</p>
+        <div class='corps'>
+            <div class='page-header'>
+                <h3>Connexion</h3>
+            </div>
+            <c:set var="message" scope="session" value="${requestScope['message']}"/>
+            <c:if test="${message.equals('invalide')}">
+                <div class="alert alert-danger">
+                    Mauvais login/mot de passe
+                </div>
+            </c:if>
+            <c:if test="${message.equals('deconnexion')}">
+                <div class="alert alert-success">
+                    Vous vous êtes bien deconnecté.
+                </div>
+            </c:if>
+            <div class="row">
+                <div class="col-md-3"></div>
+                <div class="col-md-6">
+                    <form method="post" class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <label for="login" class="col-sm-2 control-label">Login</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="login" placeholder="Login">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="password" class="col-sm-2 control-label">Password</label>
+                            <div class="col-sm-10">
+                                <input type="password" class="form-control" id="password" placeholder="Password">
+                            </div>
+                        </div>
 
-                            <input type="text" name="login" class="form-control uname" placeholder="Login" />
-                            <input type="password" name="password" class="form-control pword" placeholder="Password" /><br/>
-                            
+                        <p>
                             Vous n'avez de compte ? <a href="/tp2webmiage/inscription">Créer un compte</a>
-                            
-                            <button class="btn btn-success btn-block">Connexion</button>
-                        </form>
-                    </div>
+                        </p>
+
+                        <br/>
+                        <button style="margin: 20px;" class="btn btn-success btn-block">Inscription</button>
+                    </form>
                 </div>
             </div>
-        </section>
+        </div>
     </jsp:body>
 </t:frontoffice>
