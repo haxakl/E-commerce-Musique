@@ -15,3 +15,9 @@
 ul.itemList li{
     color : white;
 }
+
+small {
+display: block;
+line-height: 1.428571429;
+color: #999;
+}

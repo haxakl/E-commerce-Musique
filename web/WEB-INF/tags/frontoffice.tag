@@ -36,9 +36,9 @@
                 <nav id="primary-nav">
                     <ul class="clearfix">
                         <li>
-                            <a href="/tp2webmiage/artistes">
+                            <a href="/tp2webmiage/view/frontoffice/profile.jsp">
                                 <i class="icon-tag-1"></i>
-                                <p>Artistes</p>
+                                <p>Mon profil</p>
                             </a>
                         </li>
                         <li>
