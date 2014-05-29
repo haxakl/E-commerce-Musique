@@ -10,9 +10,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
         <meta name="author" content="Golfieri Guillaume Blacas Julien">
-
+        
         <title>MultiTracksSongs</title>
-
+        
         <link href="/tp2webmiage/ressources/library/musiccomposer/theme.css" rel="stylesheet">
         <link href="/tp2webmiage/ressources/library/musiccomposer/systeme.css" rel="stylesheet">
         <link href="/tp2webmiage/ressources/library/fontello/fontello.css" rel="stylesheet">
@@ -22,7 +22,11 @@
 
     <body>
         <aside id="logo-bar">
-            <div id="logo"><a href="/tp2webmiage/"><img src="/tp2webmiage/ressources/logo.png" alt="LOGO"></a></div>
+            <div id="logo">
+                <a href="/tp2webmiage/">
+                    <img src="/tp2webmiage/ressources/logo.png" alt="LOGO">
+                </a>
+            </div>
         </aside>
         <section id="page-global">
 
@@ -34,7 +38,7 @@
                         <li>
                             <a href="/tp2webmiage/artistes">
                                 <i class="icon-tag-1"></i>
-                                <p>Mon profil</p>
+                                <p>Artistes</p>
                             </a>
                         </li>
                         <li>
