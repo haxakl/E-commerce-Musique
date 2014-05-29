@@ -165,7 +165,7 @@ p#slidecite     			{    margin-top: 25px;
 
 #logo-bar                               {    position: absolute;
                                              width: 80px;
-                                             height: 100%;
+                                             height: 100px;
                                              z-index: 9;
                                         }
 #logo                                   {    position: relative;
@@ -224,11 +224,11 @@ p#slidecite     			{    margin-top: 25px;
 #primary-nav li.shop a                  { 	color: #ff3600 }
 
 /* === 3.2 PRIMARY SUB NAV === */
-#primary-nav ul li:hover > ul           { 	display: block }
+#primary-nav ul li:hover > ul           { 	display: block}
 #primary-nav ul li.active:hover > ul    { 	display: none }
 #primary-nav ul li ul                   {    display: none;
                                              position: absolute;
-                                             left: -80px;
+                                             left: -10px;
                                              /* width: 100%; */
                                              right: 0px;    background: #777;
                                         }
@@ -236,7 +236,7 @@ p#slidecite     			{    margin-top: 25px;
                                              color: #fff;
                                              font: 12px/42px "Open sans", Helvetica, Arial, sans-serif;
                                              width: auto;
-                                             height: 42px;
+                                             height: 40px;
                                              line-height: 42px;
                                              background: transparent;
                                         }
@@ -332,7 +332,9 @@ p#slidecite     			{    margin-top: 25px;
                                         }
 #page .container                        { 	background: rgba(0,0,0,0.5) }
 
-.contentpanel {/* background-color: white; */}
+.contentpanel {
+    margin-top: 20px;
+}
 /* === 4.3 CONTENT SORTER === */
 #content-sorter,
 #content-meta                           { 	background: #444 }

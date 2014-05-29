@@ -13,15 +13,11 @@
         <title>Administration</title>
 
         <link href="/tp2webmiage/ressources/library/musiccomposer/style.default.css" rel="stylesheet">
-        
-        <script src="/tp2webmiage/ressources/library/jquery/jquery-1.10.2.min.js"></script>
+        <link href="/tp2webmiage/ressources/library/bootstrap/bootsrap-override.css" rel="stylesheet">
+        <script src="/tp2webmiage/ressources/library/jquery/jquery.js"></script>
+
     </head>
     <body>
-
-        <!-- Preloader -->
-        <div id="preloader">
-            <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
-        </div>
 
         <div class="leftpanel">
 
@@ -70,18 +66,8 @@
                 <jsp:doBody/>
             </div>
 
-        </div><!-- Main Panel -->
-        <script src="/tp2webmiage/ressources/library/jquery/jquery-1.10.2.min.js"></script>
-        <script src="/tp2webmiage/ressources/library/jquery/jquery-migrate-1.2.1.min.js"></script>
-        <script src="/tp2webmiage/ressources/library/jquery/jquery.validate.min.js"></script>
         <script src="/tp2webmiage/ressources/library/jquery/bootstrap.min.js"></script>
-        <script src="/tp2webmiage/ressources/library/jquery/modernizr.min.js"></script>
-        <script src="/tp2webmiage/ressources/library/jquery/jquery.sparkline.min.js"></script>
+        <script src="/tp2webmiage/ressources/library/jquery/jquery-ui-1.10.3.min.js"></script>
         <script src="/tp2webmiage/ressources/library/jquery/toggles.min.js"></script>
-        <script src="/tp2webmiage/ressources/library/jquery/retina.min.js"></script>
-        <script src="/tp2webmiage/ressources/library/jquery/jquery.cookies.js"></script>
-        <script src="/tp2webmiage/ressources/library/jquery/custom.js"></script>
-        <script src="/tp2webmiage/ressources/library/jquery/jquery.maskedinput.min.js"></script>
-        <script src="/tp2webmiage/ressources/library/jquery/chosen.jquery.min.js"></script>
     </body>
 </html>

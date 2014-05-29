@@ -20,6 +20,51 @@
         </div>
     </jsp:attribute>
     <jsp:body>
+                <div class="col-lg-6">
+            <ul class="pagination">
+<!--                 Définition du nombre d'élément par page -->
+                <c:choose>
+                    <c:when test="${nbAffiche != 30}">
+                        <c:set var="nbElement" value="${param.nbAffiche}">          
+                        </c:set>
+                    </c:when>
+                    <c:otherwise>
+                        <c:set var="nbElement" value="30">          
+                        </c:set>
+                    </c:otherwise>       
+                </c:choose>
+
+<!--                 Bouton "précédent" -->
+                <c:choose>
+                    <c:when test="${page == '1'}">
+                        <li><a href="?page=${page}&nbAffiche=${nbElement}">&laquo;</a></li>
+                        </c:when>
+                        <c:otherwise>
+                        <li><a href="?page=${page - 1}&nbAffiche=${nbElement}">&laquo;</a></li>
+                        </c:otherwise>
+                    </c:choose>
+<!--                 fin bouton "précedent"  -->
+
+                <c:forEach var="entry" begin="1" end="${nbPages}">
+                    <li
+                        <c:if test="${page.equals(entry)}">
+                            class="active"
+                        </c:if>
+                        ><a href="?page=${entry}&nbAffiche=${nbElement}">${entry}</a></li>
+                    </c:forEach>
+
+<!--                 Bouton suivant -->
+                <c:choose>
+                    <c:when test="${page.equals(nbPages)}">
+                        <li><a href="?page=${page}&nbAffiche=${nbElement}">&raquo;</a></li>
+                        </c:when>
+                        <c:otherwise>
+                        <li><a href="?page=${page + 1}&nbAffiche=${nbElement}">&raquo;</a></li>
+                        </c:otherwise>
+                    </c:choose>
+<!--                 Fin bouton suivant  -->
+            </ul>
+        </div>
         <!-- Zone qui affiche les utilisateurs si le paramètre action vaut listerComptes -->  
         <table class="table">  
             <!-- La ligne de titre du tableau des comptes -->  

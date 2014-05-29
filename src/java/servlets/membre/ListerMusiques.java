@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package servlets.membre;
 
 import java.io.IOException;
@@ -25,9 +24,10 @@ import utilisateurs.modeles.Utilisateur;
  */
 @WebServlet(name = "ListerMusiques", urlPatterns = {"/membre/musiques"})
 public class ListerMusiques extends HttpServlet {
+
     @EJB
     private GestionnaireUtilisateurs gestionnaireUtilisateurs;
-    
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -39,17 +39,44 @@ public class ListerMusiques extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-                // Il n'y a pas d'utilisateurs
-        
-         Collection<Musique> liste;
-        if(request.getParameter("genre") != null) {
-            int genre = Integer.parseInt(request.getParameter("genre"));
-            liste =  gestionnaireUtilisateurs.getMusiqueByGenre(genre);
-            System.out.println(liste);
+        // Il n'y a pas d'utilisateurs
+
+        Collection<Musique> liste;
+        // Page affichée
+        int numPage = 1;
+        if (request.getParameter("page") != null) {
+            numPage = Integer.parseInt(request.getParameter("page"));
         }
-        else{
-            liste =  gestionnaireUtilisateurs.getAllMusiques();
+
+        // Nombre affichée par page
+        int nbAffiche = 0;
+        if (request.getParameter("nbAffiche") != null) {
+            nbAffiche = Integer.parseInt(request.getParameter("nbAffiche"));
+            System.out.println("nbAffiche : " + nbAffiche);
+        } else {
+            nbAffiche = 30;
         }
+
+        // Recupère tous les utilisateurs
+        Collection<Musique> listeAllMusiques = gestionnaireUtilisateurs.getAllMusiques();
+        double totalMusiques = listeAllMusiques.size();
+
+        liste = gestionnaireUtilisateurs.getMusiques((numPage - 1) * nbAffiche, nbAffiche);
+
+        if (totalMusiques == 0) {
+            request.setAttribute("nbPages", Math.ceil(liste.size() / nbAffiche));
+        } else {
+            request.setAttribute("nbPages", (int) Math.ceil(totalMusiques / nbAffiche));
+        }
+//        if (request.getParameter("genre") != null) {
+//            int genre = Integer.parseInt(request.getParameter("genre"));
+//            liste = gestionnaireUtilisateurs.getMusiqueByGenre(genre);
+//            System.out.println(liste);
+//        } else {
+//            liste = gestionnaireUtilisateurs.getAllMusiques();
+//        }
+        request.setAttribute("page", numPage);
+        request.setAttribute("nbAffiche", nbAffiche);
         request.setAttribute("listeDesMusiques", liste);
         this.getServletContext().getRequestDispatcher("/view/backoffice/musiques.jsp").forward(request, response);
     }

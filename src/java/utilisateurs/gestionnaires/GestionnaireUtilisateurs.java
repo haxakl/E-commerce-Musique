@@ -150,9 +150,20 @@ public class GestionnaireUtilisateurs {
         return q.getResultList();
     }
 
+    public Collection<Musique> getMusiques(int index, int offset) {
+        // Exécution d'une requête équivalente à un select *  
+        Query q = em.createQuery("select u from Musique u").setMaxResults(offset).setFirstResult(index);
+        return q.getResultList();
+    }
+
     public Collection<Musique> getMusiqueByGenre(int idgenre) {
         // Exécution d'une requête équivalente à un select *  
         Query q = em.createQuery("select m from Musique m where m.genre.id = :cidgenre").setParameter("cidgenre", idgenre);
+        return q.getResultList();
+    }
+
+    public Collection<Musique> getMusiqueByGenre(int idgenre, int index, int offset) { 
+        Query q = em.createQuery("select m from Musique m where m.genre.id = :cidgenre").setMaxResults(offset).setFirstResult(index).setParameter("cidgenre", idgenre);
         return q.getResultList();
     }
 

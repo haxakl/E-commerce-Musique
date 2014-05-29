@@ -21,22 +21,6 @@
     </head>
 
     <body>
-        <div id="header">
-            <c:if test="${user != null}" >
-                <div class="membre_connecte">
-                    <a class="pull-right" href="/tp2webmiage/logout"><i class="fa fa-sign-out"></i> Déconnexoin</a>
-                    <a class="pull-right" href="/tp2webmiage/membre" style="margin-right: 20px;">
-                        <i class="fa fa-user"></i> ${user.getPrenom()} ${user.getNom()}
-                    </a>
-                </div>
-            </c:if>
-
-            <c:if test="${user == null}" >
-                <a class="pull-right" href="/tp2webmiage/connexion"><i class="fa fa-sign-in"></i> Connexion</a>
-                <a class="pull-right" href="/tp2webmiage/inscription" style="margin-right: 20px;"><i class="fa fa-user"></i> Inscription</a>
-            </c:if>
-        </div>
-
         <aside id="logo-bar">
             <div id="logo"><a href="/tp2webmiage/"><img src="/tp2webmiage/ressources/logo.png" alt="LOGO"></a></div>
         </aside>
@@ -83,7 +67,24 @@
                         </li>
                     </ul>
                 </nav>
+                <div id="header">
+                    <c:if test="${user != null}" >
+                        <div class="membre_connecte">
+                            <c:if test="${user.getNom() == 'Administrateur'}" >
+                              <a class="pull-right" href="/tp2webmiage/utilisateurs" style="margin-right: 20px;"><i class="fa fa-sign-out"></i> Accès Backoffice</a>  
+                            </c:if>
+                            <a class="pull-right" href="/tp2webmiage/logout" style="margin-right: 20px;"><i class="fa fa-sign-out"></i> Déconnexion</a>
+                            <a class="pull-right" href="/tp2webmiage/membre" style="margin-right: 20px;">
+                                <i class="fa fa-user"></i> ${user.getPrenom()} ${user.getNom()}
+                            </a>
+                        </div>
+                    </c:if>
 
+                    <c:if test="${user == null}" >
+                        <a class="pull-right" href="/tp2webmiage/connexion" style="margin-right: 20px;"><i class="fa fa-sign-in"></i> Connexion</a>
+                        <a class="pull-right" href="/tp2webmiage/inscription" style="margin-right: 20px;"><i class="fa fa-user"></i> Inscription</a>
+                    </c:if>
+                </div>
                 <!-- ## SEC NAV ## -->
                 <nav id="sec-nav">
                     <ul class="clearfix"></ul>

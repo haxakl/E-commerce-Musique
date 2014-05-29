@@ -19,9 +19,10 @@ import utilisateurs.modeles.Utilisateur;
  */
 @WebServlet(name = "Musiques", urlPatterns = {"/musiques"})
 public class Musiques extends HttpServlet {
+
     @EJB
     private GestionnaireUtilisateurs gestionnaireUtilisateurs;
-    
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -33,17 +34,40 @@ public class Musiques extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-                // Il n'y a pas d'utilisateurs
-        
-         Collection<Musique> liste;
-        if(request.getParameter("genre") != null) {
+
+        Collection<Musique> liste;
+        // Page affichée
+        int numPage = 1;
+        if (request.getParameter("page") != null) {
+            numPage = Integer.parseInt(request.getParameter("page"));
+        }
+        // Nombre affichée par page
+        int nbAffiche = 0;
+        if (request.getParameter("nbAffiche") != null) {
+            nbAffiche = Integer.parseInt(request.getParameter("nbAffiche"));
+            System.out.println("nbAffiche : " + nbAffiche);
+        } else {
+            nbAffiche = 30;
+        }
+
+        // Recupère tous les utilisateurs
+        Collection<Musique> listeAllMusiques = gestionnaireUtilisateurs.getAllMusiques();
+        double totalMusiques = listeAllMusiques.size();
+
+        if (request.getParameter("genre") != null) {
             int genre = Integer.parseInt(request.getParameter("genre"));
-            liste =  gestionnaireUtilisateurs.getMusiqueByGenre(genre);
+            liste = gestionnaireUtilisateurs.getMusiqueByGenre(genre, (numPage - 1) * nbAffiche, nbAffiche);
             System.out.println(liste);
+        } else {
+            liste = gestionnaireUtilisateurs.getMusiques((numPage - 1) * nbAffiche, nbAffiche);
         }
-        else{
-            liste =  gestionnaireUtilisateurs.getAllMusiques();
+        if (totalMusiques == 0) {
+            request.setAttribute("nbPages", Math.ceil(liste.size() / nbAffiche));
+        } else {
+            request.setAttribute("nbPages", (int) Math.ceil(totalMusiques / nbAffiche));
         }
+        request.setAttribute("page", numPage);
+        request.setAttribute("nbAffiche", nbAffiche);
         request.setAttribute("listeDesMusiques", liste);
         this.getServletContext().getRequestDispatcher("/view/frontoffice/musiques.jsp").forward(request, response);
     }
