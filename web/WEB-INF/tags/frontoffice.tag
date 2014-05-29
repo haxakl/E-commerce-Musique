@@ -60,7 +60,19 @@
                             </ul>					
                         </li>
                         <li style="right: 0px; position: absolute;">
-                            <a href="./contact.html">
+                            <ul class="itemList">
+                                <li>
+                                    <img style="float:left; padding-right:10px" src="images/item1.jpg" width="64" height="64" alt="Item1" /> 
+                                    Lorem ipsum dolor<br />
+                                    99:-<br />
+                                    Read More</li>
+                                <li>
+                                    <img style="float:left; padding-right:10px" src="images/item1.jpg" width="64" height="64" alt="Item1" /> 
+                                    Dolor sit amet<br />
+                                    99:-<br />
+                                    Read More</li>
+                            </ul>
+                            <a href="/tp2webmiage/view/frontoffice/panier.jsp">
                                 <i class="icon-cart"></i>
                                 <p>Mon Panier</p>
                             </a>
@@ -71,7 +83,7 @@
                     <c:if test="${user != null}" >
                         <div class="membre_connecte">
                             <c:if test="${user.getNom() == 'Administrateur'}" >
-                              <a class="pull-right" href="/tp2webmiage/utilisateurs" style="margin-right: 20px;"><i class="fa fa-sign-out"></i> Accès Backoffice</a>  
+                                <a class="pull-right" href="/tp2webmiage/utilisateurs" style="margin-right: 20px;"><i class="fa fa-sign-out"></i> Accès Backoffice</a>  
                             </c:if>
                             <a class="pull-right" href="/tp2webmiage/logout" style="margin-right: 20px;"><i class="fa fa-sign-out"></i> Déconnexion</a>
                             <a class="pull-right" href="/tp2webmiage/membre" style="margin-right: 20px;">
