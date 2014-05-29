@@ -52,7 +52,7 @@ public class Accueil extends HttpServlet {
             JSONParser parser = new JSONParser();
             String chaine = "";
             try {
-                InputStream ips = new FileInputStream("/tp2webmiage/ressources/musique.json");
+                InputStream ips = new FileInputStream(getServletContext().getRealPath("") + "\\ressources\\musique.json");
                 InputStreamReader ipsr = new InputStreamReader(ips);
                 BufferedReader br = new BufferedReader(ipsr);
                 String ligne;

@@ -10,9 +10,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
         <meta name="author" content="Golfieri Guillaume Blacas Julien">
-        
+
         <title>MultiTracksSongs</title>
-        
+
         <link href="/tp2webmiage/ressources/library/musiccomposer/theme.css" rel="stylesheet">
         <link href="/tp2webmiage/ressources/library/musiccomposer/systeme.css" rel="stylesheet">
         <link href="/tp2webmiage/ressources/library/fontello/fontello.css" rel="stylesheet">
@@ -63,6 +63,39 @@
                                 <li><a href="#">Popular</a></li>
                             </ul>					
                         </li>
+                        <li style='float: right; margin-right: 200px;'>
+                            <c:if test="${user != null}" >
+                                <c:if test="${user.getNom() == 'Administrateur'}" >
+                                    <a class="pull-right" href="/tp2webmiage/utilisateurs">
+                                        <i class="fa fa-sign-out"></i> <p>Accès Backoffice</p>
+                                    </a>
+                                </li>
+                                <li style='float: right;'>
+                                </c:if>
+
+                                <a class="pull-right" href="/tp2webmiage/logout">
+                                    <i class="fa fa-sign-out"></i> <p>Déconnexion</p>
+                                </a>
+                            </li>
+                            <li  style='float: right;'>
+                                <a class="pull-right" href="/tp2webmiage/admin">
+                                    <i class="fa fa-user"></i> <p>${user.getPrenom()} ${user.getNom()}</p>
+                                </a>
+                            </c:if>
+
+                            <c:if test="${user == null}" >
+                                <a href="/tp2webmiage/inscription">
+                                    <i class="fa fa-3x fa-user"></i>
+                                    <p>Inscription</p>
+                                </a>
+                            </li>
+                            <li  style='float: right;'>
+                                <a href="/tp2webmiage/connexion">
+                                    <i class="fa fa-sign-in"></i>
+                                    <p>Connexion</p>
+                                </a>
+                            </c:if>
+                        </li>
                         <li style="right: 0px; position: absolute;">
                             <ul class="itemList">
                                 <li>
@@ -83,60 +116,11 @@
                         </li>
                     </ul>
                 </nav>
-                <div id="header">
-                    <c:if test="${user != null}" >
-                        <div class="membre_connecte">
-                            <c:if test="${user.getNom() == 'Administrateur'}" >
-                                <a class="pull-right" href="/tp2webmiage/utilisateurs" style="margin-right: 20px;"><i class="fa fa-sign-out"></i> Accès Backoffice</a>  
-                            </c:if>
-                            <a class="pull-right" href="/tp2webmiage/logout" style="margin-right: 20px;"><i class="fa fa-sign-out"></i> Déconnexion</a>
-                            <a class="pull-right" href="/tp2webmiage/membre" style="margin-right: 20px;">
-                                <i class="fa fa-user"></i> ${user.getPrenom()} ${user.getNom()}
-                            </a>
-                        </div>
-                    </c:if>
 
-                    <c:if test="${user == null}" >
-                        <a class="pull-right" href="/tp2webmiage/connexion" style="margin-right: 20px;"><i class="fa fa-sign-in"></i> Connexion</a>
-                        <a class="pull-right" href="/tp2webmiage/inscription" style="margin-right: 20px;"><i class="fa fa-user"></i> Inscription</a>
-                    </c:if>
-                </div>
                 <!-- ## SEC NAV ## -->
                 <nav id="sec-nav">
                     <ul class="clearfix"></ul>
                 </nav>
-
-                <!-- ## MOBILE NAV ## -->
-                <ul id="mobileNav">
-                    <li><a href="#"><i class="icon-menu"></i> Navigation <i class="icon-down-open-big"></i></a>
-                        <ul class="clearfix"><li><a href="./albums.html">
-                                    <i class="icon-music-1"></i>
-                                    <p>Albums</p>
-                                </a></li><li><a href="./album-single.html" class="child">&nbsp;- Album Single</a></li><li><a href="#" class="child">&nbsp;- Newest</a></li><li><a href="#" class="child">&nbsp;- Popular</a></li><li><a href="./artists.html">
-                                    <i class="icon-user-1"></i>
-                                    <p>Artists</p>
-                                </a></li><li><a href="./artist-single.html" class="child">&nbsp;- Artist Single</a></li><li><a href="#" class="child">&nbsp;- Newest</a></li><li><a href="#" class="child">&nbsp;- Popular</a></li><li><a href="./events.html">
-                                    <i class="icon-calendar-2"></i>
-                                    <p>Events</p>
-                                </a></li><li><a href="./event-single.html" class="child">&nbsp;- Event Single</a></li><li><a href="#" class="child">&nbsp;- Newest</a></li><li><a href="#" class="child">&nbsp;- Ending Soon</a></li><li><a href="./blog.html">
-                                    <i class="icon-book-open"></i>
-                                    <p>Blog</p>
-                                </a></li><li><a href="./blog-single.html" class="child">&nbsp;- Blog Single</a></li><li><a href="#" class="child">&nbsp;- Newest</a></li><li><a href="#" class="child">&nbsp;- Popular</a></li><li><a href="./gallery.html">
-                                    <i class="icon-picture"></i>
-                                    <p>Gallery</p>
-                                </a></li><li><a href="./gallery.html" class="child">&nbsp;- Newest</a></li><li><a href="./gallery.html" class="child">&nbsp;- Popular</a></li><li><a href="#">
-                                    <i class="icon-plus-squared"></i>
-                                    <p>Pages</p>
-                                </a></li><li><a href="./fullwidth.html" class="child">&nbsp;- Fullwidth</a></li><li><a href="./404.html" class="child">&nbsp;- 404 Error</a></li>
-                            <li>
-                                <a href="./contact.html">
-                                    <i class="icon-email"></i>
-                                    <p>Contact</p>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
 
                 <div id="logo"><a href="./index.html"><img src="./assets/img/placeholder/logo.png" alt="LOGO"></a></div></header>
         </section>
