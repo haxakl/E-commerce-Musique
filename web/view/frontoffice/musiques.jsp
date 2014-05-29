@@ -18,6 +18,7 @@
             <div class="page-header">
                 <h3>Liste des musiques</h3>
             </div>
+
             <div class="col-lg-6">
                 <ul class="pagination">
                     <!--                Définition du nombre d'élément par page -->
@@ -63,6 +64,7 @@
                     <!--                 Fin bouton suivant  -->
                 </ul>
             </div>
+            
             <!-- Zone qui affiche les utilisateurs si le paramètre action vaut listerComptes -->  
             <table class="table table-striped">  
                 <!-- La ligne de titre du tableau des comptes -->  

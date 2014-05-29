@@ -6,8 +6,8 @@
             <!-- ## SLIDE CONTENT ## -->
             <section id="slideContent">
                 <div class="container">
-                    <h2 id="slidecaption">Sunburn<br> Arena <br> 2014</h2>
-                    <p id="slidecite">- Mumbai, India</p>
+                    <h2 id="slidecaption">Music<br> Composer <br> 2014</h2>
+                    <p id="slidecite">- Télécharger n'importe quelle piste de musique</p>
                 </div>
             </section>
             <!-- ## SLIDE CONTENT ## -->
