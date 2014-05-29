@@ -333,7 +333,7 @@ p#slidecite     			{    margin-top: 25px;
 #page .container                        { 	background: rgba(0,0,0,0.5) }
 
 .contentpanel {
-    margin-top: 20px;
+    /* margin-top: 20px; */
 }
 /* === 4.3 CONTENT SORTER === */
 #content-sorter,
