@@ -51,56 +51,6 @@ public class Accueil extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        /**
-         * Test si les musiques sont vides
-         */
-        if (gestionnaireMusiques.getAllMusiques().isEmpty()) {
-            JSONParser parser = new JSONParser();
-            String chaine = "";
-            try {
-                InputStream ips = new FileInputStream(getServletContext().getRealPath("") + "\\ressources\\musique.json");
-                InputStreamReader ipsr = new InputStreamReader(ips);
-                BufferedReader br = new BufferedReader(ipsr);
-                String ligne;
-                while ((ligne = br.readLine()) != null) {
-                    chaine += ligne + "\n";
-                }
-                br.close();
-            } catch (Exception e) {
-                System.out.println(e.toString());
-            }
-
-            try {
-                Object obj = parser.parse(chaine);
-                JSONArray array = (JSONArray) obj;
-                Artiste acdc = new Artiste("AC-DC", "Groupe de rock connu", "/photos/acdc");
-                gestionnaireMusiques.persist(acdc);
-                Genre rock = new Genre("rock");
-                gestionnaireMusiques.persist(rock);
-                for (int i = 0; i < array.size(); i++) {
-                    JSONObject objet = (JSONObject) array.get(i);
-                    JSONArray compositions = (JSONArray) objet.get("composition");
-
-                    Musique musique = gestionnaireMusiques.creerMusique(acdc, (String) objet.get("nom"), compositions.size(), 2000, "", rock);
-
-                    // Boucle sur les compositions
-                    int nbpiste = 0;
-                    for (int j = 0; j < compositions.size(); j++) {
-                        String piste = compositions.get(j).toString();
-                        if (piste.lastIndexOf('.') != -1 && piste.substring(piste.lastIndexOf('.') + 1).toLowerCase().compareTo("mp3") == 0) {
-                            gestionnaireMusiques.creerPiste(musique, (String) compositions.get(j));
-                            nbpiste++;
-                        }
-                    }
-                    
-                    musique.setNbpiste(nbpiste);
-                }
-            } catch (ParseException pe) {
-                System.out.println("position: " + pe.getPosition());
-                System.out.println(pe);
-            }
-        }
-
         request.setAttribute("accueil", "true");
 
         this.getServletContext().getRequestDispatcher("/accueil.jsp").forward(request, response);
