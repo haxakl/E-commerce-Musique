@@ -51,6 +51,9 @@ public class Accueil extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        /**
+         * Test si les musiques sont vides
+         */
         if (gestionnaireMusiques.getAllMusiques().isEmpty()) {
             JSONParser parser = new JSONParser();
             String chaine = "";

@@ -21,13 +21,11 @@ import utilisateurs.gestionnaires.GestionnaireUtilisateurs;
  *
  * @author julien
  */
-@WebServlet(name = "cart", urlPatterns = {"/cart"})
+@WebServlet(name = "Panier", urlPatterns = {"/Panier"})
 public class ShoppingCartClient extends HttpServlet {
     
     @EJB
     private GestionnaireMusiques gestionnaireUtilisateurs;
-//    @EJB
-//    private static ShoppingCartImpl cart;
     
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
