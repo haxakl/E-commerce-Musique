@@ -18,6 +18,21 @@
         <div class="page-header">
             <h3>Détail de la musique</h3>
         </div>
+        
+        <table class="table table-striped">  
+            <!-- La ligne de titre du tableau des comptes -->  
+            <tr>  
+                <td><b>Nom</b></td>
+            </tr>  
+
+            <c:forEach var="m" items="${requestScope['listeDesPistes']}">
+                <tr>
+                    <td>${m.nom}</td>
+                </tr>
+                <c:set var="total" value="${total+1}"/>
+            </c:forEach>
+            <!-- Affichage du solde total dans la dernière ligne du tableau -->  
+        </table>
 
     </jsp:body>
 </t:frontoffice>
