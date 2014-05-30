@@ -26,13 +26,13 @@
                         <div class="form-group">
                             <label for="login" class="col-sm-2 control-label">Login</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="login" placeholder="Login">
+                                <input type="text" class="form-control" id="login" name="login" placeholder="Login">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="password" class="col-sm-2 control-label">Password</label>
                             <div class="col-sm-10">
-                                <input type="password" class="form-control" id="password" placeholder="Password">
+                                <input type="password" class="form-control" id="password" name="password" placeholder="Password">
                             </div>
                         </div>
 
@@ -41,7 +41,7 @@
                         </p>
 
                         <br/>
-                        <button style="margin: 20px;" class="btn btn-success btn-block">Inscription</button>
+                        <button style="margin: 20px;" class="btn btn-success btn-block">Connexion</button>
                     </form>
                 </div>
             </div>
