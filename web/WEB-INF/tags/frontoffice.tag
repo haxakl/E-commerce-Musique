@@ -74,20 +74,10 @@
                                     <i class="fa fa-sign-out"></i> <p>Déconnexion</p>
                                 </a>
                             </li>
-                            <c:choose>
-                                <c:when test="${user.getNom() == 'Administrateur'}" >
-                                    <li  style='float: right;'>
-                                        <a class="pull-right" href="/tp2webmiage/admin">
-                                            <i class="fa fa-user"></i> <p>${user.getPrenom()} ${user.getNom()}</p>
-                                        </a>
-                                    </c:when>
-                                    <c:otherwise>
-                                    <li  style='float: right;'>
-                                        <a class="pull-right" href="/tp2webmiage/view/frontoffice/profile.jsp">
-                                            <i class="fa fa-user"></i> <p>Mon profil</p>
-                                        </a>
-                                    </c:otherwise>
-                                </c:choose> 
+                            <li  style='float: right;'>
+                                <a class="pull-right" href="/tp2webmiage/profile">
+                                    <i class="fa fa-user"></i> <p>Mon profil</p>
+                                </a>
                             </li>
                         </c:if>
 

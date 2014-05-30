@@ -24,6 +24,7 @@ public class Utilisateur implements Serializable {
     private String prenom;
     private String nom;
     private String login;
+    private String email;
     private String password;
     private int groupe;
 
@@ -32,17 +33,25 @@ public class Utilisateur implements Serializable {
     }
 
     public Utilisateur(final String prenom, final String nom, final String login, final String password){
-        this(prenom, nom, login, password, 0);
+        this(prenom, nom, login, password, "", 0);
     }
     
-    public Utilisateur(final String prenom, final String nom, final String login, final String password, int groupe){
+    public Utilisateur(final String prenom, final String nom, final String login, final String password, final String email, int groupe){
         this.login = login;
         this.prenom = prenom;
         this.nom = nom;
+        this.email = nom;
         this.password = password;
         this.groupe = groupe;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     public String getPrenom() {
         return prenom;

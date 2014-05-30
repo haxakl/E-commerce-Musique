@@ -3,6 +3,15 @@
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 
 <t:frontoffice>
+    <jsp:attribute name="breadcrumb">
+        <div class="breadcrumb-wrapper">
+            <span class="label">Vous êtes ici</span>
+            <ol class="breadcrumb">
+                <li><a href="index.jsp">Accueil</a></li>
+                <li class="active">Panier</li>
+            </ol>
+        </div>
+    </jsp:attribute>
     <jsp:body>
         <div class="container" style="background-color: white;">
             <div class="row">
