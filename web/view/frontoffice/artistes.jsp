@@ -28,7 +28,7 @@
     <jsp:body>
         <div class="corps">
             <div class="page-header">
-                <h3>Liste des musiques</h3>
+                <h3>Liste des artistes</h3>
             </div>
             <div id="SandBox" class="sandbox config-open">
                 <div class="mix category-1" data-value="7" style="display: inline-block;">7</div>

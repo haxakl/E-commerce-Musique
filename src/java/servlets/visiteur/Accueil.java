@@ -52,7 +52,7 @@ public class Accueil extends HttpServlet {
             JSONParser parser = new JSONParser();
             String chaine = "";
             try {
-                InputStream ips = new FileInputStream(getServletContext().getRealPath("")+ "\\ressources\\musique.json");
+                InputStream ips = new FileInputStream(getServletContext().getRealPath("") + "\\ressources\\musique.json");
                 InputStreamReader ipsr = new InputStreamReader(ips);
                 BufferedReader br = new BufferedReader(ipsr);
                 String ligne;
@@ -79,8 +79,9 @@ public class Accueil extends HttpServlet {
 
                     // Boucle sur les compositions
                     for (int j = 0; j < compositions.size(); j++) {
-                        // Faire les pistes
-                        gestionnaireUtilisateurs.creerPiste(musique, (String) compositions.get(j));
+                        if (compositions.get(j).substring(compositions.get(j).lastIndexOf('.'), compositions.get(j).length()).toLowerCase()) {
+                            gestionnaireUtilisateurs.creerPiste(musique, (String) compositions.get(j));
+                        }
                     }
 
                 }
@@ -89,6 +90,8 @@ public class Accueil extends HttpServlet {
                 System.out.println(pe);
             }
         }
+
+        request.setAttribute("accueil", "true");
 
         this.getServletContext().getRequestDispatcher("/accueil.jsp").forward(request, response);
     }

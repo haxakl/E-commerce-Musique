@@ -17,7 +17,61 @@ ul.itemList li{
 }
 
 small {
-display: block;
-line-height: 1.428571429;
-color: #999;
+    display: block;
+    line-height: 1.428571429;
+    color: #999;
+}
+
+@media all and (min-width: 641px) {
+    .sandbox .mix {
+        margin-bottom: 2%;
+    }
+    .sandbox .mix:before {
+        padding-top: 80%;
+    }
+    .sandbox .gap,
+    .sandbox .mix {
+        width: 23.5%;
+    }
+}
+@media all and (min-width: 769px) {
+    .sandbox {
+        padding: 30px 30px 0;
+    }
+    .sandbox .mix:before {
+        padding-top: 45%;
+    }
+    .sandbox .gap,
+    .sandbox .mix {
+        width: 23.5%;
+    }
+}
+
+.sandbox {
+    background: #03899c;
+    position: relative;
+    /* min-height: 580px; */
+    padding: 15px;
+    overflow: hidden;
+    margin-bottom: 40px;
+}
+
+.sandbox .mix {
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    -ms-transform-style: preserve-3d;
+    height: 150px;
+    transform-style: preserve-3d;
+    position: relative;
+    text-align: right;
+    background: rgba(255, 255, 255, 0.4);
+    margin-bottom: 4%;
+    display: none;
+    font-size: 25px;
+    padding-right: .5em;
+    line-height: 1.8em;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.9);
+    vertical-align: top;
+    -webkit-backface-visibility: hidden;
 }

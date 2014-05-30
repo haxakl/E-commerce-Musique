@@ -38,7 +38,7 @@
                 <nav id="primary-nav">
                     <ul class="clearfix">
                         <li>
-                            <a href="/tp2webmiage/view/frontoffice/profile.jsp">
+                            <a href="/tp2webmiage/artistes">
                                 <i class="icon-cd"></i>
                                 <p>Artistes</p>
                             </a>
@@ -55,15 +55,10 @@
                             </ul>
                         </li>
                         <li>
-                            <a href="./artists.html">
+                            <a href="/tp2webmiage/abonnement">
                                 <i class="icon-tag-1"></i>
                                 <p>Mes abonnements</p>
                             </a>
-                            <ul>
-                                <li><a href="./artist-single.html">Artist Single</a></li>
-                                <li><a href="#">Newest</a></li>
-                                <li><a href="#">Popular</a></li>
-                            </ul>					
                         </li>
                         <li style='float: right; margin-right: 200px;'>
                             <c:if test="${user != null}" >
@@ -92,15 +87,15 @@
                                             <i class="fa fa-user"></i> <p>Mon profil</p>
                                         </a>
                                     </c:otherwise>
-                            </c:choose> 
+                                </c:choose> 
                             </li>
-                            </c:if>
+                        </c:if>
 
-                            <c:if test="${user == null}" >
-                                <a href="/tp2webmiage/inscription">
-                                    <i class="fa fa-3x fa-user"></i>
-                                    <p>Inscription</p>
-                                </a>
+                        <c:if test="${user == null}" >
+                            <a href="/tp2webmiage/inscription">
+                                <i class="fa fa-3x fa-user"></i>
+                                <p>Inscription</p>
+                            </a>
                             </li>
                             <li  style='float: right;'>
                                 <a href="/tp2webmiage/connexion">
@@ -141,19 +136,21 @@
         <div class="contentpanel">
             <jsp:invoke fragment="sans_corps"/>
 
-            <div class="corps">
-                <div class="container">
-                    <jsp:invoke fragment="breadcrumb"/>
+            <c:if test="${accueil == null}" >
+                <div class="corps">
+                    <div class="container">
+                        <jsp:invoke fragment="breadcrumb"/>
 
-                    <jsp:doBody/>
+                        <jsp:doBody/>
+                    </div>
                 </div>
-            </div>
+            </c:if>
         </div>
 
         <script src="/tp2webmiage/ressources/library/jquery/jquery.js"></script>
         <script src="/tp2webmiage/ressources/library/bootstrap/bootstrap.js"></script>
         <script src="/tp2webmiage/ressources/library/mixit-up/jquery.mixitup.js"></script>
-        
+
         <jsp:invoke fragment="script"/>
     </body>
 </html>

@@ -35,11 +35,11 @@
                                 <input type="password" name="password" class="form-control pword" id="password" placeholder="Password">
                             </div>
                         </div>
-
+                        
                         <p>
                             Vous n'avez de compte ? <a href="/tp2webmiage/inscription">Créer un compte</a>
                         </p>
-
+                        
                         <br/>
                         <button style="margin: 20px;" class="btn btn-success btn-block">Connexion</button>
                     </form>
