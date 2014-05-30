@@ -24,7 +24,6 @@ import javax.persistence.OneToMany;
 @Entity
 public class Piste implements Serializable {
     @ManyToOne
-    @JoinColumn(name = "pistes", referencedColumnName = "id")
     private Musique musique;
     private static final long serialVersionUID = 1L;
     @Id

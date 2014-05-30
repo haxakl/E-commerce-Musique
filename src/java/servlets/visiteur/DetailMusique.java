@@ -36,28 +36,16 @@ public class DetailMusique extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-//        Collection<Piste> liste;
+        String url = request.getRequestURL().toString();
+        int musique = Integer.valueOf(url.substring(url.lastIndexOf("/") + 1));
+        
+        Collection<Piste> liste;
 //        
         // Recupère tous les utilisateurs
-//        Collection<Musique> listeAllMusiques = gestionnaireUtilisateurs.getPistes();
-//        double totalMusiques = listeAllMusiques.size();
-//
-//        if (request.getParameter("genre") != null) {
-//            int genre = Integer.parseInt(request.getParameter("genre"));
-//            liste = gestionnaireUtilisateurs.getMusiqueByGenre(genre, (numPage - 1) * nbAffiche, nbAffiche);
-//            System.out.println(liste);
-//        } else {
-//            liste = gestionnaireUtilisateurs.getMusiques((numPage - 1) * nbAffiche, nbAffiche);
-//        }
-//        if (totalMusiques == 0) {
-//            request.setAttribute("nbPages", Math.ceil(liste.size() / nbAffiche));
-//        } else {
-//            request.setAttribute("nbPages", (int) Math.ceil(totalMusiques / nbAffiche));
-//        }
-//        request.setAttribute("page", numPage);
-//        request.setAttribute("nbAffiche", nbAffiche);
-//        request.setAttribute("listeDesMusiques", liste);
-        this.getServletContext().getRequestDispatcher("/view/frontoffice/musiques.jsp").forward(request, response);
+        Collection<Piste> listeDesPistes = gestionnaireUtilisateurs.getPistes(musique);
+
+        request.setAttribute("listeDesPistes", listeDesPistes);
+        this.getServletContext().getRequestDispatcher("/view/frontoffice/detailmusique.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

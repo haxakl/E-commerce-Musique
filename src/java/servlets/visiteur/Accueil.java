@@ -78,12 +78,16 @@ public class Accueil extends HttpServlet {
                     Musique musique = gestionnaireUtilisateurs.creerMusique(acdc, (String) objet.get("nom"), compositions.size(), 2000, "", rock);
 
                     // Boucle sur les compositions
+                    int nbpiste = 0;
                     for (int j = 0; j < compositions.size(); j++) {
-                        if (compositions.get(j).substring(compositions.get(j).lastIndexOf('.'), compositions.get(j).length()).toLowerCase()) {
+                        String piste = compositions.get(j).toString();
+                        if (piste.lastIndexOf('.') != -1 && piste.substring(piste.lastIndexOf('.') + 1).toLowerCase().compareTo("mp3") == 0) {
                             gestionnaireUtilisateurs.creerPiste(musique, (String) compositions.get(j));
+                            nbpiste++;
                         }
                     }
-
+                    
+                    musique.setNbpiste(nbpiste);
                 }
             } catch (ParseException pe) {
                 System.out.println("position: " + pe.getPosition());

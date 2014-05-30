@@ -1,6 +1,7 @@
 package utilisateurs.gestionnaires;
 
 import adresse.modeles.Adresse;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import javax.ejb.Stateless;
@@ -146,6 +147,7 @@ public class GestionnaireUtilisateurs {
 
     /**
      * Retourne tous les artistes
+     *
      * @return Tous les artistes
      */
     public Collection<Artiste> getAllArtistes() {
@@ -156,7 +158,8 @@ public class GestionnaireUtilisateurs {
 
     /**
      * Retourne toutes les musiques
-     * @return  Toutes les musiques
+     *
+     * @return Toutes les musiques
      */
     public Collection<Musique> getAllMusiques() {
         // Exécution d'une requête équivalente à un select *  
@@ -165,10 +168,27 @@ public class GestionnaireUtilisateurs {
     }
 
     /**
+     * Retourne toutes les pistes
+     *
+     * @param idMusique Numéro de la musique
+     * @return Toutes les pistes
+     */
+    public Collection<Piste> getPistes(int idMusique) {
+        Musique musique = getMusique(idMusique);
+
+        if (musique != null) {
+            // Exécution d'une requête équivalente à un select
+            Query q = em.createQuery("select p from Piste p where p.musique = :pidmusique").setParameter("pidmusique", musique);
+            return q.getResultList();
+        }
+        return new ArrayList<>();
+    }
+
+    /**
      * Retourne les musiques dans une plage
-     * 
+     *
      * Utilisé lors des listes pour la pagination
-     * 
+     *
      * @param index Départ de la plage
      * @param offset Fin de la plage
      * @return Les musiques dans une plage
@@ -179,13 +199,30 @@ public class GestionnaireUtilisateurs {
         return q.getResultList();
     }
 
+    /**
+     * Retourne la musique cherchée
+     *
+     * Utilisé lors des listes pour la pagination
+     *
+     * @param idMusique Numéro de la musique
+     * @return Les musiques dans une plage
+     */
+    public Musique getMusique(int idMusique) {
+        // Exécution d'une requête équivalente à un select *  
+        Query q = em.createQuery("select u from Musique u where u.id = :idMusique").setParameter("idMusique", idMusique);
+        if(q.getResultList().isEmpty()) {
+            return null;
+        }
+        return (Musique) q.getResultList().get(0);
+    }
+
     public Collection<Musique> getMusiqueByGenre(int idgenre) {
         // Exécution d'une requête équivalente à un select *  
         Query q = em.createQuery("select m from Musique m where m.genre.id = :cidgenre").setParameter("cidgenre", idgenre);
         return q.getResultList();
     }
 
-    public Collection<Musique> getMusiqueByGenre(int idgenre, int index, int offset) { 
+    public Collection<Musique> getMusiqueByGenre(int idgenre, int index, int offset) {
         Query q = em.createQuery("select m from Musique m where m.genre.id = :cidgenre").setMaxResults(offset).setFirstResult(index).setParameter("cidgenre", idgenre);
         return q.getResultList();
     }
