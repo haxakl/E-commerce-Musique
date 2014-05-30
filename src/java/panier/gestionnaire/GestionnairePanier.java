@@ -20,7 +20,7 @@ public class GestionnairePanier {
     private EntityManager em;
     
 
-    public void persist(Object object) {
+    public void persist(Object object) throws RuntimeException{
         em.persist(object);
     }
 }

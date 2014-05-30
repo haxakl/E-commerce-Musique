@@ -16,8 +16,8 @@ import musique.modeles.Musique;
  *
  * @author julien
  */
-@Stateful
-public class ShoppingCartImpl implements ShoppingCart {
+@Stateful (mappedName = "ejb/myStatefulBean")
+public class ShoppingCartImpl implements ShoppingCart{
     
     
     private Integer uid;
@@ -26,19 +26,16 @@ public class ShoppingCartImpl implements ShoppingCart {
     private ArrayList<Musique> products;
 
 
-   @Override
    public void create(){
      products = new ArrayList<>();
    }
 
-   @Override
    public void init(Integer id){
      if(id==null){
        uid = id;
      }
   }
 
-  @Override
   public void addToCart(Musique product){
      if(product!=null){
         products.add(product);
@@ -46,7 +43,7 @@ public class ShoppingCartImpl implements ShoppingCart {
 
  }
 
-    public void persist(Object object) {
+    public void persist(Object object) throws RuntimeException{
         em.persist(object);
     }
     

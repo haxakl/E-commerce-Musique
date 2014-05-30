@@ -32,11 +32,9 @@ public class ShoppingCartClient extends HttpServlet {
     GestionnairePanier gestionnairePanier = lookupGestionnairePanierBean();
     
     
+    
     @EJB
     private GestionnaireMusiques gestionnaireMusiques;
-    
-//    @EJB
-//    private static ShoppingCartImpl cart;
     
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -48,21 +46,22 @@ public class ShoppingCartClient extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        System.out.println("===== Servlet CART =====");
-        System.out.println(request.getParameter("idmus"));
-        if(request.getParameter("idmus") != null) {
-            int idmusique = Integer.parseInt(request.getParameter("idmus"));
-            Musique msc = gestionnaireMusiques.getMusique(idmusique);
-            ShoppingCartImpl mycart = new ShoppingCartImpl();
-            mycart.create();
-            mycart.addToCart(msc);
-            gestionnairePanier.persist(mycart);
-            System.out.println("Artiste : " + msc.getArtiste());
-            System.out.println("Titre : " + msc.getTitre());
-            System.out.println("IDMUSIQUE" + request.getParameter("idmus"));
-            System.out.println("My cart :" + mycart.getItem(0).getTitre());
-        }
+            throws ServletException, IOException{
+            System.out.println("===== Servlet CART =====");
+            System.out.println(request.getParameter("idmus"));
+            
+            if(request.getParameter("idmus") != null) {
+                int idmusique = Integer.parseInt(request.getParameter("idmus"));
+                Musique msc = gestionnaireMusiques.getMusique(idmusique);
+                ShoppingCartImpl mycart = new ShoppingCartImpl();
+                mycart.create();
+                mycart.addToCart(msc);
+                gestionnairePanier.persist(mycart);
+                System.out.println("Artiste : " + msc.getArtiste());
+                System.out.println("Titre : " + msc.getTitre());
+                System.out.println("IDMUSIQUE" + request.getParameter("idmus"));
+                System.out.println("My cart :" + mycart.getItem(0).getTitre());
+            }
     }
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -94,11 +93,10 @@ public class ShoppingCartClient extends HttpServlet {
     private GestionnairePanier lookupGestionnairePanierBean() {
         try {
             Context c = new InitialContext();
-            return (GestionnairePanier) c.lookup("java:global/tp2webmiage/GestionnairePanier!panier.gestionnaire.GestionnairePanier");
+            return (GestionnairePanier) c.lookup("java:global/TP_2_Git/GestionnairePanier!panier.gestionnaire.GestionnairePanier");
         } catch (NamingException ne) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
             throw new RuntimeException(ne);
         }
     }
-
 }
