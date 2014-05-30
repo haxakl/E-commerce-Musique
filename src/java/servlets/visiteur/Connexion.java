@@ -100,7 +100,7 @@ public class Connexion extends HttpServlet {
 
         } else {
             request.setAttribute("message", "invalide");
-            this.getServletContext().getRequestDispatcher("/connexion.jsp").forward(request, response);
+            this.getServletContext().getRequestDispatcher("/tp2webmiage/view/frontoffice/connexion.jsp").forward(request, response);
         }
     }
 

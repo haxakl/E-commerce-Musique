@@ -1,5 +1,6 @@
 <%@tag pageEncoding="UTF-8" %>
 <%@attribute name="breadcrumb" fragment="true" %>
+<%@attribute name="sans_corps" fragment="true" %>
 
 <!DOCTYPE html>
 <html>

@@ -144,12 +144,35 @@ public class GestionnaireUtilisateurs {
         return u;
     }
 
+    /**
+     * Retourne tous les artistes
+     * @return Tous les artistes
+     */
+    public Collection<Artiste> getAllArtistes() {
+        // Exécution d'une requête équivalente à un select *  
+        Query q = em.createQuery("select a from Artiste a");
+        return q.getResultList();
+    }
+
+    /**
+     * Retourne toutes les musiques
+     * @return  Toutes les musiques
+     */
     public Collection<Musique> getAllMusiques() {
         // Exécution d'une requête équivalente à un select *  
         Query q = em.createQuery("select m from Musique m");
         return q.getResultList();
     }
 
+    /**
+     * Retourne les musiques dans une plage
+     * 
+     * Utilisé lors des listes pour la pagination
+     * 
+     * @param index Départ de la plage
+     * @param offset Fin de la plage
+     * @return Les musiques dans une plage
+     */
     public Collection<Musique> getMusiques(int index, int offset) {
         // Exécution d'une requête équivalente à un select *  
         Query q = em.createQuery("select u from Musique u").setMaxResults(offset).setFirstResult(index);

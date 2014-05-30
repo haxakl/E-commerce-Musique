@@ -1,5 +1,7 @@
 <%@tag pageEncoding="UTF-8" %>
 <%@attribute name="breadcrumb" fragment="true" %>
+<%@attribute name="sans_corps" fragment="true" %>
+<%@attribute name="script" fragment="true" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 
 <!DOCTYPE html>
@@ -126,10 +128,21 @@
         </section>
 
         <div class="contentpanel">
-            <jsp:doBody/>
+            <jsp:invoke fragment="sans_corps"/>
+
+            <div class="corps">
+                <div class="container">
+                    <jsp:invoke fragment="breadcrumb"/>
+
+                    <jsp:doBody/>
+                </div>
+            </div>
         </div>
 
         <script src="/tp2webmiage/ressources/library/jquery/jquery.js"></script>
         <script src="/tp2webmiage/ressources/library/bootstrap/bootstrap.js"></script>
+        <script src="/tp2webmiage/ressources/library/mixit-up/jquery.mixitup.js"></script>
+        
+        <jsp:invoke fragment="script"/>
     </body>
 </html>

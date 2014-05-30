@@ -2,7 +2,7 @@
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 
 <t:frontoffice>
-    <jsp:body>
+    <jsp:attribute name="sans_corps">
             <!-- ## SLIDE CONTENT ## -->
             <section id="slideContent">
                 <div class="container">
@@ -11,5 +11,5 @@
                 </div>
             </section>
             <!-- ## SLIDE CONTENT ## -->
-    </jsp:body>
+    </jsp:attribute>
 </t:frontoffice>
