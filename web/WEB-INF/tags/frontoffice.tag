@@ -39,8 +39,8 @@
                     <ul class="clearfix">
                         <li>
                             <a href="/tp2webmiage/view/frontoffice/profile.jsp">
-                                <i class="icon-tag-1"></i>
-                                <p>Mon profil</p>
+                                <i class="icon-cd"></i>
+                                <p>Artistes</p>
                             </a>
                         </li>
                         <li>
@@ -79,10 +79,21 @@
                                     <i class="fa fa-sign-out"></i> <p>Déconnexion</p>
                                 </a>
                             </li>
-                            <li  style='float: right;'>
-                                <a class="pull-right" href="/tp2webmiage/admin">
-                                    <i class="fa fa-user"></i> <p>${user.getPrenom()} ${user.getNom()}</p>
-                                </a>
+                            <c:choose>
+                                <c:when test="${user.getNom() == 'Administrateur'}" >
+                                    <li  style='float: right;'>
+                                        <a class="pull-right" href="/tp2webmiage/admin">
+                                            <i class="fa fa-user"></i> <p>${user.getPrenom()} ${user.getNom()}</p>
+                                        </a>
+                                    </c:when>
+                                    <c:otherwise>
+                                    <li  style='float: right;'>
+                                        <a class="pull-right" href="/tp2webmiage/view/frontoffice/profile.jsp">
+                                            <i class="fa fa-user"></i> <p>Mon profil</p>
+                                        </a>
+                                    </c:otherwise>
+                            </c:choose> 
+                            </li>
                             </c:if>
 
                             <c:if test="${user == null}" >
