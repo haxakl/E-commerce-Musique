@@ -106,18 +106,20 @@
                         </li>
                         <li style="right: 0px; position: absolute;">
                             <ul class="itemList">
-                                <li>
-                                    <img style="float:left; padding-right:10px" src="images/item1.jpg" width="64" height="64" alt="Item1" /> 
-                                    Lorem ipsum dolor<br />
-                                    99:-<br />
-                                    Read More</li>
-                                <li>
-                                    <img style="float:left; padding-right:10px" src="images/item1.jpg" width="64" height="64" alt="Item1" /> 
-                                    Dolor sit amet<br />
-                                    99:-<br />
-                                    Read More</li>
+                                <c:choose>
+                                    <c:when test="${panier != null}">
+                                        <c:if test="${panier.isEmpty()}" >
+                                            <li>
+                                                Aucun objet dans votre panier.
+                                            </li>
+                                        </c:if>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <li>Aucun objet dans votre panier.</li>
+                                        </c:otherwise>
+                                    </c:choose>
                             </ul>
-                            <a href="/tp2webmiage/view/frontoffice/panier.jsp">
+                            <a href="/tp2webmiage/panier">
                                 <i class="icon-cart"></i>
                                 <p>Mon Panier</p>
                             </a>
