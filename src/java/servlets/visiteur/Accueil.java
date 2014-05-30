@@ -50,9 +50,7 @@ public class Accueil extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         request.setAttribute("accueil", "true");
-
         this.getServletContext().getRequestDispatcher("/accueil.jsp").forward(request, response);
     }
 

@@ -88,45 +88,14 @@
                     <td>${m.nbpiste}</td>
                     <td>${m.annee}</td>
                     <td><a href="musiques?genre=${m.genre.id}" style="color:#E90303">${m.genre.nom}</a></td>
-                    <td><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
-                            <span class="fa fa-shopping-cart"></span> 3.99 €</button></td>
+                    <td>
+                        <a href="/tp2webmiage/panier?idmus=${m.id}" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i> Ajouter au panier</a>
+                    </td>
                 </tr>
                 <c:set var="total" value="${total+1}"/>
             </c:forEach>
             <!-- Affichage du solde total dans la dernière ligne du tableau -->  
-            <tr><td><b>TOTAL</b></td><td></td><td></td><td><b>${total}</b></td><td></td></tr>
+            <tr><td><b>TOTAL</b></td><td></td><td></td><td></td><td><b>${total}</b></td><td></td></tr>
         </table>
-
-        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        <h4 class="modal-title" id="myModalLabel">Achat d'un titre</h4>
-                    </div>
-                    <div class="modal-body">
-                        <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
-                            <input type='hidden' value="2.2" name="amount" />
-                            <input name="currency_code" type="hidden" value="EUR" />
-                            <input name="return" type="hidden" value="http://localhost:8080/tp2webmiage/musiques" />
-                            <input name="cancel_return" type="hidden" value="http://localhost:8080/tp2webmiage/musiques" />
-                            <input name="notify_url" type="hidden" value="http://votredomaine/validationPaiement.php" />
-                            <input name="cmd" type="hidden" value="_xclick" />
-                            <input name="business" type="hidden" value="julienblacas@gmail.com" />
-                            <input name="item_name" type="hidden" value="Une musique" />
-                            <input name="no_note" type="hidden" value="1" />
-                            <input name="lc" type="hidden" value="FR" />
-                            <input name="bn" type="hidden" value="PP-BuyNowBF" />
-                            <input name="custom" type="hidden" value="ID_ACHETEUR" />
-                            <input alt="Effectuez vos paiements via PayPal : une solution rapide, gratuite et sécurisée" name="submit" src="https://www.paypal.com/fr_FR/FR/i/btn/btn_buynow_LG.gif" type="image" /><img src="https://www.paypal.com/fr_FR/i/scr/pixel.gif" border="0" alt="" width="1" height="1" />
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Payer avec paypal</button>
-                    </div>
-                </div><!-- modal-content -->
-            </div><!-- modal-dialog -->
-        </div>
     </jsp:body>
 </t:frontoffice>

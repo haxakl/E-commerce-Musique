@@ -38,6 +38,10 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import panier.gestionnaire.GestionnairePanier;
+import utilisateurs.gestionnaires.GestionnaireUtilisateurs;
+import utilisateurs.modeles.Adresse;
+import utilisateurs.modeles.Telephone;
 
 /**
  *
@@ -45,6 +49,7 @@ import org.json.simple.parser.ParseException;
  */
 @WebFilter(filterName = "/", urlPatterns = {"/*", "/"}, dispatcherTypes = {DispatcherType.REQUEST})
 public class AccueilFilter implements Filter {
+    GestionnaireUtilisateurs gestionnaireUtilisateurs = lookupGestionnaireUtilisateursBean();
     GestionnaireMusiques gestionnaireMusiques = lookupGestionnaireMusiquesBean();
 
     private static final boolean debug = true;
@@ -70,9 +75,23 @@ public class AccueilFilter implements Filter {
             FilterChain chain)
             throws IOException, ServletException {
 
-        /**
-         * Test si les musiques sont vides
-         */
+        // Test si un panier est déclaré
+        HttpServletRequest httprequest = (HttpServletRequest) request;
+        HttpSession session = httprequest.getSession();
+        if(session.getAttribute("panier") == null) {
+            session.setAttribute("panier", new GestionnairePanier());
+        }
+        
+        request.setAttribute("panier", session.getAttribute("panier"));
+        
+        // Il n'y a pas d'utilisateurs
+        if (gestionnaireUtilisateurs.getAllUsers().isEmpty()) {
+            Adresse nice = new Adresse("NICE", "06480");
+            Telephone tel = new Telephone("22");
+            gestionnaireUtilisateurs.creeUtilisateur("Administrateur", "", "admin", "admin", nice, tel);
+        }
+
+        //Test si les musiques sont vides
         if (gestionnaireMusiques.getAllMusiques().isEmpty()) {
             JSONParser parser = new JSONParser();
             String chaine = "";
@@ -157,6 +176,16 @@ public class AccueilFilter implements Filter {
         try {
             Context c = new InitialContext();
             return (GestionnaireMusiques) c.lookup("java:global/TP_2_Git/GestionnaireMusiques!musique.gestionnaires.GestionnaireMusiques");
+        } catch (NamingException ne) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
+            throw new RuntimeException(ne);
+        }
+    }
+
+    private GestionnaireUtilisateurs lookupGestionnaireUtilisateursBean() {
+        try {
+            Context c = new InitialContext();
+            return (GestionnaireUtilisateurs) c.lookup("java:global/TP_2_Git/GestionnaireUtilisateurs!utilisateurs.gestionnaires.GestionnaireUtilisateurs");
         } catch (NamingException ne) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
             throw new RuntimeException(ne);

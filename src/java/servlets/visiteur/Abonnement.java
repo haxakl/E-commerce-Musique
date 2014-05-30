@@ -35,7 +35,6 @@ public class Abonnement extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         this.getServletContext().getRequestDispatcher("/view/frontoffice/abonnement.jsp").forward(request, response);
     }
 

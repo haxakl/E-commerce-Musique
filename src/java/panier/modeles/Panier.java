@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package panier.modeles;
 
 import java.io.IOException;
@@ -27,15 +26,11 @@ import utilisateurs.gestionnaires.GestionnaireUtilisateurs;
  *
  * @author julien
  */
-@WebServlet(name = "cart", urlPatterns = {"/Panier"})
-public class ShoppingCartClient extends HttpServlet {
-    GestionnairePanier gestionnairePanier = lookupGestionnairePanierBean();
-    
-    
-    
+@WebServlet(name = "Panier", urlPatterns = {"/panier"})
+public class Panier extends HttpServlet {
     @EJB
     private GestionnaireMusiques gestionnaireMusiques;
-    
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -46,23 +41,19 @@ public class ShoppingCartClient extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException{
-            System.out.println("===== Servlet CART =====");
-            System.out.println(request.getParameter("idmus"));
-            
-            if(request.getParameter("idmus") != null) {
-                int idmusique = Integer.parseInt(request.getParameter("idmus"));
-                Musique msc = gestionnaireMusiques.getMusique(idmusique);
-                ShoppingCartImpl mycart = new ShoppingCartImpl();
-                mycart.create();
-                mycart.addToCart(msc);
-                gestionnairePanier.persist(mycart);
-                System.out.println("Artiste : " + msc.getArtiste());
-                System.out.println("Titre : " + msc.getTitre());
-                System.out.println("IDMUSIQUE" + request.getParameter("idmus"));
-                System.out.println("My cart :" + mycart.getItem(0).getTitre());
-            }
+            throws ServletException, IOException {
+        System.out.println("===== Servlet CART =====");
+
+        if (request.getParameter("idmus") != null) {
+            Musique msc = gestionnaireMusiques.getMusique(Integer.valueOf(request.getParameter("idmus")));
+            System.out.println("Ajout au panier de la musique: " + msc.getTitre());
+            GestionnairePanier panier_tmp = (GestionnairePanier) request.getSession().getAttribute("panier");
+            panier_tmp.addToCart(msc);
+        }
+        
+        this.getServletContext().getRequestDispatcher("/view/frontoffice/panier.jsp").forward(request, response);
     }
+
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -76,7 +67,8 @@ public class ShoppingCartClient extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
     }
-        /**
+
+    /**
      * Handles the HTTP <code>POST</code> method.
      *
      * @param request servlet request
@@ -88,15 +80,5 @@ public class ShoppingCartClient extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-    }
-
-    private GestionnairePanier lookupGestionnairePanierBean() {
-        try {
-            Context c = new InitialContext();
-            return (GestionnairePanier) c.lookup("java:global/TP_2_Git/GestionnairePanier!panier.gestionnaire.GestionnairePanier");
-        } catch (NamingException ne) {
-            Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
-            throw new RuntimeException(ne);
-        }
     }
 }

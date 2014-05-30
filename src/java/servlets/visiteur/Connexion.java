@@ -48,13 +48,6 @@ public class Connexion extends HttpServlet {
             this.getServletContext().getRequestDispatcher("/view/backoffice/connecte.jsp").forward(request, response);
         }
 
-        // Il n'y a pas d'utilisateurs
-        if (gestionnaireUtilisateurs.getAllUsers().isEmpty()) {
-            Adresse nice = new Adresse("NICE", "06480");
-            Telephone tel = new Telephone("22");
-            gestionnaireUtilisateurs.creeUtilisateur("Administrateur", "", "admin", "admin", nice, tel);
-        }
-
         this.getServletContext().getRequestDispatcher("/view/frontoffice/connexion.jsp").forward(request, response);
     }
 
