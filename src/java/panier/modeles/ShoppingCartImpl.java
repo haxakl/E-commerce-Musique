@@ -26,9 +26,9 @@ public class ShoppingCartImpl implements ShoppingCart {
     private ArrayList<Musique> products;
 
 
-   @PostConstruct
-   private void create(){
-     products = new ArrayList<Musique>();
+   @Override
+   public void create(){
+     products = new ArrayList<>();
    }
 
    @Override
@@ -48,6 +48,10 @@ public class ShoppingCartImpl implements ShoppingCart {
 
     public void persist(Object object) {
         em.persist(object);
+    }
+    
+    public Musique getItem(int index){
+        return products.get(index);
     }
 
 }

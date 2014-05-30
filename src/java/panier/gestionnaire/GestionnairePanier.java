@@ -18,11 +18,9 @@ import javax.persistence.PersistenceContext;
 public class GestionnairePanier {
     @PersistenceContext(unitName = "TP_2_GitPU")
     private EntityManager em;
+    
 
     public void persist(Object object) {
         em.persist(object);
     }
-    
-    // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
 }

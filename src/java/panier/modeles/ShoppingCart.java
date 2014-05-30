@@ -15,7 +15,8 @@ import musique.modeles.Musique;
  */
 @Remote
 public interface ShoppingCart{
-
+    
+  public void create();
   public void init(Integer id);
   public void addToCart(Musique a_music);
 
