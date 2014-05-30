@@ -71,9 +71,9 @@ public class Accueil extends HttpServlet {
                 Object obj = parser.parse(chaine);
                 JSONArray array = (JSONArray) obj;
                 Artiste acdc = new Artiste("AC-DC", "Groupe de rock connu", "/photos/acdc");
-                gestionnaireUtilisateurs.persist(acdc);
+                gestionnaireMusiques.persist(acdc);
                 Genre rock = new Genre("rock");
-                gestionnaireUtilisateurs.persist(rock);
+                gestionnaireMusiques.persist(rock);
                 for (int i = 0; i < array.size(); i++) {
                     JSONObject objet = (JSONObject) array.get(i);
                     JSONArray compositions = (JSONArray) objet.get("composition");
@@ -85,7 +85,7 @@ public class Accueil extends HttpServlet {
                     for (int j = 0; j < compositions.size(); j++) {
                         String piste = compositions.get(j).toString();
                         if (piste.lastIndexOf('.') != -1 && piste.substring(piste.lastIndexOf('.') + 1).toLowerCase().compareTo("mp3") == 0) {
-                            gestionnaireUtilisateurs.creerPiste(musique, (String) compositions.get(j));
+                            gestionnaireMusiques.creerPiste(musique, (String) compositions.get(j));
                             nbpiste++;
                         }
                     }

@@ -104,20 +104,6 @@ public class GestionnaireUtilisateurs {
         return u;
     }
 
-    // Créer un utilisateur
-    public Piste creerPiste(Musique musique, String nom) {
-
-        Piste m = new Piste(musique, nom);
-
-        // a est déjà en base et connectée, donc la ligne suivante modifie les   
-        // données pour relier l'adresse à l'utilisateur 
-        // On persiste l'utilisateur, la relation est déjà en base, cela va donc  
-        // ajouter une ligne dans la table des utilisateur avec une clé étrangère  
-        // correspondant à l'adresse  
-        em.persist(m);
-        return m;
-    }
-
     // Modifier un utilisateur
     public Utilisateur modifierUtilisateur(int id, String nom, String prenom, String login, String password) {
         Utilisateur u = getUser(id);

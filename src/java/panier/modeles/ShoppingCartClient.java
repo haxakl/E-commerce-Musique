@@ -41,10 +41,11 @@ public class ShoppingCartClient extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         System.out.println("===== Servlet CART =====");
-        if(request.getParameter("idmus") != null){
+        System.out.println(request.getParameter("idmus"));
+        if(request.getParameter("idmus") != null) {
             int idmusique = Integer.parseInt(request.getParameter("idmus"));
             Musique msc = gestionnaireUtilisateurs.getMusique(idmusique);
-//            System.out.println("Artiste : " + msc.getArtiste().getNom());
+            System.out.println("Artiste : " + msc.getArtiste());
             System.out.println("Titre : " + msc.getTitre());
             System.out.println("IDMUSIQUE" + request.getParameter("idmus"));
         }

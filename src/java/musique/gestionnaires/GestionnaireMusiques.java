@@ -30,6 +30,10 @@ public class GestionnaireMusiques {
         em.persist(object);
     }
 
+    // =============================
+    //  Musiques
+    // =============================
+    
     /**
      * Créer une musique
      * @param artiste Artiste
@@ -49,17 +53,6 @@ public class GestionnaireMusiques {
     }
 
     /**
-     * Retourne tous les artistes
-     *
-     * @return Tous les artistes
-     */
-    public Collection<Artiste> getAllArtistes() {
-        // Exécution d'une requête équivalente à un select *  
-        Query q = em.createQuery("select a from Artiste a");
-        return q.getResultList();
-    }
-
-    /**
      * Retourne toutes les musiques
      *
      * @return Toutes les musiques
@@ -68,23 +61,6 @@ public class GestionnaireMusiques {
         // Exécution d'une requête équivalente à un select *  
         Query q = em.createQuery("select m from Musique m");
         return q.getResultList();
-    }
-
-    /**
-     * Retourne toutes les pistes
-     *
-     * @param idMusique Numéro de la musique
-     * @return Toutes les pistes
-     */
-    public Collection<Piste> getPistes(int idMusique) {
-        Musique musique = getMusique(idMusique);
-
-        if (musique != null) {
-            // Exécution d'une requête équivalente à un select
-            Query q = em.createQuery("select p from Piste p where p.musique = :pidmusique").setParameter("pidmusique", musique);
-            return q.getResultList();
-        }
-        return new ArrayList<>();
     }
 
     /**
@@ -140,4 +116,49 @@ public class GestionnaireMusiques {
         return q.getResultList();
     }
     
+    // =============================
+    //  Pistes
+    // =============================
+    
+    /**
+     * Retourne toutes les pistes
+     *
+     * @param idMusique Numéro de la musique
+     * @return Toutes les pistes
+     */
+    public Collection<Piste> getPistes(int idMusique) {
+        Musique musique = getMusique(idMusique);
+
+        if (musique != null) {
+            // Exécution d'une requête équivalente à un select
+            Query q = em.createQuery("select p from Piste p where p.musique = :pidmusique").setParameter("pidmusique", musique);
+            return q.getResultList();
+        }
+        return new ArrayList<>();
+    }
+
+    // Créer un utilisateur
+    public Piste creerPiste(Musique musique, String nom) {
+
+        Piste m = new Piste(musique, nom);
+
+        em.persist(m);
+        return m;
+    }
+
+    // =============================
+    //  Artiste
+    // =============================
+    
+    /**
+     * Retourne tous les artistes
+     *
+     * @return Tous les artistes
+     */
+    public Collection<Artiste> getAllArtistes() {
+        // Exécution d'une requête équivalente à un select *  
+        Query q = em.createQuery("select a from Artiste a");
+        return q.getResultList();
+    }
+
 }
