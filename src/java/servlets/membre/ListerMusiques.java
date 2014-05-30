@@ -14,6 +14,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import musique.gestionnaires.GestionnaireMusiques;
 import musique.modeles.Musique;
 import utilisateurs.gestionnaires.GestionnaireUtilisateurs;
 import utilisateurs.modeles.Utilisateur;
@@ -24,6 +25,8 @@ import utilisateurs.modeles.Utilisateur;
  */
 @WebServlet(name = "ListerMusiques", urlPatterns = {"/membre/musiques"})
 public class ListerMusiques extends HttpServlet {
+    @EJB
+    private GestionnaireMusiques gestionnaireMusiques;
 
     @EJB
     private GestionnaireUtilisateurs gestionnaireUtilisateurs;
@@ -58,10 +61,10 @@ public class ListerMusiques extends HttpServlet {
         }
 
         // Recupère tous les utilisateurs
-        Collection<Musique> listeAllMusiques = gestionnaireUtilisateurs.getAllMusiques();
+        Collection<Musique> listeAllMusiques = gestionnaireMusiques.getAllMusiques();
         double totalMusiques = listeAllMusiques.size();
 
-        liste = gestionnaireUtilisateurs.getMusiques((numPage - 1) * nbAffiche, nbAffiche);
+        liste = gestionnaireMusiques.getMusiques((numPage - 1) * nbAffiche, nbAffiche);
 
         if (totalMusiques == 0) {
             request.setAttribute("nbPages", Math.ceil(liste.size() / nbAffiche));

@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import musique.gestionnaires.GestionnaireMusiques;
 import musique.modeles.Artiste;
 import musique.modeles.Musique;
 import utilisateurs.gestionnaires.GestionnaireUtilisateurs;
@@ -20,6 +21,8 @@ import utilisateurs.modeles.Utilisateur;
  */
 @WebServlet(name = "Artistes", urlPatterns = {"/artistes"})
 public class Artistes extends HttpServlet {
+    @EJB
+    private GestionnaireMusiques gestionnaireMusiques;
 
     @EJB
     private GestionnaireUtilisateurs gestionnaireUtilisateurs;
@@ -37,7 +40,7 @@ public class Artistes extends HttpServlet {
             throws ServletException, IOException {
 
         // Recupère tous les utilisateurs
-        Collection<Artiste> listeAllArtistes = gestionnaireUtilisateurs.getAllArtistes();
+        Collection<Artiste> listeAllArtistes = gestionnaireMusiques.getAllArtistes();
         
         request.setAttribute("listeDesMusiques", listeAllArtistes);
         

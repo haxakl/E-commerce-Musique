@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import musique.gestionnaires.GestionnaireMusiques;
 import musique.modeles.Musique;
 import musique.modeles.Piste;
 import utilisateurs.gestionnaires.GestionnaireUtilisateurs;
@@ -20,10 +21,13 @@ import utilisateurs.modeles.Utilisateur;
  */
 @WebServlet(name = "Détail musique", urlPatterns = {"/musiques/*"})
 public class DetailMusique extends HttpServlet {
+    
+    @EJB
+    private GestionnaireMusiques gestionnaireMusiques;
 
     @EJB
     private GestionnaireUtilisateurs gestionnaireUtilisateurs;
-
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -42,7 +46,7 @@ public class DetailMusique extends HttpServlet {
         Collection<Piste> liste;
 //        
         // Recupère tous les utilisateurs
-        Collection<Piste> listeDesPistes = gestionnaireUtilisateurs.getPistes(musique);
+        Collection<Piste> listeDesPistes = gestionnaireMusiques.getPistes(musique);
 
         request.setAttribute("listeDesPistes", listeDesPistes);
         this.getServletContext().getRequestDispatcher("/view/frontoffice/detailmusique.jsp").forward(request, response);

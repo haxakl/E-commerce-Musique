@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import musique.gestionnaires.GestionnaireMusiques;
 import musique.modeles.Artiste;
 import musique.modeles.Genre;
 import musique.modeles.Musique;
@@ -32,6 +33,8 @@ import utilisateurs.modeles.Utilisateur;
  */
 @WebServlet(name = "Accueil", urlPatterns = {"/index.jsp"})
 public class Accueil extends HttpServlet {
+    @EJB
+    private GestionnaireMusiques gestionnaireMusiques;
 
     @EJB
     private GestionnaireUtilisateurs gestionnaireUtilisateurs;
@@ -48,7 +51,7 @@ public class Accueil extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        if (gestionnaireUtilisateurs.getAllMusiques().isEmpty()) {
+        if (gestionnaireMusiques.getAllMusiques().isEmpty()) {
             JSONParser parser = new JSONParser();
             String chaine = "";
             try {
@@ -75,7 +78,7 @@ public class Accueil extends HttpServlet {
                     JSONObject objet = (JSONObject) array.get(i);
                     JSONArray compositions = (JSONArray) objet.get("composition");
 
-                    Musique musique = gestionnaireUtilisateurs.creerMusique(acdc, (String) objet.get("nom"), compositions.size(), 2000, "", rock);
+                    Musique musique = gestionnaireMusiques.creerMusique(acdc, (String) objet.get("nom"), compositions.size(), 2000, "", rock);
 
                     // Boucle sur les compositions
                     int nbpiste = 0;
