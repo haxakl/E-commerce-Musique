@@ -1,6 +1,6 @@
 package servlets.visiteur;
 
-import adresse.modeles.Adresse;
+import utilisateurs.modeles.Adresse;
 import java.io.IOException;
 import javax.ejb.EJB;
 import javax.servlet.ServletContext;
@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import telephone.modeles.Telephone;
+import utilisateurs.modeles.Telephone;
 import utilisateurs.gestionnaires.GestionnaireUtilisateurs;
 import utilisateurs.modeles.Utilisateur;
 

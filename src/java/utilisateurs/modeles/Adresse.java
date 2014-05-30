@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package adresse.modeles; 
+package utilisateurs.modeles; 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;

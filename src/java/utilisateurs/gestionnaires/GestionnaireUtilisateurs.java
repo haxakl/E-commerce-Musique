@@ -1,6 +1,6 @@
 package utilisateurs.gestionnaires;
 
-import adresse.modeles.Adresse;
+import utilisateurs.modeles.Adresse;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -12,7 +12,7 @@ import musique.modeles.Artiste;
 import musique.modeles.Genre;
 import musique.modeles.Musique;
 import musique.modeles.Piste;
-import telephone.modeles.Telephone;
+import utilisateurs.modeles.Telephone;
 import utilisateurs.modeles.Utilisateur;
 
 @Stateless

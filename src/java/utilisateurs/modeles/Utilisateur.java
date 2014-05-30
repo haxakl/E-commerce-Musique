@@ -1,6 +1,5 @@
 package utilisateurs.modeles;
 
-import adresse.modeles.Adresse;
 import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -9,7 +8,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
-import telephone.modeles.Telephone;
 
 @Entity
 public class Utilisateur implements Serializable {

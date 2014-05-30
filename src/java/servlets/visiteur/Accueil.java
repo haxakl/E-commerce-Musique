@@ -1,6 +1,6 @@
 package servlets.visiteur;
 
-import adresse.modeles.Adresse;
+import utilisateurs.modeles.Adresse;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -23,7 +23,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-import telephone.modeles.Telephone;
+import utilisateurs.modeles.Telephone;
 import utilisateurs.gestionnaires.GestionnaireUtilisateurs;
 import utilisateurs.modeles.Utilisateur;
 
