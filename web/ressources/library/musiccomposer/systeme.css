@@ -76,3 +76,172 @@ small {
     vertical-align: top;
     -webkit-backface-visibility: hidden;
 }
+
+.pricing {
+    display: block;
+    position: relative;
+    margin-bottom: 40px;
+}
+
+.pricing .pricing-wrap {
+    float: left;
+    width: 25%;
+    position: relative;
+}
+
+.pricing3 .pricing-wrap { width: 33.33%; }
+
+.pricing5 .pricing-wrap { width: 20%; }
+
+.pricing .pricing-wrap.best-price { margin-left: -1px; }
+
+.pricing-wrap .pricing-inner {
+    position: relative;
+    border: 1px solid #E5E5E5;
+    border-left: none;
+    text-align: center;
+}
+
+.pricing-wrap:first-child { margin-left: 1px; }
+
+.pricing-wrap:first-child .pricing-inner { border-left: 1px solid #E5E5E5; }
+
+.best-price .pricing-inner { border-left: 1px solid #E5E5E5; }
+
+.pricing-inner .pricing-title {
+    position: relative;
+    padding: 10px 0;
+}
+
+.pricing-title h4 {
+    font-size: 17px;
+    line-height: 24px;
+    font-weight: bold;
+    padding-bottom: 0;
+    color: #444;
+}
+
+.best-price .pricing-title h4 { color: #57B3DF; }
+
+.pricing-title h4 span {
+    display: block;
+    font-family: "Droid Serif", serif;
+    font-size: 13px;
+    font-weight: normal;
+    color: #BBB;
+}
+
+.pricing-inner .pricing-price {
+    padding: 15px 0;
+    font-size: 36px;
+    line-height: 40px;
+    font-family: "Droid Serif", serif;
+    background-color: #EEE;
+    color: #444;
+    text-shadow: 1px 1px 1px #FFF;
+    border-top: 1px solid #E5E5E5;
+    border-bottom: 1px solid #E5E5E5;
+}
+
+.best-price .pricing-price { color: #57B3DF; }
+
+.pricing-price .price-sub {
+    display: inline-block;
+    position: relative;
+    font-size: 16px;
+    vertical-align: top;
+    top: -7px;
+    margin-left: 2px;
+}
+
+.pricing-price .price-tenure {
+    display: block;
+    font-size: 13px;
+    line-height: 20px;
+    font-family: "Open Sans", sans-serif;
+    color: #AAA;
+}
+
+.pricing-inner .pricing-features {
+    padding: 10px 15px;
+    border-bottom: 1px solid #E5E5E5;
+    text-shadow: 1px 1px 1px #FFF;
+}
+
+.pricing-features ul { margin: 0; }
+
+.pricing-features li {
+    position: relative;
+    padding: 6px 0;
+    border-top: 1px solid #EEE;
+}
+
+.pricing-features li span {
+    font-weight: bold;
+    color: #333;
+}
+
+.pricing-features li:first-child { border-top: 0; }
+
+.pricing-action {
+    background-color: #EEE;
+    padding: 15px 0;
+}
+
+.pricing-action a { margin: 0 !important; }
+
+.pricing-style2 .pricing-price {
+    padding: 15px 0;
+    font-size: 36px;
+    line-height: 40px;
+    font-family: "Droid Serif", serif;
+    background-color: #444;
+    margin: 0 -1px;    
+    color: #FFF;
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.3);
+}
+
+.pricing-style2 .best-price .pricing-price { background-color: #57B3DF; }
+
+.pricing-style2 .best-price .price-tenure { color: #EEE; }
+
+.pricing-wrap.pricing-defines .pricing-inner {
+    border-color: transparent;
+    border-right: 1px solid #E5E5E5;
+    text-align: left;
+}
+
+.pricing-wrap.pricing-defines .pricing-title,
+.pricing-wrap.pricing-defines .pricing-price,
+.pricing-wrap.pricing-defines .pricing-action { visibility: hidden; }
+
+.pricing-wrap.pricing-defines .pricing-features {
+    padding: 10px 15px;
+    border: 1px solid #E5E5E5;
+    border-right: none;
+    background-color: #EEE;
+}
+
+.pricing-wrap.pricing-defines .pricing-features li {
+    border-top: 1px solid #E5E5E5;
+    font-weight: bold;
+    color: #AAA;
+}
+
+.pricing-wrap.pricing-defines .pricing-features li a.fa-question-circle {
+    display: block;
+    position: absolute;
+    width: 17px;
+    height: 17px;
+    text-align: center;
+    top: 6px;
+    left: auto;
+    right: 0;
+    font-size: 17px;
+    color: #AAA;
+}
+
+.pricing-wrap.pricing-defines .pricing-features li a.fa-question-circle:hover { color: #666; }
+
+.pricing-wrap.pricing-defines .pricing-features li:first-child { border-top: 0; }
+
