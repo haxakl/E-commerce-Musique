@@ -11,9 +11,12 @@ import servlets.membre.*;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.Context;
@@ -39,6 +42,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import panier.gestionnaire.GestionnairePanier;
+import sun.net.www.http.HttpClient;
 import utilisateurs.gestionnaires.GestionnaireUtilisateurs;
 import utilisateurs.modeles.Adresse;
 import utilisateurs.modeles.Telephone;
@@ -120,14 +124,14 @@ public class AccueilFilter implements Filter {
                     if (nom.indexOf("-") != 0) {
                         String nomArtiste = nom.substring(0, nom.indexOf("-") - 1);
                         artiste = gestionnaireMusiques.getArtiste(nomArtiste);
-                        if(gestionnaireMusiques.getArtiste(nomArtiste) == null) {
+                        if (gestionnaireMusiques.getArtiste(nomArtiste) == null) {
                             artiste = gestionnaireMusiques.creerArtiste(nomArtiste, "", "");
                         }
-                        nom = nom.substring(nom.indexOf("-") + 1);
-                    }
 
-                    Musique musique = gestionnaireMusiques.creerMusique(artiste, nom, getNombrePiste(compositions, null), 0, "", null);
-                    getNombrePiste(compositions, musique);
+                        nom = nom.substring(nom.indexOf("-") + 1);
+                        Musique musique = gestionnaireMusiques.creerMusique(artiste, nom, getNombrePiste(compositions, null), 0, "", null);
+                        getNombrePiste(compositions, musique);
+                    }
                 }
             } catch (ParseException pe) {
                 System.out.println("position: " + pe.getPosition());
@@ -136,11 +140,15 @@ public class AccueilFilter implements Filter {
         }
 
         chain.doFilter(request, response);
+    }
 
+    static String convertStreamToString(java.io.InputStream is) {
+        java.util.Scanner s = new java.util.Scanner(is).useDelimiter("\\A");
+        return s.hasNext() ? s.next() : "";
     }
 
     /**
-     * 
+     *
      * @param compositions Tableau de pistes
      * @param musique Si une musique est donnée cela crée la piste
      * @return Un nombre de piste
@@ -151,10 +159,10 @@ public class AccueilFilter implements Filter {
             String piste = compositions.get(j).toString();
             String extension = piste.substring(piste.lastIndexOf('.') + 1).toLowerCase();
             if (piste.lastIndexOf('.') != -1 && (extension.compareTo("mp3") == 0 || extension.compareTo("ogg") == 0)) {
-                if(musique != null) {
+                if (musique != null) {
                     gestionnaireMusiques.creerPiste(musique, (String) compositions.get(j));
                 }
-                
+
                 nbpiste++;
             }
         }

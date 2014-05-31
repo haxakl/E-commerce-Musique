@@ -31,6 +31,10 @@ public class GestionnaireMusiques {
         em.persist(object);
     }
 
+    public void merge(Object object) {
+        em.merge(object);
+    }
+
     // =============================
     //  Musiques
     // =============================

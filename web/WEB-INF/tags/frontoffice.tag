@@ -110,7 +110,7 @@
                                             </c:forEach>
                                             <li>
                                                 
-                                            <button class="btn btn-default"> Commander </button>
+                                            <button style="margin-top: 15px" class="btn btn-default"> Commander </button>
                                         </c:if>
                                     </c:when>
                                     <c:otherwise>
@@ -130,8 +130,6 @@
                 <nav id="sec-nav">
                     <ul class="clearfix"></ul>
                 </nav>
-
-                <div id="logo"><a href="./index.html"><img src="./assets/img/placeholder/logo.png" alt="LOGO"></a></div></header>
         </section>
 
         <div class="contentpanel">

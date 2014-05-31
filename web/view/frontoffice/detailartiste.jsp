@@ -19,10 +19,19 @@
             <h3>Détail de l'artiste</h3>
         </div>
         
+        <div class="row" style="margin-bottom: 20px;">
+            <div class="col-lg-5">
+                <img width="95%" src="${artiste.photo}"/>
+            </div>
+            <div class="col-lg-7">
+                ${artiste.resume}
+            </div>
+        </div>
+        
         <table class="table table-striped">  
             <!-- La ligne de titre du tableau des comptes -->  
             <tr>  
-                <td><b>Nom</b></td>
+                <td><b>Liste des musiques</b></td>
             </tr>  
 
             <c:forEach var="m" items="${requestScope['listeDesMusiques']}">
