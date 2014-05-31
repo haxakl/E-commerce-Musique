@@ -68,7 +68,7 @@
             <thead>
                 <tr>  
                     <td><b>Artiste</b></td>
-                    <td><b>Genre</b></td>
+                    <td><b>Description</b></td>
                     <td><b>Nombre de musiques</b></td>
                 </tr>
             </thead>
@@ -80,7 +80,7 @@
                 <c:forEach var="a" items="${requestScope['listeDesArtistes']}">
                     <tr>
                         <td><a href="/tp2webmiage/musiques/${a.id}" style="color:#E90303">${a.nom}</a></td>
-                        <td></td>
+                        <td>${a.resume}</td>
                         <td></td>
                     </tr>
                     <c:set var="total" value="${total+1}"/>

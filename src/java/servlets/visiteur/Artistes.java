@@ -42,7 +42,8 @@ public class Artistes extends HttpServlet {
 
         // Recupère tous les utilisateurs
         Collection<Artiste> listeAllArtistes = gestionnaireMusiques.getAllArtistes();
-
+        Collection<Musique> liste;
+        
         // Page affichée
         int numPage = 1;
         if (request.getParameter("page") != null) {
@@ -56,8 +57,17 @@ public class Artistes extends HttpServlet {
         } else {
             nbAffiche = 30;
         }
-        
+
+        // Recupère tous les utilisateurs
         double totalMusiques = listeAllArtistes.size();
+
+        liste = gestionnaireMusiques.getArtistes((numPage - 1) * nbAffiche, nbAffiche);
+        if (totalMusiques == 0) {
+            request.setAttribute("nbPages", Math.ceil(liste.size() / nbAffiche));
+        } else {
+            request.setAttribute("nbPages", (int) Math.ceil(totalMusiques / nbAffiche));
+        }
+
         if (totalMusiques == 0) {
             request.setAttribute("nbPages", Math.ceil(listeAllArtistes.size() / nbAffiche));
         } else {
@@ -65,7 +75,7 @@ public class Artistes extends HttpServlet {
         }
         request.setAttribute("page", numPage);
         request.setAttribute("nbAffiche", nbAffiche);
-        request.setAttribute("listeDesArtistes", listeAllArtistes);
+        request.setAttribute("listeDesArtistes", liste);
 
         this.getServletContext().getRequestDispatcher("/view/frontoffice/artistes.jsp").forward(request, response);
     }

@@ -212,4 +212,15 @@ public class GestionnaireMusiques {
         return q.getResultList();
     }
 
+    /**
+     * Retourne les artistes avec une plage
+     * @param index Début de la plage
+     * @param offset Fin de la plage
+     * @return Les musiques d'un genre précis avec une plage
+     */
+    public Collection<Musique> getArtistes(int index, int offset) {
+        Query q = em.createQuery("select m from Artiste m").setMaxResults(offset).setFirstResult(index);
+        return q.getResultList();
+    }
+    
 }
