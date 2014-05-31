@@ -51,7 +51,8 @@ import utilisateurs.modeles.Telephone;
 public class AccueilFilter implements Filter {
     GestionnaireUtilisateurs gestionnaireUtilisateurs = lookupGestionnaireUtilisateursBean();
     GestionnaireMusiques gestionnaireMusiques = lookupGestionnaireMusiquesBean();
-
+    
+    
     private static final boolean debug = true;
 
     // The filter configuration object we are associated with.  If
@@ -74,7 +75,6 @@ public class AccueilFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response,
             FilterChain chain)
             throws IOException, ServletException {
-
         // Test si un panier est déclaré
         HttpServletRequest httprequest = (HttpServletRequest) request;
         HttpSession session = httprequest.getSession();
@@ -175,7 +175,7 @@ public class AccueilFilter implements Filter {
     private GestionnaireMusiques lookupGestionnaireMusiquesBean() {
         try {
             Context c = new InitialContext();
-            return (GestionnaireMusiques) c.lookup("java:global/TP_2_Git/GestionnaireMusiques!musique.gestionnaires.GestionnaireMusiques");
+            return (GestionnaireMusiques) c.lookup("java:global/tp2webmiage/GestionnaireMusiques!musique.gestionnaires.GestionnaireMusiques");
         } catch (NamingException ne) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
             throw new RuntimeException(ne);
@@ -185,7 +185,7 @@ public class AccueilFilter implements Filter {
     private GestionnaireUtilisateurs lookupGestionnaireUtilisateursBean() {
         try {
             Context c = new InitialContext();
-            return (GestionnaireUtilisateurs) c.lookup("java:global/TP_2_Git/GestionnaireUtilisateurs!utilisateurs.gestionnaires.GestionnaireUtilisateurs");
+            return (GestionnaireUtilisateurs) c.lookup("java:global/tp2webmiage/GestionnaireUtilisateurs!utilisateurs.gestionnaires.GestionnaireUtilisateurs");
         } catch (NamingException ne) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
             throw new RuntimeException(ne);

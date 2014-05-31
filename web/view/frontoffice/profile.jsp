@@ -18,10 +18,24 @@
                                 <img src="http://placehold.it/380x500" alt="" class="img-rounded img-responsive" />
                             </div>
                             <div class="col-sm-6 col-md-8">
-                                <h4>
+                                <h3>
                                     ${user.nom} ${user.nom}
-                                </h4>
-                                <small><cite title="San Francisco, USA">San Francisco, USA <i class="fa fa-map-marker"></i>
+                                </h3>
+                                <h4>
+                                    <c:if test="${user.current_abo == 'NONE'}">
+                                        Aucun abonnement
+                                    </c:if>
+                                    <c:if test="${user.current_abo == 'BASIC'}">
+                                        Abonnement basique
+                                    </c:if> 
+                                    <c:if test="${user.current_abo == 'LIMITED'}">
+                                        Abonnement limité
+                                    </c:if> 
+                                    <c:if test="${user.current_abo == 'UNLIMITED'}">
+                                        Abonnement sans limites
+                                    </c:if> 
+                               </h4>
+                                    <small><cite title="San Francisco, USA">San Francisco, USA <i class="fa fa-map-marker"></i>
                                         </cite></small>
                                 <p>
                                     <i class="fa fa-envelope-o"></i>email@example.com

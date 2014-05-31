@@ -16,11 +16,13 @@
         <div class="page-header">
             <h3>Nos prix</h3>
         </div>
-        
+        <c:if test="${checkconnect == 'no'}">
+            <div class="alert alert-danger"> Attention, vous devez être connecté pour vous abonner</div>
+        </c:if>
         <div class="pricing pricing3 clearfix">
             <div class="pricing-wrap">
                 <div class="pricing-inner">
-                    <div class="pricing-title"><h4>Pack<span>Pour les amateurs</span></h4></div>
+                    <div class="pricing-title"><h4>Abonnement "basique"<span>Pour les amateurs</span></h4></div>
                     <div class="pricing-price">3<span class="price-sub">99</span>€<span class="price-tenure">par mois</span></div>
                     <div class="pricing-features">
                         <ul>
@@ -31,14 +33,19 @@
                             <li>&nbsp;</li>
                         </ul>
                     </div>
-                    <div class="pricing-action">
-                        <a href="#" class="simple-button">Prendre</a>
-                    </div>
+                    <c:if test="${checkconnect == 'yes'}">
+                    <form action = "" method = "post">
+                        <input type="hidden" name="type_abo" value="BASIC">
+                        <div class="pricing-action">
+                            <input type="submit" class="btn btn-primary" value="S'abonner">
+                        </div>
+                    </form>
+                    </c:if>
                 </div>
             </div>
             <div class="pricing-wrap best-price">
                 <div class="pricing-inner">
-                    <div class="pricing-title"><h4>Abonnement limité<span>Notre meilleur abonnement</span></h4></div>
+                    <div class="pricing-title"><h4>Abonnement "limité"<span>Notre meilleur abonnement</span></h4></div>
                     <div class="pricing-price">14<span class="price-sub">99</span>€<span class="price-tenure">par mois</span></div>
                     <div class="pricing-features">
                         <ul>
@@ -49,14 +56,19 @@
                             <li>Support <span>Téléphone & Email</span></li>
                         </ul>
                     </div>
-                    <div class="pricing-action">
-                        <a href="#" class="simple-button inverse">S'abonner</a>
-                    </div>
+                    <c:if test="${checkconnect == 'yes'}">
+                    <form action = "" method = "post">
+                        <input type="hidden" name="type_abo" value="LIMITED">
+                        <div class="pricing-action">
+                            <input type="submit" class="btn btn-primary" value="S'abonner">
+                        </div>
+                    </form>
+                    </c:if>
                 </div>
             </div>
             <div class="pricing-wrap">
                 <div class="pricing-inner">
-                    <div class="pricing-title"><h4>Abonnement illimité<span>Pour les professionnels</span></h4></div>
+                    <div class="pricing-title"><h4>Abonnement "illimité"<span>Pour les professionnels</span></h4></div>
                     <div class="pricing-price">24<span class="price-sub">99</span>€<span class="price-tenure">par mois</span></div>
                     <div class="pricing-features">
                         <ul>
@@ -67,9 +79,14 @@
                             <li>Support <span>Téléphone & Email</span></li>
                         </ul>
                     </div>
-                    <div class="pricing-action">
-                        <a href="#" class="simple-button">S'abonner</a>
-                    </div>
+                    <c:if test="${checkconnect == 'yes'}">
+                    <form action = "" method = "post">
+                        <input type="hidden" name="type_abo" value="UNLIMITED">
+                        <div class="pricing-action">
+                            <input type="submit" class="btn btn-primary" value="S'abonner">
+                        </div>
+                    </form>
+                    </c:if>
                 </div>
             </div>
         </div>

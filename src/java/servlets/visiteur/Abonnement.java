@@ -35,6 +35,23 @@ public class Abonnement extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
+        HttpServletRequest httprequest = (HttpServletRequest) request;
+        HttpSession session = httprequest.getSession();
+        Utilisateur current_user = (Utilisateur) session.getAttribute("user");
+        
+        
+        if (current_user == null) {
+            // Si l'utilisateur n'est pas connecté
+            request.setAttribute("checkconnect", "no");
+        } else {
+            // Si l'utilisateur est connecté
+            if (request.getParameter("type_abo") != null) {
+                // Si l'utilisateur a choisi un abonnement
+                current_user.setCurrent_abo(request.getParameter("type_abo"));
+            }
+            request.setAttribute("checkconnect", "yes");
+        }
         this.getServletContext().getRequestDispatcher("/view/frontoffice/abonnement.jsp").forward(request, response);
     }
 
