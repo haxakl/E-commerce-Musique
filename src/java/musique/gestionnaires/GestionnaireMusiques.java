@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package musique.gestionnaires;
 
 import java.util.ArrayList;
@@ -23,6 +22,7 @@ import musique.modeles.Piste;
  */
 @Stateless
 public class GestionnaireMusiques {
+
     @PersistenceContext(unitName = "TP_2_GitPU")
     private EntityManager em;
 
@@ -33,9 +33,9 @@ public class GestionnaireMusiques {
     // =============================
     //  Musiques
     // =============================
-    
     /**
      * Créer une musique
+     *
      * @param artiste Artiste
      * @param titre Titre
      * @param nbpiste Nombre de pistes
@@ -89,7 +89,7 @@ public class GestionnaireMusiques {
     public Musique getMusique(int idMusique) {
         // Exécution d'une requête équivalente à un select *  
         Query q = em.createQuery("select u from Musique u where u.id = :idMusique").setParameter("idMusique", idMusique);
-        if(q.getResultList().isEmpty()) {
+        if (q.getResultList().isEmpty()) {
             return null;
         }
         return (Musique) q.getResultList().get(0);
@@ -97,6 +97,7 @@ public class GestionnaireMusiques {
 
     /**
      * Retourne les musiques d'un genre précis
+     *
      * @param idgenre Le numéro du genre
      * @return Les musiques d'un genre précis
      */
@@ -106,8 +107,12 @@ public class GestionnaireMusiques {
         return q.getResultList();
     }
 
+    // =============================
+    //  Genres
+    // =============================
     /**
      * Retourne les musiques d'un genre précis avec une plage
+     *
      * @param idgenre Le numéro du genre
      * @return Les musiques d'un genre précis avec une plage
      */
@@ -115,11 +120,10 @@ public class GestionnaireMusiques {
         Query q = em.createQuery("select m from Musique m where m.genre.id = :cidgenre").setMaxResults(offset).setFirstResult(index).setParameter("cidgenre", idgenre);
         return q.getResultList();
     }
-    
+
     // =============================
     //  Pistes
     // =============================
-    
     /**
      * Retourne toutes les pistes
      *
@@ -149,7 +153,6 @@ public class GestionnaireMusiques {
     // =============================
     //  Artiste
     // =============================
-    
     /**
      * Retourne tous les artistes
      *
@@ -158,6 +161,41 @@ public class GestionnaireMusiques {
     public Collection<Artiste> getAllArtistes() {
         // Exécution d'une requête équivalente à un select *  
         Query q = em.createQuery("select a from Artiste a");
+        return q.getResultList();
+    }
+
+    // =============================
+    //  Recherche de patterns
+    // =============================
+    /**
+     * Retourne les musiques dont le genre a un pattern précis
+     *
+     * @param pattern
+     * @return
+     */
+    public Collection<Musique> searchGenre(String pattern) {
+        Query q = em.createQuery("select m from Musique m where m.genre.nom LIKE :cpattern").setParameter("cpattern", "%" + pattern + "%");
+        return q.getResultList();
+    }
+
+    /**
+     * Retourne les musiques qui suivent un pattern précis
+     *
+     * @param pattern Le motif a rechercher
+     * @return Les musiques qui ont le pattern
+     */
+    public Collection<Musique> searchMusique(String pattern) {
+        Query q = em.createQuery("select m from Musique m where m.titre LIKE :cpattern").setParameter("cpattern", "%" + pattern + "%");
+        return q.getResultList();
+    }
+
+    public Collection<Musique> searchArtist(String pattern) {
+       Query q = em.createQuery("select m from Musique m where m.artiste.nom LIKE :cpattern").setParameter("cpattern", "%" + pattern + "%");
+       return q.getResultList();
+    }
+
+    public Collection<Musique> searchAnnee(int pattern) {
+        Query q = em.createQuery("select m from Musique m where m.annee = :cpattern").setParameter("cpattern",pattern);
         return q.getResultList();
     }
 

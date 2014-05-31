@@ -1,7 +1,12 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
 package servlets.visiteur;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Collection;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -11,23 +16,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import musique.gestionnaires.GestionnaireMusiques;
 import musique.modeles.Musique;
-import utilisateurs.gestionnaires.GestionnaireUtilisateurs;
-import utilisateurs.modeles.Utilisateur;
 
 /**
  *
  * @author julien
  */
-@WebServlet(name = "Musiques", urlPatterns = {"/musiques"})
-public class Musiques extends HttpServlet {
-
+@WebServlet(name = "Search", urlPatterns = {"/search"})
+public class Search extends HttpServlet{
     @EJB
     private GestionnaireMusiques gestionnaireMusiques;
-
-    @EJB
-    private GestionnaireUtilisateurs gestionnaireUtilisateurs;
-
-    /**
+    
+    
+        /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
      *
@@ -38,47 +38,37 @@ public class Musiques extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        Collection<Musique> liste;
-        // Page affichée
-        int numPage = 1;
-        if (request.getParameter("page") != null) {
-            numPage = Integer.parseInt(request.getParameter("page"));
-        }
-        // Nombre affichée par page
-        int nbAffiche = 0;
-        if (request.getParameter("nbAffiche") != null) {
-            nbAffiche = Integer.parseInt(request.getParameter("nbAffiche"));
-            System.out.println("nbAffiche : " + nbAffiche);
-        } else {
-            nbAffiche = 30;
-        }
-
-        // Recupère tous les utilisateurs
-        Collection<Musique> listeAllMusiques = gestionnaireMusiques.getAllMusiques();
-        double totalMusiques = listeAllMusiques.size();
-
-        if (request.getParameter("genre") != null) {
-            int genre = Integer.parseInt(request.getParameter("genre"));
-            liste = gestionnaireMusiques.getMusiqueByGenre(genre, (numPage - 1) * nbAffiche, nbAffiche);
+        Collection<Musique> liste = null;
+        
+        if(request.getParameter("searchtitle") != null){
+            String pattern = request.getParameter("searchtitle");
+            liste = gestionnaireMusiques.searchMusique(pattern);
             System.out.println(liste);
-        } else {
-            liste = gestionnaireMusiques.getMusiques((numPage - 1) * nbAffiche, nbAffiche);
         }
-
-        if (totalMusiques == 0) {
-            request.setAttribute("nbPages", Math.ceil(liste.size() / nbAffiche));
-        } else {
-            request.setAttribute("nbPages", (int) Math.ceil(totalMusiques / nbAffiche));
+        else if(request.getParameter("searchgenre") != null){
+           String pattern = request.getParameter("searchgenre");
+           liste = gestionnaireMusiques.searchGenre(pattern);
         }
-        request.setAttribute("page", numPage);
-        request.setAttribute("nbAffiche", nbAffiche);
+        else if(request.getParameter("searchartist") != null){
+           String pattern = request.getParameter("searchartist");
+           liste = gestionnaireMusiques.searchArtist(pattern);
+        }
+        else if(request.getParameter("searchannee") != null){
+            int pattern = Integer.parseInt(request.getParameter("searchannee"));
+            liste = gestionnaireMusiques.searchAnnee(pattern);
+        }
+        else{
+            liste = gestionnaireMusiques.getAllMusiques();
+        }
+        
+        
+        request.setAttribute("nbPages", 1);
+        request.setAttribute("page", 1);
+        request.setAttribute("nbAffiche", 30);
         request.setAttribute("listeDesMusiques", liste);
         this.getServletContext().getRequestDispatcher("/view/frontoffice/musiques.jsp").forward(request, response);
     }
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
+        /**
      * Handles the HTTP <code>GET</code> method.
      *
      * @param request servlet request
@@ -105,15 +95,5 @@ public class Musiques extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
     }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
 
 }
