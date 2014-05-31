@@ -24,7 +24,7 @@ import utilisateurs.modeles.Utilisateur;
  *
  * @author Guillaume
  */
-@WebServlet(name = "AjouterUtilisateur", urlPatterns = {"/utilisateurs/new"})
+@WebServlet(name = "AjouterUtilisateur", urlPatterns = {"/admin/utilisateurs/new"})
 public class AjouterUtilisateur extends HttpServlet {
 
     @EJB
@@ -43,7 +43,7 @@ public class AjouterUtilisateur extends HttpServlet {
             throws ServletException, IOException {
         request.setAttribute("listeVilles", gestionnaireUtilisateurs.getVilles());
 
-        this.getServletContext().getRequestDispatcher("/new_utilisateur.jsp").forward(request, response);
+        this.getServletContext().getRequestDispatcher("/view/backoffice/new_utilisateur.jsp").forward(request, response);
     }
 
     /**
@@ -81,10 +81,11 @@ public class AjouterUtilisateur extends HttpServlet {
                 request.getParameter("prenom"),
                 request.getParameter("login"),
                 request.getParameter("password"),
-                new Adresse(request.getParameter("ville"), request.getParameter("cp")), new Telephone(request.getParameter("phone")));
+                new Adresse(request.getParameter("ville"), request.getParameter("cp")),
+                new Telephone(request.getParameter("phone")));
 
         // Redirection
-        response.sendRedirect("/tp2webmiage/utilisateurs");
+        response.sendRedirect("/tp2webmiage/admin/utilisateurs");
     }
 
     /**

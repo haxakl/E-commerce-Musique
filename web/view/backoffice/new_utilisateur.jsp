@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 
-<t:template>
+<t:backoffice>
     <jsp:attribute name="breadcrumb">
         <h2><i class="fa fa-home"></i> Utilisateurs <span>Ajouter un utilisateur</span></h2>
         <div class="breadcrumb-wrapper">
@@ -125,4 +125,4 @@
         </script>
 
     </jsp:body>
-</t:template>
+</t:backoffice>

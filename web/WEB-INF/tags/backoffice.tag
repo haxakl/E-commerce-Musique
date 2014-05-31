@@ -15,6 +15,7 @@
 
         <link href="/tp2webmiage/ressources/library/musiccomposer/style.default.css" rel="stylesheet">
         <link href="/tp2webmiage/ressources/library/fontawesome/font-awesome.css" rel="stylesheet">
+        <link href="/tp2webmiage/ressources/library/fontello/fontello.css" rel="stylesheet">
         <link href="/tp2webmiage/ressources/library/bootstrap/bootsrap-override.css" rel="stylesheet">
         
         <script src="/tp2webmiage/ressources/library/jquery/jquery.js"></script>

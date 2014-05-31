@@ -37,7 +37,7 @@ public class MasseUtilisateur extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         gestionnaireUtilisateurs.creerUtilisateursDeTest();
-        response.sendRedirect("/tp2webmiage/utilisateurs");
+        response.sendRedirect("/tp2webmiage/admin/utilisateurs");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

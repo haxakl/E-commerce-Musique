@@ -137,7 +137,12 @@ public class GestionnaireMusiques {
         return new ArrayList<>();
     }
 
-    // Créer un utilisateur
+    /**
+     * Créer une piste
+     * @param musique Musique de la piste
+     * @param nom Nom de la piste
+     * @return Une piste
+     */
     public Piste creerPiste(Musique musique, String nom) {
 
         Piste m = new Piste(musique, nom);
@@ -151,9 +156,21 @@ public class GestionnaireMusiques {
     // =============================
     
     /**
+     * Créer une artiste
+     * @param nom Nom de l'artiste
+     * @param description Description de l'artiste
+     * @param photo Lien de la photo
+     * @return Un artiste
+     */
+    public Artiste creerArtiste(String nom, String description, String photo) {
+        Artiste a = new Artiste(nom, description, photo);
+        em.persist(a);
+        return a;
+    }
+
+    /**
      * Retourne tous les artistes
-     *
-     * @return Tous les artistes
+     * @return Une collection d'artiste
      */
     public Collection<Artiste> getAllArtistes() {
         // Exécution d'une requête équivalente à un select *  
