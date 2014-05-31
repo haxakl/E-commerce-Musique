@@ -29,6 +29,11 @@ import utilisateurs.modeles.Utilisateur;
 
 /**
  *
+ * Clé d'api:
+ * 
+ * API Key: c1ed12bbe627d4e5f486aeae944ebbbd
+ * Secret: is 97c6d3af8f265f1d4d846e4c5f6cffa5
+ * 
  * @author Guillaume
  */
 @WebServlet(name = "Accueil", urlPatterns = {"/index.jsp"})

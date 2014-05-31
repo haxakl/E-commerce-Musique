@@ -83,7 +83,7 @@
             <c:forEach var="m" items="${requestScope['listeDesMusiques']}">
                 <tr>
                     <td>${m.artiste.nom}</td> 
-                    <td><a href="http://localhost:8080/tp2webmiage/musiques/${m.id}" style="color:#E90303">${m.titre}</a></td>
+                    <td><a href="/tp2webmiage/musiques/${m.id}" style="color:#E90303">${m.titre}</a></td>
                     <td>${m.nbpiste}</td>
                     <td>${m.annee}</td>
                     <td><a href="musiques?genre=${m.genre.id}" style="color:#E90303">${m.genre.nom}</a></td>
