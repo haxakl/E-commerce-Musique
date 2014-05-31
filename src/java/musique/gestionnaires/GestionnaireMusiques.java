@@ -79,6 +79,25 @@ public class GestionnaireMusiques {
     }
 
     /**
+     * Retourne les musiques d'un artiste
+     *
+     * Utilisé lors des listes pour la pagination
+     *
+     * @param idArtiste Numéro de l'artiste
+     * @return Les musiques dans une plage
+     */
+    public Collection<Musique> getMusiques(int idArtiste) {
+        Artiste artiste = getArtiste(idArtiste);
+
+        if (artiste != null) {
+            // Exécution d'une requête équivalente à un select
+            Query q = em.createQuery("select p from Musique p where p.artiste = :artiste").setParameter("artiste", artiste);
+            return q.getResultList();
+        }
+        return new ArrayList<>();
+    }
+
+    /**
      * Retourne la musique cherchée
      *
      * Utilisé lors des listes pour la pagination

@@ -19,8 +19,8 @@ import utilisateurs.modeles.Utilisateur;
  *
  * @author julien
  */
-@WebServlet(name = "Détail musique", urlPatterns = {"/musiques/*"})
-public class DetailMusique extends HttpServlet {
+@WebServlet(name = "Détail artiste", urlPatterns = {"/artistes/*"})
+public class DetailArtiste extends HttpServlet {
     
     @EJB
     private GestionnaireMusiques gestionnaireMusiques;
@@ -41,13 +41,13 @@ public class DetailMusique extends HttpServlet {
             throws ServletException, IOException {
 
         String url = request.getRequestURL().toString();
-        int musique = Integer.valueOf(url.substring(url.lastIndexOf("/") + 1));
+        int artiste = Integer.valueOf(url.substring(url.lastIndexOf("/") + 1));
         
-        // Recupère tous les utilisateurs
-        Collection<Piste> listeDesPistes = gestionnaireMusiques.getPistes(musique);
+        // Recupère les musiques
+        Collection<Musique> listeDesMusiques = gestionnaireMusiques.getMusiques(artiste);
 
-        request.setAttribute("listeDesPistes", listeDesPistes);
-        this.getServletContext().getRequestDispatcher("/view/frontoffice/detailmusique.jsp").forward(request, response);
+        request.setAttribute("listeDesMusiques", listeDesMusiques);
+        this.getServletContext().getRequestDispatcher("/view/frontoffice/detailartiste.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
