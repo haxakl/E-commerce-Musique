@@ -100,14 +100,14 @@
             // Basic Form
             jQuery(document).ready(function() {
                   // Basic Form
-                jQuery("#basicForm").validate({
-                  highlight: function(element) {
-                    jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
-                  },
-                  success: function(element) {
-                    jQuery(element).closest('.form-group').removeClass('has-error');
-                  }
-                });
+//                jQuery("#basicForm").validate({
+//                  highlight: function(element) {
+//                    jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+//                  },
+//                  success: function(element) {
+//                    jQuery(element).closest('.form-group').removeClass('has-error');
+//                  }
+//                });
                 $("#autofill").click(function(){
                     $("#nom").val("Dupond");
                     $("#prenom").val("jean");
@@ -117,7 +117,7 @@
                     $("#cp").val("06560");
                     $("#ville").val("Valbonne");
                  });  
-                jQuery(".chosen-select").chosen({'width': '100%', 'white-space': 'nowrap'});
+//                jQuery(".chosen-select").chosen({'width': '100%', 'white-space': 'nowrap'});
                 // Error Message In One Container
                                  // Input Masks
                 jQuery("#phone").mask("99.99.99.99.99");
