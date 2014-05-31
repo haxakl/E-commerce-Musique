@@ -118,7 +118,11 @@ public class AccueilFilter implements Filter {
                     Artiste artiste = null;
 
                     if (nom.indexOf("-") != 0) {
-                        artiste = gestionnaireMusiques.creerArtiste(nom.substring(0, nom.indexOf("-") - 1), "", "");
+                        String nomArtiste = nom.substring(0, nom.indexOf("-") - 1);
+                        artiste = gestionnaireMusiques.getArtiste(nomArtiste);
+                        if(gestionnaireMusiques.getArtiste(nomArtiste) == null) {
+                            artiste = gestionnaireMusiques.creerArtiste(nomArtiste, "", "");
+                        }
                         nom = nom.substring(nom.indexOf("-") + 1);
                     }
 

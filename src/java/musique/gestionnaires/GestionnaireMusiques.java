@@ -169,6 +169,40 @@ public class GestionnaireMusiques {
     }
 
     /**
+     * Retourne l'artiste cherché
+     *
+     * Utilisé lors des listes pour la pagination
+     *
+     * @param idArtiste Numéro de l'artiste
+     * @return Un artiste
+     */
+    public Artiste getArtiste(int idArtiste) {
+        // Exécution d'une requête équivalente à un select *  
+        Query q = em.createQuery("select a from Artiste a where a.id = :idArtiste").setParameter("idArtiste", idArtiste);
+        if(q.getResultList().isEmpty()) {
+            return null;
+        }
+        return (Artiste) q.getResultList().get(0);
+    }
+    
+    /**
+     * Retourne l'artiste cherché
+     *
+     * Utilisé lors des listes pour la pagination
+     *
+     * @param nomArtiste Nom de l'artiste
+     * @return Un artiste
+     */
+    public Artiste getArtiste(String nomArtiste) {
+        // Exécution d'une requête équivalente à un select *  
+        Query q = em.createQuery("select a from Artiste a where a.nom = :nomArtiste").setParameter("nomArtiste", nomArtiste);
+        if(q.getResultList().isEmpty()) {
+            return null;
+        }
+        return (Artiste) q.getResultList().get(0);
+    }
+    
+    /**
      * Retourne tous les artistes
      * @return Une collection d'artiste
      */
