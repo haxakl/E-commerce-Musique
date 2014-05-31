@@ -103,6 +103,15 @@
                                                 Aucun objet dans votre panier.
                                             </li>
                                         </c:if>
+                                        <c:if test="${!panier.isEmpty()}" >
+                                            <li>
+                                            <c:forEach var="music" items="${panier.getMusiques()}">
+                                                ${music.getTitre()}
+                                            </c:forEach>
+                                            <li>
+                                                
+                                            <button class="btn btn-default"> Commander </button>
+                                        </c:if>
                                     </c:when>
                                     <c:otherwise>
                                         <li>Aucun objet dans votre panier.</li>

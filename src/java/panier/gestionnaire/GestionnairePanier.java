@@ -43,6 +43,9 @@ public class GestionnairePanier {
         }
 
     }
+    public void makeEmpty(){
+        musiques.clear();
+    }
 
     public void persist(Object object) throws RuntimeException {
         em.persist(object);

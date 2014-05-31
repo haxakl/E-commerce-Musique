@@ -58,9 +58,23 @@
                     </table>
                 </div>
             </div>
-            <p>
-                <a class="btn btn-sm btn-primary pull-right">Acheter</a><br/><br/>
-            </p>
+            <div class="row">
+                <!-- BOUTON VIDER -->
+                <div class="col-md-1 col-md-offset-1">
+                    <form action = "" method = "post">
+                        <input type="hidden" name="action" value="empty">
+                        <input type ="submit" class="btn btn-primary pull-left form-control" value="Vider">
+                    </form>
+                </div>
+                <!-- BOUTON ACHETER -->
+                <div class="col-md-2 col-md-offset-7">
+                    <form action = "" method = "post">
+                        <input type="hidden" name="action" value="buy">
+                        <input type ="submit" class="btn btn-success pull-left form-control" value="Acheter">
+                    </form>
+                </div>
+            </div>
+            </br></br>
         </div>
     </jsp:body>
 </t:frontoffice>

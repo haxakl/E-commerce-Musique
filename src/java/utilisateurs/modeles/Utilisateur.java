@@ -28,7 +28,6 @@ public class Utilisateur implements Serializable {
     private String password;
 
     private static enum type_abo {
-
         NONE, BASIC, LIMITED, UNLIMITED
     };
     private String current_abo;

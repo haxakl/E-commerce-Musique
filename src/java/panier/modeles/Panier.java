@@ -50,6 +50,11 @@ public class Panier extends HttpServlet {
             GestionnairePanier panier_tmp = (GestionnairePanier) request.getSession().getAttribute("panier");
             panier_tmp.addToCart(msc);
         }
+        if(request.getParameter("action") != null && request.getParameter("action").equalsIgnoreCase("empty")){
+            System.out.println("TEST");
+             GestionnairePanier panier_tmp = (GestionnairePanier) request.getSession().getAttribute("panier");
+             panier_tmp.makeEmpty();
+        }
         
         this.getServletContext().getRequestDispatcher("/view/frontoffice/panier.jsp").forward(request, response);
     }
