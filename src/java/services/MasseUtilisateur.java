@@ -20,7 +20,7 @@ import utilisateurs.gestionnaires.GestionnaireUtilisateurs;
  *
  * @author Guillaume
  */
-@WebServlet(name = "MasseUtilisateur", urlPatterns = {"/utilisateurs/masse/*"})
+@WebServlet(name = "MasseUtilisateur", urlPatterns = {"/admin/utilisateurs/masse/*"})
 public class MasseUtilisateur extends HttpServlet {
     @EJB
     private GestionnaireUtilisateurs gestionnaireUtilisateurs;

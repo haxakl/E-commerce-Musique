@@ -20,7 +20,7 @@ import utilisateurs.gestionnaires.GestionnaireUtilisateurs;
  *
  * @author Guillaume
  */
-@WebServlet(name = "DeleteUtilisateur", urlPatterns = {"/utilisateurs/delete/*"})
+@WebServlet(name = "DeleteUtilisateur", urlPatterns = {"/admin/utilisateurs/delete/*"})
 public class DeleteUtilisateur extends HttpServlet {
     @EJB
     private GestionnaireUtilisateurs gestionnaireUtilisateurs;

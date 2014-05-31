@@ -22,7 +22,7 @@ import utilisateurs.modeles.Utilisateur;
  *
  * @author Guillaume
  */
-@WebServlet(name = "ModifierUtilisateur", urlPatterns = {"/utilisateurs/modify/*"})
+@WebServlet(name = "ModifierUtilisateur", urlPatterns = {"/admin/utilisateurs/modify/*"})
 public class ModifierUtilisateur extends HttpServlet {
     @EJB
     private GestionnaireUtilisateurs gestionnaireUtilisateurs;

@@ -16,8 +16,8 @@
     <jsp:body>
 
         <p>
-            <a href="/tp2webmiage/utilisateurs/new" class="btn btn-primary btn-sm">Ajouter un utilisateur</a>
-            <a href="/tp2webmiage/utilisateurs/masse/50" class="btn btn-primary btn-sm">Créer utilisateurs de tests</a>
+            <a href="/tp2webmiage/tp2webmiage/admin/utilisateurs" class="btn btn-primary btn-sm">Ajouter un utilisateur</a>
+            <a href="/tp2webmiage/tp2webmiage/admin/utilisateurs/masse/50" class="btn btn-primary btn-sm">Créer utilisateurs de tests</a>
         </p>
 
         <div class="row">
@@ -66,10 +66,10 @@
                     <!-- Fin bouton suivant --> 
                 </ul>
             </div>
-            <div class="col-lg-4"></div>
+            <div class="col-lg-2"></div>
             <div class="col-lg-2">
                 <form name="submitForm" method="POST" action="/tp2webmiage/utilisateurs">
-                    <select name="nbAffiche" class="form-control">
+                    <select name="nbAffiche" class="form-control btn-sm">
                         <option value="10"
                                 <c:if test="${nbAffiche == 10}">selected</c:if>        
                                     >10</option>
@@ -86,9 +86,11 @@
                                 <c:if test="${nbAffiche == 100}">selected</c:if> 
                                     >100</option>
                                 <option value="-1">Tous</option>
-                        </select><br/>
-                        <input type="submit" class="btn btn-info" onclick="this.form.submit()"></a>
+                        </select>
                     </form>
+                </div>
+                <div class="col-lg-2">
+                    <input value="Filtrer" type="submit" class="btn btn-sm btn-info" onclick="this.form.submit()">
                 </div>
             </div>
 
@@ -130,7 +132,10 @@
             </c:forEach>
 
             <!-- Affichage du solde total dans la dernière ligne du tableau -->  
-            <tr><td><b>TOTAL</b></td><td></td><td></td><td><b>${total}</b></td><td></td></tr>
+            <tr>
+                <td colspan="7"><b>TOTAL</b></td>
+                <td><b>${total}</b></td>
+            </tr>
         </table>
 
         <div class="modal fade bs-example-modal-panel in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
@@ -169,7 +174,7 @@
                 });
             });
 
-        </script>
+    </script>
 
     </jsp:body>
 </t:backoffice>
