@@ -21,6 +21,7 @@ import utilisateurs.modeles.Utilisateur;
  */
 @WebServlet(name = "Artistes", urlPatterns = {"/artistes"})
 public class Artistes extends HttpServlet {
+
     @EJB
     private GestionnaireMusiques gestionnaireMusiques;
 
@@ -41,9 +42,41 @@ public class Artistes extends HttpServlet {
 
         // Recupère tous les utilisateurs
         Collection<Artiste> listeAllArtistes = gestionnaireMusiques.getAllArtistes();
+        Collection<Musique> liste;
         
-        request.setAttribute("listeDesMusiques", listeAllArtistes);
-        
+        // Page affichée
+        int numPage = 1;
+        if (request.getParameter("page") != null) {
+            numPage = Integer.parseInt(request.getParameter("page"));
+        }
+        // Nombre affichée par page
+        int nbAffiche = 0;
+        if (request.getParameter("nbAffiche") != null) {
+            nbAffiche = Integer.parseInt(request.getParameter("nbAffiche"));
+            System.out.println("nbAffiche : " + nbAffiche);
+        } else {
+            nbAffiche = 30;
+        }
+
+        // Recupère tous les utilisateurs
+        double totalMusiques = listeAllArtistes.size();
+
+        liste = gestionnaireMusiques.getArtistes((numPage - 1) * nbAffiche, nbAffiche);
+        if (totalMusiques == 0) {
+            request.setAttribute("nbPages", Math.ceil(liste.size() / nbAffiche));
+        } else {
+            request.setAttribute("nbPages", (int) Math.ceil(totalMusiques / nbAffiche));
+        }
+
+        if (totalMusiques == 0) {
+            request.setAttribute("nbPages", Math.ceil(listeAllArtistes.size() / nbAffiche));
+        } else {
+            request.setAttribute("nbPages", (int) Math.ceil(totalMusiques / nbAffiche));
+        }
+        request.setAttribute("page", numPage);
+        request.setAttribute("nbAffiche", nbAffiche);
+        request.setAttribute("listeDesArtistes", liste);
+
         this.getServletContext().getRequestDispatcher("/view/frontoffice/artistes.jsp").forward(request, response);
     }
 

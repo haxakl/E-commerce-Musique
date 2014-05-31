@@ -1,30 +1,33 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-package services;
+package servlets.visiteur;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Collection;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import musique.gestionnaires.GestionnaireMusiques;
+import musique.modeles.Musique;
+import musique.modeles.Piste;
 import utilisateurs.gestionnaires.GestionnaireUtilisateurs;
+import utilisateurs.modeles.Utilisateur;
 
 /**
  *
- * @author Guillaume
+ * @author julien
  */
-@WebServlet(name = "MasseUtilisateur", urlPatterns = {"/admin/utilisateurs/masse/*"})
-public class MasseUtilisateur extends HttpServlet {
+@WebServlet(name = "Détail artiste", urlPatterns = {"/artistes/*"})
+public class DetailArtiste extends HttpServlet {
+    
+    @EJB
+    private GestionnaireMusiques gestionnaireMusiques;
+
     @EJB
     private GestionnaireUtilisateurs gestionnaireUtilisateurs;
-
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -36,8 +39,15 @@ public class MasseUtilisateur extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        gestionnaireUtilisateurs.creerUtilisateursDeTest();
-        response.sendRedirect("/tp2webmiage/admin/utilisateurs");
+
+        String url = request.getRequestURL().toString();
+        int artiste = Integer.valueOf(url.substring(url.lastIndexOf("/") + 1));
+        
+        // Recupère les musiques
+        Collection<Musique> listeDesMusiques = gestionnaireMusiques.getMusiques(artiste);
+
+        request.setAttribute("listeDesMusiques", listeDesMusiques);
+        this.getServletContext().getRequestDispatcher("/view/frontoffice/detailartiste.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

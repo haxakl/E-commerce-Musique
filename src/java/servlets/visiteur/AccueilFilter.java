@@ -49,10 +49,10 @@ import utilisateurs.modeles.Telephone;
  */
 @WebFilter(filterName = "/", urlPatterns = {"/*", "/"}, dispatcherTypes = {DispatcherType.REQUEST})
 public class AccueilFilter implements Filter {
+
     GestionnaireUtilisateurs gestionnaireUtilisateurs = lookupGestionnaireUtilisateursBean();
     GestionnaireMusiques gestionnaireMusiques = lookupGestionnaireMusiquesBean();
-    
-    
+
     private static final boolean debug = true;
 
     // The filter configuration object we are associated with.  If
@@ -78,12 +78,12 @@ public class AccueilFilter implements Filter {
         // Test si un panier est déclaré
         HttpServletRequest httprequest = (HttpServletRequest) request;
         HttpSession session = httprequest.getSession();
-        if(session.getAttribute("panier") == null) {
+        if (session.getAttribute("panier") == null) {
             session.setAttribute("panier", new GestionnairePanier());
         }
-        
+
         request.setAttribute("panier", session.getAttribute("panier"));
-        
+
         // Il n'y a pas d'utilisateurs
         if (gestionnaireUtilisateurs.getAllUsers().isEmpty()) {
             Adresse nice = new Adresse("NICE", "06480");
@@ -111,36 +111,54 @@ public class AccueilFilter implements Filter {
             try {
                 Object obj = parser.parse(chaine);
                 JSONArray array = (JSONArray) obj;
-                Artiste acdc = new Artiste("AC-DC", "Groupe de rock connu", "/photos/acdc");
-                gestionnaireMusiques.persist(acdc);
-                Genre rock = new Genre("rock");
-                gestionnaireMusiques.persist(rock);
                 for (int i = 0; i < array.size(); i++) {
                     JSONObject objet = (JSONObject) array.get(i);
                     JSONArray compositions = (JSONArray) objet.get("composition");
+                    String nom = (String) objet.get("nom");
+                    Artiste artiste = null;
 
-                    Musique musique = gestionnaireMusiques.creerMusique(acdc, (String) objet.get("nom"), compositions.size(), 2000, "", rock);
-
-                    // Boucle sur les compositions
-                    int nbpiste = 0;
-                    for (int j = 0; j < compositions.size(); j++) {
-                        String piste = compositions.get(j).toString();
-                        if (piste.lastIndexOf('.') != -1 && piste.substring(piste.lastIndexOf('.') + 1).toLowerCase().compareTo("mp3") == 0) {
-                            gestionnaireMusiques.creerPiste(musique, (String) compositions.get(j));
-                            nbpiste++;
+                    if (nom.indexOf("-") != 0) {
+                        String nomArtiste = nom.substring(0, nom.indexOf("-") - 1);
+                        artiste = gestionnaireMusiques.getArtiste(nomArtiste);
+                        if(gestionnaireMusiques.getArtiste(nomArtiste) == null) {
+                            artiste = gestionnaireMusiques.creerArtiste(nomArtiste, "", "");
                         }
+                        nom = nom.substring(nom.indexOf("-") + 1);
                     }
 
-                    musique.setNbpiste(nbpiste);
+                    Musique musique = gestionnaireMusiques.creerMusique(artiste, nom, getNombrePiste(compositions, null), 0, "", null);
+                    getNombrePiste(compositions, musique);
                 }
             } catch (ParseException pe) {
                 System.out.println("position: " + pe.getPosition());
                 System.out.println(pe);
             }
         }
-        
+
         chain.doFilter(request, response);
 
+    }
+
+    /**
+     * 
+     * @param compositions Tableau de pistes
+     * @param musique Si une musique est donnée cela crée la piste
+     * @return Un nombre de piste
+     */
+    public int getNombrePiste(JSONArray compositions, Musique musique) {
+        int nbpiste = 0;
+        for (int j = 0; j < compositions.size(); j++) {
+            String piste = compositions.get(j).toString();
+            String extension = piste.substring(piste.lastIndexOf('.') + 1).toLowerCase();
+            if (piste.lastIndexOf('.') != -1 && (extension.compareTo("mp3") == 0 || extension.compareTo("ogg") == 0)) {
+                if(musique != null) {
+                    gestionnaireMusiques.creerPiste(musique, (String) compositions.get(j));
+                }
+                
+                nbpiste++;
+            }
+        }
+        return nbpiste;
     }
 
     /**

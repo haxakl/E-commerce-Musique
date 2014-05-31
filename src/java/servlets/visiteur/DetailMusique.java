@@ -43,8 +43,6 @@ public class DetailMusique extends HttpServlet {
         String url = request.getRequestURL().toString();
         int musique = Integer.valueOf(url.substring(url.lastIndexOf("/") + 1));
         
-        Collection<Piste> liste;
-//        
         // Recupère tous les utilisateurs
         Collection<Piste> listeDesPistes = gestionnaireMusiques.getPistes(musique);
 

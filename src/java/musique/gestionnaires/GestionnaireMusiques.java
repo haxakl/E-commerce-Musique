@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package musique.gestionnaires;
 
 import java.util.ArrayList;
@@ -33,6 +34,7 @@ public class GestionnaireMusiques {
     // =============================
     //  Musiques
     // =============================
+    
     /**
      * Créer une musique
      *
@@ -76,6 +78,25 @@ public class GestionnaireMusiques {
         // Exécution d'une requête équivalente à un select *  
         Query q = em.createQuery("select u from Musique u").setMaxResults(offset).setFirstResult(index);
         return q.getResultList();
+    }
+
+    /**
+     * Retourne les musiques d'un artiste
+     *
+     * Utilisé lors des listes pour la pagination
+     *
+     * @param idArtiste Numéro de l'artiste
+     * @return Les musiques dans une plage
+     */
+    public Collection<Musique> getMusiques(int idArtiste) {
+        Artiste artiste = getArtiste(idArtiste);
+
+        if (artiste != null) {
+            // Exécution d'une requête équivalente à un select
+            Query q = em.createQuery("select p from Musique p where p.artiste = :artiste").setParameter("artiste", artiste);
+            return q.getResultList();
+        }
+        return new ArrayList<>();
     }
 
     /**
@@ -124,6 +145,7 @@ public class GestionnaireMusiques {
     // =============================
     //  Pistes
     // =============================
+    
     /**
      * Retourne toutes les pistes
      *
@@ -141,7 +163,12 @@ public class GestionnaireMusiques {
         return new ArrayList<>();
     }
 
-    // Créer un utilisateur
+    /**
+     * Créer une piste
+     * @param musique Musique de la piste
+     * @param nom Nom de la piste
+     * @return Une piste
+     */
     public Piste creerPiste(Musique musique, String nom) {
 
         Piste m = new Piste(musique, nom);
@@ -153,10 +180,57 @@ public class GestionnaireMusiques {
     // =============================
     //  Artiste
     // =============================
+    
+    /**
+     * Créer une artiste
+     * @param nom Nom de l'artiste
+     * @param description Description de l'artiste
+     * @param photo Lien de la photo
+     * @return Un artiste
+     */
+    public Artiste creerArtiste(String nom, String description, String photo) {
+        Artiste a = new Artiste(nom, description, photo);
+        em.persist(a);
+        return a;
+    }
+
+    /**
+     * Retourne l'artiste cherché
+     *
+     * Utilisé lors des listes pour la pagination
+     *
+     * @param idArtiste Numéro de l'artiste
+     * @return Un artiste
+     */
+    public Artiste getArtiste(int idArtiste) {
+        // Exécution d'une requête équivalente à un select *  
+        Query q = em.createQuery("select a from Artiste a where a.id = :idArtiste").setParameter("idArtiste", idArtiste);
+        if(q.getResultList().isEmpty()) {
+            return null;
+        }
+        return (Artiste) q.getResultList().get(0);
+    }
+    
+    /**
+     * Retourne l'artiste cherché
+     *
+     * Utilisé lors des listes pour la pagination
+     *
+     * @param nomArtiste Nom de l'artiste
+     * @return Un artiste
+     */
+    public Artiste getArtiste(String nomArtiste) {
+        // Exécution d'une requête équivalente à un select *  
+        Query q = em.createQuery("select a from Artiste a where a.nom = :nomArtiste").setParameter("nomArtiste", nomArtiste);
+        if(q.getResultList().isEmpty()) {
+            return null;
+        }
+        return (Artiste) q.getResultList().get(0);
+    }
+    
     /**
      * Retourne tous les artistes
-     *
-     * @return Tous les artistes
+     * @return Une collection d'artiste
      */
     public Collection<Artiste> getAllArtistes() {
         // Exécution d'une requête équivalente à un select *  
@@ -199,4 +273,15 @@ public class GestionnaireMusiques {
         return q.getResultList();
     }
 
+    /**
+     * Retourne les artistes avec une plage
+     * @param index Début de la plage
+     * @param offset Fin de la plage
+     * @return Les musiques d'un genre précis avec une plage
+     */
+    public Collection<Musique> getArtistes(int index, int offset) {
+        Query q = em.createQuery("select m from Artiste m").setMaxResults(offset).setFirstResult(index);
+        return q.getResultList();
+    }
+    
 }

@@ -13,7 +13,6 @@
         </div>
     </jsp:attribute>
     <jsp:body>
-
         <div class="page-header">
             <h3>Liste des musiques</h3>
         </div>
