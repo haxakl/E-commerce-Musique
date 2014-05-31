@@ -1,8 +1,14 @@
-package servlets.visiteur;
+package servlets.membre;
 
+import servlets.visiteur.*;
 import utilisateurs.modeles.Adresse;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import javax.ejb.EJB;
+import javax.json.Json;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,6 +16,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import musique.gestionnaires.GestionnaireMusiques;
+import musique.modeles.Artiste;
+import musique.modeles.Genre;
+import musique.modeles.Musique;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import utilisateurs.modeles.Telephone;
 import utilisateurs.gestionnaires.GestionnaireUtilisateurs;
 import utilisateurs.modeles.Utilisateur;
@@ -18,8 +32,11 @@ import utilisateurs.modeles.Utilisateur;
  *
  * @author Guillaume
  */
-@WebServlet(name = "Inscription", urlPatterns = {"/inscription"})
-public class Inscription extends HttpServlet {
+@WebServlet(name = "AccueilAdmin", urlPatterns = {"/admin"})
+public class Connecte extends HttpServlet {
+
+    @EJB
+    private GestionnaireMusiques gestionnaireMusiques;
 
     @EJB
     private GestionnaireUtilisateurs gestionnaireUtilisateurs;
@@ -35,8 +52,7 @@ public class Inscription extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        this.getServletContext().getRequestDispatcher("/view/frontoffice/inscription.jsp").forward(request, response);
+        this.getServletContext().getRequestDispatcher("/view/backoffice/connecte.jsp").forward(request, response);
     }
 
     /**
@@ -64,21 +80,7 @@ public class Inscription extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        // Créé l'utilisateur pour l'inscription
-        Utilisateur user = gestionnaireUtilisateurs.creeUtilisateur(
-                request.getParameter("nom"),
-                request.getParameter("prenom"),
-                request.getParameter("login"),
-                request.getParameter("password"),
-                null,
-                null);
-        HttpSession session = request.getSession();
-        session.setAttribute("user", user);
-        
-        // Redirection
-        response.sendRedirect("/tp2webmiage/");
-        
+        processRequest(request, response);
     }
 
 }

@@ -8,7 +8,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 
-<t:frontoffice>
+<t:backoffice>
     <jsp:attribute name="breadcrumb">
         <h2><i class="fa fa-music"></i> Musiques <span>Lister les musiques</span></h2>
         <div class="breadcrumb-wrapper">
@@ -20,9 +20,9 @@
         </div>
     </jsp:attribute>
     <jsp:body>
-                <div class="col-lg-6">
+        <div class="col-lg-6">
             <ul class="pagination">
-<!--                 Définition du nombre d'élément par page -->
+                <!--                 Définition du nombre d'élément par page -->
                 <c:choose>
                     <c:when test="${nbAffiche != 30}">
                         <c:set var="nbElement" value="${param.nbAffiche}">          
@@ -34,7 +34,7 @@
                     </c:otherwise>       
                 </c:choose>
 
-<!--                 Bouton "précédent" -->
+                <!--                 Bouton "précédent" -->
                 <c:choose>
                     <c:when test="${page == '1'}">
                         <li><a href="?page=${page}&nbAffiche=${nbElement}">&laquo;</a></li>
@@ -43,7 +43,7 @@
                         <li><a href="?page=${page - 1}&nbAffiche=${nbElement}">&laquo;</a></li>
                         </c:otherwise>
                     </c:choose>
-<!--                 fin bouton "précedent"  -->
+                <!--                 fin bouton "précedent"  -->
 
                 <c:forEach var="entry" begin="1" end="${nbPages}">
                     <li
@@ -53,7 +53,7 @@
                         ><a href="?page=${entry}&nbAffiche=${nbElement}">${entry}</a></li>
                     </c:forEach>
 
-<!--                 Bouton suivant -->
+                <!--                 Bouton suivant -->
                 <c:choose>
                     <c:when test="${page.equals(nbPages)}">
                         <li><a href="?page=${page}&nbAffiche=${nbElement}">&raquo;</a></li>
@@ -62,7 +62,7 @@
                         <li><a href="?page=${page + 1}&nbAffiche=${nbElement}">&raquo;</a></li>
                         </c:otherwise>
                     </c:choose>
-<!--                 Fin bouton suivant  -->
+                <!--                 Fin bouton suivant  -->
             </ul>
         </div>
         <!-- Zone qui affiche les utilisateurs si le paramètre action vaut listerComptes -->  
@@ -74,7 +74,7 @@
                 <td><b>Nb Pistes</b></td>
                 <td><b>Annee</b></td>
                 <td><b>Genre</b></td>
-                <td><b>Acheter</b></td>
+                <td></td>
 
             </tr>  
 
@@ -89,42 +89,13 @@
                     <td>${m.nbpiste}</td>
                     <td>${m.annee}</td>
                     <td><a href="musiques?genre=${m.genre.id}">${m.genre.nom}</a></td>
-                    <td><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
-                            <span class="glyphicon glyphicon-shopping-cart"></span></button></td>
+                    <td>
+                        <button class="btn btn-danger btn-sm">
+                            <i class="fa fa-times"></i> Supprimer
+                        </button>
+                    </td>
                 </tr>
             </c:forEach>
         </table>
-        
-        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        <h4 class="modal-title" id="myModalLabel">Achat d'un titre</h4>
-                    </div>
-                    <div class="modal-body">
-                        <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
-                            <input type='hidden' value="2.2" name="amount" />
-                            <input name="currency_code" type="hidden" value="EUR" />
-                            <input name="return" type="hidden" value="http://localhost:8080/tp2webmiage/musiques" />
-                            <input name="cancel_return" type="hidden" value="http://localhost:8080/tp2webmiage/musiques" />
-                            <input name="notify_url" type="hidden" value="http://votredomaine/validationPaiement.php" />
-                            <input name="cmd" type="hidden" value="_xclick" />
-                            <input name="business" type="hidden" value="julienblacas@gmail.com" />
-                            <input name="item_name" type="hidden" value="Une musique" />
-                            <input name="no_note" type="hidden" value="1" />
-                            <input name="lc" type="hidden" value="FR" />
-                            <input name="bn" type="hidden" value="PP-BuyNowBF" />
-                            <input name="custom" type="hidden" value="ID_ACHETEUR" />
-                            <input alt="Effectuez vos paiements via PayPal : une solution rapide, gratuite et sécurisée" name="submit" src="https://www.paypal.com/fr_FR/FR/i/btn/btn_buynow_LG.gif" type="image" /><img src="https://www.paypal.com/fr_FR/i/scr/pixel.gif" border="0" alt="" width="1" height="1" />
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Payer avec paypal</button>
-                    </div>
-                </div><!-- modal-content -->
-            </div><!-- modal-dialog -->
-        </div>
     </jsp:body>
-</t:frontoffice>
+</t:backoffice>

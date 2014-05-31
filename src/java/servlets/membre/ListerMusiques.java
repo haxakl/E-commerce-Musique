@@ -23,7 +23,7 @@ import utilisateurs.modeles.Utilisateur;
  *
  * @author julien
  */
-@WebServlet(name = "ListerMusiques", urlPatterns = {"/membre/musiques"})
+@WebServlet(name = "AdminListerMusiques", urlPatterns = {"/admin/musiques"})
 public class ListerMusiques extends HttpServlet {
     @EJB
     private GestionnaireMusiques gestionnaireMusiques;

@@ -14,33 +14,28 @@
         <title>Administration</title>
 
         <link href="/tp2webmiage/ressources/library/musiccomposer/style.default.css" rel="stylesheet">
+        <link href="/tp2webmiage/ressources/library/fontawesome/font-awesome.css" rel="stylesheet">
         <link href="/tp2webmiage/ressources/library/bootstrap/bootsrap-override.css" rel="stylesheet">
+        
         <script src="/tp2webmiage/ressources/library/jquery/jquery.js"></script>
-
     </head>
     <body>
-
         <div class="leftpanel">
-
             <div class="logopanel">
                 <h1>Administration</h1>
             </div><!-- logopanel -->
-
             <div class="leftpanelinner">
-
                 <h5 class="sidebartitle">Navigation</h5>
                 <ul class="nav nav-pills nav-stacked nav-bracket">
-                    <li><a href="/tp2webmiage/utilisateurs"><i class="fa fa-user"></i> <span>Utilisateurs</span></a></li>
-                    <li><a href="/tp2webmiage/musiques"><i class="fa fa-music"></i> <span>Musiques</span></a></li>
+                    <li><a href="/tp2webmiage/admin/utilisateurs"><i class="fa fa-user"></i> <span>Utilisateurs</span></a></li>
+                    <li><a href="/tp2webmiage/admin/musiques"><i class="fa fa-music"></i> <span>Musiques</span></a></li>
                 </ul>
-
-            </div><!-- leftpanelinner -->
-        </div><!-- leftpanel -->
+            </div>
+        </div>
 
         <div class="mainpanel">
             <div class="headerbar">
                 <a class="menutoggle"><i class="fa fa-bars"></i></a>
-
                 <div class="header-right">
                     <ul class="headermenu">
                         <li>
@@ -50,14 +45,13 @@
                                     <span class="caret"></span>
                                 </button>
                                 <ul class="dropdown-menu dropdown-menu-usermenu pull-right">
-                                    <li><a href="/tp2webmiage/logout"><i class="glyphicon glyphicon-log-out"></i> Déconnexion</a></li>
+                                    <li><a href="/tp2webmiage/logout"><i class="fa fa-sign-out"></i> Déconnexion</a></li>
                                 </ul>
                             </div>
                         </li>
                     </ul>
-                </div><!-- header-right -->
-
-            </div><!-- headerbar -->
+                </div>
+            </div>
 
             <div class="pageheader">
                 <jsp:invoke fragment="breadcrumb"/>

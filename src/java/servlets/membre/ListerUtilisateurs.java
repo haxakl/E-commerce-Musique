@@ -23,7 +23,7 @@ import utilisateurs.modeles.Utilisateur;
  *
  * @author Guillaume
  */
-@WebServlet(name = "ListerUtilisateurs", urlPatterns = {"/utilisateurs"})
+@WebServlet(name = "AdminListerUtilisateurs", urlPatterns = {"/admin/utilisateurs"})
 public class ListerUtilisateurs extends HttpServlet {
 
     @EJB

@@ -25,7 +25,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Guillaume
  */
-@WebFilter(filterName = "/connecte", urlPatterns = {"/utilisateurs/*", "/utilisateurs"}, dispatcherTypes = {DispatcherType.REQUEST})
+@WebFilter(filterName = "/admin", urlPatterns = {"/admin/*", "/admin"}, dispatcherTypes = {DispatcherType.REQUEST})
 public class ConnecteFilter implements Filter {
 
     private static final boolean debug = true;
@@ -61,7 +61,7 @@ public class ConnecteFilter implements Filter {
 
         if (session == null || session.getAttribute("user") == null) {
             this.filterConfig.getServletContext().log("Unauthorized access request");
-            res.sendRedirect("/tp2webmiage/index.jsp");
+            res.sendRedirect("/tp2webmiage/");
         } else {
             this.filterConfig.getServletContext().log("Authorized access request");
             chain.doFilter(request, response);

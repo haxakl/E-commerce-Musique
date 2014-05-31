@@ -87,19 +87,18 @@ public class GestionnaireUtilisateurs {
     public Utilisateur creeUtilisateur(String nom, String prenom, String login, String password, Adresse a, Telephone tel) {
 
         Utilisateur u = new Utilisateur(prenom, nom, login, password);
-        // On met à jour la relation, elle est déjà en base  
-        u.setAdresse(a);
-        u.setTelephone(tel);
 
-        // a est déjà en base et connectée, donc la ligne suivante modifie les   
-        // données pour relier l'adresse à l'utilisateur 
-        a.addUtilisateur(u);
+        if (a != null) {
+            u.setAdresse(a);
+            a.addUtilisateur(u);
 
-        tel.setUtilisateur(u);
+        }
 
-        // On persiste l'utilisateur, la relation est déjà en base, cela va donc  
-        // ajouter une ligne dans la table des utilisateur avec une clé étrangère  
-        // correspondant à l'adresse  
+        if (tel != null) {
+            u.setTelephone(tel);
+            tel.setUtilisateur(u);
+        }
+
         em.persist(u);
         return u;
     }
