@@ -76,7 +76,7 @@ public class DetailArtiste extends HttpServlet {
                 JSONArray tmp_images = (JSONArray) tmp_artiste.get("image");
                 JSONObject tmp_image = (JSONObject) tmp_images.get(tmp_images.size()-1);
                 
-                String descr = ((String) tmp_bio.get("content")).substring(0, 254);
+                String descr = ((String) tmp_bio.get("content"));
                 artiste.setResume(descr);
                 artiste.setPhoto((String) tmp_image.get("#text"));
                 gestionnaireMusiques.merge(artiste);
