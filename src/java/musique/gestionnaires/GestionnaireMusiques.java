@@ -181,6 +181,31 @@ public class GestionnaireMusiques {
         return m;
     }
 
+    /**
+     * Retourne les pistes dans une plage
+     *
+     * Utilisé lors des listes pour la pagination
+     *
+     * @param index Départ de la plage
+     * @param offset Fin de la plage
+     * @return Les piste dans une plage
+     */
+    public Collection<Piste> getPistes(int index, int offset) {
+        // Exécution d'une requête équivalente à un select *  
+        Query q = em.createQuery("select u from Piste u").setMaxResults(offset).setFirstResult(index);
+        return q.getResultList();
+    }
+
+    /**
+     * Retourne tous les pistes
+     * @return Une collection de piste
+     */
+    public Collection<Piste> getAllPistes() {
+        // Exécution d'une requête équivalente à un select *  
+        Query q = em.createQuery("select a from Piste a");
+        return q.getResultList();
+    }
+
     // =============================
     //  Artiste
     // =============================
@@ -242,6 +267,21 @@ public class GestionnaireMusiques {
         return q.getResultList();
     }
 
+    /**
+     * Retourne les artistes dans une plage
+     *
+     * Utilisé lors des listes pour la pagination
+     *
+     * @param index Départ de la plage
+     * @param offset Fin de la plage
+     * @return Les musiques dans une plage
+     */
+    public Collection<Artiste> getArtistes(int index, int offset) {
+        // Exécution d'une requête équivalente à un select *  
+        Query q = em.createQuery("select u from Artiste u").setMaxResults(offset).setFirstResult(index);
+        return q.getResultList();
+    }
+
     // =============================
     //  Recherche de patterns
     // =============================
@@ -277,15 +317,4 @@ public class GestionnaireMusiques {
         return q.getResultList();
     }
 
-    /**
-     * Retourne les artistes avec une plage
-     * @param index Début de la plage
-     * @param offset Fin de la plage
-     * @return Les musiques d'un genre précis avec une plage
-     */
-    public Collection<Musique> getArtistes(int index, int offset) {
-        Query q = em.createQuery("select m from Artiste m").setMaxResults(offset).setFirstResult(index);
-        return q.getResultList();
-    }
-    
 }

@@ -15,7 +15,7 @@
             <span class="label">Vous êtes ici</span>
             <ol class="breadcrumb">
                 <li><a href="index.jsp">Accueil</a></li>
-                <li class="active">Musiques</li>
+                <li class="active">Artistes</li>
             </ol>
         </div>
     </jsp:attribute>
@@ -70,11 +70,9 @@
             <!-- La ligne de titre du tableau des comptes -->  
             <tr>
                 <td></td>
-                <td><b>Artiste</b></td>
-                <td><b>Titre</b></td>
-                <td><b>Nb Pistes</b></td>
-                <td><b>Annee</b></td>
-                <td><b>Genre</b></td>
+                <td><b>Nom</b></td>
+                <td><b>Description</b></td>
+                <td><b>Nb Musiques</b></td>
                 <td></td>
 
             </tr>  
@@ -83,16 +81,14 @@
             <!-- cette variable montre comment on peut utiliser JSTL et EL pour calculer -->  
             <c:set var="total" value="0"/>  
 
-            <c:forEach var="m" items="${requestScope['listeDesMusiques']}">
+            <c:forEach var="a" items="${requestScope['listeDesArtistes']}">
                 <tr>
                     <td>
-                        <a class="btn btn-sm btn-primary" href="/tp2webmiage/admin/musiques/${m.id}">Modifier</a>
+                        <a class="btn btn-sm btn-primary" href="/tp2webmiage/admin/artistes/${a.id}">Modifier</a>
                     </td>
-                    <td>${m.artiste.nom}</td> 
-                    <td>${m.titre}</td>
-                    <td>${m.nbpiste}</td>
-                    <td>${m.annee}</td>
-                    <td><a href="musiques?genre=${m.genre.id}">${m.genre.nom}</a></td>
+                    <td>${a.nom}</td> 
+                    <td>${a.resume}</td>
+                    <td></td>
                     <td>
                         <button class="btn btn-danger btn-sm">
                             <i class="fa fa-times"></i> Supprimer

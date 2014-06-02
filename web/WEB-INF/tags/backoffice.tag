@@ -30,6 +30,8 @@
                 <ul class="nav nav-pills nav-stacked nav-bracket">
                     <li><a href="/tp2webmiage/admin/utilisateurs"><i class="fa fa-user"></i> <span>Utilisateurs</span></a></li>
                     <li><a href="/tp2webmiage/admin/musiques"><i class="fa fa-music"></i> <span>Musiques</span></a></li>
+                    <li><a href="/tp2webmiage/admin/artistes"><i class="icon-cd"></i> <span>Artistes</span></a></li>
+                    <li><a href="/tp2webmiage/admin/pistes"><i class="fa fa-list"></i> <span>Pistes</span></a></li>
                     <li><a href="/tp2webmiage/"><i class="fa fa-arrow-circle-left"></i> <span>Retour au client</span></a></li>
                 </ul>
             </div>

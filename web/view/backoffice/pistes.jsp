@@ -10,12 +10,12 @@
 
 <t:backoffice>
     <jsp:attribute name="breadcrumb">
-        <h2><i class="fa fa-music"></i> Musiques <span>Lister les musiques</span></h2>
+        <h2><i class="fa fa-music"></i> Pistes <span>Lister les pistes</span></h2>
         <div class="breadcrumb-wrapper">
             <span class="label">Vous êtes ici</span>
             <ol class="breadcrumb">
                 <li><a href="index.jsp">Accueil</a></li>
-                <li class="active">Musiques</li>
+                <li class="active">Pistes</li>
             </ol>
         </div>
     </jsp:attribute>
@@ -70,11 +70,9 @@
             <!-- La ligne de titre du tableau des comptes -->  
             <tr>
                 <td></td>
-                <td><b>Artiste</b></td>
-                <td><b>Titre</b></td>
-                <td><b>Nb Pistes</b></td>
-                <td><b>Annee</b></td>
-                <td><b>Genre</b></td>
+                <td><b>Nom</b></td>
+                <td><b>Description</b></td>
+                <td><b>Nb Musiques</b></td>
                 <td></td>
 
             </tr>  
@@ -83,16 +81,13 @@
             <!-- cette variable montre comment on peut utiliser JSTL et EL pour calculer -->  
             <c:set var="total" value="0"/>  
 
-            <c:forEach var="m" items="${requestScope['listeDesMusiques']}">
+            <c:forEach var="p" items="${requestScope['listeAllPistes']}">
                 <tr>
                     <td>
-                        <a class="btn btn-sm btn-primary" href="/tp2webmiage/admin/musiques/${m.id}">Modifier</a>
+                        <a class="btn btn-sm btn-primary" href="/tp2webmiage/admin/pistes/${p.id}">Modifier</a>
                     </td>
-                    <td>${m.artiste.nom}</td> 
-                    <td>${m.titre}</td>
-                    <td>${m.nbpiste}</td>
-                    <td>${m.annee}</td>
-                    <td><a href="musiques?genre=${m.genre.id}">${m.genre.nom}</a></td>
+                    <td>${p.nom}</td> 
+                    <td></td>
                     <td>
                         <button class="btn btn-danger btn-sm">
                             <i class="fa fa-times"></i> Supprimer

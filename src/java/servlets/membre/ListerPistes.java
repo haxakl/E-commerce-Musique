@@ -1,9 +1,16 @@
-package servlets.visiteur;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package servlets.membre;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Collection;
 import javax.ejb.EJB;
+import javax.management.StringValueExp;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,17 +18,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import musique.gestionnaires.GestionnaireMusiques;
 import musique.modeles.Artiste;
-import musique.modeles.Musique;
+import musique.modeles.Piste;
 import utilisateurs.gestionnaires.GestionnaireUtilisateurs;
 import utilisateurs.modeles.Utilisateur;
 
 /**
  *
- * @author julien
+ * @author Guillaume
  */
-@WebServlet(name = "Artistes", urlPatterns = {"/artistes"})
-public class Artistes extends HttpServlet {
-
+@WebServlet(name = "AdminListerPistes", urlPatterns = {"/admin/pistes"})
+public class ListerPistes extends HttpServlet {
     @EJB
     private GestionnaireMusiques gestionnaireMusiques;
 
@@ -40,44 +46,38 @@ public class Artistes extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        // Recupère tous les utilisateurs
-        Collection<Artiste> listeAllArtistes = gestionnaireMusiques.getAllArtistes();
-        Collection<Artiste> liste;
-        
         // Page affichée
         int numPage = 1;
-        if (request.getParameter("page") != null) {
+        if(request.getParameter("page") != null) {
             numPage = Integer.parseInt(request.getParameter("page"));
         }
+        
         // Nombre affichée par page
-        int nbAffiche = 0;
-        if (request.getParameter("nbAffiche") != null) {
+        int nbAffiche=0;
+        if(request.getParameter("nbAffiche") != null) {
             nbAffiche = Integer.parseInt(request.getParameter("nbAffiche"));
             System.out.println("nbAffiche : " + nbAffiche);
-        } else {
+        }
+        else{
             nbAffiche = 30;
         }
-
+        Collection<Piste> liste = gestionnaireMusiques.getPistes((numPage-1)*nbAffiche, nbAffiche);
         // Recupère tous les utilisateurs
-        double totalMusiques = listeAllArtistes.size();
-
-        liste = gestionnaireMusiques.getArtistes((numPage - 1) * nbAffiche, nbAffiche);
-        if (totalMusiques == 0) {
-            request.setAttribute("nbPages", Math.ceil(liste.size() / nbAffiche));
-        } else {
-            request.setAttribute("nbPages", (int) Math.ceil(totalMusiques / nbAffiche));
+        Collection<Piste> listeAllPistes = gestionnaireMusiques.getAllPistes();
+        double totalUser = listeAllPistes.size();
+        
+        System.out.println("Nombre d'utilisateurs total :" + listeAllPistes.size() + "Nombre d'utilisateur par page : " + liste.size());
+        
+        if(totalUser == 0){
+            request.setAttribute("nbPages", Math.ceil(liste.size()/nbAffiche));
         }
-
-        if (totalMusiques == 0) {
-            request.setAttribute("nbPages", Math.ceil(listeAllArtistes.size() / nbAffiche));
-        } else {
-            request.setAttribute("nbPages", (int) Math.ceil(totalMusiques / nbAffiche));
+        else{
+            request.setAttribute("nbPages", (int) Math.ceil(totalUser/nbAffiche));    
         }
         request.setAttribute("page", numPage);
         request.setAttribute("nbAffiche", nbAffiche);
-        request.setAttribute("listeDesArtistes", liste);
-
-        this.getServletContext().getRequestDispatcher("/view/frontoffice/artistes.jsp").forward(request, response);
+        request.setAttribute("listeAllPistes", liste);
+        request.getRequestDispatcher("/view/backoffice/pistes.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
