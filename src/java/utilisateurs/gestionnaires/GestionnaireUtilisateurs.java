@@ -110,7 +110,7 @@ public class GestionnaireUtilisateurs {
         u.setNom(nom);
         u.setLogin(login);
         u.setPassword(password);
-        em.persist(u);
+        em.merge(u);
         return u;
     }
 

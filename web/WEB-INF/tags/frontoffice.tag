@@ -64,7 +64,7 @@
                             <c:if test="${user != null}" >
                                 <c:if test="${user.getNom() == 'Administrateur'}" >
                                     <a class="pull-right" href="/tp2webmiage/admin">
-                                        <i class="fa fa-sign-out"></i> <p>Accès Backoffice</p>
+                                        <i class="fa fa-cog"></i> <p>Accès Backoffice</p>
                                     </a>
                                 </li>
                                 <li style='float: right;'>

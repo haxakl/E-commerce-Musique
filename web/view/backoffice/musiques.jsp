@@ -20,6 +20,11 @@
         </div>
     </jsp:attribute>
     <jsp:body>
+        <c:if test="${not empty etat}">
+        <div class="alert alert-success">
+            <p>La musique a été modifiée</p>
+        </div>
+        </c:if>
         <div class="col-lg-6">
             <ul class="pagination">
                 <!--                 Définition du nombre d'élément par page -->
@@ -86,7 +91,7 @@
             <c:forEach var="m" items="${requestScope['listeDesMusiques']}">
                 <tr>
                     <td>
-                        <a class="btn btn-sm btn-primary" href="/tp2webmiage/admin/musiques/${m.id}">Modifier</a>
+                        <a class="btn btn-sm btn-primary" href="/tp2webmiage/admin/musiques/modifier/${m.id}">Modifier</a>
                     </td>
                     <td>${m.artiste.nom}</td> 
                     <td>${m.titre}</td>

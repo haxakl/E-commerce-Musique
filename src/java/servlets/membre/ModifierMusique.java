@@ -23,8 +23,8 @@ import utilisateurs.modeles.Utilisateur;
  *
  * @author julien
  */
-@WebServlet(name = "AdminListerMusiques", urlPatterns = {"/admin/musiques"})
-public class ListerMusiques extends HttpServlet {
+@WebServlet(name = "ModifierMusique", urlPatterns = {"/admin/musiques/modifier/*"})
+public class ModifierMusique extends HttpServlet {
     @EJB
     private GestionnaireMusiques gestionnaireMusiques;
 
@@ -42,53 +42,16 @@ public class ListerMusiques extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Il n'y a pas d'utilisateurs
-
-        Collection<Musique> liste;
-        // Page affichée
-        int numPage = 1;
-        if (request.getParameter("page") != null) {
-            numPage = Integer.parseInt(request.getParameter("page"));
-        }
         
-        // Un état
-        if (request.getParameter("etat") != null) {
-            request.setAttribute("etat", request.getParameter("etat"));
-        }
-
-        // Nombre affichée par page
-        int nbAffiche = 0;
-        if (request.getParameter("nbAffiche") != null) {
-            nbAffiche = Integer.parseInt(request.getParameter("nbAffiche"));
-        } else {
-            nbAffiche = 30;
-        }
-
-        // Recupère tous les utilisateurs
-        Collection<Musique> listeAllMusiques = gestionnaireMusiques.getAllMusiques();
-        double totalMusiques = listeAllMusiques.size();
-
-        liste = gestionnaireMusiques.getMusiques((numPage - 1) * nbAffiche, nbAffiche);
-
-        if (totalMusiques == 0) {
-            request.setAttribute("nbPages", Math.ceil(liste.size() / nbAffiche));
-        } else {
-            request.setAttribute("nbPages", (int) Math.ceil(totalMusiques / nbAffiche));
-        }
-//        if (request.getParameter("genre") != null) {
-//            int genre = Integer.parseInt(request.getParameter("genre"));
-//            liste = gestionnaireUtilisateurs.getMusiqueByGenre(genre);
-//            System.out.println(liste);
-//        } else {
-//            liste = gestionnaireUtilisateurs.getAllMusiques();
-//        }
-        request.setAttribute("page", numPage);
-        request.setAttribute("nbAffiche", nbAffiche);
-        request.setAttribute("listeDesMusiques", liste);
-        this.getServletContext().getRequestDispatcher("/view/backoffice/musiques.jsp").forward(request, response);
+        String url = request.getRequestURL().toString();
+        int idMusique = Integer.valueOf(url.substring(url.lastIndexOf("/") + 1));
+        
+        Musique musique = gestionnaireMusiques.getMusique(idMusique);
+        
+        request.setAttribute("musique", musique);
+        this.getServletContext().getRequestDispatcher("/view/backoffice/modifier_musique.jsp").forward(request, response);
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -114,7 +77,18 @@ public class ListerMusiques extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
+        this.getServletContext().log("Modification de l'utilisateur");
+
+        // Modification de l'utilisateur
+        gestionnaireMusiques.modifierMusique(
+                Integer.parseInt(request.getPathInfo().replaceAll("/", "")),
+                request.getParameter("titre"),
+                Integer.parseInt(request.getParameter("annee")),
+                request.getParameter("url"));
+
+        // Redirection
+        response.sendRedirect("/tp2webmiage/admin/musiques?etat=modifier");
     }
 
     /**
@@ -125,6 +99,6 @@ public class ListerMusiques extends HttpServlet {
     @Override
     public String getServletInfo() {
         return "Short description";
-    }// </editor-fold>
+    }
 
 }

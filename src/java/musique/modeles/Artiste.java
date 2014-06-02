@@ -33,6 +33,7 @@ public class Artiste implements Serializable {
     @Column(length=3000)
     private String resume;
     private String photo;
+    private int nbmusique;
 
     public Artiste() {
     }
@@ -41,9 +42,17 @@ public class Artiste implements Serializable {
         this.nom = nom;
         this.resume = resume;
         this.photo = photo;
+        this.nbmusique = 0;
     }
-            
-            
+
+    public List<Musique> getMusiques() {
+        return musiques;
+    }
+
+    public void setMusiques(List<Musique> musiques) {
+        this.musiques = musiques;
+    }
+    
     public void addMusique(Musique m){
         musiques.add(m);
     }

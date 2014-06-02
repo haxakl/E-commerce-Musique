@@ -132,6 +132,21 @@ public class GestionnaireMusiques {
         return q.getResultList();
     }
 
+    /**
+     * Modifier la musique
+     * @param idMusique Numéro de la musique
+     * @param titre Titre de la musique
+     * @param annee Année de la musique
+     * @param url  Url de la musique
+     */
+    public void modifierMusique(int idMusique, String titre, int annee, String url) {
+        Musique musique = getMusique(idMusique);
+        musique.setTitre(titre);
+        musique.setAnnee(annee);
+        musique.setUrl(url);
+        em.merge(musique);
+    }
+    
     // =============================
     //  Genres
     // =============================
