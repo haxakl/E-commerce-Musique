@@ -185,4 +185,12 @@ public class Musique implements Serializable {
         return "musique.modeles.musique[ id=" + id + " ]";
     }
     
+    public List<Piste> getPistes() {
+        return pistes;
+    }
+
+    public void setPistes(List<Piste> pistes) {
+        this.pistes = pistes;
+    }
+    
 }

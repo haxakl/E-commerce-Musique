@@ -59,6 +59,12 @@
                                 <i class="fa fa-microphone"></i>
                                 <p>Instruments</p>
                             </a>
+                            <ul>
+                                <li><a href="/tp2webmiage/instruments/drums">Drums</a></li>
+                                <li><a href="/tp2webmiage/instruments/bass">Bass</a></li>
+                                <li><a href="/tp2webmiage/instruments/snare">Snare</a></li>
+                                <li><a href="/tp2webmiage/instruments/hi-hat">Hi-hat</a></li>
+                            </ul>
                         </li>
                         <li>
                             <a href="/tp2webmiage/abonnement">
@@ -111,15 +117,15 @@
                                         </c:if>
                                         <c:if test="${!panier.isEmpty()}" >
                                             <li>
-                                            <c:forEach var="music" items="${panier.getMusiques()}">
-                                                ${music.getTitre()}
-                                            </c:forEach>
+                                                <c:forEach var="music" items="${panier.getMusiques()}">
+                                                    ${music.getTitre()}
+                                                </c:forEach>
                                             <li>
-                                                
-                                            <button style="margin-top: 15px" class="btn btn-default"> Commander </button>
-                                        </c:if>
-                                    </c:when>
-                                    <c:otherwise>
+
+                                                <button style="margin-top: 15px" class="btn btn-default"> Commander </button>
+                                            </c:if>
+                                        </c:when>
+                                        <c:otherwise>
                                         <li>Aucun objet dans votre panier.</li>
                                         </c:otherwise>
                                     </c:choose>

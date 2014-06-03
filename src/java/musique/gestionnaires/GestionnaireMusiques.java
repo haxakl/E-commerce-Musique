@@ -2,6 +2,7 @@ package musique.gestionnaires;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -387,4 +388,13 @@ public class GestionnaireMusiques {
         return q.getResultList();
     }
 
+    // =============================
+    //  Piste
+    // =============================
+    
+    public Collection<Musique> getMusiqueByInstrument(String nom){
+        String lower = nom.toLowerCase();
+        Query q = em.createQuery("select distinct p.musique from Piste p where lower(p.nom) LIKE :cnom").setParameter("cnom","%" + nom + "%");
+        return q.getResultList();
+    }
 }
