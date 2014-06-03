@@ -55,6 +55,12 @@
                             </ul>
                         </li>
                         <li>
+                            <a href="/tp2webmiage/instruments">
+                                <i class="fa fa-microphone"></i>
+                                <p>Instruments</p>
+                            </a>
+                        </li>
+                        <li>
                             <a href="/tp2webmiage/abonnement">
                                 <i class="icon-tag-1"></i>
                                 <p>Mes abonnements</p>

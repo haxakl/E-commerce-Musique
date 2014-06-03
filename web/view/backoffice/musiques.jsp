@@ -103,7 +103,7 @@
 
             <c:forEach var="m" items="${requestScope['listeDesMusiques']}">
                 <tr>
-                    <td><a class="btn btn-sm btn-primary" href="/tp2webmiage/admin/musiques/modifier/${m.id}">Modifier</a></td>
+                    <td><a class="btn btn-sm btn-primary" href="/tp2webmiage/admin/musiques/modifier/${m.id}"><i class="fa fa-cog"></i> Modifier</a></td>
                     <td><a href="/tp2webmiage/admin/artiste/${m.artiste.id}">${m.artiste.nom}</a></td> 
                     <td>${m.titre}</td>
                     <td>${m.nbpiste}</td>

@@ -17,7 +17,7 @@
         <link href="/tp2webmiage/ressources/library/fontawesome/font-awesome.css" rel="stylesheet">
         <link href="/tp2webmiage/ressources/library/fontello/fontello.css" rel="stylesheet">
         <link href="/tp2webmiage/ressources/library/bootstrap/bootsrap-override.css" rel="stylesheet">
-        
+
         <script src="/tp2webmiage/ressources/library/jquery/jquery.js"></script>
     </head>
     <body>
@@ -32,6 +32,8 @@
                     <li><a href="/tp2webmiage/admin/musiques"><i class="fa fa-music"></i> <span>Musiques</span></a></li>
                     <li><a href="/tp2webmiage/admin/artistes"><i class="icon-cd"></i> <span>Artistes</span></a></li>
                     <li><a href="/tp2webmiage/admin/pistes"><i class="fa fa-list"></i> <span>Pistes</span></a></li>
+                    <li><a href="/tp2webmiage/admin/genres"><i class="fa fa-tag"></i> <span>Genres</span></a></li>
+                    <li class="divider"></li>
                     <li><a href="/tp2webmiage/"><i class="fa fa-arrow-circle-left"></i> <span>Retour au client</span></a></li>
                 </ul>
             </div>
@@ -64,6 +66,7 @@
             <div class="contentpanel">
                 <jsp:doBody/>
             </div>
+        </div>
 
         <script src="/tp2webmiage/ressources/library/jquery/bootstrap.min.js"></script>
         <script src="/tp2webmiage/ressources/library/jquery/jquery-ui-1.10.3.min.js"></script>
