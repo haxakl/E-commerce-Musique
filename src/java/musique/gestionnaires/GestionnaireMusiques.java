@@ -57,6 +57,22 @@ public class GestionnaireMusiques {
         em.persist(m);
         return m;
     }
+    
+    /**
+     * Créer une musique
+     * @param artiste
+     * @param titre
+     * @param nbpiste
+     * @param annee
+     * @param url
+     * @param genre
+     * @return 
+     */
+    public Musique creerMusique(String titre, int annee, String url) {
+        Musique m = new Musique(titre, 0, annee, url);
+        em.persist(m);
+        return m;
+    }
 
     /**
      * Retourne toutes les musiques
@@ -158,6 +174,33 @@ public class GestionnaireMusiques {
      */
     public Collection<Musique> getMusiqueByGenre(int idgenre, int index, int offset) {
         Query q = em.createQuery("select m from Musique m where m.genre.id = :cidgenre").setMaxResults(offset).setFirstResult(index).setParameter("cidgenre", idgenre);
+        return q.getResultList();
+    }
+
+    /**
+     * Retourne le genre cherché
+     *
+     * Utilisé lors des listes pour la pagination
+     *
+     * @param idGenre Numéro du genre
+     * @return Un artiste
+     */
+    public Genre getGenre(int idGenre) {
+        // Exécution d'une requête équivalente à un select *  
+        Query q = em.createQuery("select g from Genre g where g.id = :idGenre").setParameter("idGenre", idGenre);
+        if(q.getResultList().isEmpty()) {
+            return null;
+        }
+        return (Genre) q.getResultList().get(0);
+    }
+    
+    /**
+     * Retourne tous les genres
+     * @return Une collection de genre
+     */
+    public Collection<Genre> getAllGenres() {
+        // Exécution d'une requête équivalente à un select *  
+        Query q = em.createQuery("select g from Genre g");
         return q.getResultList();
     }
 
