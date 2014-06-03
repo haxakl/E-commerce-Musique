@@ -7,15 +7,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 
 @Entity
 public class Utilisateur implements Serializable {
 
     @ManyToOne(cascade = CascadeType.PERSIST)
     private Adresse adresse;
-    @OneToOne(cascade = CascadeType.PERSIST)
-    private Telephone telephone;
+    private String telephone;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -99,11 +97,11 @@ public class Utilisateur implements Serializable {
         this.password = password;
     }
 
-    public Telephone getTelephone() {
+    public String getTelephone() {
         return telephone;
     }
 
-    public void setTelephone(Telephone telephone) {
+    public void setTelephone(String telephone) {
         this.telephone = telephone;
     }
 
@@ -132,11 +130,7 @@ public class Utilisateur implements Serializable {
     }
 
     public boolean isAdmin() {
-        if (this.groupe == 1) {
-            return true;
-        } else {
-            return false;
-        }
+        return this.groupe == 1;
     }
 
     @Override
@@ -153,10 +147,7 @@ public class Utilisateur implements Serializable {
             return false;
         }
         Utilisateur other = (Utilisateur) object;
-        if (this.id != other.id) {
-            return false;
-        }
-        return true;
+        return this.id == other.id;
     }
 
     @Override

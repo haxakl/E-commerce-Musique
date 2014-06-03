@@ -1,18 +1,12 @@
 package utilisateurs.gestionnaires;
 
 import utilisateurs.modeles.Adresse;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import musique.modeles.Artiste;
-import musique.modeles.Genre;
-import musique.modeles.Musique;
-import musique.modeles.Piste;
-import utilisateurs.modeles.Telephone;
 import utilisateurs.modeles.Utilisateur;
 
 @Stateless
@@ -36,11 +30,8 @@ public class GestionnaireUtilisateurs {
         Adresse nice = new Adresse("Nice", "06000");
         em.persist(nice);
 
-        Telephone untel = new Telephone("0634220204");
-        em.persist(untel);
-
-        Telephone untel2 = new Telephone("0618967542");
-        em.persist(untel);
+        String untel = "0634220204";
+        String untel2 = "0618967542";
 
         creeUtilisateur("John", "Lennon", "jlennon", "test", nice, untel);
         creeUtilisateur("Paul", "Mac Cartney", "pmc", "test", valbonne, untel);
@@ -84,7 +75,7 @@ public class GestionnaireUtilisateurs {
     }
 
     // Créer un utilisateur
-    public Utilisateur creeUtilisateur(String nom, String prenom, String login, String password, Adresse a, Telephone tel) {
+    public Utilisateur creeUtilisateur(String nom, String prenom, String login, String password, Adresse a, String tel) {
 
         Utilisateur u = new Utilisateur(prenom, nom, login, password);
 
@@ -92,11 +83,6 @@ public class GestionnaireUtilisateurs {
             u.setAdresse(a);
             a.addUtilisateur(u);
 
-        }
-
-        if (tel != null) {
-            u.setTelephone(tel);
-            tel.setUtilisateur(u);
         }
 
         em.persist(u);

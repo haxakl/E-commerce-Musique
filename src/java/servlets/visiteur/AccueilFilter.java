@@ -7,16 +7,9 @@ package servlets.visiteur;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
-import servlets.membre.*;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.PrintStream;
-import java.io.PrintWriter;
-import java.io.StringWriter;
-import java.net.URL;
-import java.net.URLConnection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.Context;
@@ -31,21 +24,17 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import musique.gestionnaires.GestionnaireMusiques;
 import musique.modeles.Artiste;
-import musique.modeles.Genre;
 import musique.modeles.Musique;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import panier.gestionnaire.GestionnairePanier;
-import sun.net.www.http.HttpClient;
 import utilisateurs.gestionnaires.GestionnaireUtilisateurs;
 import utilisateurs.modeles.Adresse;
-import utilisateurs.modeles.Telephone;
 
 /**
  *
@@ -76,6 +65,7 @@ public class AccueilFilter implements Filter {
      * @exception IOException if an input/output error occurs
      * @exception ServletException if a servlet error occurs
      */
+    @Override
     public void doFilter(ServletRequest request, ServletResponse response,
             FilterChain chain)
             throws IOException, ServletException {
@@ -91,8 +81,7 @@ public class AccueilFilter implements Filter {
         // Il n'y a pas d'utilisateurs
         if (gestionnaireUtilisateurs.getAllUsers().isEmpty()) {
             Adresse nice = new Adresse("NICE", "06480");
-            Telephone tel = new Telephone("22");
-            gestionnaireUtilisateurs.creeUtilisateur("Administrateur", "", "admin", "admin", nice, tel);
+            gestionnaireUtilisateurs.creeUtilisateur("Administrateur", "", "admin", "admin", nice, "0493320233");
         }
 
         //Test si les musiques sont vides
@@ -102,13 +91,13 @@ public class AccueilFilter implements Filter {
             try {
                 InputStream ips = new FileInputStream(request.getServletContext().getRealPath("") + "\\ressources\\musique.json");
                 InputStreamReader ipsr = new InputStreamReader(ips);
-                BufferedReader br = new BufferedReader(ipsr);
-                String ligne;
-                while ((ligne = br.readLine()) != null) {
-                    chaine += ligne + "\n";
+                try (BufferedReader br = new BufferedReader(ipsr)) {
+                    String ligne;
+                    while ((ligne = br.readLine()) != null) {
+                        chaine += ligne + "\n";
+                    }
                 }
-                br.close();
-            } catch (Exception e) {
+            } catch (IOException e) {
                 System.out.println(e.toString());
             }
 
@@ -119,9 +108,9 @@ public class AccueilFilter implements Filter {
                     JSONObject objet = (JSONObject) array.get(i);
                     JSONArray compositions = (JSONArray) objet.get("composition");
                     String nom = (String) objet.get("nom");
-                    Artiste artiste = null;
 
                     if (nom.indexOf("-") != 0) {
+                        Artiste artiste = null;
                         String nomArtiste = nom.substring(0, nom.indexOf("-") - 1);
                         artiste = gestionnaireMusiques.getArtiste(nomArtiste);
                         if (gestionnaireMusiques.getArtiste(nomArtiste) == null) {

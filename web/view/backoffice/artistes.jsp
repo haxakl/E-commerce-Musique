@@ -10,11 +10,11 @@
 
 <t:backoffice>
     <jsp:attribute name="breadcrumb">
-        <h2><i class="fa fa-music"></i> Musiques <span>Lister les musiques</span></h2>
+        <h2><i class="fa fa-music"></i> Artistes <span>Lister les artistes</span></h2>
         <div class="breadcrumb-wrapper">
             <span class="label">Vous êtes ici</span>
             <ol class="breadcrumb">
-                <li><a href="index.jsp">Accueil</a></li>
+                <li><a href="/tp2webmiage/admin">Accueil</a></li>
                 <li class="active">Artistes</li>
             </ol>
         </div>
@@ -69,12 +69,11 @@
         <table class="table">  
             <!-- La ligne de titre du tableau des comptes -->  
             <tr>
-                <td></td>
-                <td><b>Nom</b></td>
-                <td><b>Description</b></td>
-                <td><b>Nb Musiques</b></td>
-                <td></td>
-
+                <th style="width: 100px;"></th>
+                <th><b>Nom</b></th>
+                <th><b>Description</b></th>
+                <th><b>Nb Musiques</b></th>
+                <th style="width: 100px;"></th>
             </tr>  
 
             <!-- Ici on affiche les lignes, une par utilisateur -->  
@@ -84,7 +83,7 @@
             <c:forEach var="a" items="${requestScope['listeDesArtistes']}">
                 <tr>
                     <td>
-                        <a class="btn btn-sm btn-primary" href="/tp2webmiage/admin/artistes/${a.id}">Modifier</a>
+                        <a class="btn btn-sm btn-primary" href="/tp2webmiage/admin/artistes/modifier/${a.id}"><i class="fa fa-cog"></i> Modifier</a>
                     </td>
                     <td>${a.nom}</td> 
                     <td>${a.resume}</td>

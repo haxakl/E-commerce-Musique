@@ -1,32 +1,14 @@
 package servlets.membre;
 
-import servlets.visiteur.*;
-import utilisateurs.modeles.Adresse;
-import java.io.BufferedReader;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import javax.ejb.EJB;
-import javax.json.Json;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import musique.gestionnaires.GestionnaireMusiques;
-import musique.modeles.Artiste;
-import musique.modeles.Genre;
-import musique.modeles.Musique;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
-import utilisateurs.modeles.Telephone;
 import utilisateurs.gestionnaires.GestionnaireUtilisateurs;
-import utilisateurs.modeles.Utilisateur;
 
 /**
  *
