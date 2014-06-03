@@ -151,12 +151,16 @@ public class GestionnaireMusiques {
     /**
      * Modifier la musique
      * @param idMusique Numéro de la musique
+     * @param artiste Artiste de la musique
+     * @param genre Genre de la musique
      * @param titre Titre de la musique
      * @param annee Année de la musique
      * @param url  Url de la musique
      */
-    public void modifierMusique(int idMusique, String titre, int annee, String url) {
+    public void modifierMusique(int idMusique, Artiste artiste, Genre genre, String titre, int annee, String url) {
         Musique musique = getMusique(idMusique);
+        musique.setArtiste(artiste);
+        musique.setGenre(genre);
         musique.setTitre(titre);
         musique.setAnnee(annee);
         musique.setUrl(url);

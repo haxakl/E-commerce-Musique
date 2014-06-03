@@ -18,6 +18,28 @@
         <form id="basicForm" method="post" class="form-horizontal" role="form">
             <h3>Informations</h3>
             <div class="form-group">
+                <label for="artiste" class="col-sm-2 control-label">Artiste</label>
+                <div class="col-sm-10">
+                    <select name="artiste" class="form-control">
+                        <option value="">Aucun artiste</option>
+                        <c:forEach var="a" items="${requestScope['listeDesArtistes']}">
+                            <option value="${a.id}" <c:if test="${a.id == musique.getArtiste().getId()}">selected</c:if>>${a.nom}</option>
+                        </c:forEach>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="genre" class="col-sm-2 control-label">Genre</label>
+                <div class="col-sm-10">
+                    <select name="genre" class="form-control">
+                        <option value="">Aucun genre</option>
+                        <c:forEach var="g" items="${requestScope['listeDesGenres']}">
+                            <option value="${g.id}" <c:if test="${g.id == musique.getGenre().getId()}">selected</c:if>>${g.nom}</option>
+                        </c:forEach>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
                 <label for="titre" class="col-sm-2 control-label">Titre</label>
                 <div class="col-sm-10">
                     <input type="text" value="${musique.titre}" class="form-control" name="titre" id="titre" placeholder="Titre">

@@ -14,7 +14,7 @@
         <div class="breadcrumb-wrapper">
             <span class="label">Vous êtes ici</span>
             <ol class="breadcrumb">
-                <li><a href="index.jsp">Accueil</a></li>
+                <li><a href="/tp2webmiage/admin">Accueil</a></li>
                 <li class="active">Musiques</li>
             </ol>
         </div>

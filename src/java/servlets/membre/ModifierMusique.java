@@ -15,6 +15,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import musique.gestionnaires.GestionnaireMusiques;
+import musique.modeles.Artiste;
+import musique.modeles.Genre;
 import musique.modeles.Musique;
 import utilisateurs.gestionnaires.GestionnaireUtilisateurs;
 import utilisateurs.modeles.Utilisateur;
@@ -48,6 +50,9 @@ public class ModifierMusique extends HttpServlet {
         
         Musique musique = gestionnaireMusiques.getMusique(idMusique);
         
+        
+        request.setAttribute("listeDesGenres", gestionnaireMusiques.getAllGenres());
+        request.setAttribute("listeDesArtistes", gestionnaireMusiques.getAllArtistes());
         request.setAttribute("musique", musique);
         this.getServletContext().getRequestDispatcher("/view/backoffice/modifier_musique.jsp").forward(request, response);
     }
@@ -77,14 +82,33 @@ public class ModifierMusique extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        Artiste artiste = null;
+        Genre genre = null;
         
-        this.getServletContext().log("Modification de l'utilisateur");
-
+        String inputArtiste = request.getParameter("artiste");
+        String inputGenre = request.getParameter("genre");
+        String inputAnnee = request.getParameter("annee");
+        int annee = 0;
+        
+        if(inputArtiste != null && !inputArtiste.isEmpty()) {
+            artiste = gestionnaireMusiques.getArtiste(Integer.parseInt(inputArtiste));
+        }
+        
+        if(inputGenre != null && !inputGenre.isEmpty()) {
+            genre = gestionnaireMusiques.getGenre(Integer.parseInt(inputGenre));
+        }
+        
+        if(!inputAnnee.isEmpty()) {
+            annee = Integer.parseInt(request.getParameter("annee"));
+        }
+        
         // Modification de l'utilisateur
         gestionnaireMusiques.modifierMusique(
                 Integer.parseInt(request.getPathInfo().replaceAll("/", "")),
+                artiste,
+                genre,
                 request.getParameter("titre"),
-                Integer.parseInt(request.getParameter("annee")),
+                annee,
                 request.getParameter("url"));
 
         // Redirection
