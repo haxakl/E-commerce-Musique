@@ -6,12 +6,9 @@ URL: http://themepixels.com/
 @import url('./bootstrap.min.css');
 @import url('./bootstrap-override.css');
 @import url('./jquery-ui-1.10.3.css');
-@import url('../fontawesome/font-awesome.min.css');
 @import url('./animate.min.css');
 @import url('./animate.delay.css');
-@import url('./toggles.css');
 @import url('chosen.css');
-@import url('lato.css');
 
 body {
    background: #1d2939;

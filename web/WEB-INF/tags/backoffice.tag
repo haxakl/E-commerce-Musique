@@ -16,7 +16,7 @@
         <link href="/tp2webmiage/ressources/library/musiccomposer/style.default.css" rel="stylesheet">
         <link href="/tp2webmiage/ressources/library/fontawesome/font-awesome.css" rel="stylesheet">
         <link href="/tp2webmiage/ressources/library/fontello/fontello.css" rel="stylesheet">
-        <link href="/tp2webmiage/ressources/library/bootstrap/bootsrap-override.css" rel="stylesheet">
+        <link href="/tp2webmiage/ressources/library/toggles/toggles.css" rel="stylesheet">
 
         <script src="/tp2webmiage/ressources/library/jquery/jquery.js"></script>
     </head>
@@ -70,6 +70,6 @@
 
         <script src="/tp2webmiage/ressources/library/jquery/bootstrap.min.js"></script>
         <script src="/tp2webmiage/ressources/library/jquery/jquery-ui-1.10.3.min.js"></script>
-        <script src="/tp2webmiage/ressources/library/jquery/toggles.min.js"></script>
+        <script src="/tp2webmiage/ressources/library/toggles/toggles.min.js"></script>
     </body>
 </html>
