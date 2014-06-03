@@ -83,7 +83,7 @@
                         <td class="text-center"><img height="100" src="${a.photo}"/></td>
                         <td><a href="/tp2webmiage/artistes/${a.id}" style="color:#E90303">${a.nom}</a></td>
                         <td>${a.resume}</td>
-                        <td>${a.getMusiques().size()}</td>
+                        <td>${a.nbmusique}</td>
                     </tr>
                     <c:set var="total" value="${total+1}"/>
                 </c:forEach>

@@ -45,6 +45,18 @@ public class Artiste implements Serializable {
         this.nbmusique = 0;
     }
 
+    public void incrNbMusique() {
+        this.nbmusique++;
+    }
+    
+    public int getNbmusique() {
+        return nbmusique;
+    }
+
+    public void setNbmusique(int nbmusique) {
+        this.nbmusique = nbmusique;
+    }
+
     public List<Musique> getMusiques() {
         return musiques;
     }

@@ -30,6 +30,7 @@ public class Piste implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String nom;
+    private int note;
 
     public Piste() {
     }

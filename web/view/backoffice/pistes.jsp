@@ -37,7 +37,7 @@
                 <!--                 Bouton "précédent" -->
                 <c:choose>
                     <c:when test="${page == '1'}">
-                        <li><a href="?page=${page}&nbAffiche=${nbElement}">&laquo;</a></li>
+                        <li><a class="disabled" href="?page=${page}&nbAffiche=${nbElement}">&laquo;</a></li>
                         </c:when>
                         <c:otherwise>
                         <li><a href="?page=${page - 1}&nbAffiche=${nbElement}">&laquo;</a></li>
@@ -46,12 +46,10 @@
                 <!--                 fin bouton "précedent"  -->
 
                 <c:forEach var="entry" begin="1" end="${nbPages}">
-                    <li
-                        <c:if test="${page.equals(entry)}">
-                            class="active"
-                        </c:if>
-                        ><a href="?page=${entry}&nbAffiche=${nbElement}">${entry}</a></li>
-                    </c:forEach>
+                    <li <c:if test="${page.equals(entry)}">class="active"</c:if>>
+                        <a href="?page=${entry}&nbAffiche=${nbElement}">${entry}</a>
+                    </li>
+                </c:forEach>
 
                 <!--                 Bouton suivant -->
                 <c:choose>
@@ -69,13 +67,10 @@
         <table class="table">  
             <!-- La ligne de titre du tableau des comptes -->  
             <tr>
-                <td></td>
-                <td><b>Nom</b></td>
-                <td><b>Description</b></td>
-                <td><b>Nb Musiques</b></td>
-                <td></td>
-
-            </tr>  
+                <th style="width: 100px;"></th>
+                <th><b>Nom</b></th>
+                <th style="width: 100px;"></th>
+            </tr>
 
             <!-- Ici on affiche les lignes, une par utilisateur -->  
             <!-- cette variable montre comment on peut utiliser JSTL et EL pour calculer -->  
@@ -84,10 +79,9 @@
             <c:forEach var="p" items="${requestScope['listeAllPistes']}">
                 <tr>
                     <td>
-                        <a class="btn btn-sm btn-primary" href="/tp2webmiage/admin/pistes/${p.id}">Modifier</a>
+                        <a class="btn btn-sm btn-primary" href="/tp2webmiage/admin/pistes/${p.id}"><i class="fa fa-cog"></i> Modifier</a>
                     </td>
                     <td>${p.nom}</td> 
-                    <td></td>
                     <td>
                         <button class="btn btn-danger btn-sm">
                             <i class="fa fa-times"></i> Supprimer

@@ -6,21 +6,16 @@
 package servlets.membre;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Collection;
 import javax.ejb.EJB;
-import javax.management.StringValueExp;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import musique.gestionnaires.GestionnaireMusiques;
-import musique.modeles.Artiste;
 import musique.modeles.Piste;
 import utilisateurs.gestionnaires.GestionnaireUtilisateurs;
-import utilisateurs.modeles.Utilisateur;
 
 /**
  *
@@ -48,25 +43,26 @@ public class ListerPistes extends HttpServlet {
 
         // Page affichée
         int numPage = 1;
+        int pagination_begin = 1;
+        int pagination_end = 1;
+        
         if(request.getParameter("page") != null) {
             numPage = Integer.parseInt(request.getParameter("page"));
         }
         
         // Nombre affichée par page
-        int nbAffiche=0;
+        int nbAffiche;
         if(request.getParameter("nbAffiche") != null) {
             nbAffiche = Integer.parseInt(request.getParameter("nbAffiche"));
-            System.out.println("nbAffiche : " + nbAffiche);
-        }
-        else{
+        } else{
             nbAffiche = 30;
         }
-        Collection<Piste> liste = gestionnaireMusiques.getPistes((numPage-1)*nbAffiche, nbAffiche);
-        // Recupère tous les utilisateurs
-        Collection<Piste> listeAllPistes = gestionnaireMusiques.getAllPistes();
-        double totalUser = listeAllPistes.size();
         
-        System.out.println("Nombre d'utilisateurs total :" + listeAllPistes.size() + "Nombre d'utilisateur par page : " + liste.size());
+        // Récupération des listes
+        Collection<Piste> liste = gestionnaireMusiques.getPistes((numPage-1)*nbAffiche, nbAffiche);
+        Collection<Piste> listeAllPistes = gestionnaireMusiques.getAllPistes();
+        
+        double totalUser = listeAllPistes.size();
         
         if(totalUser == 0){
             request.setAttribute("nbPages", Math.ceil(liste.size()/nbAffiche));
