@@ -17,7 +17,7 @@
             <h3>Liste des artistes</h3>
         </div>
 
-        <div class="col-lg-6">
+        <div>
             <ul class="pagination">
                 <!--                Définition du nombre d'élément par page -->
                 <c:choose>
@@ -63,38 +63,28 @@
             </ul>
         </div>
 
-        <!-- Zone qui affiche les utilisateurs si le paramètre action vaut listerComptes -->  
-        <table class="table table-striped">
-            <thead>
-                <tr>  
-                    <td></td>
-                    <td><b>Artiste</b></td>
-                    <td><b>Description</b></td>
-                    <td><b>Nombre de musiques</b></td>
-                </tr>
-            </thead>
+        <div id="whatever">
+            <c:forEach var="a" items="${requestScope['listeDesArtistes']}">
+                <div class="item">
+                    <img src="http://www.veryicon.com/icon/png/System/User%20task%20report/User%20Anonymous%20Disabled.png" />
+                    <img src="${a.photo}" />
+                    <div item="${a.id}" class="caption" style="display: none;">
+                        <h2>${a.nom}</h2>
+                        <p>${a.resume}</p>
+                    </div>
+                </div>
+            </c:forEach>
+        </div>
 
-            <tbody>
-                <!-- Ici on affiche les lignes, une par utilisateur -->  
-                <!-- cette variable montre comment on peut utiliser JSTL et EL pour calculer -->  
-                <c:set var="total" value="0"/>  
-                <c:forEach var="a" items="${requestScope['listeDesArtistes']}">
-                    <tr>
-                        <td class="text-center"><img height="100" src="${a.photo}"/></td>
-                        <td><a href="/tp2webmiage/artistes/${a.id}" style="color:#E90303">${a.nom}</a></td>
-                        <td>${a.resume}</td>
-                        <td>${a.nbmusique}</td>
-                    </tr>
-                    <c:set var="total" value="${total+1}"/>
-                </c:forEach>
-            </tbody>
-            <!-- Affichage du solde total dans la dernière ligne du tableau -->  
-            <tfoot>
-                <tr>
-                    <td colspan="2"><b>TOTAL</b>
-                    <td><b>${total}</b></td>
-                </tr>
-            </tfoot>
-        </table>
+        <script src="/tp2webmiage/ressources/library/hoverGrid/hoverGrid.js"></script>
+        <script>
+            $(document).ready(function() {
+                $('#whatever').hoverGrid();
+            });
+            
+            $(".caption").click(function() {
+                location = "/tp2webmiage/artistes/" + $(this).attr("item");
+            });
+        </script>
     </jsp:body>
 </t:frontoffice>

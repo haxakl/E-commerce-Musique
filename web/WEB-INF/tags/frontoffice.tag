@@ -20,6 +20,10 @@
         <link href="/tp2webmiage/ressources/library/fontello/fontello.css" rel="stylesheet">
         <link href="/tp2webmiage/ressources/library/fontawesome/font-awesome.css" rel="stylesheet">
         <link href="/tp2webmiage/ressources/library/bootstrap/bootstrap.min.css" rel="stylesheet">
+        <link href="/tp2webmiage/ressources/library/hoverGrid/hoverGrid.css" rel="stylesheet">
+        
+        <script src="/tp2webmiage/ressources/library/jquery/jquery.js"></script>
+        <script src="/tp2webmiage/ressources/library/bootstrap/bootstrap.js"></script>
     </head>
 
     <body>
@@ -158,8 +162,6 @@
             </c:if>
         </div>
 
-        <script src="/tp2webmiage/ressources/library/jquery/jquery.js"></script>
-        <script src="/tp2webmiage/ressources/library/bootstrap/bootstrap.js"></script>
         <script src="/tp2webmiage/ressources/library/mixit-up/jquery.mixitup.js"></script>
 
         <jsp:invoke fragment="script"/>
