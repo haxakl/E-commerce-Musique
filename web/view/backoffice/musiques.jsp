@@ -29,6 +29,9 @@
                     <c:when test="${etat.equals('modifier')}">
                         <p>La musique a été modifiée</p>
                     </c:when>
+                    <c:when test="${etat.equals('supprimer')}">
+                        <p>La musique a été supprimée</p>
+                    </c:when>
                 </c:choose>
             </div>
         </c:if>
@@ -47,7 +50,7 @@
                     <c:otherwise>
                         <c:set var="nbElement" value="30">          
                         </c:set>
-                    </c:otherwise>       
+                    </c:otherwise>
                 </c:choose>
 
                 <!--                 Bouton "précédent" -->
@@ -100,19 +103,13 @@
 
             <c:forEach var="m" items="${requestScope['listeDesMusiques']}">
                 <tr>
-                    <td>
-                        <a class="btn btn-sm btn-primary" href="/tp2webmiage/admin/musiques/modifier/${m.id}">Modifier</a>
-                    </td>
-                    <td>${m.artiste.nom}</td> 
+                    <td><a class="btn btn-sm btn-primary" href="/tp2webmiage/admin/musiques/modifier/${m.id}">Modifier</a></td>
+                    <td><a href="/tp2webmiage/admin/artiste/${m.artiste.id}">${m.artiste.nom}</a></td> 
                     <td>${m.titre}</td>
                     <td>${m.nbpiste}</td>
                     <td>${m.annee}</td>
-                    <td><a href="musiques?genre=${m.genre.id}">${m.genre.nom}</a></td>
-                    <td>
-                        <button class="btn btn-danger btn-sm">
-                            <i class="fa fa-times"></i> Supprimer
-                        </button>
-                    </td>
+                    <td><a href="/tp2webmiage/admin/musiques?genre=${m.genre.id}">${m.genre.nom}</a></td>
+                    <td><a class="btn btn-danger btn-sm" href="/tp2webmiage/admin/musiques/delete/${m.id}"><i class="fa fa-times"></i> Supprimer</a></td>
                 </tr>
             </c:forEach>
         </table>

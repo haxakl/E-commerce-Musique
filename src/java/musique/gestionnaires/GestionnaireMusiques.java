@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package musique.gestionnaires;
 
 import java.util.ArrayList;
@@ -167,9 +161,22 @@ public class GestionnaireMusiques {
         em.merge(musique);
     }
     
+    /**
+     * Supprimer une musique
+     * @param idMusique Numéro de la musique
+     */
+    public void deleteMusique(int idMusique) {
+        Query q = em.createQuery("delete from Piste p where p.musique.id = :idMusique").setParameter("idMusique", idMusique);
+        q.executeUpdate();
+        
+        Query q2 = em.createQuery("delete from Musique u where u.id = :idMusique").setParameter("idMusique", idMusique);
+        q2.executeUpdate();
+    }
+    
     // =============================
     //  Genres
     // =============================
+    
     /**
      * Retourne les musiques d'un genre précis avec une plage
      *
@@ -347,6 +354,7 @@ public class GestionnaireMusiques {
     // =============================
     //  Recherche de patterns
     // =============================
+    
     /**
      * Retourne les musiques dont le genre a un pattern précis
      *
