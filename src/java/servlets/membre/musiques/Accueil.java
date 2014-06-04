@@ -85,7 +85,7 @@ public class Accueil extends HttpServlet {
         request.setAttribute("page", numPage);
         request.setAttribute("nbAffiche", nbAffiche);
         request.setAttribute("listeDesMusiques", liste);
-        this.getServletContext().getRequestDispatcher("/view/backoffice/musiques.jsp").forward(request, response);
+        this.getServletContext().getRequestDispatcher("/view/backoffice/musiques/accueil.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

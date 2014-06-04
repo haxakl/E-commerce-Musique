@@ -34,7 +34,6 @@ public class GestionnaireMusiques {
     // =============================
     //  Musiques
     // =============================
-    
     /**
      * Créer une musique
      *
@@ -53,13 +52,14 @@ public class GestionnaireMusiques {
         em.persist(m);
         return m;
     }
-    
+
     /**
      * Créer une musique
+     *
      * @param titre
      * @param annee
      * @param url
-     * @return 
+     * @return
      */
     public Musique creerMusique(String titre, int annee, String url) {
         Musique m = new Musique(titre, 0, annee, url);
@@ -143,12 +143,13 @@ public class GestionnaireMusiques {
 
     /**
      * Modifier la musique
+     *
      * @param idMusique Numéro de la musique
      * @param artiste Artiste de la musique
      * @param genre Genre de la musique
      * @param titre Titre de la musique
      * @param annee Année de la musique
-     * @param url  Url de la musique
+     * @param url Url de la musique
      */
     public void modifierMusique(int idMusique, Artiste artiste, Genre genre, String titre, int annee, String url) {
         Musique musique = getMusique(idMusique);
@@ -159,19 +160,20 @@ public class GestionnaireMusiques {
         musique.setUrl(url);
         em.merge(musique);
     }
-    
+
     /**
      * Supprimer une musique
+     *
      * @param idMusique Numéro de la musique
      */
     public void deleteMusique(int idMusique) {
         Query q = em.createQuery("delete from Piste p where p.musique.id = :idMusique").setParameter("idMusique", idMusique);
         q.executeUpdate();
-        
+
         Query q2 = em.createQuery("delete from Musique u where u.id = :idMusique").setParameter("idMusique", idMusique);
         q2.executeUpdate();
     }
-    
+
     /**
      * Retourne les musiques d'un genre précis avec une plage
      *
@@ -188,7 +190,6 @@ public class GestionnaireMusiques {
     // =============================
     //  Genres
     // =============================
-    
     /**
      * Créer un genre de musique
      *
@@ -200,7 +201,7 @@ public class GestionnaireMusiques {
         em.persist(g);
         return g;
     }
-    
+
     /**
      * Modifier un genre de musique
      *
@@ -212,7 +213,7 @@ public class GestionnaireMusiques {
         g.setNom(nom);
         em.merge(g);
     }
-    
+
     /**
      * Retourne le genre cherché
      *
@@ -224,14 +225,15 @@ public class GestionnaireMusiques {
     public Genre getGenre(int idGenre) {
         // Exécution d'une requête équivalente à un select *  
         Query q = em.createQuery("select g from Genre g where g.id = :idGenre").setParameter("idGenre", idGenre);
-        if(q.getResultList().isEmpty()) {
+        if (q.getResultList().isEmpty()) {
             return null;
         }
         return (Genre) q.getResultList().get(0);
     }
-    
+
     /**
      * Retourne tous les genres
+     *
      * @return Une collection de genre
      */
     public Collection<Genre> getAllGenres() {
@@ -242,16 +244,17 @@ public class GestionnaireMusiques {
 
     /**
      * Supprimer un genre
+     *
      * @param idGenre Numéro du genre
      */
     public void deleteGenre(int idGenre) {
         Query q = em.createQuery("update Musique set genre = null where genre.id = :idGenre").setParameter("idGenre", idGenre);
         q.executeUpdate();
-        
+
         Query q2 = em.createQuery("delete from Genre u where u.id = :idGenre").setParameter("idGenre", idGenre);
         q2.executeUpdate();
     }
-    
+
     /**
      * Retourne les genres dans une plage
      *
@@ -272,6 +275,22 @@ public class GestionnaireMusiques {
     // =============================
     
     /**
+     * Retourne la piste
+     *
+     * @param idPiste Numéro de la piste
+     * @return Une piste
+     */
+    public Piste getPiste(int idPiste) {
+        // Exécution d'une requête équivalente à un select
+        Query q = em.createQuery("select p from Piste p where p.id = :idPiste").setParameter("idPiste", idPiste);
+
+        if (q.getResultList().isEmpty()) {
+            return null;
+        }
+        return (Piste) q.getResultList().get(0);
+    }
+
+    /**
      * Retourne toutes les pistes
      *
      * @param idMusique Numéro de la musique
@@ -290,6 +309,7 @@ public class GestionnaireMusiques {
 
     /**
      * Créer une piste
+     *
      * @param musique Musique de la piste
      * @param nom Nom de la piste
      * @return Une piste
@@ -319,6 +339,7 @@ public class GestionnaireMusiques {
 
     /**
      * Retourne tous les pistes
+     *
      * @return Une collection de piste
      */
     public Collection<Piste> getAllPistes() {
@@ -330,9 +351,9 @@ public class GestionnaireMusiques {
     // =============================
     //  Artiste
     // =============================
-    
     /**
      * Créer une artiste
+     *
      * @param nom Nom de l'artiste
      * @param description Description de l'artiste
      * @param photo Lien de la photo
@@ -355,12 +376,12 @@ public class GestionnaireMusiques {
     public Artiste getArtiste(int idArtiste) {
         // Exécution d'une requête équivalente à un select *  
         Query q = em.createQuery("select a from Artiste a where a.id = :idArtiste").setParameter("idArtiste", idArtiste);
-        if(q.getResultList().isEmpty()) {
+        if (q.getResultList().isEmpty()) {
             return null;
         }
         return (Artiste) q.getResultList().get(0);
     }
-    
+
     /**
      * Retourne l'artiste cherché
      *
@@ -372,14 +393,15 @@ public class GestionnaireMusiques {
     public Artiste getArtiste(String nomArtiste) {
         // Exécution d'une requête équivalente à un select *  
         Query q = em.createQuery("select a from Artiste a where a.nom = :nomArtiste").setParameter("nomArtiste", nomArtiste);
-        if(q.getResultList().isEmpty()) {
+        if (q.getResultList().isEmpty()) {
             return null;
         }
         return (Artiste) q.getResultList().get(0);
     }
-    
+
     /**
      * Retourne tous les artistes
+     *
      * @return Une collection d'artiste
      */
     public Collection<Artiste> getAllArtistes() {
@@ -405,18 +427,20 @@ public class GestionnaireMusiques {
 
     /**
      * Supprimer un artiste
+     *
      * @param idArtiste Numéro de l'artiste
      */
     public void deleteArtiste(int idArtiste) {
         Query q = em.createQuery("update Musique set artiste = null where artiste.id = :idArtiste").setParameter("idArtiste", idArtiste);
         q.executeUpdate();
-        
+
         Query q2 = em.createQuery("delete from Artiste u where u.id = :idArtiste").setParameter("idArtiste", idArtiste);
         q2.executeUpdate();
     }
-    
+
     /**
      * Modifier l'artiste
+     *
      * @param idArtiste Numéro de l'artiste
      * @param nom Nom de l'artiste
      * @param description Description de l'artiste
@@ -429,11 +453,10 @@ public class GestionnaireMusiques {
         artiste.setPhoto(photo);
         em.merge(artiste);
     }
-    
+
     // =============================
     //  Recherche de patterns
     // =============================
-    
     /**
      * Retourne les musiques dont le genre a un pattern précis
      *
@@ -457,22 +480,21 @@ public class GestionnaireMusiques {
     }
 
     public Collection<Musique> searchArtist(String pattern) {
-       Query q = em.createQuery("select m from Musique m where m.artiste.nom LIKE :cpattern").setParameter("cpattern", "%" + pattern + "%");
-       return q.getResultList();
+        Query q = em.createQuery("select m from Musique m where m.artiste.nom LIKE :cpattern").setParameter("cpattern", "%" + pattern + "%");
+        return q.getResultList();
     }
 
     public Collection<Musique> searchAnnee(int pattern) {
-        Query q = em.createQuery("select m from Musique m where m.annee = :cpattern").setParameter("cpattern",pattern);
+        Query q = em.createQuery("select m from Musique m where m.annee = :cpattern").setParameter("cpattern", pattern);
         return q.getResultList();
     }
 
     // =============================
     //  Piste
     // =============================
-    
-    public Collection<Musique> getMusiqueByInstrument(String nom){
+    public Collection<Musique> getMusiqueByInstrument(String nom) {
         String lower = nom.toLowerCase();
-        Query q = em.createQuery("select distinct p.musique from Piste p where lower(p.nom) LIKE :cnom").setParameter("cnom","%" + nom + "%");
+        Query q = em.createQuery("select distinct p.musique from Piste p where lower(p.nom) LIKE :cnom").setParameter("cnom", "%" + nom + "%");
         return q.getResultList();
     }
 }

@@ -18,43 +18,30 @@
         <form id="basicForm" method="post" class="form-horizontal" role="form">
             <h3>Informations</h3>
             <div class="form-group">
-                <label for="artiste" class="col-sm-2 control-label">Artiste</label>
+                <label for="musique" class="col-sm-2 control-label">Musique</label>
                 <div class="col-sm-10">
-                    <select name="artiste" class="form-control">
-                        <option value="">Aucun artiste</option>
-                        <c:forEach var="a" items="${requestScope['listeDesArtistes']}">
-                            <option value="${a.id}">${a.nom}</option>
+                    <select name="musique" class="form-control">
+                        <option value="">Aucune musique</option>
+                        <c:forEach var="m" items="${requestScope['listeDesMusiques']}">
+                            <option value="${m.id}">${m.titre}</option>
                         </c:forEach>
                     </select>
                 </div>
             </div>
             <div class="form-group">
-                <label for="genre" class="col-sm-2 control-label">Genre</label>
+                <label for="nom" class="col-sm-2 control-label">Nom</label>
                 <div class="col-sm-10">
-                    <select name="genre" class="form-control">
-                        <option value="">Aucun genre</option>
-                        <c:forEach var="g" items="${requestScope['listeDesGenres']}">
-                            <option value="${g.id}">${g.nom}</option>
-                        </c:forEach>
+                    <input type="text" class="form-control" name="nom" id="titre" placeholder="Nom">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="annee" class="col-sm-2 control-label">Difficulté</label>
+                <div class="col-sm-10">
+                    <select class="form-control">
+                        <%--<c:for var="0" items="${requestScope['listeDesMusiques']}">--%>
+                            <!--<option value="${m.id}">${m.titre}</option>-->
+                        <%--</c:forEach>--%>
                     </select>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="titre" class="col-sm-2 control-label">Titre</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" name="titre" id="titre" placeholder="Titre">
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="url" class="col-sm-2 control-label">Url</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" name="url" id="url" placeholder="Url">
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="annee" class="col-sm-2 control-label">Année</label>
-                <div class="col-sm-10">
-                    <input type="number" class="form-control" name="annee" id="annee">
                 </div>
             </div>
 

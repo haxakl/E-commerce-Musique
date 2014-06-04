@@ -54,7 +54,7 @@ public class Modifier extends HttpServlet {
         request.setAttribute("listeDesGenres", gestionnaireMusiques.getAllGenres());
         request.setAttribute("listeDesArtistes", gestionnaireMusiques.getAllArtistes());
         request.setAttribute("musique", musique);
-        this.getServletContext().getRequestDispatcher("/view/backoffice/modifier_musique.jsp").forward(request, response);
+        this.getServletContext().getRequestDispatcher("/view/backoffice/musiques/modifier.jsp").forward(request, response);
     }
 
     /**

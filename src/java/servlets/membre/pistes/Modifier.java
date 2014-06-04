@@ -11,13 +11,14 @@ import musique.gestionnaires.GestionnaireMusiques;
 import musique.modeles.Artiste;
 import musique.modeles.Genre;
 import musique.modeles.Musique;
+import musique.modeles.Piste;
 import utilisateurs.gestionnaires.GestionnaireUtilisateurs;
 
 /**
  *
  * @author julien
  */
-@WebServlet(name = "ModifierMusique", urlPatterns = {"/admin/musiques/modifier/*"})
+@WebServlet(name = "ModifierMusique", urlPatterns = {"/admin/pistes/modifier/*"})
 public class Modifier extends HttpServlet {
     @EJB
     private GestionnaireMusiques gestionnaireMusiques;
@@ -38,15 +39,13 @@ public class Modifier extends HttpServlet {
             throws ServletException, IOException {
         
         String url = request.getRequestURL().toString();
-        int idMusique = Integer.valueOf(url.substring(url.lastIndexOf("/") + 1));
+        int idPiste = Integer.valueOf(url.substring(url.lastIndexOf("/") + 1));
         
-        Musique musique = gestionnaireMusiques.getMusique(idMusique);
+        Piste piste = gestionnaireMusiques.getPiste(idPiste);
         
-        
-        request.setAttribute("listeDesGenres", gestionnaireMusiques.getAllGenres());
-        request.setAttribute("listeDesArtistes", gestionnaireMusiques.getAllArtistes());
-        request.setAttribute("musique", musique);
-        this.getServletContext().getRequestDispatcher("/view/backoffice/modifier_musique.jsp").forward(request, response);
+        request.setAttribute("listeDesMusiques", gestionnaireMusiques.getAllMusiques());
+        request.setAttribute("piste", piste);
+        this.getServletContext().getRequestDispatcher("/view/backoffice/pistes/modifier.jsp").forward(request, response);
     }
 
     /**

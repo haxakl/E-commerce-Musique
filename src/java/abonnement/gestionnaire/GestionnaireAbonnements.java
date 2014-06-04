@@ -56,6 +56,8 @@ public class GestionnaireAbonnements {
     
     public void addUtilisateur(Abonnement abo, Utilisateur user){
         abo.addUtilisateur(user);
+        user.setAbonnement(abo);
+        em.merge(abo);
         em.merge(user);
     }
     

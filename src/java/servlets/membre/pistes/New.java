@@ -16,7 +16,7 @@ import utilisateurs.gestionnaires.GestionnaireUtilisateurs;
  *
  * @author julien
  */
-@WebServlet(name = "AjouterMusique", urlPatterns = {"/admin/musiques/add"})
+@WebServlet(name = "AjouterPiste", urlPatterns = {"/admin/pistes/add"})
 public class New extends HttpServlet {
     @EJB
     private GestionnaireMusiques gestionnaireMusiques;
@@ -35,9 +35,8 @@ public class New extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setAttribute("listeDesGenres", gestionnaireMusiques.getAllGenres());
-        request.setAttribute("listeDesArtistes", gestionnaireMusiques.getAllArtistes());
-        this.getServletContext().getRequestDispatcher("/view/backoffice/add_musique.jsp").forward(request, response);
+        request.setAttribute("listeDesMusiques", gestionnaireMusiques.getAllMusiques());
+        this.getServletContext().getRequestDispatcher("/view/backoffice/pistes/new.jsp").forward(request, response);
     }
 
     /**

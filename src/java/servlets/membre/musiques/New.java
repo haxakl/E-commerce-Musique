@@ -37,7 +37,7 @@ public class New extends HttpServlet {
             throws ServletException, IOException {
         request.setAttribute("listeDesGenres", gestionnaireMusiques.getAllGenres());
         request.setAttribute("listeDesArtistes", gestionnaireMusiques.getAllArtistes());
-        this.getServletContext().getRequestDispatcher("/view/backoffice/add_musique.jsp").forward(request, response);
+        this.getServletContext().getRequestDispatcher("/view/backoffice/musiques/new.jsp").forward(request, response);
     }
 
     /**
