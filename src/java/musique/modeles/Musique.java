@@ -42,6 +42,14 @@ public class Musique implements Serializable {
     @ManyToMany(mappedBy = "purshased")
     private List<Utilisateur> utilisateurs;
 
+    public List<Utilisateur> getUtilisateurs() {
+        return utilisateurs;
+    }
+
+    public void setUtilisateurs(List<Utilisateur> utilisateurs) {
+        this.utilisateurs = utilisateurs;
+    }
+
     public Musique() {
     }
 

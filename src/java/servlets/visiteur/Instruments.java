@@ -42,7 +42,6 @@ public class Instruments extends HttpServlet {
         System.out.println(url);
         String instrument = url.substring(url.lastIndexOf("/") + 1);
         instrument = URLDecoder.decode(instrument, "UTF-8");
-        System.out.println("Instrument : " + instrument);
         Collection<Musique> researchmusics = gestionnaireMusiques.getMusiqueByInstrument(instrument);
         request.setAttribute("listeDesMusiques", researchmusics);
         request.setAttribute("filtername", instrument);
