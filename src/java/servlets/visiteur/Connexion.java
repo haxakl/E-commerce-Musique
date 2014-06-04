@@ -33,16 +33,6 @@ public class Connexion extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        // L'utilisateur est connecté
-        if ((Utilisateur) request.getSession().getAttribute("user") != null) {
-
-            // Récupération de l'utilisateur
-            Utilisateur user = (Utilisateur) request.getSession().getAttribute("user");
-
-            this.getServletContext().getRequestDispatcher("/view/backoffice/connecte.jsp").forward(request, response);
-        }
-
         this.getServletContext().getRequestDispatcher("/view/frontoffice/connexion.jsp").forward(request, response);
     }
 
@@ -88,7 +78,7 @@ public class Connexion extends HttpServlet {
 
         } else {
             request.setAttribute("message", "invalide");
-            this.getServletContext().getRequestDispatcher("/tp2webmiage/view/frontoffice/connexion.jsp").forward(request, response);
+            this.getServletContext().getRequestDispatcher("/view/frontoffice/connexion.jsp").forward(request, response);
         }
     }
 

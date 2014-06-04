@@ -4,12 +4,12 @@
 
 <t:backoffice>
     <jsp:attribute name="breadcrumb">
-        <h2><i class="fa fa-home"></i> Musique <span>Modifier une musique</span></h2>
+        <h2><i class="fa fa-home"></i> Piste <span>Modifier une piste</span></h2>
         <div class="breadcrumb-wrapper">
             <span class="label">Vous êtes ici</span>
             <ol class="breadcrumb">
                 <li><a href="/tp2webmiage/admin">Accueil</a></li>
-                <li><a href="/tp2webmiage/admin/musiques">Musiques</a></li>
+                <li><a href="/tp2webmiage/admin/pistes">Pistes</a></li>
                 <li class="active">Modifier</li>
             </ol>
         </div>
@@ -18,50 +18,39 @@
         <form id="basicForm" method="post" class="form-horizontal" role="form">
             <h3>Informations</h3>
             <div class="form-group">
-                <label for="artiste" class="col-sm-2 control-label">Artiste</label>
+                <label for="musique" class="col-sm-2 control-label">Musique</label>
                 <div class="col-sm-10">
-                    <select name="artiste" class="form-control">
-                        <option value="">Aucun artiste</option>
-                        <c:forEach var="a" items="${requestScope['listeDesArtistes']}">
-                            <option value="${a.id}" <c:if test="${a.id == musique.getArtiste().getId()}">selected</c:if>>${a.nom}</option>
+                    <select name="musique" id="musique" class="form-control">
+                        <option value="">Aucune musique</option>
+                        <c:forEach var="m" items="${requestScope['listeDesMusiques']}">
+                            <option value="${m.id}" <c:if test="${m.id == piste.musique.id}">selected</c:if>>${m.titre}</option>
                         </c:forEach>
                     </select>
                 </div>
             </div>
             <div class="form-group">
-                <label for="genre" class="col-sm-2 control-label">Genre</label>
+                <label for="nom" class="col-sm-2 control-label">Nom</label>
                 <div class="col-sm-10">
-                    <select name="genre" class="form-control">
-                        <option value="">Aucun genre</option>
-                        <c:forEach var="g" items="${requestScope['listeDesGenres']}">
-                            <option value="${g.id}" <c:if test="${g.id == musique.getGenre().getId()}">selected</c:if>>${g.nom}</option>
+                    <input type="text" value="${piste.nom}" class="form-control" name="nom" id="titre" placeholder="Nom">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="note" class="col-sm-2 control-label">Difficulté</label>
+                <div class="col-sm-10">
+                    <select name="note" id="note" class="form-control">
+                        <c:forEach var="entry" begin="0" end="4">
+                            <option value="${entry}" <c:if test="${entry == piste.note}">selected</c:if>>${entry}</option>
+                            <option value="${entry+0.5}" <c:if test="${entry + 0.5 == piste.note}">selected</c:if>>${entry+0.5}</option>
                         </c:forEach>
+                            <option value="5">5</option>
                     </select>
                 </div>
             </div>
-            <div class="form-group">
-                <label for="titre" class="col-sm-2 control-label">Titre</label>
-                <div class="col-sm-10">
-                    <input type="text" value="${musique.titre}" class="form-control" name="titre" id="titre" placeholder="Titre">
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="url" class="col-sm-2 control-label">Url</label>
-                <div class="col-sm-10">
-                    <input type="text" value="${musique.url}" class="form-control" name="url" id="url" placeholder="Url">
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="annee" class="col-sm-2 control-label">Année</label>
-                <div class="col-sm-10">
-                    <input type="number" value="${musique.annee}" class="form-control" name="annee" id="annee">
-                </div>
-            </div>
-            
+
             <div class="row">
                 <div class="col-lg-9"></div>
                 <div class="col-lg-3">
-                    <button class="btn btn-success btn-block pull-right">Modifier la musique</button>
+                    <button class="btn btn-success btn-block pull-right">Modifier la piste</button>
                 </div>
             </div>
         </form><br/>

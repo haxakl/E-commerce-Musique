@@ -1,6 +1,13 @@
-package servlets.membre.pistes;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+package services;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,21 +15,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import musique.gestionnaires.GestionnaireMusiques;
-import musique.modeles.Artiste;
-import musique.modeles.Genre;
-import musique.modeles.Musique;
-import musique.modeles.Piste;
 import utilisateurs.gestionnaires.GestionnaireUtilisateurs;
 
 /**
  *
- * @author julien
+ * @author Guillaume
  */
-@WebServlet(name = "ModifierPiste", urlPatterns = {"/admin/pistes/modifier/*"})
-public class Modifier extends HttpServlet {
+@WebServlet(name = "DeletePiste", urlPatterns = {"/admin/pistes/delete/*"})
+public class DeletePiste extends HttpServlet {
     @EJB
     private GestionnaireMusiques gestionnaireMusiques;
-
+    
     @EJB
     private GestionnaireUtilisateurs gestionnaireUtilisateurs;
 
@@ -37,15 +40,8 @@ public class Modifier extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        String url = request.getRequestURL().toString();
-        int idPiste = Integer.valueOf(url.substring(url.lastIndexOf("/") + 1));
-        
-        Piste piste = gestionnaireMusiques.getPiste(idPiste);
-        
-        request.setAttribute("listeDesMusiques", gestionnaireMusiques.getAllMusiques());
-        request.setAttribute("piste", piste);
-        this.getServletContext().getRequestDispatcher("/view/backoffice/pistes/modifier.jsp").forward(request, response);
+        gestionnaireMusiques.deletePiste(Integer.parseInt(request.getPathInfo().replaceAll("/", "")));
+        response.sendRedirect("/tp2webmiage/admin/pistes?etat=supprimer");
     }
 
     /**
@@ -73,25 +69,7 @@ public class Modifier extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Musique musique = null;
-        
-        String inputMusique = request.getParameter("musique");
-        String inputNom = request.getParameter("nom");
-        String inputNote = request.getParameter("note");
-        
-        if(inputMusique != null && !inputMusique.isEmpty()) {
-            musique = gestionnaireMusiques.getMusique(Integer.parseInt(inputMusique));
-        }
-        
-        // Modification de l'utilisateur
-        gestionnaireMusiques.modifierPiste(
-                Integer.parseInt(request.getPathInfo().replaceAll("/", "")),
-                musique,
-                inputNom,
-                Integer.parseInt(inputNote));
-
-        // Redirection
-        response.sendRedirect("/tp2webmiage/admin/pistes?etat=modifier");
+        processRequest(request, response);
     }
 
     /**

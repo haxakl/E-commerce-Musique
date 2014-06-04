@@ -273,7 +273,6 @@ public class GestionnaireMusiques {
     // =============================
     //  Pistes
     // =============================
-    
     /**
      * Retourne la piste
      *
@@ -317,6 +316,10 @@ public class GestionnaireMusiques {
     public Piste creerPiste(Musique musique, String nom, int note) {
 
         Piste m = new Piste(musique, nom, note);
+        
+        if(musique != null) {
+            musique.setNbpiste(musique.getNbpiste() + 1);
+        }
 
         em.persist(m);
         return m;
@@ -346,6 +349,42 @@ public class GestionnaireMusiques {
         // Exécution d'une requête équivalente à un select *  
         Query q = em.createQuery("select a from Piste a");
         return q.getResultList();
+    }
+
+    /**
+     * Supprimer une piste
+     *
+     * @param idPiste Numéro de la piste
+     */
+    public void deletePiste(int idPiste) {
+        Piste piste = getPiste(idPiste);
+        Musique musique = piste.getMusique();
+        if (musique != null) {
+            musique.setNbpiste(musique.getNbpiste() - 1);
+            em.merge(musique);
+        }
+
+        Query q2 = em.createQuery("delete from Piste u where u.id = :idPiste").setParameter("idPiste", idPiste);
+        q2.executeUpdate();
+    }
+
+    /**
+     * Modifier une piste
+     *
+     * @param idPiste Numéro de la piste
+     * @param musique Musique de la piste
+     * @param nom Nom de la piste
+     * @param note Note de la piste
+     * @return Une piste
+     */
+    public Piste modifierPiste(int idPiste, Musique musique, String nom, int note) {
+
+        Piste m = getPiste(idPiste);
+        m.setMusique(musique);
+        m.setNom(nom);
+        m.setNote(note);
+        em.merge(m);
+        return m;
     }
 
     // =============================

@@ -101,7 +101,7 @@
             <c:forEach var="p" items="${requestScope['listeAllPistes']}">
                 <tr>
                     <td>
-                        <a class="btn btn-sm btn-primary" href="/tp2webmiage/admin/pistes/${p.id}"><i class="fa fa-cog"></i> Modifier</a>
+                        <a class="btn btn-sm btn-primary" href="/tp2webmiage/admin/pistes/modifier/${p.id}"><i class="fa fa-cog"></i> Modifier</a>
                     </td>
                     <td>${p.nom}</td> 
                     <td>${p.musique.titre}</td> 
@@ -117,11 +117,7 @@
                             </c:choose>
                         </c:forEach>
                     </td> 
-                    <td>
-                        <button class="btn btn-danger btn-sm">
-                            <i class="fa fa-times"></i> Supprimer
-                        </button>
-                    </td>
+                    <td><a class="btn btn-danger btn-sm" href="/tp2webmiage/admin/pistes/delete/${p.id}"><i class="fa fa-times"></i> Supprimer</a></td>
                 </tr>
             </c:forEach>
         </table>

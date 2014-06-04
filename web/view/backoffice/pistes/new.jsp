@@ -4,12 +4,12 @@
 
 <t:backoffice>
     <jsp:attribute name="breadcrumb">
-        <h2><i class="fa fa-home"></i> Musique <span>Ajouter une musique</span></h2>
+        <h2><i class="fa fa-home"></i> Piste <span>Ajouter une piste</span></h2>
         <div class="breadcrumb-wrapper">
             <span class="label">Vous êtes ici</span>
             <ol class="breadcrumb">
                 <li><a href="/tp2webmiage/admin">Accueil</a></li>
-                <li><a href="/tp2webmiage/admin/musiques">Musiques</a></li>
+                <li><a href="/tp2webmiage/admin/pistes">Pistes</a></li>
                 <li class="active">Ajouter</li>
             </ol>
         </div>
