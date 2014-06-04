@@ -3,28 +3,28 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package servlets.membre;
+package servlets.membre.utilisateurs;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Collection;
 import javax.ejb.EJB;
+import javax.management.StringValueExp;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import musique.gestionnaires.GestionnaireMusiques;
-import musique.modeles.Piste;
 import utilisateurs.gestionnaires.GestionnaireUtilisateurs;
+import utilisateurs.modeles.Utilisateur;
 
 /**
  *
  * @author Guillaume
  */
-@WebServlet(name = "AdminListerPistes", urlPatterns = {"/admin/pistes"})
-public class ListerPistes extends HttpServlet {
-    @EJB
-    private GestionnaireMusiques gestionnaireMusiques;
+@WebServlet(name = "AdminListerUtilisateurs", urlPatterns = {"/admin/utilisateurs"})
+public class Accueil extends HttpServlet {
 
     @EJB
     private GestionnaireUtilisateurs gestionnaireUtilisateurs;
@@ -43,26 +43,28 @@ public class ListerPistes extends HttpServlet {
 
         // Page affichée
         int numPage = 1;
-        int pagination_begin = 1;
-        int pagination_end = 1;
-        
         if(request.getParameter("page") != null) {
             numPage = Integer.parseInt(request.getParameter("page"));
         }
         
         // Nombre affichée par page
-        int nbAffiche;
+        int nbAffiche=0;
         if(request.getParameter("nbAffiche") != null) {
             nbAffiche = Integer.parseInt(request.getParameter("nbAffiche"));
-        } else{
+            System.out.println("nbAffiche : " + nbAffiche);
+        }
+        else{
             nbAffiche = 30;
         }
+        System.out.println("Numpage: "+ numPage);
+        System.out.println("Requete utilisateurs de : " + (numPage-1)*nbAffiche + "à : " + nbAffiche*numPage);
+        Collection<Utilisateur> liste = gestionnaireUtilisateurs.getUsers((numPage-1)*nbAffiche, nbAffiche);
+        System.out.println(liste);
+        // Recupère tous les utilisateurs
+        Collection<Utilisateur> listeAllUsers = gestionnaireUtilisateurs.getAllUsers();
+        double totalUser = listeAllUsers.size();
         
-        // Récupération des listes
-        Collection<Piste> liste = gestionnaireMusiques.getPistes((numPage-1)*nbAffiche, nbAffiche);
-        Collection<Piste> listeAllPistes = gestionnaireMusiques.getAllPistes();
-        
-        double totalUser = listeAllPistes.size();
+        System.out.println("Nombre d'utilisateurs total :" + listeAllUsers.size() + "Nombre d'utilisateur par page : " + liste.size());
         
         if(totalUser == 0){
             request.setAttribute("nbPages", Math.ceil(liste.size()/nbAffiche));
@@ -72,8 +74,8 @@ public class ListerPistes extends HttpServlet {
         }
         request.setAttribute("page", numPage);
         request.setAttribute("nbAffiche", nbAffiche);
-        request.setAttribute("listeAllPistes", liste);
-        request.getRequestDispatcher("/view/backoffice/pistes.jsp").forward(request, response);
+        request.setAttribute("listeDesUsers", liste);
+        request.getRequestDispatcher("/view/backoffice/utilisateurs.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

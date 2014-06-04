@@ -1,32 +1,23 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package servlets.membre;
+package servlets.membre.pistes;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Collection;
 import javax.ejb.EJB;
-import javax.management.StringValueExp;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import musique.gestionnaires.GestionnaireMusiques;
-import musique.modeles.Artiste;
+import musique.modeles.Piste;
 import utilisateurs.gestionnaires.GestionnaireUtilisateurs;
-import utilisateurs.modeles.Utilisateur;
 
 /**
  *
  * @author Guillaume
  */
-@WebServlet(name = "AdminListerArtistes", urlPatterns = {"/admin/artistes"})
-public class ListerArtistes extends HttpServlet {
+@WebServlet(name = "AdminListerPistes", urlPatterns = {"/admin/pistes"})
+public class Accueil extends HttpServlet {
     @EJB
     private GestionnaireMusiques gestionnaireMusiques;
 
@@ -47,25 +38,26 @@ public class ListerArtistes extends HttpServlet {
 
         // Page affichée
         int numPage = 1;
+        int pagination_begin = 1;
+        int pagination_end = 1;
+        
         if(request.getParameter("page") != null) {
             numPage = Integer.parseInt(request.getParameter("page"));
         }
         
         // Nombre affichée par page
-        int nbAffiche=0;
+        int nbAffiche;
         if(request.getParameter("nbAffiche") != null) {
             nbAffiche = Integer.parseInt(request.getParameter("nbAffiche"));
-            System.out.println("nbAffiche : " + nbAffiche);
-        }
-        else{
+        } else{
             nbAffiche = 30;
         }
-        Collection<Artiste> liste = gestionnaireMusiques.getArtistes((numPage-1)*nbAffiche, nbAffiche);
-        // Recupère tous les utilisateurs
-        Collection<Artiste> listeAllUsers = gestionnaireMusiques.getAllArtistes();
-        double totalUser = listeAllUsers.size();
         
-        System.out.println("Nombre d'utilisateurs total :" + listeAllUsers.size() + "Nombre d'utilisateur par page : " + liste.size());
+        // Récupération des listes
+        Collection<Piste> liste = gestionnaireMusiques.getPistes((numPage-1)*nbAffiche, nbAffiche);
+        Collection<Piste> listeAllPistes = gestionnaireMusiques.getAllPistes();
+        
+        double totalUser = listeAllPistes.size();
         
         if(totalUser == 0){
             request.setAttribute("nbPages", Math.ceil(liste.size()/nbAffiche));
@@ -75,8 +67,8 @@ public class ListerArtistes extends HttpServlet {
         }
         request.setAttribute("page", numPage);
         request.setAttribute("nbAffiche", nbAffiche);
-        request.setAttribute("listeDesArtistes", liste);
-        request.getRequestDispatcher("/view/backoffice/artistes.jsp").forward(request, response);
+        request.setAttribute("listeAllPistes", liste);
+        request.getRequestDispatcher("/view/backoffice/pistes.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

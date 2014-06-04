@@ -1,12 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package servlets.membre;
+package servlets.membre.artistes;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Collection;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -15,16 +9,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import musique.gestionnaires.GestionnaireMusiques;
-import musique.modeles.Musique;
+import musique.modeles.Artiste;
 import utilisateurs.gestionnaires.GestionnaireUtilisateurs;
-import utilisateurs.modeles.Utilisateur;
 
 /**
  *
- * @author julien
+ * @author Guillaume
  */
-@WebServlet(name = "AdminListerMusiques", urlPatterns = {"/admin/musiques"})
-public class ListerMusiques extends HttpServlet {
+@WebServlet(name = "AdminListerArtistes", urlPatterns = {"/admin/artistes"})
+public class Accueil extends HttpServlet {
     @EJB
     private GestionnaireMusiques gestionnaireMusiques;
 
@@ -42,50 +35,42 @@ public class ListerMusiques extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Il n'y a pas d'utilisateurs
 
-        Collection<Musique> liste;
-        // Page affichée
-        int numPage = 1;
-        if (request.getParameter("page") != null) {
-            numPage = Integer.parseInt(request.getParameter("page"));
-        }
-        
         // Un état
         if (request.getParameter("etat") != null) {
             request.setAttribute("etat", request.getParameter("etat"));
         }
 
+        // Page affichée
+        int numPage = 1;
+        if(request.getParameter("page") != null) {
+            numPage = Integer.parseInt(request.getParameter("page"));
+        }
+        
         // Nombre affichée par page
-        int nbAffiche = 0;
-        if (request.getParameter("nbAffiche") != null) {
+        int nbAffiche;
+        if(request.getParameter("nbAffiche") != null) {
             nbAffiche = Integer.parseInt(request.getParameter("nbAffiche"));
-        } else {
+            System.out.println("nbAffiche : " + nbAffiche);
+        }
+        else{
             nbAffiche = 30;
         }
-
+        Collection<Artiste> liste = gestionnaireMusiques.getArtistes((numPage-1)*nbAffiche, nbAffiche);
         // Recupère tous les utilisateurs
-        Collection<Musique> listeAllMusiques = gestionnaireMusiques.getAllMusiques();
-        double totalMusiques = listeAllMusiques.size();
-
-        liste = gestionnaireMusiques.getMusiques((numPage - 1) * nbAffiche, nbAffiche);
-
-        if (totalMusiques == 0) {
-            request.setAttribute("nbPages", Math.ceil(liste.size() / nbAffiche));
-        } else {
-            request.setAttribute("nbPages", (int) Math.ceil(totalMusiques / nbAffiche));
+        Collection<Artiste> listeAllUsers = gestionnaireMusiques.getAllArtistes();
+        double totalUser = listeAllUsers.size();
+        
+        if(totalUser == 0){
+            request.setAttribute("nbPages", Math.ceil(liste.size()/nbAffiche));
         }
-//        if (request.getParameter("genre") != null) {
-//            int genre = Integer.parseInt(request.getParameter("genre"));
-//            liste = gestionnaireUtilisateurs.getMusiqueByGenre(genre);
-//            System.out.println(liste);
-//        } else {
-//            liste = gestionnaireUtilisateurs.getAllMusiques();
-//        }
+        else{
+            request.setAttribute("nbPages", (int) Math.ceil(totalUser/nbAffiche));    
+        }
         request.setAttribute("page", numPage);
         request.setAttribute("nbAffiche", nbAffiche);
-        request.setAttribute("listeDesMusiques", liste);
-        this.getServletContext().getRequestDispatcher("/view/backoffice/musiques.jsp").forward(request, response);
+        request.setAttribute("listeDesArtistes", liste);
+        request.getRequestDispatcher("/view/backoffice/artistes/accueil.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

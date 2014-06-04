@@ -20,6 +20,26 @@
         </div>
     </jsp:attribute>
     <jsp:body>
+        <c:if test="${not empty etat}">
+            <div class="alert alert-success">
+                <c:choose>
+                    <c:when test="${etat.equals('ajouter')}">
+                        <p>Une piste a été ajoutée</p>
+                    </c:when>
+                    <c:when test="${etat.equals('modifier')}">
+                        <p>La piste a été modifiée</p>
+                    </c:when>
+                    <c:when test="${etat.equals('supprimer')}">
+                        <p>La piste a été supprimée</p>
+                    </c:when>
+                </c:choose>
+            </div>
+        </c:if>
+        
+        <p>
+            <a href="/tp2webmiage/admin/pistes/add" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i> Nouvelle piste</a>
+        </p>
+        
         <div class="col-lg-6">
             <ul class="pagination">
                 <!--                 Définition du nombre d'élément par page -->

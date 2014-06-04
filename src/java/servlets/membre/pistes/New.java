@@ -1,11 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package servlets.membre;
+package servlets.membre.pistes;
 
-import utilisateurs.modeles.Adresse;
 import java.io.IOException;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -13,14 +7,19 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import musique.gestionnaires.GestionnaireMusiques;
+import musique.modeles.Artiste;
+import musique.modeles.Genre;
 import utilisateurs.gestionnaires.GestionnaireUtilisateurs;
 
 /**
  *
- * @author Guillaume
+ * @author julien
  */
-@WebServlet(name = "AjouterUtilisateur", urlPatterns = {"/admin/utilisateurs/new"})
-public class AjouterUtilisateur extends HttpServlet {
+@WebServlet(name = "AjouterMusique", urlPatterns = {"/admin/musiques/add"})
+public class New extends HttpServlet {
+    @EJB
+    private GestionnaireMusiques gestionnaireMusiques;
 
     @EJB
     private GestionnaireUtilisateurs gestionnaireUtilisateurs;
@@ -36,9 +35,9 @@ public class AjouterUtilisateur extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setAttribute("listeVilles", gestionnaireUtilisateurs.getVilles());
-
-        this.getServletContext().getRequestDispatcher("/view/backoffice/new_utilisateur.jsp").forward(request, response);
+        request.setAttribute("listeDesGenres", gestionnaireMusiques.getAllGenres());
+        request.setAttribute("listeDesArtistes", gestionnaireMusiques.getAllArtistes());
+        this.getServletContext().getRequestDispatcher("/view/backoffice/add_musique.jsp").forward(request, response);
     }
 
     /**
@@ -66,21 +65,37 @@ public class AjouterUtilisateur extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        this.getServletContext().log(request.getParameter("nom"));
-        this.getServletContext().log(request.getParameter("prenom"));
-
-        // Récupération de l'utilisateur
-        gestionnaireUtilisateurs.creeUtilisateur(
-                request.getParameter("nom"),
-                request.getParameter("prenom"),
-                request.getParameter("login"),
-                request.getParameter("password"),
-                new Adresse(request.getParameter("ville"), request.getParameter("cp")),
-                request.getParameter("phone"));
+        Artiste artiste = null;
+        Genre genre = null;
+        
+        String inputArtiste = request.getParameter("artiste");
+        String inputGenre = request.getParameter("genre");
+        String inputAnnee = request.getParameter("annee");
+        int annee = 0;
+        
+        if(inputArtiste != null && !inputArtiste.isEmpty()) {
+            artiste = gestionnaireMusiques.getArtiste(Integer.parseInt(inputArtiste));
+        }
+        
+        if(inputGenre != null && !inputGenre.isEmpty()) {
+            genre = gestionnaireMusiques.getGenre(Integer.parseInt(inputGenre));
+        }
+        
+        if(!inputAnnee.isEmpty()) {
+            annee = Integer.parseInt(request.getParameter("annee"));
+        }
+        
+        // Modification de l'utilisateur
+        gestionnaireMusiques.creerMusique(
+                artiste,
+                request.getParameter("titre"),
+                0,
+                annee,
+                request.getParameter("url"),
+                genre);
 
         // Redirection
-        response.sendRedirect("/tp2webmiage/admin/utilisateurs");
+        response.sendRedirect("/tp2webmiage/admin/musiques?etat=ajouter");
     }
 
     /**

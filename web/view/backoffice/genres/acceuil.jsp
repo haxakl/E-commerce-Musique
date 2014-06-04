@@ -10,16 +10,36 @@
 
 <t:backoffice>
     <jsp:attribute name="breadcrumb">
-        <h2><i class="fa fa-music"></i> Artistes <span>Lister les artistes</span></h2>
+        <h2><i class="fa fa-music"></i> Genres <span>Lister les genres</span></h2>
         <div class="breadcrumb-wrapper">
             <span class="label">Vous êtes ici</span>
             <ol class="breadcrumb">
                 <li><a href="/tp2webmiage/admin">Accueil</a></li>
-                <li class="active">Artistes</li>
+                <li class="active">Genres</li>
             </ol>
         </div>
     </jsp:attribute>
     <jsp:body>
+        <c:if test="${not empty etat}">
+            <div class="alert alert-success">
+                <c:choose>
+                    <c:when test="${etat.equals('ajouter')}">
+                        <p>Un genre a été ajoutée</p>
+                    </c:when>
+                    <c:when test="${etat.equals('modifier')}">
+                        <p>Le genre a été modifié</p>
+                    </c:when>
+                    <c:when test="${etat.equals('supprimer')}">
+                        <p>Le genre a été supprimé</p>
+                    </c:when>
+                </c:choose>
+            </div>
+        </c:if>
+        
+        <p>
+            <a href="/tp2webmiage/admin/genres/add" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i> Nouveau genre</a>
+        </p>
+        
         <div class="col-lg-6">
             <ul class="pagination">
                 <!--                 Définition du nombre d'élément par page -->
@@ -71,8 +91,6 @@
             <tr>
                 <th style="width: 100px;"></th>
                 <th><b>Nom</b></th>
-                <th><b>Description</b></th>
-                <th><b>Nb Musiques</b></th>
                 <th style="width: 100px;"></th>
             </tr>  
 
@@ -80,19 +98,13 @@
             <!-- cette variable montre comment on peut utiliser JSTL et EL pour calculer -->  
             <c:set var="total" value="0"/>  
 
-            <c:forEach var="a" items="${requestScope['listeDesArtistes']}">
+            <c:forEach var="g" items="${requestScope['listeDesGenres']}">
                 <tr>
                     <td>
-                        <a class="btn btn-sm btn-primary" href="/tp2webmiage/admin/artistes/modifier/${a.id}"><i class="fa fa-cog"></i> Modifier</a>
+                        <a class="btn btn-sm btn-primary" href="/tp2webmiage/admin/genres/modifier/${a.id}"><i class="fa fa-cog"></i> Modifier</a>
                     </td>
-                    <td>${a.nom}</td> 
-                    <td>${a.resume}</td>
-                    <td></td>
-                    <td>
-                        <button class="btn btn-danger btn-sm">
-                            <i class="fa fa-times"></i> Supprimer
-                        </button>
-                    </td>
+                    <td>${g.nom}</td> 
+                    <td><a class="btn btn-danger btn-sm" href="/tp2webmiage/admin/genres/delete/${a.id}"><i class="fa fa-times"></i> Supprimer</a></td>
                 </tr>
             </c:forEach>
         </table>
