@@ -40,7 +40,6 @@
                     <select name="note" id="note" class="form-control">
                         <c:forEach var="entry" begin="0" end="4">
                             <option value="${entry}">${entry}</option>
-                            <option value="${entry+0.5}">${entry+0.5}</option>
                         </c:forEach>
                             <option value="5">5</option>
                     </select>
