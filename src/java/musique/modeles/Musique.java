@@ -13,8 +13,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import utilisateurs.modeles.Utilisateur;
 
 /**
  *
@@ -37,6 +39,8 @@ public class Musique implements Serializable {
     private int nbpiste; 
     private int annee;
     private String url;
+    @ManyToMany(mappedBy = "purshased")
+    private List<Utilisateur> utilisateurs;
 
     public Musique() {
     }

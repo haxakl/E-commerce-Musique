@@ -2,12 +2,16 @@ package utilisateurs.modeles;
 
 import abonnement.modeles.Abonnement;
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import musique.modeles.Musique;
 
 @Entity
 public class Utilisateur implements Serializable {
@@ -24,6 +28,8 @@ public class Utilisateur implements Serializable {
     private String login;
     private String email;
     private String password;
+    @ManyToMany
+    private Collection<Musique> purshased;
     @ManyToOne
     private Abonnement abonnement;
     private int groupe;
@@ -117,7 +123,7 @@ public class Utilisateur implements Serializable {
     public void setGroupe(int groupe) {
         this.groupe = groupe;
     }
-    
+
     public boolean isAdmin() {
         return this.groupe == 1;
     }
@@ -128,6 +134,20 @@ public class Utilisateur implements Serializable {
 
     public Abonnement getAbonnement() {
         return abonnement;
+    }
+
+    public Collection<Musique> getPurshased() {
+        return purshased;
+    }
+
+    public void setPurshased(Collection<Musique> purshased) {
+        this.purshased = purshased;
+    }
+    
+    public void addPurshased(Collection<Musique> purshased) {
+        for(Musique msc : purshased){
+            this.purshased.add(msc);
+        } 
     }
 
     @Override

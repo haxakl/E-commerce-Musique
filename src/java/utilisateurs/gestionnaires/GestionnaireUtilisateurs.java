@@ -7,6 +7,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import musique.modeles.Musique;
 import utilisateurs.modeles.Utilisateur;
 
 @Stateless
@@ -134,6 +135,11 @@ public class GestionnaireUtilisateurs {
         Query q = em.createQuery("select a from Adresse a");
 
         return q.getResultList();
+    }
+    
+    public void addPurshased(Utilisateur u, Collection<Musique> m){
+        u.addPurshased(m);
+        em.merge(u);
     }
 
     public Collection<Utilisateur> getUsersParVille(int idVille) {

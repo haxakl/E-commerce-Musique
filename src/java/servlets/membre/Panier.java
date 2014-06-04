@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package panier.modeles;
+package servlets.membre;
 
 import java.io.IOException;
+import java.util.Collection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
@@ -21,6 +22,7 @@ import musique.gestionnaires.GestionnaireMusiques;
 import musique.modeles.Musique;
 import panier.gestionnaire.GestionnairePanier;
 import utilisateurs.gestionnaires.GestionnaireUtilisateurs;
+import utilisateurs.modeles.Utilisateur;
 
 /**
  *
@@ -28,6 +30,8 @@ import utilisateurs.gestionnaires.GestionnaireUtilisateurs;
  */
 @WebServlet(name = "Panier", urlPatterns = {"/panier"})
 public class Panier extends HttpServlet {
+    @EJB
+    private GestionnaireUtilisateurs gestionnaireUtilisateurs;
     @EJB
     private GestionnaireMusiques gestionnaireMusiques;
 
@@ -55,8 +59,18 @@ public class Panier extends HttpServlet {
              GestionnairePanier panier_tmp = (GestionnairePanier) request.getSession().getAttribute("panier");
              panier_tmp.makeEmpty();
         }
-        
-        this.getServletContext().getRequestDispatcher("/view/frontoffice/panier.jsp").forward(request, response);
+        if(request.getParameter("action") != null && request.getParameter("action").equalsIgnoreCase("buy")){
+              GestionnairePanier panier_tmp = (GestionnairePanier) request.getSession().getAttribute("panier");
+              Collection<Musique> musics_tmp = panier_tmp.getMusiques();
+              Utilisateur current_user = (Utilisateur) request.getSession().getAttribute("user");
+              gestionnaireUtilisateurs.addPurshased(current_user, musics_tmp);
+//              panier_tmp.makeEmpty();
+              response.sendRedirect("/tp2webmiage/profile");
+        }
+        else{
+             this.getServletContext().getRequestDispatcher("/view/frontoffice/panier.jsp").forward(request, response);
+        }    
+         
     }
 
     /**
