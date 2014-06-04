@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import musique.gestionnaires.GestionnaireMusiques;
 import musique.modeles.Artiste;
 import musique.modeles.Genre;
+import musique.modeles.Musique;
 import utilisateurs.gestionnaires.GestionnaireUtilisateurs;
 
 /**
@@ -64,37 +65,21 @@ public class New extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Artiste artiste = null;
-        Genre genre = null;
+        Musique musique = null;
         
-        String inputArtiste = request.getParameter("artiste");
-        String inputGenre = request.getParameter("genre");
-        String inputAnnee = request.getParameter("annee");
-        int annee = 0;
+        String inputMusique = request.getParameter("musique");
+        String inputNom = request.getParameter("nom");
+        String inputNote = request.getParameter("note");
         
-        if(inputArtiste != null && !inputArtiste.isEmpty()) {
-            artiste = gestionnaireMusiques.getArtiste(Integer.parseInt(inputArtiste));
-        }
-        
-        if(inputGenre != null && !inputGenre.isEmpty()) {
-            genre = gestionnaireMusiques.getGenre(Integer.parseInt(inputGenre));
-        }
-        
-        if(!inputAnnee.isEmpty()) {
-            annee = Integer.parseInt(request.getParameter("annee"));
+        if(inputMusique != null && !inputMusique.isEmpty()) {
+            musique = gestionnaireMusiques.getMusique(Integer.parseInt(inputMusique));
         }
         
         // Modification de l'utilisateur
-        gestionnaireMusiques.creerMusique(
-                artiste,
-                request.getParameter("titre"),
-                0,
-                annee,
-                request.getParameter("url"),
-                genre);
+        gestionnaireMusiques.creerPiste(musique, inputNom, Integer.valueOf(inputNote));
 
         // Redirection
-        response.sendRedirect("/tp2webmiage/admin/musiques?etat=ajouter");
+        response.sendRedirect("/tp2webmiage/admin/pistes?etat=ajouter");
     }
 
     /**

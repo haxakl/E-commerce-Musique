@@ -35,11 +35,11 @@
                 </c:choose>
             </div>
         </c:if>
-        
+
         <p>
             <a href="/tp2webmiage/admin/pistes/add" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i> Nouvelle piste</a>
         </p>
-        
+
         <div class="col-lg-6">
             <ul class="pagination">
                 <!--                 Définition du nombre d'élément par page -->
@@ -88,7 +88,9 @@
             <!-- La ligne de titre du tableau des comptes -->  
             <tr>
                 <th style="width: 100px;"></th>
+                <th><b>Musique</b></th>
                 <th><b>Nom</b></th>
+                <th><b>Note</b></th>
                 <th style="width: 100px;"></th>
             </tr>
 
@@ -102,6 +104,19 @@
                         <a class="btn btn-sm btn-primary" href="/tp2webmiage/admin/pistes/${p.id}"><i class="fa fa-cog"></i> Modifier</a>
                     </td>
                     <td>${p.nom}</td> 
+                    <td>${p.musique.titre}</td> 
+                    <td>
+                        <c:forEach var="entry" begin="0" end="4">
+                            <c:choose>
+                                <c:when test="${entry < p.note}">
+                                    <i class="fa fa-star"></i>
+                                </c:when>
+                                <c:otherwise>
+                                    <i class="fa fa-star-o"></i>
+                                </c:otherwise>
+                            </c:choose>
+                        </c:forEach>
+                    </td> 
                     <td>
                         <button class="btn btn-danger btn-sm">
                             <i class="fa fa-times"></i> Supprimer

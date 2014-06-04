@@ -314,9 +314,9 @@ public class GestionnaireMusiques {
      * @param nom Nom de la piste
      * @return Une piste
      */
-    public Piste creerPiste(Musique musique, String nom) {
+    public Piste creerPiste(Musique musique, String nom, int note) {
 
-        Piste m = new Piste(musique, nom);
+        Piste m = new Piste(musique, nom, note);
 
         em.persist(m);
         return m;

@@ -35,9 +35,10 @@ public class Piste implements Serializable {
     public Piste() {
     }
 
-    public Piste(Musique musique, String nom){
+    public Piste(Musique musique, String nom, int note){
         this.musique = musique;
         this.nom = nom;
+        this.note = note;
     }
 
     public Musique getMusique() {
@@ -46,6 +47,14 @@ public class Piste implements Serializable {
 
     public void setMusique(Musique musique) {
         this.musique = musique;
+    }
+
+    public int getNote() {
+        return note;
+    }
+
+    public void setNote(int note) {
+        this.note = note;
     }
 
     /**

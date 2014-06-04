@@ -20,7 +20,7 @@
             <div class="form-group">
                 <label for="musique" class="col-sm-2 control-label">Musique</label>
                 <div class="col-sm-10">
-                    <select name="musique" class="form-control">
+                    <select name="musique" id="musique" class="form-control">
                         <option value="">Aucune musique</option>
                         <c:forEach var="m" items="${requestScope['listeDesMusiques']}">
                             <option value="${m.id}">${m.titre}</option>
@@ -35,12 +35,14 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="annee" class="col-sm-2 control-label">Difficulté</label>
+                <label for="note" class="col-sm-2 control-label">Difficulté</label>
                 <div class="col-sm-10">
-                    <select class="form-control">
-                        <%--<c:for var="0" items="${requestScope['listeDesMusiques']}">--%>
-                            <!--<option value="${m.id}">${m.titre}</option>-->
-                        <%--</c:forEach>--%>
+                    <select name="note" id="note" class="form-control">
+                        <c:forEach var="entry" begin="0" end="4">
+                            <option value="${entry}">${entry}</option>
+                            <option value="${entry+0.5}">${entry+0.5}</option>
+                        </c:forEach>
+                            <option value="5">5</option>
                     </select>
                 </div>
             </div>
@@ -48,7 +50,7 @@
             <div class="row">
                 <div class="col-lg-9"></div>
                 <div class="col-lg-3">
-                    <button class="btn btn-success btn-block pull-right">Ajouter la musique</button>
+                    <button class="btn btn-success btn-block pull-right">Ajouter la piste</button>
                 </div>
             </div>
         </form><br/>

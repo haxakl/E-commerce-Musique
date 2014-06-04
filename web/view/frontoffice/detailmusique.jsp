@@ -23,11 +23,24 @@
             <!-- La ligne de titre du tableau des comptes -->  
             <tr>  
                 <td><b>Nom</b></td>
+                <td><b>Note</b></td>
             </tr>  
 
             <c:forEach var="m" items="${requestScope['listeDesPistes']}">
                 <tr>
                     <td>${m.nom}</td>
+                    <td>
+                        <c:forEach var="entry" begin="0" end="4">
+                            <c:choose>
+                                <c:when test="${entry < m.note}">
+                                    <i class="fa fa-star"></i>
+                                </c:when>
+                                <c:otherwise>
+                                    <i class="fa fa-star-o"></i>
+                                </c:otherwise>
+                            </c:choose>
+                        </c:forEach>
+                    </td>
                 </tr>
                 <c:set var="total" value="${total+1}"/>
             </c:forEach>

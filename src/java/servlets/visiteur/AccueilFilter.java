@@ -158,7 +158,7 @@ public class AccueilFilter implements Filter {
             String extension = piste.substring(piste.lastIndexOf('.') + 1).toLowerCase();
             if (piste.lastIndexOf('.') != -1 && (extension.compareTo("mp3") == 0 || extension.compareTo("ogg") == 0)) {
                 if (musique != null) {
-                    gestionnaireMusiques.creerPiste(musique, (String) compositions.get(j));
+                    gestionnaireMusiques.creerPiste(musique, (String) compositions.get(j), 0);
                 }
 
                 nbpiste++;
