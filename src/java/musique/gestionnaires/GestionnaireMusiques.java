@@ -56,12 +56,9 @@ public class GestionnaireMusiques {
     
     /**
      * Créer une musique
-     * @param artiste
      * @param titre
-     * @param nbpiste
      * @param annee
      * @param url
-     * @param genre
      * @return 
      */
     public Musique creerMusique(String titre, int annee, String url) {
@@ -191,6 +188,30 @@ public class GestionnaireMusiques {
     // =============================
     //  Genres
     // =============================
+    
+    /**
+     * Créer un genre de musique
+     *
+     * @param nom Nom du genre
+     * @return Un genre
+     */
+    public Genre creerGenre(String nom) {
+        Genre g = new Genre(nom);
+        em.persist(g);
+        return g;
+    }
+    
+    /**
+     * Modifier un genre de musique
+     *
+     * @param idGenre Numéro du genre
+     * @param nom Nom du genre
+     */
+    public void modifierGenre(int idGenre, String nom) {
+        Genre g = getGenre(idGenre);
+        g.setNom(nom);
+        em.merge(g);
+    }
     
     /**
      * Retourne le genre cherché

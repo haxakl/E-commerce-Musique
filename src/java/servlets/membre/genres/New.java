@@ -8,8 +8,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import musique.gestionnaires.GestionnaireMusiques;
-import musique.modeles.Artiste;
-import musique.modeles.Genre;
 import utilisateurs.gestionnaires.GestionnaireUtilisateurs;
 
 /**
@@ -35,9 +33,7 @@ public class New extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setAttribute("listeDesGenres", gestionnaireMusiques.getAllGenres());
-        request.setAttribute("listeDesArtistes", gestionnaireMusiques.getAllArtistes());
-        this.getServletContext().getRequestDispatcher("/view/backoffice/add_musique.jsp").forward(request, response);
+        this.getServletContext().getRequestDispatcher("/view/backoffice/genres/new.jsp").forward(request, response);
     }
 
     /**
@@ -65,37 +61,12 @@ public class New extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Artiste artiste = null;
-        Genre genre = null;
-        
-        String inputArtiste = request.getParameter("artiste");
-        String inputGenre = request.getParameter("genre");
-        String inputAnnee = request.getParameter("annee");
-        int annee = 0;
-        
-        if(inputArtiste != null && !inputArtiste.isEmpty()) {
-            artiste = gestionnaireMusiques.getArtiste(Integer.parseInt(inputArtiste));
-        }
-        
-        if(inputGenre != null && !inputGenre.isEmpty()) {
-            genre = gestionnaireMusiques.getGenre(Integer.parseInt(inputGenre));
-        }
-        
-        if(!inputAnnee.isEmpty()) {
-            annee = Integer.parseInt(request.getParameter("annee"));
-        }
-        
+
         // Modification de l'utilisateur
-        gestionnaireMusiques.creerMusique(
-                artiste,
-                request.getParameter("titre"),
-                0,
-                annee,
-                request.getParameter("url"),
-                genre);
+        gestionnaireMusiques.creerGenre(request.getParameter("nom"));
 
         // Redirection
-        response.sendRedirect("/tp2webmiage/admin/musiques?etat=ajouter");
+        response.sendRedirect("/tp2webmiage/admin/genres?etat=ajouter");
     }
 
     /**

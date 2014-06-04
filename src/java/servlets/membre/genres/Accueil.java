@@ -16,7 +16,7 @@ import utilisateurs.gestionnaires.GestionnaireUtilisateurs;
  *
  * @author julien
  */
-@WebServlet(name = "AdminListerGenres", urlPatterns = {"/admin/genres"})
+@WebServlet(name = "ListerGenres", urlPatterns = {"/admin/genres"})
 public class Accueil extends HttpServlet {
     @EJB
     private GestionnaireMusiques gestionnaireMusiques;
@@ -72,7 +72,7 @@ public class Accueil extends HttpServlet {
         request.setAttribute("page", numPage);
         request.setAttribute("nbAffiche", nbAffiche);
         request.setAttribute("listeAllGenres", liste);
-        this.getServletContext().getRequestDispatcher("/view/backoffice/genres.jsp").forward(request, response);
+        this.getServletContext().getRequestDispatcher("/view/backoffice/genres/accueil.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

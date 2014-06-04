@@ -35,11 +35,11 @@
                 </c:choose>
             </div>
         </c:if>
-        
+
         <p>
             <a href="/tp2webmiage/admin/genres/add" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i> Nouveau genre</a>
         </p>
-        
+
         <div class="col-lg-6">
             <ul class="pagination">
                 <!--                 Définition du nombre d'élément par page -->
@@ -86,27 +86,31 @@
             </ul>
         </div>
         <!-- Zone qui affiche les utilisateurs si le paramètre action vaut listerComptes -->  
-        <table class="table">  
-            <!-- La ligne de titre du tableau des comptes -->  
-            <tr>
-                <th style="width: 100px;"></th>
-                <th><b>Nom</b></th>
-                <th style="width: 100px;"></th>
-            </tr>  
+        <table class="table">
+            <thead>
+                <!-- La ligne de titre du tableau des comptes -->  
+                <tr>
+                    <th style="width: 100px;"></th>
+                    <th><b>Nom</b></th>
+                    <th style="width: 100px;"></th>
+                </tr>
+            </thead>
 
             <!-- Ici on affiche les lignes, une par utilisateur -->  
             <!-- cette variable montre comment on peut utiliser JSTL et EL pour calculer -->  
             <c:set var="total" value="0"/>  
 
-            <c:forEach var="g" items="${requestScope['listeDesGenres']}">
-                <tr>
-                    <td>
-                        <a class="btn btn-sm btn-primary" href="/tp2webmiage/admin/genres/modifier/${a.id}"><i class="fa fa-cog"></i> Modifier</a>
-                    </td>
-                    <td>${g.nom}</td> 
-                    <td><a class="btn btn-danger btn-sm" href="/tp2webmiage/admin/genres/delete/${a.id}"><i class="fa fa-times"></i> Supprimer</a></td>
-                </tr>
-            </c:forEach>
+            <tbody>
+                <c:forEach var="g" items="${requestScope['listeAllGenres']}">
+                    <tr>
+                        <td>
+                            <a class="btn btn-sm btn-primary" href="/tp2webmiage/admin/genres/modifier/${g.id}"><i class="fa fa-cog"></i> Modifier</a>
+                        </td>
+                        <td>${g.nom}</td> 
+                        <td><a class="btn btn-danger btn-sm" href="/tp2webmiage/admin/genres/delete/${g.id}"><i class="fa fa-times"></i> Supprimer</a></td>
+                    </tr>
+                </c:forEach>
+            </tbody>
         </table>
     </jsp:body>
 </t:backoffice>
