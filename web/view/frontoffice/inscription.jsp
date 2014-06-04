@@ -30,8 +30,48 @@
                                 <input type="text" name="email" class="form-control" id="email" placeholder="Email">
                             </div>
                         </div>
-                        
+
                         <hr>
+                        <div class="form-group">
+                            <!--
+                            <label for="instrument" class="col-sm-2 control-label">Instruments</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="email" class="form-control" id="email" placeholder="Email">
+                            </div> -->
+                            <label for="instrument" class="col-sm-2 control-label">Instruments</label>
+                            <div class="dropdown" id="instrument">
+                                <a class="dropdown-toggle btn" data-toggle="dropdown" href="#">
+                                    Veuillez choisir vos instruments favoris
+                                    <b class="caret"></b>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-form" role="menu">
+                                    <li>
+                                        <label class="checkbox">
+                                            <input type="checkbox">
+                                            Drums
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label class="checkbox">
+                                            <input type="checkbox">
+                                            Bass
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label class="checkbox">
+                                            <input type="checkbox">
+                                            Snare
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label class="checkbox">
+                                            <input type="checkbox">
+                                            Hi-hat
+                                        </label>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
 
                         <div class="form-group">
                             <label for="login" class="col-sm-2 control-label">Login</label>
@@ -51,12 +91,19 @@
                                 <input type="password" name="confirmation" class="form-control" id="confirmation" placeholder="Confirmation">
                             </div>
                         </div>
-                        
+
                         <br/>
                         <button style="margin: 20px;" class="btn btn-success btn-block">Inscription</button>
                     </form>
                 </div>
             </div>
         </div>
+        <script>
+            $('.dropdown-menu').on('click', function(e) {
+                if ($(this).hasClass('dropdown-menu-form')) {
+                    e.stopPropagation();
+                }
+            });
+        </script>
     </jsp:body>
 </t:frontoffice>
