@@ -3,6 +3,7 @@ package musique.gestionnaires;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -55,12 +56,9 @@ public class GestionnaireMusiques {
     
     /**
      * Créer une musique
-     * @param artiste
      * @param titre
-     * @param nbpiste
      * @param annee
      * @param url
-     * @param genre
      * @return 
      */
     public Musique creerMusique(String titre, int annee, String url) {
@@ -174,14 +172,12 @@ public class GestionnaireMusiques {
         q2.executeUpdate();
     }
     
-    // =============================
-    //  Genres
-    // =============================
-    
     /**
      * Retourne les musiques d'un genre précis avec une plage
      *
      * @param idgenre Le numéro du genre
+     * @param index Début de la plage
+     * @param offset Fin de la plage
      * @return Les musiques d'un genre précis avec une plage
      */
     public Collection<Musique> getMusiqueByGenre(int idgenre, int index, int offset) {
@@ -189,6 +185,34 @@ public class GestionnaireMusiques {
         return q.getResultList();
     }
 
+    // =============================
+    //  Genres
+    // =============================
+    
+    /**
+     * Créer un genre de musique
+     *
+     * @param nom Nom du genre
+     * @return Un genre
+     */
+    public Genre creerGenre(String nom) {
+        Genre g = new Genre(nom);
+        em.persist(g);
+        return g;
+    }
+    
+    /**
+     * Modifier un genre de musique
+     *
+     * @param idGenre Numéro du genre
+     * @param nom Nom du genre
+     */
+    public void modifierGenre(int idGenre, String nom) {
+        Genre g = getGenre(idGenre);
+        g.setNom(nom);
+        em.merge(g);
+    }
+    
     /**
      * Retourne le genre cherché
      *
@@ -213,6 +237,33 @@ public class GestionnaireMusiques {
     public Collection<Genre> getAllGenres() {
         // Exécution d'une requête équivalente à un select *  
         Query q = em.createQuery("select g from Genre g");
+        return q.getResultList();
+    }
+
+    /**
+     * Supprimer un genre
+     * @param idGenre Numéro du genre
+     */
+    public void deleteGenre(int idGenre) {
+        Query q = em.createQuery("update Musique set genre = null where genre.id = :idGenre").setParameter("idGenre", idGenre);
+        q.executeUpdate();
+        
+        Query q2 = em.createQuery("delete from Genre u where u.id = :idGenre").setParameter("idGenre", idGenre);
+        q2.executeUpdate();
+    }
+    
+    /**
+     * Retourne les genres dans une plage
+     *
+     * Utilisé lors des listes pour la pagination
+     *
+     * @param index Départ de la plage
+     * @param offset Fin de la plage
+     * @return Les genres dans une plage
+     */
+    public Collection<Genre> getGenres(int index, int offset) {
+        // Exécution d'une requête équivalente à un select *  
+        Query q = em.createQuery("select u from Genre u").setMaxResults(offset).setFirstResult(index);
         return q.getResultList();
     }
 
@@ -352,6 +403,33 @@ public class GestionnaireMusiques {
         return q.getResultList();
     }
 
+    /**
+     * Supprimer un artiste
+     * @param idArtiste Numéro de l'artiste
+     */
+    public void deleteArtiste(int idArtiste) {
+        Query q = em.createQuery("update Musique set artiste = null where artiste.id = :idArtiste").setParameter("idArtiste", idArtiste);
+        q.executeUpdate();
+        
+        Query q2 = em.createQuery("delete from Artiste u where u.id = :idArtiste").setParameter("idArtiste", idArtiste);
+        q2.executeUpdate();
+    }
+    
+    /**
+     * Modifier l'artiste
+     * @param idArtiste Numéro de l'artiste
+     * @param nom Nom de l'artiste
+     * @param description Description de l'artiste
+     * @param photo Photo de l'artiste
+     */
+    public void modifierArtiste(int idArtiste, String nom, String description, String photo) {
+        Artiste artiste = getArtiste(idArtiste);
+        artiste.setNom(nom);
+        artiste.setResume(description);
+        artiste.setPhoto(photo);
+        em.merge(artiste);
+    }
+    
     // =============================
     //  Recherche de patterns
     // =============================

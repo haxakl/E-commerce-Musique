@@ -3,33 +3,27 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package servlets.membre;
+package servlets.membre.utilisateurs;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Collection;
 import javax.ejb.EJB;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import musique.gestionnaires.GestionnaireMusiques;
-import musique.modeles.Artiste;
-import musique.modeles.Genre;
-import musique.modeles.Musique;
+import javax.servlet.http.HttpSession;
 import utilisateurs.gestionnaires.GestionnaireUtilisateurs;
 import utilisateurs.modeles.Utilisateur;
 
 /**
  *
- * @author julien
+ * @author Guillaume
  */
-@WebServlet(name = "ModifierMusique", urlPatterns = {"/admin/musiques/modifier/*"})
-public class ModifierMusique extends HttpServlet {
-    @EJB
-    private GestionnaireMusiques gestionnaireMusiques;
-
+@WebServlet(name = "ModifierUtilisateur", urlPatterns = {"/admin/utilisateurs/modify/*"})
+public class Modifier extends HttpServlet {
     @EJB
     private GestionnaireUtilisateurs gestionnaireUtilisateurs;
 
@@ -44,17 +38,9 @@ public class ModifierMusique extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        String url = request.getRequestURL().toString();
-        int idMusique = Integer.valueOf(url.substring(url.lastIndexOf("/") + 1));
-        
-        Musique musique = gestionnaireMusiques.getMusique(idMusique);
-        
-        
-        request.setAttribute("listeDesGenres", gestionnaireMusiques.getAllGenres());
-        request.setAttribute("listeDesArtistes", gestionnaireMusiques.getAllArtistes());
-        request.setAttribute("musique", musique);
-        this.getServletContext().getRequestDispatcher("/view/backoffice/modifier_musique.jsp").forward(request, response);
+        Utilisateur user = gestionnaireUtilisateurs.getUser(Integer.parseInt(request.getPathInfo().replaceAll("/", "")));
+        request.setAttribute("modif_user", user);
+        this.getServletContext().getRequestDispatcher("/modifier_utilisateur.jsp").forward(request, response);
     }
 
     /**
@@ -82,37 +68,19 @@ public class ModifierMusique extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Artiste artiste = null;
-        Genre genre = null;
-        
-        String inputArtiste = request.getParameter("artiste");
-        String inputGenre = request.getParameter("genre");
-        String inputAnnee = request.getParameter("annee");
-        int annee = 0;
-        
-        if(inputArtiste != null && !inputArtiste.isEmpty()) {
-            artiste = gestionnaireMusiques.getArtiste(Integer.parseInt(inputArtiste));
-        }
-        
-        if(inputGenre != null && !inputGenre.isEmpty()) {
-            genre = gestionnaireMusiques.getGenre(Integer.parseInt(inputGenre));
-        }
-        
-        if(!inputAnnee.isEmpty()) {
-            annee = Integer.parseInt(request.getParameter("annee"));
-        }
-        
+
+        this.getServletContext().log("Modification de l'utilisateur");
+
         // Modification de l'utilisateur
-        gestionnaireMusiques.modifierMusique(
+        gestionnaireUtilisateurs.modifierUtilisateur(
                 Integer.parseInt(request.getPathInfo().replaceAll("/", "")),
-                artiste,
-                genre,
-                request.getParameter("titre"),
-                annee,
-                request.getParameter("url"));
+                request.getParameter("nom"),
+                request.getParameter("prenom"),
+                request.getParameter("login"),
+                request.getParameter("password"));
 
         // Redirection
-        response.sendRedirect("/tp2webmiage/admin/musiques?etat=modifier");
+        response.sendRedirect("/tp2webmiage/utilisateurs");
     }
 
     /**

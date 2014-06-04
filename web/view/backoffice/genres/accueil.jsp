@@ -10,12 +10,12 @@
 
 <t:backoffice>
     <jsp:attribute name="breadcrumb">
-        <h2><i class="fa fa-music"></i> Musiques <span>Lister les musiques</span></h2>
+        <h2><i class="fa fa-music"></i> Genres <span>Lister les genres</span></h2>
         <div class="breadcrumb-wrapper">
             <span class="label">Vous êtes ici</span>
             <ol class="breadcrumb">
                 <li><a href="/tp2webmiage/admin">Accueil</a></li>
-                <li class="active">Musiques</li>
+                <li class="active">Genres</li>
             </ol>
         </div>
     </jsp:attribute>
@@ -24,19 +24,20 @@
             <div class="alert alert-success">
                 <c:choose>
                     <c:when test="${etat.equals('ajouter')}">
-                        <p>Une musique a été ajoutée</p>
+                        <p>Un genre a été ajoutée</p>
                     </c:when>
                     <c:when test="${etat.equals('modifier')}">
-                        <p>La musique a été modifiée</p>
+                        <p>Le genre a été modifié</p>
                     </c:when>
                     <c:when test="${etat.equals('supprimer')}">
-                        <p>La musique a été supprimée</p>
+                        <p>Le genre a été supprimé</p>
                     </c:when>
                 </c:choose>
             </div>
         </c:if>
+
         <p>
-            <a href="/tp2webmiage/admin/musiques/add" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i> Nouvelle musique</a>
+            <a href="/tp2webmiage/admin/genres/add" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i> Nouveau genre</a>
         </p>
 
         <div class="col-lg-6">
@@ -50,7 +51,7 @@
                     <c:otherwise>
                         <c:set var="nbElement" value="30">          
                         </c:set>
-                    </c:otherwise>
+                    </c:otherwise>       
                 </c:choose>
 
                 <!--                 Bouton "précédent" -->
@@ -85,33 +86,31 @@
             </ul>
         </div>
         <!-- Zone qui affiche les utilisateurs si le paramètre action vaut listerComptes -->  
-        <table class="table">  
-            <!-- La ligne de titre du tableau des comptes -->  
-            <tr>
-                <th style="width: 100px;"></th>
-                <th><b>Artiste</b></th>
-                <th><b>Titre</b></th>
-                <th><b>Nb Pistes</b></th>
-                <th><b>Annee</b></th>
-                <th><b>Genre</b></th>
-                <th style="width: 100px;"></th>
-            </tr>  
+        <table class="table">
+            <thead>
+                <!-- La ligne de titre du tableau des comptes -->  
+                <tr>
+                    <th style="width: 100px;"></th>
+                    <th><b>Nom</b></th>
+                    <th style="width: 100px;"></th>
+                </tr>
+            </thead>
 
             <!-- Ici on affiche les lignes, une par utilisateur -->  
             <!-- cette variable montre comment on peut utiliser JSTL et EL pour calculer -->  
             <c:set var="total" value="0"/>  
 
-            <c:forEach var="m" items="${requestScope['listeDesMusiques']}">
-                <tr>
-                    <td><a class="btn btn-sm btn-primary" href="/tp2webmiage/admin/musiques/modifier/${m.id}"><i class="fa fa-cog"></i> Modifier</a></td>
-                    <td><a href="/tp2webmiage/admin/artiste/${m.artiste.id}">${m.artiste.nom}</a></td> 
-                    <td>${m.titre}</td>
-                    <td>${m.nbpiste}</td>
-                    <td>${m.annee}</td>
-                    <td><a href="/tp2webmiage/admin/musiques?genre=${m.genre.id}">${m.genre.nom}</a></td>
-                    <td><a class="btn btn-danger btn-sm" href="/tp2webmiage/admin/musiques/delete/${m.id}"><i class="fa fa-times"></i> Supprimer</a></td>
-                </tr>
-            </c:forEach>
+            <tbody>
+                <c:forEach var="g" items="${requestScope['listeAllGenres']}">
+                    <tr>
+                        <td>
+                            <a class="btn btn-sm btn-primary" href="/tp2webmiage/admin/genres/modifier/${g.id}"><i class="fa fa-cog"></i> Modifier</a>
+                        </td>
+                        <td>${g.nom}</td> 
+                        <td><a class="btn btn-danger btn-sm" href="/tp2webmiage/admin/genres/delete/${g.id}"><i class="fa fa-times"></i> Supprimer</a></td>
+                    </tr>
+                </c:forEach>
+            </tbody>
         </table>
     </jsp:body>
 </t:backoffice>

@@ -70,8 +70,9 @@
                     <img src="${a.photo}" />
                     <div item="${a.id}" class="caption" style="display: none;">
                         <h2>${a.nom}</h2>
-                        <p>${a.resume}</p>
+                        <p>${a.nbmusique} musiques</p>
                     </div>
+                    <div class='legend'>${a.nom}</div>
                 </div>
             </c:forEach>
         </div>

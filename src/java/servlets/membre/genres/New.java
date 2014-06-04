@@ -1,12 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package servlets.membre;
+package servlets.membre.genres;
 
 import java.io.IOException;
-import java.util.Collection;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,15 +8,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import musique.gestionnaires.GestionnaireMusiques;
-import musique.modeles.Piste;
 import utilisateurs.gestionnaires.GestionnaireUtilisateurs;
 
 /**
  *
- * @author Guillaume
+ * @author julien
  */
-@WebServlet(name = "AdminListerPistes", urlPatterns = {"/admin/pistes"})
-public class ListerPistes extends HttpServlet {
+@WebServlet(name = "AjouterGenre", urlPatterns = {"/admin/genres/add"})
+public class New extends HttpServlet {
     @EJB
     private GestionnaireMusiques gestionnaireMusiques;
 
@@ -40,43 +33,9 @@ public class ListerPistes extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        // Page affichée
-        int numPage = 1;
-        int pagination_begin = 1;
-        int pagination_end = 1;
-        
-        if(request.getParameter("page") != null) {
-            numPage = Integer.parseInt(request.getParameter("page"));
-        }
-        
-        // Nombre affichée par page
-        int nbAffiche;
-        if(request.getParameter("nbAffiche") != null) {
-            nbAffiche = Integer.parseInt(request.getParameter("nbAffiche"));
-        } else{
-            nbAffiche = 30;
-        }
-        
-        // Récupération des listes
-        Collection<Piste> liste = gestionnaireMusiques.getPistes((numPage-1)*nbAffiche, nbAffiche);
-        Collection<Piste> listeAllPistes = gestionnaireMusiques.getAllPistes();
-        
-        double totalUser = listeAllPistes.size();
-        
-        if(totalUser == 0){
-            request.setAttribute("nbPages", Math.ceil(liste.size()/nbAffiche));
-        }
-        else{
-            request.setAttribute("nbPages", (int) Math.ceil(totalUser/nbAffiche));    
-        }
-        request.setAttribute("page", numPage);
-        request.setAttribute("nbAffiche", nbAffiche);
-        request.setAttribute("listeAllPistes", liste);
-        request.getRequestDispatcher("/view/backoffice/pistes.jsp").forward(request, response);
+        this.getServletContext().getRequestDispatcher("/view/backoffice/genres/new.jsp").forward(request, response);
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -102,7 +61,12 @@ public class ListerPistes extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+
+        // Modification de l'utilisateur
+        gestionnaireMusiques.creerGenre(request.getParameter("nom"));
+
+        // Redirection
+        response.sendRedirect("/tp2webmiage/admin/genres?etat=ajouter");
     }
 
     /**
@@ -113,6 +77,6 @@ public class ListerPistes extends HttpServlet {
     @Override
     public String getServletInfo() {
         return "Short description";
-    }// </editor-fold>
+    }
 
 }

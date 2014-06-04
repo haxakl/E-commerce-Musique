@@ -1,0 +1,5 @@
+<cron>
+    <url>/cron/abonnements</url>
+    <description>Gestion des abonnements</description>
+    <schedule>every 24 hours</schedule>
+</cron>

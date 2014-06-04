@@ -16,8 +16,7 @@
     <jsp:body>
 
         <p>
-            <a href="/tp2webmiage/admin/utilisateurs/new" class="btn btn-primary btn-sm">Ajouter un utilisateur</a>
-            <a href="/tp2webmiage/admin/utilisateurs/masse/50" class="btn btn-primary btn-sm">Créer utilisateurs de tests</a>
+            <a href="/tp2webmiage/admin/utilisateurs/new" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Nouvel utilisateur</a>
         </p>
 
         <div class="row">
