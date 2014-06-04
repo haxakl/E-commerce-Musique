@@ -33,6 +33,12 @@ public class Connexion extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        // Un état
+        if (request.getParameter("etat") != null) {
+            request.setAttribute("message", request.getParameter("etat"));
+        }
+        
         this.getServletContext().getRequestDispatcher("/view/frontoffice/connexion.jsp").forward(request, response);
     }
 

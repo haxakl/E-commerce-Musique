@@ -30,6 +30,7 @@ import utilisateurs.modeles.Utilisateur;
  */
 @WebServlet(name = "Panier", urlPatterns = {"/panier"})
 public class Panier extends HttpServlet {
+
     @EJB
     private GestionnaireUtilisateurs gestionnaireUtilisateurs;
     @EJB
@@ -54,23 +55,14 @@ public class Panier extends HttpServlet {
             GestionnairePanier panier_tmp = (GestionnairePanier) request.getSession().getAttribute("panier");
             panier_tmp.addToCart(msc);
         }
-        if(request.getParameter("action") != null && request.getParameter("action").equalsIgnoreCase("empty")){
+        if (request.getParameter("action") != null && request.getParameter("action").equalsIgnoreCase("empty")) {
             System.out.println("TEST");
-             GestionnairePanier panier_tmp = (GestionnairePanier) request.getSession().getAttribute("panier");
-             panier_tmp.makeEmpty();
+            GestionnairePanier panier_tmp = (GestionnairePanier) request.getSession().getAttribute("panier");
+            panier_tmp.makeEmpty();
+        } else {
+            this.getServletContext().getRequestDispatcher("/view/frontoffice/panier.jsp").forward(request, response);
         }
-        if(request.getParameter("action") != null && request.getParameter("action").equalsIgnoreCase("buy")){
-              GestionnairePanier panier_tmp = (GestionnairePanier) request.getSession().getAttribute("panier");
-              Collection<Musique> musics_tmp = panier_tmp.getMusiques();
-              Utilisateur current_user = (Utilisateur) request.getSession().getAttribute("user");
-              gestionnaireUtilisateurs.addPurshased(current_user, musics_tmp);
-//              panier_tmp.makeEmpty();
-              response.sendRedirect("/tp2webmiage/profile");
-        }
-        else{
-             this.getServletContext().getRequestDispatcher("/view/frontoffice/panier.jsp").forward(request, response);
-        }    
-         
+
     }
 
     /**
@@ -98,6 +90,23 @@ public class Panier extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+
+        // Acheter
+        if (request.getParameter("action") != null && request.getParameter("action").equalsIgnoreCase("buy")) {
+            Utilisateur current_user = (Utilisateur) request.getSession().getAttribute("user");
+
+            if (current_user != null) {
+                GestionnairePanier panier_tmp = (GestionnairePanier) request.getSession().getAttribute("panier");
+                Collection<Musique> musics_tmp = panier_tmp.getMusiques();
+                System.out.println(current_user);
+                gestionnaireUtilisateurs.addPurshased(current_user, musics_tmp);
+                request.getSession().setAttribute("panier", null);
+                response.sendRedirect("/tp2webmiage/profile");
+            } else {
+                response.sendRedirect("/tp2webmiage/connexion?etat=achat");
+            }
+        } else {
+            processRequest(request, response);
+        }
     }
 }

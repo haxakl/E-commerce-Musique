@@ -70,7 +70,7 @@
                         <div class="col-md-8">
                             <c:if test="${not empty user.purshased}">
                                 <c:forEach var="m" items="${user.purshased}">
-                                    <p> ${m.titre} </p>
+                                    <p><a href="/tp2webmiage/musiques/${m.id}">${m.titre}</a></p>
                                 </c:forEach>
                             </c:if>
                         </div>

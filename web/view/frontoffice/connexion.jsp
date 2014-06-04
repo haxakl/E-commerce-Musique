@@ -9,6 +9,11 @@
                 <h3>Connexion</h3>
             </div>
             <c:set var="message" scope="session" value="${requestScope['message']}"/>
+            <c:if test="${message.equals('achat')}">
+                <div class="alert alert-danger">
+                    Vous devez être connecté pour acheter
+                </div>
+            </c:if>
             <c:if test="${message.equals('invalide')}">
                 <div class="alert alert-danger">
                     Mauvais login/mot de passe
