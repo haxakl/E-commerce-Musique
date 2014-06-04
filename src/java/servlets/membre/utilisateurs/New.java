@@ -33,7 +33,7 @@ public class New extends HttpServlet {
             throws ServletException, IOException {
         request.setAttribute("listeVilles", gestionnaireUtilisateurs.getVilles());
 
-        this.getServletContext().getRequestDispatcher("/view/backoffice/new_utilisateur.jsp").forward(request, response);
+        this.getServletContext().getRequestDispatcher("/view/backoffice/utilisateurs/new.jsp").forward(request, response);
     }
 
     /**

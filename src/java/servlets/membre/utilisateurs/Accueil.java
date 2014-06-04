@@ -75,7 +75,7 @@ public class Accueil extends HttpServlet {
         request.setAttribute("page", numPage);
         request.setAttribute("nbAffiche", nbAffiche);
         request.setAttribute("listeDesUsers", liste);
-        request.getRequestDispatcher("/view/backoffice/utilisateurs.jsp").forward(request, response);
+        request.getRequestDispatcher("/view/backoffice/utilisateurs/accueil.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

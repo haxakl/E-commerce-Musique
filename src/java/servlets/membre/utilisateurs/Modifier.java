@@ -40,7 +40,7 @@ public class Modifier extends HttpServlet {
             throws ServletException, IOException {
         Utilisateur user = gestionnaireUtilisateurs.getUser(Integer.parseInt(request.getPathInfo().replaceAll("/", "")));
         request.setAttribute("modif_user", user);
-        this.getServletContext().getRequestDispatcher("/modifier_utilisateur.jsp").forward(request, response);
+        this.getServletContext().getRequestDispatcher("/view/backoffice/utilisateurs/modifier.jsp").forward(request, response);
     }
 
     /**
@@ -80,7 +80,7 @@ public class Modifier extends HttpServlet {
                 request.getParameter("password"));
 
         // Redirection
-        response.sendRedirect("/tp2webmiage/utilisateurs");
+        response.sendRedirect("/tp2webmiage/admin/utilisateurs");
     }
 
     /**
