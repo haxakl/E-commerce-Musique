@@ -12,6 +12,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
         <meta name="author" content="Golfieri Guillaume Blacas Julien">
+        
+        <link rel="shortcut icon" href="/tp2webmiage/ressources/logo.png" type="image/png">
 
         <title>MultiTracksSongs</title>
 

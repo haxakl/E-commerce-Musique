@@ -9,7 +9,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
         <meta name="author" content="">
-        <link rel="shortcut icon" href="/tp2webmiage/images/favicon.png" type="image/png">
+        
+        <link rel="shortcut icon" href="/tp2webmiage/ressources/logo.png" type="image/png">
 
         <title>Administration</title>
 
