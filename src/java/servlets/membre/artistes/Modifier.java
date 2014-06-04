@@ -38,13 +38,9 @@ public class Modifier extends HttpServlet {
             throws ServletException, IOException {
         
         String url = request.getRequestURL().toString();
-        int idMusique = Integer.valueOf(url.substring(url.lastIndexOf("/") + 1));
+        int idArtiste = Integer.valueOf(url.substring(url.lastIndexOf("/") + 1));
         
-        Musique musique = gestionnaireMusiques.getMusique(idMusique);
-        
-        request.setAttribute("listeDesGenres", gestionnaireMusiques.getAllGenres());
-        request.setAttribute("listeDesArtistes", gestionnaireMusiques.getAllArtistes());
-        request.setAttribute("musique", musique);
+        request.setAttribute("artiste", gestionnaireMusiques.getArtiste(idArtiste));
         this.getServletContext().getRequestDispatcher("/view/backoffice/artistes/modifier.jsp").forward(request, response);
     }
 
@@ -73,37 +69,21 @@ public class Modifier extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Artiste artiste = null;
-        Genre genre = null;
         
-        String inputArtiste = request.getParameter("artiste");
-        String inputGenre = request.getParameter("genre");
-        String inputAnnee = request.getParameter("annee");
-        int annee = 0;
-        
-        if(inputArtiste != null && !inputArtiste.isEmpty()) {
-            artiste = gestionnaireMusiques.getArtiste(Integer.parseInt(inputArtiste));
-        }
-        
-        if(inputGenre != null && !inputGenre.isEmpty()) {
-            genre = gestionnaireMusiques.getGenre(Integer.parseInt(inputGenre));
-        }
-        
-        if(!inputAnnee.isEmpty()) {
-            annee = Integer.parseInt(request.getParameter("annee"));
-        }
+        // Récupérations des infos
+        String inputNom = request.getParameter("nom");
+        String inputDescription = request.getParameter("description");
+        String inputPhoto = request.getParameter("photo");
         
         // Modification de l'utilisateur
-        gestionnaireMusiques.modifierMusique(
+        gestionnaireMusiques.modifierArtiste(
                 Integer.parseInt(request.getPathInfo().replaceAll("/", "")),
-                artiste,
-                genre,
-                request.getParameter("titre"),
-                annee,
-                request.getParameter("url"));
+                inputNom,
+                inputDescription,
+                inputPhoto);
 
         // Redirection
-        response.sendRedirect("/tp2webmiage/admin/musiques?etat=modifier");
+        response.sendRedirect("/tp2webmiage/admin/artistes?etat=modifier");
     }
 
     /**

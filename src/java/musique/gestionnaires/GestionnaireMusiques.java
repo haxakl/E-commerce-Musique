@@ -394,6 +394,21 @@ public class GestionnaireMusiques {
         q2.executeUpdate();
     }
     
+    /**
+     * Modifier l'artiste
+     * @param idArtiste Numéro de l'artiste
+     * @param nom Nom de l'artiste
+     * @param description Description de l'artiste
+     * @param photo Photo de l'artiste
+     */
+    public void modifierArtiste(int idArtiste, String nom, String description, String photo) {
+        Artiste artiste = getArtiste(idArtiste);
+        artiste.setNom(nom);
+        artiste.setResume(description);
+        artiste.setPhoto(photo);
+        em.merge(artiste);
+    }
+    
     // =============================
     //  Recherche de patterns
     // =============================

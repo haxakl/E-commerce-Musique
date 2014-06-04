@@ -107,7 +107,7 @@
                     </td>
                     <td>${a.nom}</td> 
                     <td>${a.resume}</td>
-                    <td></td>
+                    <td>${a.nbmusique}</td>
                     <td><a class="btn btn-danger btn-sm" href="/tp2webmiage/admin/artistes/delete/${a.id}"><i class="fa fa-times"></i> Supprimer</a></td>
                 </tr>
             </c:forEach>
