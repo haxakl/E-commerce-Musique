@@ -1,5 +1,6 @@
 package utilisateurs.modeles;
 
+import abonnement.modeles.Abonnement;
 import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -18,35 +19,31 @@ public class Utilisateur implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-
     private String prenom;
     private String nom;
     private String login;
     private String email;
     private String password;
-
-    private static enum type_abo {
-        NONE, BASIC, LIMITED, UNLIMITED
-    };
-    private String current_abo;
+    @ManyToOne
+    private Abonnement abonnement;
     private int groupe;
 
     public Utilisateur() {
 
     }
 
-    public Utilisateur(final String prenom, final String nom, final String login, final String password) {
-        this(prenom, nom, login, password, "", type_abo.NONE.name(), 0);
+    public Utilisateur(final String prenom, final String nom, final String login, final String password, final Abonnement abo) {
+        this(prenom, nom, login, password, "", abo, 0);
     }
 
-    public Utilisateur(final String prenom, final String nom, final String login, final String password, final String email, final String unabo, int groupe) {
+    public Utilisateur(final String prenom, final String nom, final String login, final String password, final String email, final Abonnement unabo, int groupe) {
         this.login = login;
         this.prenom = prenom;
         this.nom = nom;
         this.email = nom;
         this.password = password;
         this.groupe = groupe;
-        this.current_abo = unabo;
+        this.abonnement = unabo;
     }
 
     public String getEmail() {
@@ -120,17 +117,17 @@ public class Utilisateur implements Serializable {
     public void setGroupe(int groupe) {
         this.groupe = groupe;
     }
-
-    public String getCurrent_abo() {
-        return current_abo;
-    }
-
-    public void setCurrent_abo(String current_abo) {
-        this.current_abo = current_abo;
-    }
-
+    
     public boolean isAdmin() {
         return this.groupe == 1;
+    }
+
+    public void setAbonnement(Abonnement abonnement) {
+        this.abonnement = abonnement;
+    }
+
+    public Abonnement getAbonnement() {
+        return abonnement;
     }
 
     @Override

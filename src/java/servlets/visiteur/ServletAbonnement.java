@@ -1,5 +1,7 @@
 package servlets.visiteur;
 
+import abonnement.gestionnaire.GestionnaireAbonnements;
+import abonnement.modeles.Abonnement;
 import java.io.IOException;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -16,7 +18,9 @@ import utilisateurs.modeles.Utilisateur;
  * @author Guillaume
  */
 @WebServlet(name = "Prix", urlPatterns = {"/abonnement"})
-public class Abonnement extends HttpServlet {
+public class ServletAbonnement extends HttpServlet {
+    @EJB
+    private GestionnaireAbonnements gestionnaireAbonnements;
 
     @EJB
     private GestionnaireUtilisateurs gestionnaireUtilisateurs;
@@ -44,8 +48,9 @@ public class Abonnement extends HttpServlet {
         } else {
             // Si l'utilisateur est connecté
             if (request.getParameter("type_abo") != null) {
-                // Si l'utilisateur a choisi un abonnement
-                current_user.setCurrent_abo(request.getParameter("type_abo"));
+                Abonnement find_abo = gestionnaireAbonnements.seekAbonnement(request.getParameter("type_abo"));
+                System.out.println("FIND ABO : "+find_abo);
+                gestionnaireAbonnements.addUtilisateur(find_abo, current_user);
             }
             request.setAttribute("checkconnect", "yes");
         }

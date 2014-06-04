@@ -22,16 +22,16 @@
                                     ${user.nom} ${user.nom}
                                 </h3>
                                 <h4>
-                                    <c:if test="${user.current_abo == 'NONE'}">
+                                    <c:if test="${user.abonnement.name == null}">
                                         Aucun abonnement
                                     </c:if>
-                                    <c:if test="${user.current_abo == 'BASIC'}">
+                                    <c:if test="${user.abonnement.name == 'BASIC'}">
                                         Abonnement basique
                                     </c:if> 
-                                    <c:if test="${user.current_abo == 'LIMITED'}">
+                                    <c:if test="${user.abonnement.name == 'LIMITED'}">
                                         Abonnement limité
                                     </c:if> 
-                                    <c:if test="${user.current_abo == 'UNLIMITED'}">
+                                    <c:if test="${user.abonnement.name == 'UNLIMITED'}">
                                         Abonnement sans limites
                                     </c:if> 
                                </h4>

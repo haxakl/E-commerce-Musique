@@ -77,7 +77,7 @@ public class GestionnaireUtilisateurs {
     // Créer un utilisateur
     public Utilisateur creeUtilisateur(String nom, String prenom, String login, String password, Adresse a, String tel) {
 
-        Utilisateur u = new Utilisateur(prenom, nom, login, password);
+        Utilisateur u = new Utilisateur(prenom, nom, login, password, null);
 
         if (a != null) {
             u.setAdresse(a);
