@@ -3,25 +3,29 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-package services;
+package servlets.membre;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Collection;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import musique.modeles.Musique;
+import panier.gestionnaire.GestionnairePanier;
 import utilisateurs.gestionnaires.GestionnaireUtilisateurs;
+import utilisateurs.modeles.Utilisateur;
 
 /**
  *
- * @author Guillaume
+ * @author julien
  */
-@WebServlet(name = "DeleteUtilisateur", urlPatterns = {"/admin/utilisateurs/delete/*"})
-public class DeleteUtilisateur extends HttpServlet {
+@WebServlet(name = "Paiement", urlPatterns = {"/paiement"})
+public class Paiement extends HttpServlet {
+
     @EJB
     private GestionnaireUtilisateurs gestionnaireUtilisateurs;
 
@@ -36,8 +40,28 @@ public class DeleteUtilisateur extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        gestionnaireUtilisateurs.deleteUtilisateur(Integer.parseInt(request.getPathInfo().replaceAll("/", "")));
-        response.sendRedirect("/tp2webmiage/admin/utilisateurs");
+        GestionnairePanier panier_tmp = (GestionnairePanier) request.getSession().getAttribute("panier");
+        request.setAttribute("panier",  panier_tmp);
+        Utilisateur current_user = (Utilisateur) request.getSession().getAttribute("user");
+        request.getParameter("achat");
+        if (current_user != null && request.getParameter("achat") != null && request.getParameter("achat").equals("success")) {
+            Collection<Musique> musics_tmp = panier_tmp.getMusiques();
+            // Test s'il reste du crédit sur l'utilisateur
+            if (current_user.getAbonnement() != null && current_user.getAbonnement().getName().compareTo("ILLIMITED") == 0) {
+                gestionnaireUtilisateurs.addPurshased(current_user, musics_tmp);
+                request.getSession().setAttribute("panier", null);
+                response.sendRedirect("/tp2webmiage/profile");
+            } // Sinon on test qu'il reste du crédit
+            else if (current_user.getNbMusiqueAchat() >= musics_tmp.size()){
+                current_user.setNbMusiqueAchat(current_user.getNbMusiqueAchat() - musics_tmp.size());
+                gestionnaireUtilisateurs.merge(current_user);
+                gestionnaireUtilisateurs.addPurshased(current_user, musics_tmp);
+                request.getSession().setAttribute("panier", null);
+                response.sendRedirect("/tp2webmiage/profile");
+            }
+        }else{
+            this.getServletContext().getRequestDispatcher("/view/frontoffice/paiement.jsp").forward(request, response);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

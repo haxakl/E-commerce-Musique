@@ -94,48 +94,13 @@
                 </div>
                 <!-- BOUTON ACHETER -->
                 <div class="col-md-2 col-md-offset-7">
-                    <form action = "" method = "post">
-                        <!--<input type="hidden" name="action" value="buy">-->
-                        <input class="btn btn-success pull-left form-control" data-toggle="modal" data-target="#myModal" value="Acheter">
-                    </form>
+                    <c:if test="${user != null}">
+                            <!--<input type="hidden" name="action" value="buy">-->
+                            <a href="/tp2webmiage/paiement" class="btn btn-success pull-left form-control"> Acheter </a>
+                    </c:if>
                 </div>
             </div>
             <br/><br/>
-        </div>
-        
-        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">Ã—</button>
-                        <h4 class="modal-title" id="myModalLabel">Achat d'un titre</h4>
-                    </div>
-                    <div class="modal-body">
-                        <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
-                            <input type='hidden' value="${panier.getMusiques().size() * 3.99}" name="amount" />
-                            <input name="currency_code" type="hidden" value="EUR" />
-                            <input name="return" type="hidden" value="http://localhost:8080/tp2webmiage/musiques" />
-                            <input name="cancel_return" type="hidden" value="http://localhost:8080/tp2webmiage/musiques" />
-                            <input name="notify_url" type="hidden" value="http://votredomaine/validationPaiement.php" />
-                            <input name="cmd" type="hidden" value="_xclick" />
-                            <input name="business" type="hidden" value="julienblacas@gmail.com" />
-                            <input name="item_name" type="hidden" value="Panier MusicComposer" />
-                            <input name="no_note" type="hidden" value="${panier.getMusiques().size()}" />
-                            <input name="lc" type="hidden" value="FR" />
-                            <input name="bn" type="hidden" value="PP-BuyNowBF" />
-                            <input name="custom" type="hidden" value="ID_ACHETEUR" />
-                            <input name="submit" class="btn btn-primary" type="image" value="Payer avec paypal"/>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <form action = "" method = "post">
-                            <input type="hidden" name="action" value="buy">
-                            <input type="submit" class="btn btn-success pull-left" data-toggle="modal" data-target="#myModal" value="Acheter">
-                        </form>
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    </div>
-                </div><!-- modal-content -->
-            </div><!-- modal-dialog -->
         </div>
 
     </jsp:body>

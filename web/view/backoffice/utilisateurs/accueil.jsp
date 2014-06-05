@@ -113,7 +113,7 @@
 
             <c:forEach var="u" items="${requestScope['listeDesUsers']}">
                 <tr>
-                    <td><a href="/tp2webmiage/admin/utilisateurs/modifier/${u.id}" class="btn btn-primary btn-sm"><i class="fa fa-cog"></i> Modifier</a></td>
+                    <td><a href="/tp2webmiage/admin/utilisateurs/modify/${u.id}" class="btn btn-primary btn-sm"><i class="fa fa-cog"></i> Modifier</a></td>
                     <td>${u.login}</td>
                     <td>${u.nom}</td>
                     <td>${u.prenom}</td>

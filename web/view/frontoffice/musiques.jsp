@@ -142,9 +142,14 @@
                     <td>${m.annee}</td>
                     <td><a href="musiques?genre=${m.genre.id}" style="color:#E90303">${m.genre.nom}</a></td>
                     <td>
-                        <c:if test="${not user.purshased.contains(m)}">
-                        <a href="/tp2webmiage/panier?idmus=${m.id}" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i> Ajouter au panier</a>
-                        </c:if>
+                        <c:choose>
+                            <c:when test="${not user.purshased.contains(m)}">
+                                <a href="/tp2webmiage/panier?idmus=${m.id}" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i> Ajouter au panier</a>
+                            </c:when>
+                            <c:otherwise>
+                                <button type="button" class="btn btn-success"><i class="fa fa-play"></i> Jouer</button>
+                            </c:otherwise>
+                        </c:choose>
                     </td>
                 </tr>
                 <c:set var="total" value="${total+1}"/>

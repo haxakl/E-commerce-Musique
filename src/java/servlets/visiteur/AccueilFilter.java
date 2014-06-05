@@ -118,9 +118,6 @@ public class AccueilFilter implements Filter {
                             artiste = gestionnaireMusiques.creerArtiste(nomArtiste, "", "");
                         }
                         
-                        artiste.incrNbMusique();
-                        gestionnaireMusiques.merge(artiste);
-
                         nom = nom.substring(nom.indexOf("-") + 1);
                         Musique musique = gestionnaireMusiques.creerMusique(artiste, nom, getNombrePiste(compositions, null), 0, "", null);
                         getNombrePiste(compositions, musique);

@@ -74,7 +74,8 @@ public class Panier extends HttpServlet {
                 response.sendRedirect("/tp2webmiage/panier?etat=dejapresent");
             }
 
-        } else {
+        }
+        else {
             if (request.getParameter("action") != null && request.getParameter("action").equalsIgnoreCase("empty")) {
                 request.getSession().setAttribute("panier", null);
                 this.getServletContext().getRequestDispatcher("/view/frontoffice/panier.jsp").forward(request, response);
@@ -113,7 +114,7 @@ public class Panier extends HttpServlet {
         GestionnairePanier panier_tmp = (GestionnairePanier) request.getSession().getAttribute("panier");
         
         // Acheter
-        if (request.getParameter("action") != null && request.getParameter("action").equalsIgnoreCase("buy")) {
+        if (request.getParameter("achat") != null && request.getParameter("action").equalsIgnoreCase("buy")) {
             Utilisateur current_user = (Utilisateur) request.getSession().getAttribute("user");
 
             if (current_user != null) {
@@ -130,7 +131,6 @@ public class Panier extends HttpServlet {
                     gestionnaireUtilisateurs.merge(current_user);
                     gestionnaireUtilisateurs.addPurshased(current_user, musics_tmp);
                     request.getSession().setAttribute("panier", null);
-                    response.sendRedirect("/tp2webmiage/profile");
                 } // Sinon on dit qu'il ne reste plus assez de crédit
                 else {
                     response.sendRedirect("/tp2webmiage/panier?etat=plusdecredit");

@@ -38,13 +38,14 @@
                                         <c:if test="${user.abonnement.nbmusicallowed == -1}">
                                             Aucune limite de téléchargements
                                         </c:if>
-                                        <c:if test="${user.abonnement.nbmusicallowed != -1}">
-                                            ${user.nbMusiqueAchat} musiques restantes
-                                        </c:if>
                                     </c:if>
                                     <c:if test="${empty user.abonnement}">
                                     <p>
                                         Aucun abonnement<br/>
+                                    </c:if>
+
+                                    <c:if test="${user.abonnement.nbmusicallowed != -1}">
+                                        ${user.nbMusiqueAchat} musiques restantes
                                     </c:if>
                                 </p>
                             </div>
