@@ -18,7 +18,29 @@
         <div class="page-header">
             <h3>Détail de la musique</h3>
         </div>
-        
+
+        <c:if test="${not empty user.purshased}">
+            <c:if test="${user.purshased.contains(musique)}">
+                <a class='btn btn-primary btn-sm'>Lire la musique</a><br/><br/>
+            </c:if>
+        </c:if>
+
+        <fieldset>
+            <legend>Informations</legend>
+            <p>
+                <b>Artiste:</b> ${musique.artiste.nom}
+            </p>
+            <p>
+                <b>Genre:</b> ${musique.genre.nom}
+            </p>
+            <p>
+                <b>Année:</b> ${musique.annee}
+            </p>
+            <p>
+                <b>Url:</b> <a href="${musique.url}">Lien</a>
+            </p>
+        </fieldset><br/><br/>
+
         <table class="table table-striped">  
             <!-- La ligne de titre du tableau des comptes -->  
             <tr>  

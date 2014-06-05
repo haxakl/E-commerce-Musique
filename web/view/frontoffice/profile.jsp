@@ -8,58 +8,49 @@
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 
 <t:frontoffice>
+    <jsp:attribute name="breadcrumb">
+        <div class="breadcrumb-wrapper">
+            <span class="label">Vous êtes ici</span>
+            <ol class="breadcrumb">
+                <li><a href="index.jsp">Accueil</a></li>
+                <li class="active">Mon profile</li>
+            </ol>
+        </div>
+    </jsp:attribute>
     <jsp:body>
         <div class="row">
-            <div class="col-xs-12 col-sm-6 col-md-6">
+            <div class="col-xs-12 col-sm-6 col-md-6">            
                 <div class="well well-sm">
                     <div class="row">
-                        <div class="col-sm-6 col-md-4">
-                            <img src="http://placehold.it/380x500" alt="" class="img-rounded img-responsive" />
+                        <div class="text-center">
+                            <h2>Mon profil</h2>
                         </div>
-                        <div class="col-sm-6 col-md-8">
-                            <h3>
-                                ${user.nom} ${user.nom}
-                            </h3>
-                            <h4>
-                                <c:if test="${user.abonnement.name == null}">
-                                    Aucun abonnement
-                                </c:if>
-                                <c:if test="${user.abonnement.name == 'BASIC'}">
-                                    Abonnement basique
-                                </c:if> 
-                                <c:if test="${user.abonnement.name == 'LIMITED'}">
-                                    Abonnement limité
-                                </c:if> 
-                                <c:if test="${user.abonnement.name == 'UNLIMITED'}">
-                                    Abonnement sans limites
-                                </c:if> 
-                            </h4>
-                            <small><cite title="San Francisco, USA">San Francisco, USA <i class="fa fa-map-marker"></i>
-                                </cite></small>
+                        <div class="col-md-8">
+                            <h3>${user.prenom} ${user.nom}</h3>
                             <p>
-                                <i class="fa fa-envelope-o"></i>email@example.com
-                                <br />
-                                <i class="fa fa-globe"></i><a href="http://www.jquery2dotnet.com">www.jquery2dotnet.com</a>
-                                <br />
-                                <i class="fa fa-gift"></i>June 02, 1988</p>
-                            <!-- Split button -->
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-primary">
-                                    Social</button>
-                                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                                    <span class="caret"></span><span class="sr-only">Social</span>
-                                </button>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li><a href="#">Twitter</a></li>
-                                    <li><a href="https://plus.google.com/+Jquery2dotnet/posts">Google +</a></li>
-                                    <li><a href="https://www.facebook.com/jquery2dotnet">Facebook</a></li>
-                                    <li class="divider"></li>
-                                    <li><a href="#">Github</a></li>
-                                </ul>
+                                ${user.email}
+                            </p>
+                            <br/>
+                            <div>
+                                <c:if test="${not empty user.abonnement}">
+                                    <p>
+                                        ${user.abonnement.name}<br/>
+                                        <c:if test="${user.abonnement.nbmusicallowed == -1}">
+                                            Aucune limite de téléchargements
+                                        </c:if>
+                                        <c:if test="${user.abonnement.nbmusicallowed != -1}">
+                                            ${user.nbMusiqueAchat} musiques restantes
+                                        </c:if>
+                                    </c:if>
+                                    <c:if test="${empty user.abonnement}">
+                                    <p>
+                                        Aucun abonnement<br/>
+                                    </c:if>
+                                </p>
                             </div>
                         </div>
                     </div>
-                </div>      
+                </div>
             </div>
             <div class="col-xs-12 col-sm-6 col-md-6">            
                 <div class="well well-sm">
@@ -70,8 +61,15 @@
                         <div class="col-md-8">
                             <c:if test="${not empty user.purshased}">
                                 <c:forEach var="m" items="${user.purshased}">
-                                    <p><a href="/tp2webmiage/musiques/${m.id}">${m.titre}</a></p>
+                                    <p>
+                                        <a href="/tp2webmiage/musiques/${m.id}">${m.titre}</a>
+                                    </p>
                                 </c:forEach>
+                            </c:if>
+                            <c:if test="${empty user.purshased}">
+                                <p>
+                                    Aucun achat.
+                                </p>
                             </c:if>
                         </div>
                     </div>

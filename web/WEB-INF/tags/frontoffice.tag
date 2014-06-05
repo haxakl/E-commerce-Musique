@@ -12,7 +12,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
         <meta name="author" content="Golfieri Guillaume Blacas Julien">
-        
+
         <link rel="shortcut icon" href="/tp2webmiage/ressources/logo.png" type="image/png">
 
         <title>MultiTracksSongs</title>
@@ -23,7 +23,7 @@
         <link href="/tp2webmiage/ressources/library/fontawesome/font-awesome.css" rel="stylesheet">
         <link href="/tp2webmiage/ressources/library/bootstrap/bootstrap.min.css" rel="stylesheet">
         <link href="/tp2webmiage/ressources/library/hoverGrid/hoverGrid.css" rel="stylesheet">
-        
+
         <script src="/tp2webmiage/ressources/library/jquery/jquery.js"></script>
         <script src="/tp2webmiage/ressources/library/bootstrap/bootstrap.js"></script>
     </head>
@@ -122,16 +122,14 @@
                                             </li>
                                         </c:if>
                                         <c:if test="${!panier.isEmpty()}" >
-                                            <li>
-                                                <c:forEach var="music" items="${panier.getMusiques()}">
-                                                    ${music.getTitre()}
-                                                </c:forEach>
-                                            <li>
-
-                                                <button style="margin-top: 15px" class="btn btn-default"> Commander </button>
-                                            </c:if>
-                                        </c:when>
-                                        <c:otherwise>
+                                            <c:forEach var="music" items="${panier.getMusiques()}">
+                                                <li>
+                                                    ${music.artiste.nom} ${music.getTitre()}
+                                                </li>
+                                            </c:forEach>
+                                        </c:if>
+                                    </c:when>
+                                    <c:otherwise>
                                         <li>Aucun objet dans votre panier.</li>
                                         </c:otherwise>
                                     </c:choose>

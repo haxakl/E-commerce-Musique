@@ -16,54 +16,12 @@ public class GestionnaireUtilisateurs {
     @PersistenceContext(unitName = "TP_2_GitPU")
     private EntityManager em;
 
-    public void persist(Object object) {
-        em.persist(object);
+    public void merge(Object object) {
+        em.merge(object);
     }
 
-    // Créer une masse d'utilisateur
-    public void creerUtilisateursDeTest() {
-
-        // On cree des adresses et on les insère dans la base  
-        Adresse biot = new Adresse("Biot", "06410");
-        em.persist(biot);
-        Adresse valbonne = new Adresse("Valbonne", "06560");
-        em.persist(valbonne);
-        Adresse nice = new Adresse("Nice", "06000");
-        em.persist(nice);
-
-        String untel = "0634220204";
-        String untel2 = "0618967542";
-
-        creeUtilisateur("John", "Lennon", "jlennon", "test", nice, untel);
-        creeUtilisateur("Paul", "Mac Cartney", "pmc", "test", valbonne, untel);
-        creeUtilisateur("Ringo", "Starr", "rstarr", "test", nice, untel);
-        creeUtilisateur("Georges", "Harisson", "georgesH", "test", biot, untel2);
-        creeUtilisateur("Georges", "Harisson", "georgesH", "test", biot, untel2);
-        creeUtilisateur("Georges", "Harisson", "georgesH", "test", biot, untel2);
-        creeUtilisateur("Georges", "Harisson", "georgesH", "test", biot, untel2);
-        creeUtilisateur("Georges", "Harisson", "georgesH", "test", biot, untel2);
-        creeUtilisateur("Georges", "Harisson", "georgesH", "test", biot, untel2);
-        creeUtilisateur("Georges", "Harisson", "georgesH", "test", biot, untel2);
-        creeUtilisateur("Georges", "Harisson", "georgesH", "test", biot, untel2);
-        creeUtilisateur("Georges", "Harisson", "georgesH", "test", biot, untel2);
-        creeUtilisateur("Georges", "Harisson", "georgesH", "test", biot, untel2);
-        creeUtilisateur("Georges", "Harisson", "georgesH", "test", biot, untel2);
-        creeUtilisateur("Georges", "Harisson", "georgesH", "test", biot, untel2);
-        creeUtilisateur("Georges", "Harisson", "georgesH", "test", biot, untel2);
-        creeUtilisateur("Georges", "Harisson", "georgesH", "test", biot, untel2);
-        creeUtilisateur("Georges", "Harisson", "georgesH", "test", biot, untel2);
-        creeUtilisateur("Georges", "Harisson", "georgesH", "test", biot, untel2);
-        creeUtilisateur("Georges", "Harisson", "georgesH", "test", biot, untel2);
-        creeUtilisateur("Georges", "Harisson", "georgesH", "test", biot, untel2);
-        creeUtilisateur("Georges", "Harisson", "georgesH", "test", biot, untel2);
-        creeUtilisateur("Georges", "Harisson", "georgesH", "test", biot, untel2);
-        creeUtilisateur("Georges", "Harisson", "georgesH", "test", biot, untel2);
-        creeUtilisateur("Georges", "Harisson", "georgesH", "test", biot, untel2);
-        creeUtilisateur("Georges", "Harisson", "georgesH", "test", biot, untel2);
-        creeUtilisateur("Georges", "Harisson", "georgesH", "test", biot, untel2);
-        creeUtilisateur("Georges", "Harisson", "georgesH", "test", biot, untel2);
-        creeUtilisateur("Georges", "Harisson", "georgesH", "test", biot, untel2);
-        creeUtilisateur("Georges", "Harisson", "georgesH", "test", biot, untel2);
+    public void persist(Object object) {
+        em.persist(object);
     }
 
     // Test si l'utilisateur existe et si le mot de passe correspond
@@ -76,14 +34,15 @@ public class GestionnaireUtilisateurs {
     }
 
     // Créer un utilisateur
-    public Utilisateur creeUtilisateur(String nom, String prenom, String login, String password, Adresse a, String tel) {
+    public Utilisateur creeUtilisateur(String nom, String prenom, String login, String password, String email, Adresse a, String tel) {
 
         Utilisateur u = new Utilisateur(prenom, nom, login, password, null);
-
+        u.setEmail(email);
+        u.setNbMusiqueAchat(3);
+        
         if (a != null) {
             u.setAdresse(a);
             a.addUtilisateur(u);
-
         }
 
         em.persist(u);

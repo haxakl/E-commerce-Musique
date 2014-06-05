@@ -10,7 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import musique.modeles.Musique;
 
 @Entity
@@ -33,6 +32,7 @@ public class Utilisateur implements Serializable {
     @ManyToOne
     private Abonnement abonnement;
     private int groupe;
+    private int nbMusiqueAchat;
 
     public Utilisateur() {
 
@@ -50,6 +50,14 @@ public class Utilisateur implements Serializable {
         this.password = password;
         this.groupe = groupe;
         this.abonnement = unabo;
+    }
+
+    public int getNbMusiqueAchat() {
+        return nbMusiqueAchat;
+    }
+
+    public void setNbMusiqueAchat(int nbMusiqueAchat) {
+        this.nbMusiqueAchat = nbMusiqueAchat;
     }
 
     public String getEmail() {

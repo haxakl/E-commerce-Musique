@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package servlets.visiteur;
 
 import abonnement.gestionnaire.GestionnaireAbonnements;
@@ -87,7 +82,7 @@ public class AccueilFilter implements Filter {
         // Il n'y a pas d'utilisateurs
         if (gestionnaireUtilisateurs.getAllUsers().isEmpty()) {
             Adresse nice = new Adresse("NICE", "06480");
-            gestionnaireUtilisateurs.creeUtilisateur("Administrateur", "", "admin", "admin", nice, "0493320233");
+            gestionnaireUtilisateurs.creeUtilisateur("Administrateur", "", "admin", "admin", "admin@musiccomposer.fr", nice, "0493320233");
         }
 
         //Test si les musiques sont vides

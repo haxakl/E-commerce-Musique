@@ -2,6 +2,7 @@
 .corps {
     background: white;
     /* padding: 20px; */
+    padding-bottom: 20px;
 }
 #primary-nav ul li ul.itemList{
     -moz-border-radius: 10px;
@@ -17,6 +18,8 @@
 
 ul.itemList li{
     color : white;
+    float: none !important;
+    padding: 10px;
 }
 
 small {

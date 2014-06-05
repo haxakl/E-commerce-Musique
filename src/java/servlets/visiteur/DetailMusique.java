@@ -46,6 +46,7 @@ public class DetailMusique extends HttpServlet {
         // Recupère tous les utilisateurs
         Collection<Piste> listeDesPistes = gestionnaireMusiques.getPistes(musique);
 
+        request.setAttribute("musique", gestionnaireMusiques.getMusique(musique));
         request.setAttribute("listeDesPistes", listeDesPistes);
         this.getServletContext().getRequestDispatcher("/view/frontoffice/detailmusique.jsp").forward(request, response);
     }

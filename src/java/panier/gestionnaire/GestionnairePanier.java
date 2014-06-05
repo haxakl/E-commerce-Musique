@@ -33,6 +33,10 @@ public class GestionnairePanier {
         return musiques;
     }
 
+    public void setMusiques(ArrayList<Musique> musiques) {
+        this.musiques = musiques;
+    }
+
     public boolean isEmpty() {
         return musiques.isEmpty();
     }

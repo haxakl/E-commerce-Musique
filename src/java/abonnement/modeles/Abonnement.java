@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package abonnement.modeles;
 
 import java.io.Serializable;
@@ -29,11 +24,10 @@ public class Abonnement implements Serializable {
     private int nbmusicallowed;
     @OneToMany(mappedBy = "abonnement")
     private Collection<Utilisateur> utilisateur;
-
+    
     public Abonnement() {
     }
 
-        
     public Abonnement(int nbmusicallowed, String name) {
         this.nbmusicallowed = nbmusicallowed;
         this.name = name;

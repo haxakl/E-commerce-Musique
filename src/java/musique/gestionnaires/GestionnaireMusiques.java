@@ -47,7 +47,11 @@ public class GestionnaireMusiques {
      */
     public Musique creerMusique(Artiste artiste, String titre, int nbpiste, int annee, String url, Genre genre) {
         Musique m = new Musique(titre, nbpiste, annee, url);
-        m.setArtiste(artiste);
+        if (artiste != null) {
+            m.setArtiste(artiste);
+            artiste.incrNbMusique();
+            em.merge(artiste);
+        }
         m.setGenre(genre);
         em.persist(m);
         return m;
@@ -89,7 +93,7 @@ public class GestionnaireMusiques {
      */
     public Collection<Musique> getMusiques(int index, int offset) {
         // Exécution d'une requête équivalente à un select *  
-        Query q = em.createQuery("select u from Musique u").setMaxResults(offset).setFirstResult(index);
+        Query q = em.createQuery("select u from Musique u order by u.titre").setMaxResults(offset).setFirstResult(index);
         return q.getResultList();
     }
 
@@ -106,7 +110,7 @@ public class GestionnaireMusiques {
 
         if (artiste != null) {
             // Exécution d'une requête équivalente à un select
-            Query q = em.createQuery("select p from Musique p where p.artiste = :artiste").setParameter("artiste", artiste);
+            Query q = em.createQuery("select p from Musique p where p.artiste = :artiste order by p.titre").setParameter("artiste", artiste);
             return q.getResultList();
         }
         return new ArrayList<>();
@@ -153,7 +157,11 @@ public class GestionnaireMusiques {
      */
     public void modifierMusique(int idMusique, Artiste artiste, Genre genre, String titre, int annee, String url) {
         Musique musique = getMusique(idMusique);
-        musique.setArtiste(artiste);
+        if (artiste != null) {
+            musique.setArtiste(artiste);
+            artiste.incrNbMusique();
+            em.merge(artiste);
+        }
         musique.setGenre(genre);
         musique.setTitre(titre);
         musique.setAnnee(annee);
@@ -316,8 +324,8 @@ public class GestionnaireMusiques {
     public Piste creerPiste(Musique musique, String nom, int note) {
 
         Piste m = new Piste(musique, nom, note);
-        
-        if(musique != null) {
+
+        if (musique != null) {
             musique.setNbpiste(musique.getNbpiste() + 1);
         }
 
@@ -445,7 +453,7 @@ public class GestionnaireMusiques {
      */
     public Collection<Artiste> getAllArtistes() {
         // Exécution d'une requête équivalente à un select *  
-        Query q = em.createQuery("select a from Artiste a");
+        Query q = em.createQuery("select a from Artiste a order by a.nom");
         return q.getResultList();
     }
 
@@ -460,7 +468,7 @@ public class GestionnaireMusiques {
      */
     public Collection<Artiste> getArtistes(int index, int offset) {
         // Exécution d'une requête équivalente à un select *  
-        Query q = em.createQuery("select u from Artiste u").setMaxResults(offset).setFirstResult(index);
+        Query q = em.createQuery("select u from Artiste u order by u.nom").setMaxResults(offset).setFirstResult(index);
         return q.getResultList();
     }
 

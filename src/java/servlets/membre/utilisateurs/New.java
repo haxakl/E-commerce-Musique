@@ -71,6 +71,7 @@ public class New extends HttpServlet {
                 request.getParameter("prenom"),
                 request.getParameter("login"),
                 request.getParameter("password"),
+                request.getParameter("email"),
                 new Adresse(request.getParameter("ville"), request.getParameter("cp")),
                 request.getParameter("phone"));
 

@@ -113,7 +113,7 @@
 
             <c:forEach var="u" items="${requestScope['listeDesUsers']}">
                 <tr>
-                    <td><a href="/tp2webmiage/utilisateurs/modify/${u.id}" class="btn btn-primary btn-sm"><i class="fa fa-cog"></i> Modifier</a></td>
+                    <td><a href="/tp2webmiage/admin/utilisateurs/modifier/${u.id}" class="btn btn-primary btn-sm"><i class="fa fa-cog"></i> Modifier</a></td>
                     <td>${u.login}</td>
                     <td>${u.nom}</td>
                     <td>${u.prenom}</td>
@@ -124,7 +124,7 @@
                     </td>  
                     <td>${u.adresse.codePostal}</td> 
                     <td>${u.telephone.tel}</td>
-                    <td><a href="/tp2webmiage/utilisateurs/delete/${u.id}" class="supprimer btn btn-danger btn-sm"><i class="fa fa-times"></i> Supprimer</a></td>
+                    <td><a href="/tp2webmiage/admin/utilisateurs/delete/${u.id}" class="supprimer btn btn-danger btn-sm"><i class="fa fa-times"></i> Supprimer</a></td>
                     <!-- On compte le nombre de users -->  
                     <c:set var="total" value="${total+1}"/>
                 </tr>

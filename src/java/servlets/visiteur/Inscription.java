@@ -68,8 +68,10 @@ public class Inscription extends HttpServlet {
                 request.getParameter("prenom"),
                 request.getParameter("login"),
                 request.getParameter("password"),
+                request.getParameter("email"),
                 null,
                 null);
+        
         HttpSession session = request.getSession();
         session.setAttribute("user", user);
         

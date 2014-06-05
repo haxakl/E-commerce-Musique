@@ -19,6 +19,7 @@ import utilisateurs.modeles.Utilisateur;
  */
 @WebServlet(name = "Prix", urlPatterns = {"/abonnement"})
 public class ServletAbonnement extends HttpServlet {
+
     @EJB
     private GestionnaireAbonnements gestionnaireAbonnements;
 
@@ -40,21 +41,26 @@ public class ServletAbonnement extends HttpServlet {
         HttpServletRequest httprequest = (HttpServletRequest) request;
         HttpSession session = httprequest.getSession();
         Utilisateur current_user = (Utilisateur) session.getAttribute("user");
-        
-        
+
+        // L'utilisateur n'est pas connecté
         if (current_user == null) {
-            // Si l'utilisateur n'est pas connecté
             request.setAttribute("checkconnect", "no");
-        } else {
-            // Si l'utilisateur est connecté
-            if (request.getParameter("type_abo") != null) {
-                Abonnement find_abo = gestionnaireAbonnements.seekAbonnement(request.getParameter("type_abo"));
-                System.out.println("FIND ABO : "+find_abo);
-                gestionnaireAbonnements.addUtilisateur(find_abo, current_user);
-            }
-            request.setAttribute("checkconnect", "yes");
+            this.getServletContext().getRequestDispatcher("/view/frontoffice/abonnement.jsp").forward(request, response);
         }
-        this.getServletContext().getRequestDispatcher("/view/frontoffice/abonnement.jsp").forward(request, response);
+        
+        // Changement d'abonnement
+        else if (request.getParameter("type_abo") != null) {
+            Abonnement find_abo = gestionnaireAbonnements.seekAbonnement(request.getParameter("type_abo"));
+            gestionnaireAbonnements.addUtilisateur(find_abo, current_user);
+            current_user.setNbMusiqueAchat(current_user.getNbMusiqueAchat() + find_abo.getNbmusicallowed());
+            response.sendRedirect("/tp2webmiage/profile");
+        }
+        
+        // L'utilisateur est connecté mais sans abonnement
+        else {
+            request.setAttribute("checkconnect", "yes");
+            this.getServletContext().getRequestDispatcher("/view/frontoffice/abonnement.jsp").forward(request, response);
+        }
     }
 
     /**

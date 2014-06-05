@@ -8,7 +8,7 @@
             <span class="label">Vous êtes ici</span>
             <ol class="breadcrumb">
                 <li><a href="index.jsp">Accueil</a></li>
-                <li class="active">Aristes</li>
+                <li class="active">Artistes</li>
             </ol>
         </div>
     </jsp:attribute>

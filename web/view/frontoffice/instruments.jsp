@@ -60,31 +60,33 @@
                 </div>
             </div>
         </div>
-        <div class="page-header">
-            <h3>Liste des musiques par instrument <c:if test="${filtername != null}">"${filtername}"</c:if></h3>
+        <c:if test="${not empty requestScope['listeDesMusiques']}">
+            <div class="page-header">
+                <h3>Liste des musiques par instrument <c:if test="${filtername != null}">"${filtername}"</c:if></h3>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <!-- Zone qui affiche les musiques si le paramètre action vaut listerMusiques -->  
+                        <table class="table table-striped">  
+                            <thead>
+                                <!-- La ligne de titre du tableau des comptes -->  
+                                <tr>
+                                    <td><b>Artiste</b></td>
+                                    <td><b>Titre</b></td>
+                                </tr>  
+                            </thead>
+                            <tbody>
+                            <c:forEach var="m" items="${requestScope['listeDesMusiques']}">
+                                <tr>
+                                    <td><a href="/tp2webmiage/musiques/artistes/${m.artiste.id}" style="color:#E90303">${m.artiste.nom}</a></td>
+                                    <td><a href="/tp2webmiage/musiques/${m.id}" style="color:#E90303">${m.titre}</a></td>
+                                </tr>
+                            </c:forEach>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <!-- Zone qui affiche les musiques si le paramètre action vaut listerMusiques -->  
-                    <table class="table table-striped">  
-                        <thead>
-                            <!-- La ligne de titre du tableau des comptes -->  
-                            <tr>
-                                <td><b>Artiste</b></td>
-                                <td><b>Titre</b></td>
-                            </tr>  
-                        </thead>
-                        <tbody>
-                        <c:forEach var="m" items="${requestScope['listeDesMusiques']}">
-                            <tr>
-                                <td><a href="/tp2webmiage/musiques/artistes/${m.artiste.id}" style="color:#E90303">${m.artiste.nom}</a></td>
-                                <td><a href="/tp2webmiage/musiques/${m.id}" style="color:#E90303">${m.titre}</a></td>
-                            </tr>
-                        </c:forEach>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+        </c:if>
         <script src="/tp2webmiage/ressources/library/hoverGrid/hoverGrid.js"></script>
         <script>
             $(document).ready(function() {

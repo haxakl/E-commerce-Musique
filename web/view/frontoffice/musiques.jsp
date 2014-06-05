@@ -142,13 +142,18 @@
                     <td>${m.annee}</td>
                     <td><a href="musiques?genre=${m.genre.id}" style="color:#E90303">${m.genre.nom}</a></td>
                     <td>
+                        <c:if test="${not user.purshased.contains(m)}">
                         <a href="/tp2webmiage/panier?idmus=${m.id}" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i> Ajouter au panier</a>
+                        </c:if>
                     </td>
                 </tr>
                 <c:set var="total" value="${total+1}"/>
             </c:forEach>
             <!-- Affichage du solde total dans la dernière ligne du tableau -->  
-            <tr><td><b>TOTAL</b></td><td></td><td></td><td></td><td><b>${total}</b></td><td></td></tr>
+            <tr>
+                <td colspan='5'><b>TOTAL</b></td>
+                <td><b>${total}</b></td>
+            </tr>
         </table>
     </jsp:body>
 </t:frontoffice>
